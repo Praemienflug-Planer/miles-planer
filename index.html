@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4 Seats Miles Planner</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
   <div class="container">
@@ -15,45 +15,65 @@
       <div class="card">
         <h2>Eingaben</h2>
 
-        <label for="ziel">Ziel</label>
-        <select id="ziel"></select>
+        <div id="step-ziel" class="step-block active">
+          <label for="ziel">1. Ziel</label>
+          <select id="ziel"></select>
+        </div>
 
-        <label for="personen">Personen</label>
-        <select id="personen">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option selected>4</option>
-        </select>
+        <div id="step-personen" class="step-block">
+          <label for="personen">2. Personen</label>
+          <select id="personen">
+            <option value="">Bitte wählen</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+        </div>
 
-        <label for="programm">Programm</label>
-        <select id="programm"></select>
+        <div id="step-reiseklasse" class="step-block">
+          <label for="reiseklasse">3. Reiseklasse</label>
+          <select id="reiseklasse"></select>
+        </div>
 
-        <label for="reiseklasse">Reiseklasse</label>
-        <select id="reiseklasse"></select>
+        <div id="step-reisezeit" class="step-block">
+          <label for="reisezeit">4. Reisezeit</label>
+          <select id="reisezeit"></select>
+        </div>
 
-        <label for="reisezeit">Reisezeit</label>
-        <select id="reisezeit"></select>
+        <div id="step-reisemonat" class="step-block">
+          <label for="reisemonat">5. Reisemonat</label>
+          <select id="reisemonat"></select>
+        </div>
 
-        <label for="reisejahr">Reisejahr</label>
-        <input id="reisejahr" type="number" value="2030" />
+        <div id="step-programm" class="step-block">
+          <label for="programm">6. Programm</label>
+          <select id="programm"></select>
+        </div>
 
-        <label for="reisemonat">Reisemonat</label>
-        <select id="reisemonat"></select>
+        <div id="step-punkte" class="step-block">
+          <div class="step-divider"></div>
 
-        <label for="bestandAktuell">Aktueller Bestand</label>
-        <input id="bestandAktuell" type="number" value="190000" />
+          <h3 class="section-title">7. Punkte & Sammelrate</h3>
+          <p id="pointsHelper" class="helper-text"></p>
 
-        <label for="transferBestand">Transferfähiger Bestand</label>
-        <input id="transferBestand" type="number" value="0" />
+          <label for="reisejahr">Reisejahr</label>
+          <input id="reisejahr" type="number" value="2030" />
 
-        <label for="geplanterBonus">Geplanter Bonus</label>
-        <input id="geplanterBonus" type="number" value="50000" />
+          <label id="labelBestandAktuell" for="bestandAktuell">Aktueller Bestand</label>
+          <input id="bestandAktuell" type="number" value="" placeholder="z. B. 190000" />
 
-        <label for="monatlicheSammelrate">Monatliche Sammelrate</label>
-        <input id="monatlicheSammelrate" type="number" value="12000" />
+          <label id="labelTransferBestand" for="transferBestand">Transferfähiger Bestand</label>
+          <input id="transferBestand" type="number" value="" placeholder="z. B. 50000" />
 
-        <button onclick="berechneMilesPlaner()">Jetzt berechnen</button>
+          <label id="labelGeplanterBonus" for="geplanterBonus">Geplanter Bonus</label>
+          <input id="geplanterBonus" type="number" value="" placeholder="z. B. 30000" />
+
+          <label id="labelMonatlicheSammelrate" for="monatlicheSammelrate">Monatliche Sammelrate</label>
+          <input id="monatlicheSammelrate" type="number" value="" placeholder="z. B. 12000" />
+
+          <button onclick="berechneMilesPlaner()">Jetzt berechnen</button>
+        </div>
       </div>
     </div>
 
@@ -69,6 +89,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>
