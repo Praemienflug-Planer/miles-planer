@@ -385,6 +385,32 @@ async function berechneMilesPlaner() {
             <div class="label">Fehlend</div>
             <div class="value">${escapeHtml(data.fehlend || "")}</div>
           </div>
+          <div class="affiliate-box">
+<h4>💡 Meilen schneller sammeln</h4>
+<p>
+Viele Nutzer erreichen ihr Sammelziel deutlich schneller über
+Kreditkarten-Willkommensboni oder Punkteaktionen.
+</p>
+
+<div class="affiliate-links">
+
+<a href="#" class="affiliate-card">
+<strong>American Express Platinum</strong><br>
+bis zu 85.000 MR-Punkte Willkommensbonus
+</a>
+
+<a href="#" class="affiliate-card">
+<strong>American Express rosé Gold</strong><br>
+bis zu 55.000 MR-Punkte Willkommensbonus
+</a>
+
+<a href="#" class="affiliate-card">
+<strong>Payback Amex</strong><br>
+bis zu 5.000 Paybackpunkte 
+</a>
+
+</div>
+</div>
         </div>
 
         <div class="result-grid">
@@ -507,3 +533,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     programm.addEventListener("change", updatePointsLabels);
   }
 });
+
