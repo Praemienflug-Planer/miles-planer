@@ -1,6 +1,29 @@
 const API_URL =
   "https://script.google.com/macros/s/AKfycbyUYB1eWHphJIvw5ReSgZflvPjCWXlxNrk_WcprVOv8PFoq_CvvKoxijAu8hR3iAu_s/exec";
 
+const PROGRAM_CONFIG = {
+  "Miles & More": {
+    currentUnit: "Miles & More Meilen",
+    transferUnit: "PAYBACK Punkte",
+    transferInfo: "Transferfaktor: 1:1 · PAYBACK Punkte werden 1:1 in Miles & More Meilen umgewandelt.",
+  },
+  Avios: {
+    currentUnit: "Avios",
+    transferUnit: "Membership Rewards Punkte",
+    transferInfo: "Transferfaktor: 5:4 · Membership Rewards Punkte werden zu Avios umgerechnet.",
+  },
+  "Flying Blue": {
+    currentUnit: "Flying Blue Meilen",
+    transferUnit: "Membership Rewards Punkte",
+    transferInfo: "Transferfaktor: 5:4 · Membership Rewards Punkte werden zu Flying Blue Meilen umgerechnet.",
+  },
+  KrisFlyer: {
+    currentUnit: "KrisFlyer Meilen",
+    transferUnit: "Membership Rewards Punkte",
+    transferInfo: "Transferfaktor laut Rechnerlogik · Membership Rewards Punkte werden im Sheet automatisch umgerechnet.",
+  },
+};
+
 function zeigeErgebnisView() {
   document.getElementById("inputView").classList.remove("active");
   document.getElementById("resultView").classList.add("active");
@@ -101,20 +124,80 @@ function buildProgressBar(percent) {
   `;
 }
 
-function populateSelect(id, values, selectedValue = "") {
+function populateSelect(id, values, placeholder = "Bitte wählen") {
   const select = document.getElementById(id);
   if (!select) return;
 
   select.innerHTML = "";
+
+  const firstOption = document.createElement("option");
+  firstOption.value = "";
+  firstOption.textContent = placeholder;
+  firstOption.selected = true;
+  select.appendChild(firstOption);
+
   values.forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
     option.textContent = value;
-    if (String(value) === String(selectedValue)) {
-      option.selected = true;
-    }
     select.appendChild(option);
   });
+}
+
+function getProgramConfig(programm) {
+  return (
+    PROGRAM_CONFIG[programm] || {
+      currentUnit: "Meilen / Punkte",
+      transferUnit: "Transferfähige Punkte",
+      transferInfo: "Transferfaktor laut Rechnerlogik",
+    }
+  );
+}
+
+function updatePointsLabels() {
+  const programm = document.getElementById("programm").value;
+  const cfg = getProgramConfig(programm);
+
+  document.getElementById("labelBestandAktuell").textContent =
+    `Aktueller Bestand (${cfg.currentUnit})`;
+
+  document.getElementById("labelTransferBestand").textContent =
+    `Transferfähiger Bestand (${cfg.transferUnit})`;
+
+  document.getElementById("labelGeplanterBonus").textContent =
+    `Geplanter Bonus (${cfg.transferUnit})`;
+
+  document.getElementById("labelMonatlicheSammelrate").textContent =
+    `Monatliche Sammelrate (${cfg.transferUnit})`;
+
+  document.getElementById("pointsHelper").textContent = cfg.transferInfo;
+}
+
+function setStepActive(id, isActive) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.toggle("active", isActive);
+}
+
+function updateFormFlow() {
+  const ziel = document.getElementById("ziel").value;
+  const personen = document.getElementById("personen").value;
+  const reiseklasse = document.getElementById("reiseklasse").value;
+  const reisezeit = document.getElementById("reisezeit").value;
+  const reisemonat = document.getElementById("reisemonat").value;
+  const programm = document.getElementById("programm").value;
+
+  setStepActive("step-ziel", true);
+  setStepActive("step-personen", !!ziel);
+  setStepActive("step-reiseklasse", !!ziel && !!personen);
+  setStepActive("step-reisezeit", !!ziel && !!personen && !!reiseklasse);
+  setStepActive("step-reisemonat", !!ziel && !!personen && !!reiseklasse && !!reisezeit);
+  setStepActive("step-programm", !!ziel && !!personen && !!reiseklasse && !!reisezeit && !!reisemonat);
+  setStepActive("step-punkte", !!ziel && !!personen && !!reiseklasse && !!reisezeit && !!reisemonat && !!programm);
+
+  if (programm) {
+    updatePointsLabels();
+  }
 }
 
 async function ladeDropdowns() {
@@ -131,33 +214,29 @@ async function ladeDropdowns() {
       throw new Error(data.message || "Fehler beim Laden der Dropdown-Werte.");
     }
 
-    populateSelect("programm", data.programme || [], "Miles & More");
-const allowedKlassen = (data.klassen || []).filter(
-  (k) => k !== "Economy"
-);
-populateSelect("reiseklasse", allowedKlassen, "Business");
-    populateSelect("reisezeit", data.reisezeiten || [], "Ferien");
-    populateSelect("ziel", data.ziele || [], "Thailand");
-    populateSelect("reisemonat", data.monate || [], "Juli");
+    populateSelect("ziel", data.ziele || [], "Bitte Ziel wählen");
+    populateSelect("reiseklasse", (data.klassen || []).filter((k) => !/economy/i.test(k)), "Bitte Reiseklasse wählen");
+    populateSelect("reisezeit", data.reisezeiten || [], "Bitte Reisezeit wählen");
+    populateSelect("reisemonat", data.monate || [], "Bitte Reisemonat wählen");
+    populateSelect("programm", data.programme || [], "Bitte Programm wählen");
   } catch (error) {
     console.error(error);
 
-    populateSelect("programm", ["Miles & More", "Avios", "Flying Blue", "KrisFlyer"], "Miles & More");
-    populateSelect("reiseklasse", ["Premium Economy", "Business"], "Business");
-    populateSelect("reisezeit", ["Nebensaison", "Hauptreisezeit", "Ferien"], "Ferien");
-    populateSelect("ziel", ["Dubai", "Japan", "Malediven", "Südafrika", "Thailand", "USA East", "USA West"], "Thailand");
+    populateSelect("ziel", ["Dubai", "Japan", "Malediven", "Südafrika", "Thailand", "USA East", "USA West"], "Bitte Ziel wählen");
+    populateSelect("reiseklasse", ["Premium Economy", "Business"], "Bitte Reiseklasse wählen");
+    populateSelect("reisezeit", ["Nebensaison", "Hauptreisezeit", "Ferien"], "Bitte Reisezeit wählen");
     populateSelect("reisemonat", [
       "Januar", "Februar", "März", "April", "Mai", "Juni",
       "Juli", "August", "September", "Oktober", "November", "Dezember"
-    ], "Juli");
+    ], "Bitte Reisemonat wählen");
+    populateSelect("programm", ["Miles & More", "Avios", "Flying Blue", "KrisFlyer"], "Bitte Programm wählen");
   }
+
+  updateFormFlow();
 }
 
 async function berechneMilesPlaner() {
   const resultBox = document.getElementById("result");
-
-  zeigeErgebnisView();
-  resultBox.innerHTML = "<p>Berechne...</p>";
 
   const payload = {
     ziel: document.getElementById("ziel").value,
@@ -172,6 +251,21 @@ async function berechneMilesPlaner() {
     geplanterBonus: document.getElementById("geplanterBonus").value,
     monatlicheSammelrate: document.getElementById("monatlicheSammelrate").value,
   };
+
+  if (
+    !payload.ziel ||
+    !payload.personen ||
+    !payload.reiseklasse ||
+    !payload.reisezeit ||
+    !payload.reisemonat ||
+    !payload.programm
+  ) {
+    alert("Bitte fülle die sichtbaren Schritte nacheinander aus.");
+    return;
+  }
+
+  zeigeErgebnisView();
+  resultBox.innerHTML = "<p>Berechne...</p>";
 
   try {
     const response = await fetch(API_URL, {
@@ -194,6 +288,7 @@ async function berechneMilesPlaner() {
 
     const personen = Number(payload.personen) || 1;
     const programmName = payload.programm || "Programm";
+    const cfg = getProgramConfig(programmName);
 
     const dealLabel = extractDealLabel(data.deal);
     const dealDetail = extractDealDetail(data.deal);
@@ -240,12 +335,13 @@ async function berechneMilesPlaner() {
 
         <div class="result-grid">
           <div class="result-item">
-            <div class="label">Bestand heute</div>
+            <div class="label">Bestand heute (${escapeHtml(cfg.currentUnit)})</div>
             <div class="value">${escapeHtml(data.bestand || "")}</div>
           </div>
           <div class="result-item">
-            <div class="label">Bonus geplant</div>
+            <div class="label">Bonus geplant (${escapeHtml(cfg.transferUnit)})</div>
             <div class="value">${escapeHtml(data.bonus || "")}</div>
+            <div class="value-note">${escapeHtml(cfg.transferInfo)}</div>
           </div>
           <div class="result-item">
             <div class="label">Zielbedarf</div>
@@ -291,7 +387,7 @@ async function berechneMilesPlaner() {
               <div class="label">Fortschritt zum ${escapeHtml(programmName)}-Ziel inkl. Bonus</div>
               <div class="value">${escapeHtml(data.progressBonus || "")}</div>
               ${buildProgressBar(progressBonus)}
-              <div class="value-note">${escapeHtml(data.progressNoteBonus || "inkl. geplantem Bonus und Transferfaktor")}</div>
+              <div class="value-note">${escapeHtml(data.progressNoteBonus || cfg.transferInfo)}</div>
             </div>
           </div>
         </div>
@@ -357,5 +453,18 @@ async function berechneMilesPlaner() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", ladeDropdowns);
+document.addEventListener("DOMContentLoaded", async () => {
+  await ladeDropdowns();
 
+  ["ziel", "personen", "reiseklasse", "reisezeit", "reisemonat", "programm"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener("change", updateFormFlow);
+    }
+  });
+
+  const programm = document.getElementById("programm");
+  if (programm) {
+    programm.addEventListener("change", updatePointsLabels);
+  }
+});
