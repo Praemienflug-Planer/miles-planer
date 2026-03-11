@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>4 Seats Miles Planner</title>
-  <link rel="stylesheet" href="styles.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=12" />
 </head>
 <body>
   <div class="container">
@@ -16,12 +16,12 @@
         <h2>Eingaben</h2>
 
         <div id="step-ziel" class="step-block active">
-          <label for="ziel">1. Ziel</label>
+          <label for="ziel">Ziel</label>
           <select id="ziel"></select>
         </div>
 
         <div id="step-personen" class="step-block">
-          <label for="personen">2. Personen</label>
+          <label for="personen">Personen</label>
           <select id="personen">
             <option value="">Bitte wählen</option>
             <option>1</option>
@@ -32,33 +32,35 @@
         </div>
 
         <div id="step-reiseklasse" class="step-block">
-          <label for="reiseklasse">3. Reiseklasse</label>
+          <label for="reiseklasse">Reiseklasse</label>
           <select id="reiseklasse"></select>
         </div>
 
         <div id="step-reisezeit" class="step-block">
-          <label for="reisezeit">4. Reisezeit</label>
+          <label for="reisezeit">Reisezeit</label>
           <select id="reisezeit"></select>
         </div>
 
         <div id="step-reisemonat" class="step-block">
-          <label for="reisemonat">5. Reisemonat</label>
+          <label for="reisemonat">Reisemonat</label>
           <select id="reisemonat"></select>
         </div>
 
+        <div id="step-reisejahr" class="step-block">
+          <label for="reisejahr">Reisejahr</label>
+          <input id="reisejahr" type="number" value="2030" />
+        </div>
+
         <div id="step-programm" class="step-block">
-          <label for="programm">6. Programm</label>
+          <label for="programm">Programm</label>
           <select id="programm"></select>
         </div>
 
         <div id="step-punkte" class="step-block">
           <div class="step-divider"></div>
 
-          <h3 class="section-title">7. Punkte & Sammelrate</h3>
+          <h3 class="section-title">Punkte & Sammelrate</h3>
           <p id="pointsHelper" class="helper-text"></p>
-
-          <label for="reisejahr">Reisejahr</label>
-          <input id="reisejahr" type="number" value="2030" />
 
           <label id="labelBestandAktuell" for="bestandAktuell">Aktueller Bestand</label>
           <input id="bestandAktuell" type="number" value="" placeholder="z. B. 190000" />
@@ -89,6 +91,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=9"></script>
+  <script src="script.js?v=12"></script>
 </body>
 </html>
