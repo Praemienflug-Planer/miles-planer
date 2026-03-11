@@ -1,5 +1,5 @@
-const SHEET_URL =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vT2IXHFkER7uGYRWR_p_ZVNT6pFYd35kAMI5QtBGAroGUu7171pPVEQr7A2mHN-hA/pub?gid=833095277&single=true&output=csv";
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbyfyZtqZyRrQlQWmTMK-IbKc7J4KCGK4A1huw2F9ZOVdSm7hw9mN3BVSYlRmDnF8o1h/exec";
 
 async function loadData() {
   const resultBox = document.getElementById("result");
@@ -67,5 +67,6 @@ async function loadData() {
     console.error(error);
   }
 }
+
 
 loadData();
