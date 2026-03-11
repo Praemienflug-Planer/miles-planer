@@ -23,6 +23,14 @@ h1 {
   margin-bottom: 30px;
 }
 
+.view {
+  display: none;
+}
+
+.view.active {
+  display: block;
+}
+
 .card {
   background: white;
   border-radius: 14px;
@@ -62,6 +70,24 @@ button {
 
 button:hover {
   background: #1d4ed8;
+}
+
+.secondary-btn {
+  background: #e5e7eb;
+  color: #111827;
+  margin-top: 0;
+}
+
+.secondary-btn:hover {
+  background: #d1d5db;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .result-card h2 {
