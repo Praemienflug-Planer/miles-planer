@@ -1,5 +1,5 @@
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbyfyZtqZyRrQlQWmTMK-IbKc7J4KCGK4A1huw2F9ZOVdSm7hw9mN3BVSYlRmDnF8o1h/exec";
+  "https://script.google.com/macros/s/AKfycbyUYB1eWHphJIvw5ReSgZflvPjCWXlxNrk_WcprVOv8PFoq_CvvKoxijAu8hR3iAu_s/exec";
 
 function zeigeErgebnisView() {
   document.getElementById("inputView").classList.remove("active");
@@ -74,11 +74,8 @@ function extractTaxesTotal(text) {
 
 function extractCashPP(text) {
   if (!text) return NaN;
-  const match = String(text).match(/Cash\s*\|\s*~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?\s*Cash/i);
-  if (match) return extractNumber(match[1]);
-
-  const fallback = String(text).match(/~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?\s*Cash/i);
-  return fallback ? extractNumber(fallback[1]) : NaN;
+  const match = String(text).match(/~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?\s*Cash/i);
+  return match ? extractNumber(match[1]) : NaN;
 }
 
 function extractZuzahlungPP(text) {
@@ -92,6 +89,7 @@ function extractErsparnisGesamt(text) {
   const match = String(text).match(/Ersparnis\s*~?\s*([0-9\.\,]+)\s*€\s*gesamt/i);
   return match ? extractNumber(match[1]) : NaN;
 }
+
 function buildProgressBar(percent) {
   const safePercent = Number.isNaN(percent) ? 0 : Math.max(0, Math.min(100, percent));
   return `
@@ -101,6 +99,55 @@ function buildProgressBar(percent) {
       </div>
     </div>
   `;
+}
+
+function populateSelect(id, values, selectedValue = "") {
+  const select = document.getElementById(id);
+  if (!select) return;
+
+  select.innerHTML = "";
+  values.forEach((value) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    if (String(value) === String(selectedValue)) {
+      option.selected = true;
+    }
+    select.appendChild(option);
+  });
+}
+
+async function ladeDropdowns() {
+  try {
+    const response = await fetch(`${API_URL}?action=options`, { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error("Dropdowns konnten nicht geladen werden.");
+    }
+
+    const data = await response.json();
+
+    if (data.status !== "ok") {
+      throw new Error(data.message || "Fehler beim Laden der Dropdown-Werte.");
+    }
+
+    populateSelect("programm", data.programme || [], "Miles & More");
+    populateSelect("reiseklasse", data.klassen || [], "Business");
+    populateSelect("reisezeit", data.reisezeiten || [], "Ferien");
+    populateSelect("ziel", data.ziele || [], "Thailand");
+    populateSelect("reisemonat", data.monate || [], "Juli");
+  } catch (error) {
+    console.error(error);
+
+    populateSelect("programm", ["Miles & More", "Avios", "Flying Blue", "KrisFlyer"], "Miles & More");
+    populateSelect("reiseklasse", ["Premium Economy", "Business"], "Business");
+    populateSelect("reisezeit", ["Nebensaison", "Hauptreisezeit", "Ferien"], "Ferien");
+    populateSelect("ziel", ["Dubai", "Japan", "Malediven", "Südafrika", "Thailand", "USA East", "USA West"], "Thailand");
+    populateSelect("reisemonat", [
+      "Januar", "Februar", "März", "April", "Mai", "Juni",
+      "Juli", "August", "September", "Oktober", "November", "Dezember"
+    ], "Juli");
+  }
 }
 
 async function berechneMilesPlaner() {
@@ -169,13 +216,22 @@ async function berechneMilesPlaner() {
     const progressHeute = extractPercent(data.progress);
     const progressBonus = extractPercent(data.progressBonus);
 
+    const dealClass =
+      /guter deal|sehr guter deal|top deal/i.test(dealLabel)
+        ? "deal-good"
+        : /mittel|ok|solide/i.test(dealLabel)
+        ? "deal-medium"
+        : /schwach|schlechter deal|kein guter deal/i.test(dealLabel)
+        ? "deal-bad"
+        : "deal-neutral";
+
     resultBox.innerHTML = `
       <div class="result-card">
         <h2>${escapeHtml(data.headline || "Ergebnis")}</h2>
         <p class="subline">${escapeHtml(data.subline || "")}</p>
 
         <div class="result-section">
-          <p><strong>${escapeHtml(data.status || "")}</strong></p>
+          <p><strong>${escapeHtml(data.statusText || "")}</strong></p>
           <p>${escapeHtml(data.risiken || "")}</p>
         </div>
 
@@ -225,14 +281,14 @@ async function berechneMilesPlaner() {
               <div class="label">Fortschritt zum ${escapeHtml(programmName)}-Ziel heute</div>
               <div class="value">${escapeHtml(data.progress || "")}</div>
               ${buildProgressBar(progressHeute)}
-              <div class="value-note">Stand heute ohne geplanten Bonus</div>
+              <div class="value-note">${escapeHtml(data.progressNoteToday || "Stand heute ohne geplanten Bonus")}</div>
             </div>
 
             <div class="result-item">
               <div class="label">Fortschritt zum ${escapeHtml(programmName)}-Ziel inkl. Bonus</div>
               <div class="value">${escapeHtml(data.progressBonus || "")}</div>
               ${buildProgressBar(progressBonus)}
-              <div class="value-note">Inkl. geplantem Bonus und Transferfaktor</div>
+              <div class="value-note">${escapeHtml(data.progressNoteBonus || "inkl. geplantem Bonus und Transferfaktor")}</div>
             </div>
           </div>
         </div>
@@ -241,7 +297,7 @@ async function berechneMilesPlaner() {
           <h3>Deal & Kosten</h3>
 
           <div class="result-grid">
-            <div class="result-item deal-highlight">
+            <div class="result-item deal-highlight ${dealClass}">
               <div class="label">Deal-Bewertung</div>
               <div class="value value-small">${escapeHtml(dealLabel || data.deal || "")}</div>
               ${
@@ -298,3 +354,4 @@ async function berechneMilesPlaner() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", ladeDropdowns);
