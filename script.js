@@ -38,13 +38,13 @@ const AFFILIATE_CONFIG = {
     offers: [
       {
         title: "PAYBACK Kreditkarte",
-        subtitle: "klassischer Einstieg für zusätzliche PAYBACK Punkte",
+        subtitle: "zusätzliche PAYBACK Punkte für Miles & More",
         bonus: 2000,
         url: "#"
       },
       {
         title: "PAYBACK Aktionen & Partner",
-        subtitle: "regelmäßig große Extra-Punkte-Aktionen",
+        subtitle: "regelmäßig starke Extra-Punkte-Aktionen",
         bonus: 10000,
         url: "#"
       }
@@ -53,18 +53,24 @@ const AFFILIATE_CONFIG = {
   Avios: {
     sourceLabel: "Membership Rewards Punkte",
     headline: "💡 Avios schneller aufbauen",
-    text: "Für Avios sind Membership Rewards Punkte meist der schnellste Hebel, um große Lücken spürbar zu verkleinern.",
+    text: "Aktuell starke Membership Rewards Boni können helfen, deine Avios-Lücke deutlich schneller zu verkleinern.",
     offers: [
       {
+        title: "American Express Gold Rosé",
+        subtitle: "aktuell starker Bonus: bis zu 55.000 MR Punkte",
+        bonus: 55000,
+        url: "#"
+      },
+      {
         title: "American Express Gold",
-        subtitle: "typisch starker Einstieg in Membership Rewards",
-        bonus: 40000,
+        subtitle: "aktuell starker Bonus: bis zu 50.000 MR Punkte",
+        bonus: 50000,
         url: "#"
       },
       {
         title: "American Express Platinum",
-        subtitle: "hoher typischer Bonus für schnellen Aufbau",
-        bonus: 100000,
+        subtitle: "aktuell starker Bonus: bis zu 85.000 MR Punkte",
+        bonus: 85000,
         url: "#"
       }
     ]
@@ -72,18 +78,24 @@ const AFFILIATE_CONFIG = {
   "Flying Blue": {
     sourceLabel: "Membership Rewards Punkte",
     headline: "💡 Flying Blue schneller aufbauen",
-    text: "Für Flying Blue können Membership Rewards Punkte ein sehr effizienter Weg sein, um dein Sammelziel schneller zu erreichen.",
+    text: "Aktuell starke Membership Rewards Boni können helfen, deine Flying Blue Lücke deutlich schneller zu verkleinern.",
     offers: [
       {
+        title: "American Express Gold Rosé",
+        subtitle: "aktuell starker Bonus: bis zu 55.000 MR Punkte",
+        bonus: 55000,
+        url: "#"
+      },
+      {
         title: "American Express Gold",
-        subtitle: "typisch starker Einstieg in Membership Rewards",
-        bonus: 40000,
+        subtitle: "aktuell starker Bonus: bis zu 50.000 MR Punkte",
+        bonus: 50000,
         url: "#"
       },
       {
         title: "American Express Platinum",
-        subtitle: "hoher typischer Bonus für schnellen Aufbau",
-        bonus: 100000,
+        subtitle: "aktuell starker Bonus: bis zu 85.000 MR Punkte",
+        bonus: 85000,
         url: "#"
       }
     ]
@@ -91,18 +103,24 @@ const AFFILIATE_CONFIG = {
   KrisFlyer: {
     sourceLabel: "Membership Rewards Punkte",
     headline: "💡 KrisFlyer schneller aufbauen",
-    text: "Für KrisFlyer sind Membership Rewards Punkte oft der naheliegendste Weg, um eine größere Lücke schneller zu schließen.",
+    text: "Aktuell starke Membership Rewards Boni können helfen, deine KrisFlyer Lücke deutlich schneller zu verkleinern.",
     offers: [
       {
+        title: "American Express Gold Rosé",
+        subtitle: "aktuell starker Bonus: bis zu 55.000 MR Punkte",
+        bonus: 55000,
+        url: "#"
+      },
+      {
         title: "American Express Gold",
-        subtitle: "typisch starker Einstieg in Membership Rewards",
-        bonus: 40000,
+        subtitle: "aktuell starker Bonus: bis zu 50.000 MR Punkte",
+        bonus: 50000,
         url: "#"
       },
       {
         title: "American Express Platinum",
-        subtitle: "hoher typischer Bonus für schnellen Aufbau",
-        bonus: 100000,
+        subtitle: "aktuell starker Bonus: bis zu 85.000 MR Punkte",
+        bonus: 85000,
         url: "#"
       }
     ]
@@ -326,7 +344,7 @@ function buildAffiliateBox(programm, fehlend, progressPercent) {
           <strong>${escapeHtml(offer.title)}</strong><br>
           <span>${escapeHtml(offer.subtitle)}</span>
           <div class="affiliate-meta">
-            Typischer Bonus: ca. ${escapeHtml(formatPoints(offer.bonus))} ${escapeHtml(cfg.sourceLabel)}
+            Aktuell: ca. ${escapeHtml(formatPoints(offer.bonus))} ${escapeHtml(cfg.sourceLabel)}
             ${
               coverage > 0
                 ? `<br><span class="affiliate-coverage">könnte ca. ${coverage}% deiner aktuellen Lücke abdecken</span>`
@@ -341,9 +359,9 @@ function buildAffiliateBox(programm, fehlend, progressPercent) {
   let urgencyText = "";
   if (!Number.isNaN(progressPercent)) {
     if (progressPercent < 35) {
-      urgencyText = "Gerade bei einer größeren Lücke kann ein Willkommensbonus einen spürbaren Unterschied machen.";
+      urgencyText = "Gerade bei einer größeren Lücke kann ein starker Willkommensbonus einen spürbaren Unterschied machen.";
     } else if (progressPercent < 70) {
-      urgencyText = "Du bist schon unterwegs – ein Bonus kann dein Ziel deutlich näher rücken lassen.";
+      urgencyText = "Du bist schon unterwegs – ein starker Bonus kann dein Ziel deutlich näher rücken lassen.";
     } else {
       urgencyText = "Dir fehlt nicht mehr viel – ein Bonus oder eine Aktion kann die Restlücke schnell schließen.";
     }
