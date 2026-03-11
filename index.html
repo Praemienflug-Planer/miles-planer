@@ -11,20 +11,12 @@
     <h1>✈️ 4 Seats Miles Planner</h1>
     <p class="subtitle">Interaktive Berechnung mit Google Sheets</p>
 
-    <!-- EINGABE-ANSICHT -->
     <div id="inputView" class="view active">
       <div class="card">
         <h2>Eingaben</h2>
 
-<label for="ziel">Ziel</label>
-<select id="ziel">
-  <option>Thailand</option>
-  <option>Malediven</option>
-  <option>USA West</option>
-  <option>USA East</option>
-  <option>Dubai</option>
-  <option>Südafrika</option>
-</select>
+        <label for="ziel">Ziel</label>
+        <select id="ziel"></select>
 
         <label for="personen">Personen</label>
         <select id="personen">
@@ -35,44 +27,19 @@
         </select>
 
         <label for="programm">Programm</label>
-        <select id="programm">
-          <option selected>Miles & More</option>
-          <option>Flying Blue</option>
-          <option>Avios</option>
-        </select>
+        <select id="programm"></select>
 
         <label for="reiseklasse">Reiseklasse</label>
-        <select id="reiseklasse">
-          <option>Economy</option>
-          <option>Premium Economy</option>
-          <option selected>Business</option>
-        </select>
+        <select id="reiseklasse"></select>
 
         <label for="reisezeit">Reisezeit</label>
-        <select id="reisezeit">
-          <option>Nebensaison</option>
-          <option>Hauptzeit</option>
-          <option selected>Ferien</option>
-        </select>
+        <select id="reisezeit"></select>
 
         <label for="reisejahr">Reisejahr</label>
         <input id="reisejahr" type="number" value="2030" />
 
         <label for="reisemonat">Reisemonat</label>
-        <select id="reisemonat">
-          <option>Januar</option>
-          <option>Februar</option>
-          <option>März</option>
-          <option>April</option>
-          <option>Mai</option>
-          <option>Juni</option>
-          <option selected>Juli</option>
-          <option>August</option>
-          <option>September</option>
-          <option>Oktober</option>
-          <option>November</option>
-          <option>Dezember</option>
-        </select>
+        <select id="reisemonat"></select>
 
         <label for="bestandAktuell">Aktueller Bestand</label>
         <input id="bestandAktuell" type="number" value="190000" />
@@ -90,19 +57,14 @@
       </div>
     </div>
 
-    <!-- ERGEBNIS-ANSICHT -->
     <div id="resultView" class="view">
       <div class="card">
         <div class="result-header">
           <h2>Ergebnis</h2>
-          <button class="secondary-btn" onclick="zurueckZuEingaben()">
-            ← Eingaben ändern
-          </button>
+          <button class="secondary-btn" onclick="zurueckZuEingaben()">← Eingaben ändern</button>
         </div>
 
-        <div id="result">
-          Bitte Eingaben machen und auf „Jetzt berechnen“ klicken.
-        </div>
+        <div id="result">Bitte Eingaben machen und auf „Jetzt berechnen“ klicken.</div>
       </div>
     </div>
   </div>
@@ -110,4 +72,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
