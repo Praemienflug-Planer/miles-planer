@@ -1,9 +1,22 @@
 const API_URL =
   "https://script.google.com/macros/s/AKfycbyfyZtqZyRrQlQWmTMK-IbKc7J4KCGK4A1huw2F9ZOVdSm7hw9mN3BVSYlRmDnF8o1h/exec";
 
+function zeigeErgebnisView() {
+  document.getElementById("inputView").classList.remove("active");
+  document.getElementById("resultView").classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function zurueckZuEingaben() {
+  document.getElementById("resultView").classList.remove("active");
+  document.getElementById("inputView").classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 async function berechneMilesPlaner() {
   const resultBox = document.getElementById("result");
 
+  zeigeErgebnisView();
   resultBox.innerHTML = "<p>Berechne...</p>";
 
   const payload = {
@@ -110,7 +123,7 @@ async function berechneMilesPlaner() {
   } catch (error) {
     resultBox.innerHTML = `
       <p><strong>Fehler:</strong> ${error.message}</p>
-      <p>Bitte prüfe, ob die Apps-Script-Web-App korrekt bereitgestellt wurde und Zugriff auf das Google Sheet hat.</p>
+      <p>Bitte prüfe die Apps-Script-Web-App und die Sheet-Verknüpfung.</p>
     `;
     console.error(error);
   }
