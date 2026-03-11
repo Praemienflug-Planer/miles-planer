@@ -39,6 +39,36 @@ h1 {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
+.step-block {
+  display: none;
+  margin-top: 12px;
+}
+
+.step-block.active {
+  display: block;
+}
+
+.step-divider {
+  margin: 20px 0 8px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.section-title {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.helper-text {
+  margin: 0 0 14px;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
 label {
   display: block;
   margin-top: 14px;
