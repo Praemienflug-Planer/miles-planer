@@ -1,47 +1,99 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>4 Seats Miles Planner</title>
-
-<link rel="stylesheet" href="styles.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4 Seats Miles Planner</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
+  <div class="container">
+    <h1>✈️ 4 Seats Miles Planner</h1>
+    <p class="subtitle">Interaktive Berechnung mit Google Sheets</p>
 
-<div class="container">
+    <div class="card">
+      <h2>Eingaben</h2>
 
-<h1>✈️ 4 Seats Miles Planner</h1>
+      <label for="ziel">Ziel</label>
+      <select id="ziel">
+        <option>Thailand</option>
+        <option>Malediven</option>
+        <option>USA</option>
+        <option>Dubai</option>
+        <option>Südafrika</option>
+      </select>
 
-<p class="subtitle">
-Live-Auswertung aus deinem Google Sheet
-</p>
+      <label for="personen">Personen</label>
+      <select id="personen">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option selected>4</option>
+      </select>
 
-<div class="card">
+      <label for="programm">Programm</label>
+      <select id="programm">
+        <option selected>Miles & More</option>
+        <option>Flying Blue</option>
+        <option>Avios</option>
+      </select>
 
-<h2>Ergebnis</h2>
+      <label for="reiseklasse">Reiseklasse</label>
+      <select id="reiseklasse">
+        <option>Economy</option>
+        <option>Premium Economy</option>
+        <option selected>Business</option>
+      </select>
 
-<div id="result">
-Lade Daten aus Google Sheets...
-</div>
+      <label for="reisezeit">Reisezeit</label>
+      <select id="reisezeit">
+        <option>Nebensaison</option>
+        <option>Hauptzeit</option>
+        <option selected>Ferien</option>
+      </select>
 
-<button onclick="loadData()">Daten aktualisieren</button>
+      <label for="reisejahr">Reisejahr</label>
+      <input id="reisejahr" type="number" value="2030" />
 
-</div>
+      <label for="reisemonat">Reisemonat</label>
+      <select id="reisemonat">
+        <option>Januar</option>
+        <option>Februar</option>
+        <option>März</option>
+        <option>April</option>
+        <option>Mai</option>
+        <option>Juni</option>
+        <option selected>Juli</option>
+        <option>August</option>
+        <option>September</option>
+        <option>Oktober</option>
+        <option>November</option>
+        <option>Dezember</option>
+      </select>
 
-<div class="card">
+      <label for="bestandAktuell">Aktueller Bestand</label>
+      <input id="bestandAktuell" type="number" value="190000" />
 
-<h2>Rohdaten</h2>
+      <label for="transferBestand">Transferfähiger Bestand</label>
+      <input id="transferBestand" type="number" value="0" />
 
-<pre id="raw"></pre>
+      <label for="geplanterBonus">Geplanter Bonus</label>
+      <input id="geplanterBonus" type="number" value="50000" />
 
-</div>
+      <label for="monatlicheSammelrate">Monatliche Sammelrate</label>
+      <input id="monatlicheSammelrate" type="number" value="12000" />
 
-</div>
+      <button onclick="berechneMilesPlaner()">Jetzt berechnen</button>
+    </div>
 
-<script src="script.js"></script>
+    <div class="card">
+      <h2>Ergebnis</h2>
+      <div id="result">
+        Bitte Eingaben machen und auf „Jetzt berechnen“ klicken.
+      </div>
+    </div>
+  </div>
 
+  <script src="script.js"></script>
 </body>
 </html>
