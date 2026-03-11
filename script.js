@@ -1,72 +1,117 @@
 const API_URL =
   "https://script.google.com/macros/s/AKfycbyfyZtqZyRrQlQWmTMK-IbKc7J4KCGK4A1huw2F9ZOVdSm7hw9mN3BVSYlRmDnF8o1h/exec";
 
-async function loadData() {
+async function berechneMilesPlaner() {
   const resultBox = document.getElementById("result");
-  const rawBox = document.getElementById("raw");
 
-  resultBox.innerHTML = "Lade Daten aus Google Sheets...";
-  rawBox.textContent = "";
+  resultBox.innerHTML = "<p>Berechne...</p>";
+
+  const payload = {
+    ziel: document.getElementById("ziel").value,
+    personen: document.getElementById("personen").value,
+    programm: document.getElementById("programm").value,
+    reiseklasse: document.getElementById("reiseklasse").value,
+    reisezeit: document.getElementById("reisezeit").value,
+    reisejahr: document.getElementById("reisejahr").value,
+    reisemonat: document.getElementById("reisemonat").value,
+    bestandAktuell: document.getElementById("bestandAktuell").value,
+    transferBestand: document.getElementById("transferBestand").value,
+    geplanterBonus: document.getElementById("geplanterBonus").value,
+    monatlicheSammelrate: document.getElementById("monatlicheSammelrate").value,
+  };
 
   try {
-    const response = await fetch(SHEET_URL, { cache: "no-store" });
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+      body: JSON.stringify(payload),
+    });
 
     if (!response.ok) {
       throw new Error("HTTP-Fehler: " + response.status);
     }
 
-    const text = await response.text();
+    const data = await response.json();
 
-    rawBox.textContent = text;
+    if (data.status === "error") {
+      throw new Error(data.message || "Unbekannter Fehler aus Apps Script");
+    }
 
-    const rows = text
-      .split(/\r?\n/)
-      .map((row) => row.trim())
-      .filter((row) => row.length > 0)
-      .map((row) => {
-        const cells = [];
-        let current = "";
-        let inQuotes = false;
+    resultBox.innerHTML = `
+      <div class="result-card">
+        <h2>${data.headline || "Ergebnis"}</h2>
+        <p class="subline">${data.subline || ""}</p>
 
-        for (let i = 0; i < row.length; i++) {
-          const char = row[i];
+        <div class="result-section">
+          <p><strong>${data.status || ""}</strong></p>
+          <p>${data.risiken || ""}</p>
+        </div>
 
-          if (char === '"') {
-            inQuotes = !inQuotes;
-          } else if (char === "," && !inQuotes) {
-            cells.push(current.trim().replace(/^"|"$/g, ""));
-            current = "";
-          } else {
-            current += char;
-          }
-        }
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Bestand heute</div>
+            <div class="value">${data.bestand || ""}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Bonus geplant</div>
+            <div class="value">${data.bonus || ""}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Zielbedarf</div>
+            <div class="value">${data.zielbedarf || ""}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Fehlend</div>
+            <div class="value">${data.fehlend || ""}</div>
+          </div>
+        </div>
 
-        cells.push(current.trim().replace(/^"|"$/g, ""));
-        return cells;
-      });
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Monate bis Ziel</div>
+            <div class="value">${data.monate || ""}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Ziel erreicht ca.</div>
+            <div class="value">${data.zielErreicht || ""}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Geplante Reise</div>
+            <div class="value">${data.reise || ""}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Reisebewertung</div>
+            <div class="value">${data.bewertung || ""}</div>
+          </div>
+        </div>
 
-    let html = "";
+        <div class="result-section">
+          <h3>Deal & Kosten</h3>
+          <p>${data.deal || ""}</p>
+          <p>${data.taxes || ""}</p>
+          <p>${data.taxRange || ""}</p>
+          <p>${data.cash || ""}</p>
+        </div>
 
-    rows.forEach((row) => {
-      const label = row[0] || "";
-      const value = row.slice(1).join(" | ").trim();
-
-      if (label && value) {
-        html += `<p><strong>${label}</strong>: ${value}</p>`;
-      }
-    });
-
-    resultBox.innerHTML =
-      html || "<p>Es konnten keine auswertbaren Daten gelesen werden.</p>";
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Fortschritt heute</div>
+            <div class="value">${data.progress || ""}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Fortschritt inkl. Bonus</div>
+            <div class="value">${data.progressBonus || ""}</div>
+          </div>
+        </div>
+      </div>
+    `;
   } catch (error) {
     resultBox.innerHTML = `
       <p><strong>Fehler:</strong> ${error.message}</p>
-      <p>Teste die Seite bitte über GitHub Pages und nicht per Doppelklick.</p>
+      <p>Bitte prüfe, ob die Apps-Script-Web-App korrekt bereitgestellt wurde und Zugriff auf das Google Sheet hat.</p>
     `;
-    rawBox.textContent = "Fehler beim Laden der CSV.";
     console.error(error);
   }
 }
-
-
-loadData();
