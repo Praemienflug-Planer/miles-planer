@@ -92,7 +92,6 @@ function extractErsparnisGesamt(text) {
   const match = String(text).match(/Ersparnis\s*~?\s*([0-9\.\,]+)\s*€\s*gesamt/i);
   return match ? extractNumber(match[1]) : NaN;
 }
-
 function buildProgressBar(percent) {
   const safePercent = Number.isNaN(percent) ? 0 : Math.max(0, Math.min(100, percent));
   return `
@@ -100,7 +99,6 @@ function buildProgressBar(percent) {
       <div class="progress-bar">
         <div class="progress-fill" style="width:${safePercent}%"></div>
       </div>
-      <div class="progress-value">${safePercent.toLocaleString("de-DE")}%</div>
     </div>
   `;
 }
@@ -299,3 +297,4 @@ async function berechneMilesPlaner() {
     console.error(error);
   }
 }
+
