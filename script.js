@@ -132,7 +132,10 @@ async function ladeDropdowns() {
     }
 
     populateSelect("programm", data.programme || [], "Miles & More");
-    populateSelect("reiseklasse", data.klassen || [], "Business");
+const allowedKlassen = (data.klassen || []).filter(
+  (k) => k !== "Economy"
+);
+populateSelect("reiseklasse", allowedKlassen, "Business");
     populateSelect("reisezeit", data.reisezeiten || [], "Ferien");
     populateSelect("ziel", data.ziele || [], "Thailand");
     populateSelect("reisemonat", data.monate || [], "Juli");
@@ -355,3 +358,4 @@ async function berechneMilesPlaner() {
 }
 
 document.addEventListener("DOMContentLoaded", ladeDropdowns);
+
