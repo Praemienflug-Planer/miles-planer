@@ -249,3 +249,45 @@ padding:10px 12px;
 border-radius:8px;
 line-height:1.4;
 }
+.affiliate-box{
+margin-top:18px;
+padding:16px;
+background:#f0fdf4;
+border:1px solid #bbf7d0;
+border-radius:10px;
+}
+
+.affiliate-box h4{
+margin-top:0;
+margin-bottom:8px;
+font-size:16px;
+}
+
+.affiliate-box p{
+font-size:14px;
+color:#374151;
+margin-bottom:12px;
+}
+
+.affiliate-links{
+display:grid;
+grid-template-columns:1fr;
+gap:8px;
+}
+
+.affiliate-card{
+display:block;
+padding:10px 12px;
+background:white;
+border:1px solid #e5e7eb;
+border-radius:8px;
+text-decoration:none;
+color:#111827;
+font-size:14px;
+transition:all .15s;
+}
+
+.affiliate-card:hover{
+border-color:#3b82f6;
+box-shadow:0 3px 10px rgba(0,0,0,0.05);
+}
