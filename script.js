@@ -30,6 +30,85 @@ const FALLBACK_PROGRAM_META = {
   }
 };
 
+const AFFILIATE_CONFIG = {
+  "Miles & More": {
+    sourceLabel: "PAYBACK Punkte",
+    headline: "💡 Miles & More Ziel schneller erreichen",
+    text: "Viele Nutzer schließen ihre Miles & More Lücke schneller über PAYBACK Punkte, Kreditkarten-Boni oder starke Punkteaktionen.",
+    offers: [
+      {
+        title: "PAYBACK Kreditkarte",
+        subtitle: "klassischer Einstieg für zusätzliche PAYBACK Punkte",
+        bonus: 2000,
+        url: "#"
+      },
+      {
+        title: "PAYBACK Aktionen & Partner",
+        subtitle: "regelmäßig große Extra-Punkte-Aktionen",
+        bonus: 10000,
+        url: "#"
+      }
+    ]
+  },
+  Avios: {
+    sourceLabel: "Membership Rewards Punkte",
+    headline: "💡 Avios schneller aufbauen",
+    text: "Für Avios sind Membership Rewards Punkte meist der schnellste Hebel, um große Lücken spürbar zu verkleinern.",
+    offers: [
+      {
+        title: "American Express Gold",
+        subtitle: "typisch starker Einstieg in Membership Rewards",
+        bonus: 40000,
+        url: "#"
+      },
+      {
+        title: "American Express Platinum",
+        subtitle: "hoher typischer Bonus für schnellen Aufbau",
+        bonus: 100000,
+        url: "#"
+      }
+    ]
+  },
+  "Flying Blue": {
+    sourceLabel: "Membership Rewards Punkte",
+    headline: "💡 Flying Blue schneller aufbauen",
+    text: "Für Flying Blue können Membership Rewards Punkte ein sehr effizienter Weg sein, um dein Sammelziel schneller zu erreichen.",
+    offers: [
+      {
+        title: "American Express Gold",
+        subtitle: "typisch starker Einstieg in Membership Rewards",
+        bonus: 40000,
+        url: "#"
+      },
+      {
+        title: "American Express Platinum",
+        subtitle: "hoher typischer Bonus für schnellen Aufbau",
+        bonus: 100000,
+        url: "#"
+      }
+    ]
+  },
+  KrisFlyer: {
+    sourceLabel: "Membership Rewards Punkte",
+    headline: "💡 KrisFlyer schneller aufbauen",
+    text: "Für KrisFlyer sind Membership Rewards Punkte oft der naheliegendste Weg, um eine größere Lücke schneller zu schließen.",
+    offers: [
+      {
+        title: "American Express Gold",
+        subtitle: "typisch starker Einstieg in Membership Rewards",
+        bonus: 40000,
+        url: "#"
+      },
+      {
+        title: "American Express Platinum",
+        subtitle: "hoher typischer Bonus für schnellen Aufbau",
+        bonus: 100000,
+        url: "#"
+      }
+    ]
+  }
+};
+
 function zeigeErgebnisView() {
   document.getElementById("inputView").classList.remove("active");
   document.getElementById("resultView").classList.add("active");
@@ -63,6 +142,11 @@ function extractNumber(text) {
 function formatEuro(value) {
   if (value === null || value === undefined || Number.isNaN(value)) return "";
   return `${Math.round(value).toLocaleString("de-DE")} €`;
+}
+
+function formatPoints(value) {
+  if (value === null || value === undefined || Number.isNaN(value)) return "";
+  return Math.round(value).toLocaleString("de-DE");
 }
 
 function extractPercent(text) {
@@ -225,6 +309,62 @@ function updateFormFlow() {
   }
 }
 
+function getAffiliateConfig(programm) {
+  return AFFILIATE_CONFIG[programm] || null;
+}
+
+function buildAffiliateBox(programm, fehlend, progressPercent) {
+  const cfg = getAffiliateConfig(programm);
+  if (!cfg) return "";
+  if (Number.isNaN(fehlend) || fehlend <= 0) return "";
+
+  const cardsHtml = cfg.offers
+    .map((offer) => {
+      const coverage = Math.min(100, Math.round((offer.bonus / fehlend) * 100));
+      return `
+        <a href="${escapeHtml(offer.url)}" class="affiliate-card" target="_blank" rel="nofollow sponsored noopener">
+          <strong>${escapeHtml(offer.title)}</strong><br>
+          <span>${escapeHtml(offer.subtitle)}</span>
+          <div class="affiliate-meta">
+            Typischer Bonus: ca. ${escapeHtml(formatPoints(offer.bonus))} ${escapeHtml(cfg.sourceLabel)}
+            ${
+              coverage > 0
+                ? `<br><span class="affiliate-coverage">könnte ca. ${coverage}% deiner aktuellen Lücke abdecken</span>`
+                : ""
+            }
+          </div>
+        </a>
+      `;
+    })
+    .join("");
+
+  let urgencyText = "";
+  if (!Number.isNaN(progressPercent)) {
+    if (progressPercent < 35) {
+      urgencyText = "Gerade bei einer größeren Lücke kann ein Willkommensbonus einen spürbaren Unterschied machen.";
+    } else if (progressPercent < 70) {
+      urgencyText = "Du bist schon unterwegs – ein Bonus kann dein Ziel deutlich näher rücken lassen.";
+    } else {
+      urgencyText = "Dir fehlt nicht mehr viel – ein Bonus oder eine Aktion kann die Restlücke schnell schließen.";
+    }
+  }
+
+  return `
+    <div class="affiliate-box">
+      <h4>${escapeHtml(cfg.headline)}</h4>
+      <p>${escapeHtml(cfg.text)}</p>
+      ${
+        urgencyText
+          ? `<p class="affiliate-urgency">${escapeHtml(urgencyText)}</p>`
+          : ""
+      }
+      <div class="affiliate-links">
+        ${cardsHtml}
+      </div>
+    </div>
+  `;
+}
+
 async function ladeDropdowns() {
   try {
     const response = await fetch(`${API_URL}?action=options`, { cache: "no-store" });
@@ -347,6 +487,7 @@ async function berechneMilesPlaner() {
 
     const progressHeute = extractPercent(data.progress);
     const progressBonus = extractPercent(data.progressBonus);
+    const fehlendValue = extractNumber(data.fehlend);
 
     const dealClass =
       /guter deal|sehr guter deal|top deal/i.test(dealLabel)
@@ -356,6 +497,8 @@ async function berechneMilesPlaner() {
         : /schwach|schlechter deal|kein guter deal/i.test(dealLabel)
         ? "deal-bad"
         : "deal-neutral";
+
+    const affiliateBoxHtml = buildAffiliateBox(programmName, fehlendValue, progressBonus);
 
     resultBox.innerHTML = `
       <div class="result-card">
@@ -385,33 +528,9 @@ async function berechneMilesPlaner() {
             <div class="label">Fehlend</div>
             <div class="value">${escapeHtml(data.fehlend || "")}</div>
           </div>
-          <div class="affiliate-box">
-<h4>💡 Meilen schneller sammeln</h4>
-<p>
-Viele Nutzer erreichen ihr Sammelziel deutlich schneller über
-Kreditkarten-Willkommensboni oder Punkteaktionen.
-</p>
-
-<div class="affiliate-links">
-
-<a href="#" class="affiliate-card">
-<strong>American Express Platinum</strong><br>
-bis zu 85.000 MR-Punkte Willkommensbonus
-</a>
-
-<a href="#" class="affiliate-card">
-<strong>American Express rosé Gold</strong><br>
-bis zu 55.000 MR-Punkte Willkommensbonus
-</a>
-
-<a href="#" class="affiliate-card">
-<strong>Payback Amex</strong><br>
-bis zu 5.000 Paybackpunkte 
-</a>
-
-</div>
-</div>
         </div>
+
+        ${affiliateBoxHtml}
 
         <div class="result-grid">
           <div class="result-item">
@@ -499,12 +618,6 @@ bis zu 5.000 Paybackpunkte
               }
             </div>
           </div>
-
-          ${
-            data.betterProgramHint
-              ? `<div class="info-box warning-box">${escapeHtml(data.betterProgramHint)}</div>`
-              : ""
-          }
         </div>
       </div>
     `;
@@ -533,4 +646,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     programm.addEventListener("change", updatePointsLabels);
   }
 });
-
