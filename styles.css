@@ -225,3 +225,17 @@ button:hover {
   font-size: 13px;
   font-weight: bold;
 }
+
+.info-box {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.warning-box {
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+  color: #9a3412;
+}
