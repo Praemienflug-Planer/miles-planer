@@ -22,45 +22,87 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
-function extractErsparnis(text) {
-  if (!text) return "";
-  const match = text.match(/Ersparnis\s*~?([0-9\.\,]+)\s*€\s*gesamt/i);
-  return match ? `${match[1]} €` : "";
+function extractNumber(text) {
+  if (!text) return NaN;
+  const cleaned = String(text)
+    .replace(/[^\d,.-]/g, "")
+    .replace(/\./g, "")
+    .replace(",", ".");
+  return Number(cleaned);
 }
 
-function extractCashPP(text) {
-  if (!text) return "";
-  const match = text.match(/Cash\s*~?([0-9\.\,]+)\s*€\s*p\.?P\.?/i);
-  return match ? `${match[1]} € p.P.` : "";
+function formatEuro(value) {
+  if (value === null || value === undefined || Number.isNaN(value)) return "";
+  return `${Math.round(value).toLocaleString("de-DE")} €`;
 }
 
-function extractZuzahlungPP(text) {
-  if (!text) return "";
-  const match = text.match(/Zuzahlung\s*~?([0-9\.\,]+)\s*€\s*p\.?P\.?/i);
-  return match ? `${match[1]} € p.P.` : "";
-}
-
-function extractTaxesTotal(text) {
-  if (!text) return "";
-  const match = text.match(/\(~?([0-9\.\,]+)\s*€\s*(?:für|gesamt)/i);
-  return match ? `${match[1]} € gesamt` : "";
-}
-
-function extractTaxesPP(text) {
-  if (!text) return "";
-  const match = text.match(/~?([0-9\.\,]+)\s*€\s*p\.?P\.?/i);
-  return match ? `${match[1]} € p.P.` : "";
+function extractPercent(text) {
+  if (!text) return NaN;
+  const match = String(text).match(/(\d+(?:[.,]\d+)?)\s*%/);
+  if (!match) return NaN;
+  return Number(match[1].replace(",", "."));
 }
 
 function extractDealLabel(text) {
   if (!text) return "";
-  return text.split("|")[0].trim();
+  return String(text).split("|")[0].trim();
 }
 
 function extractDealDetail(text) {
   if (!text) return "";
-  const parts = text.split("|");
+  const parts = String(text).split("|");
   return parts.length > 1 ? parts.slice(1).join("|").trim() : "";
+}
+
+function extractCpm(text) {
+  if (!text) return "";
+  const match = String(text).match(/([0-9]+(?:[.,][0-9]+)?)\s*ct\s*pro\s*Meile/i);
+  return match ? `${match[1].replace(".", ",")} ct / Meile` : "";
+}
+
+function extractTaxesPP(text) {
+  if (!text) return NaN;
+  const match = String(text).match(/~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?/i);
+  return match ? extractNumber(match[1]) : NaN;
+}
+
+function extractTaxesTotal(text) {
+  if (!text) return NaN;
+  const match = String(text).match(/\(~?\s*([0-9\.\,]+)\s*€\s*(?:für|gesamt)/i);
+  return match ? extractNumber(match[1]) : NaN;
+}
+
+function extractCashPP(text) {
+  if (!text) return NaN;
+  const match = String(text).match(/Cash\s*\|\s*~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?\s*Cash/i);
+  if (match) return extractNumber(match[1]);
+
+  const fallback = String(text).match(/~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?\s*Cash/i);
+  return fallback ? extractNumber(fallback[1]) : NaN;
+}
+
+function extractZuzahlungPP(text) {
+  if (!text) return NaN;
+  const match = String(text).match(/~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?\s*Zuzahlung/i);
+  return match ? extractNumber(match[1]) : NaN;
+}
+
+function extractErsparnisGesamt(text) {
+  if (!text) return NaN;
+  const match = String(text).match(/Ersparnis\s*~?\s*([0-9\.\,]+)\s*€\s*gesamt/i);
+  return match ? extractNumber(match[1]) : NaN;
+}
+
+function buildProgressBar(percent) {
+  const safePercent = Number.isNaN(percent) ? 0 : Math.max(0, Math.min(100, percent));
+  return `
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width:${safePercent}%"></div>
+      </div>
+      <div class="progress-value">${safePercent.toLocaleString("de-DE")}%</div>
+    </div>
+  `;
 }
 
 async function berechneMilesPlaner() {
@@ -102,62 +144,35 @@ async function berechneMilesPlaner() {
       throw new Error(data.message || "Unbekannter Fehler aus Apps Script");
     }
 
+    const personen = Number(payload.personen) || 1;
+    const programmName = payload.programm || "Programm";
+
     const dealLabel = extractDealLabel(data.deal);
     const dealDetail = extractDealDetail(data.deal);
+    const cpmValue = extractCpm(data.deal);
 
-    const taxesTotal = extractTaxesTotal(data.taxes);
     const taxesPP = extractTaxesPP(data.taxes);
+    const taxesTotal = extractTaxesTotal(data.taxes);
+    const finalTaxesPP = Number.isNaN(taxesPP) ? extractZuzahlungPP(data.cash) : taxesPP;
+    const finalTaxesTotal =
+      Number.isNaN(taxesTotal) && !Number.isNaN(finalTaxesPP)
+        ? finalTaxesPP * personen
+        : taxesTotal;
 
     const cashPP = extractCashPP(data.cash);
-    const zuzahlungPP = extractZuzahlungPP(data.cash);
-    const ersparnisGesamt = extractErsparnis(data.cash);
+    const cashGesamt = !Number.isNaN(cashPP) ? cashPP * personen : NaN;
 
-    const personen = Number(payload.personen) || 1;
+    const ersparnisGesamt = extractErsparnisGesamt(data.cash);
+    const ersparnisPP =
+      !Number.isNaN(ersparnisGesamt) && personen > 0
+        ? ersparnisGesamt / personen
+        : NaN;
 
-    let ersparnisPP = "";
-    if (ersparnisGesamt) {
-      const numeric = ersparnisGesamt.replace(/[^\d,.-]/g, "").replace(/\./g, "").replace(",", ".");
-      const total = Number(numeric);
-      if (!Number.isNaN(total) && personen > 0) {
-        const perPerson = Math.round(total / personen);
-        ersparnisPP = `${perPerson.toLocaleString("de-DE")} € p.P.`;
-      }
-    }
-
-    let cashGesamt = "";
-    if (cashPP) {
-      const numeric = cashPP.replace(/[^\d,.-]/g, "").replace(/\./g, "").replace(",", ".");
-      const value = Number(numeric);
-      if (!Number.isNaN(value)) {
-        cashGesamt = `${Math.round(value * personen).toLocaleString("de-DE")} € gesamt`;
-      }
-    }
-
-    let zuzahlungGesamt = taxesTotal;
-    if (!zuzahlungGesamt && zuzahlungPP) {
-      const numeric = zuzahlungPP.replace(/[^\d,.-]/g, "").replace(/\./g, "").replace(",", ".");
-      const value = Number(numeric);
-      if (!Number.isNaN(value)) {
-        zuzahlungGesamt = `${Math.round(value * personen).toLocaleString("de-DE")} € gesamt`;
-      }
-    }
+    const progressHeute = extractPercent(data.progress);
+    const progressBonus = extractPercent(data.progressBonus);
 
     resultBox.innerHTML = `
       <div class="result-card">
-        ${
-          ersparnisGesamt
-            ? `
-          <div class="hero-savings-box">
-            <div class="hero-savings-label">💰 Geschätzte Ersparnis durch den Award</div>
-            <div class="hero-savings-value">${escapeHtml(ersparnisGesamt)}</div>
-            <div class="hero-savings-sub">
-              ${escapeHtml(personen)} Reisende${ersparnisPP ? ` · ca. ${escapeHtml(ersparnisPP)}` : ""}
-            </div>
-          </div>
-        `
-            : ""
-        }
-
         <h2>${escapeHtml(data.headline || "Ergebnis")}</h2>
         <p class="subline">${escapeHtml(data.subline || "")}</p>
 
@@ -205,12 +220,37 @@ async function berechneMilesPlaner() {
         </div>
 
         <div class="result-section">
-          <h3>Deal & Kosten</h3>
+          <h3>Sammelfortschritt</h3>
 
           <div class="result-grid">
             <div class="result-item">
+              <div class="label">Fortschritt zum ${escapeHtml(programmName)}-Ziel heute</div>
+              <div class="value">${escapeHtml(data.progress || "")}</div>
+              ${buildProgressBar(progressHeute)}
+              <div class="value-note">Stand heute ohne geplanten Bonus</div>
+            </div>
+
+            <div class="result-item">
+              <div class="label">Fortschritt zum ${escapeHtml(programmName)}-Ziel inkl. Bonus</div>
+              <div class="value">${escapeHtml(data.progressBonus || "")}</div>
+              ${buildProgressBar(progressBonus)}
+              <div class="value-note">Inkl. geplantem Bonus und Transferfaktor</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-section">
+          <h3>Deal & Kosten</h3>
+
+          <div class="result-grid">
+            <div class="result-item deal-highlight">
               <div class="label">Deal-Bewertung</div>
               <div class="value value-small">${escapeHtml(dealLabel || data.deal || "")}</div>
+              ${
+                cpmValue
+                  ? `<div class="cpm-badge">${escapeHtml(cpmValue)}</div>`
+                  : ""
+              }
               ${
                 dealDetail
                   ? `<div class="value-note">${escapeHtml(dealDetail)}</div>`
@@ -220,44 +260,33 @@ async function berechneMilesPlaner() {
 
             <div class="result-item">
               <div class="label">Award-Zuzahlung</div>
-              <div class="value value-small">${escapeHtml(zuzahlungGesamt || data.taxes || "")}</div>
+              <div class="value value-small">${escapeHtml(formatEuro(finalTaxesTotal) || data.taxes || "")}</div>
               ${
-                taxesPP
-                  ? `<div class="value-note">ca. ${escapeHtml(taxesPP)}</div>`
+                !Number.isNaN(finalTaxesPP)
+                  ? `<div class="value-note">ca. ${escapeHtml(formatEuro(finalTaxesPP))} p.P.</div>`
                   : ""
               }
             </div>
 
             <div class="result-item">
               <div class="label">Cashpreis</div>
-              <div class="value value-small">${escapeHtml(cashGesamt || data.cash || "")}</div>
+              <div class="value value-small">${escapeHtml(formatEuro(cashGesamt) || "—")}</div>
               ${
-                cashPP
-                  ? `<div class="value-note">ca. ${escapeHtml(cashPP)}</div>`
+                !Number.isNaN(cashPP)
+                  ? `<div class="value-note">ca. ${escapeHtml(formatEuro(cashPP))} p.P.</div>`
                   : ""
               }
             </div>
 
             <div class="result-item">
               <div class="label">Ersparnis</div>
-              <div class="value value-small">${escapeHtml(ersparnisGesamt || "—")}</div>
+              <div class="value value-small">${escapeHtml(formatEuro(ersparnisGesamt) || "—")}</div>
               ${
-                ersparnisPP
-                  ? `<div class="value-note">ca. ${escapeHtml(ersparnisPP)}</div>`
+                !Number.isNaN(ersparnisPP)
+                  ? `<div class="value-note">ca. ${escapeHtml(formatEuro(ersparnisPP))} p.P.</div>`
                   : ""
               }
             </div>
-          </div>
-        </div>
-
-        <div class="result-grid">
-          <div class="result-item">
-            <div class="label">Fortschritt heute</div>
-            <div class="value">${escapeHtml(data.progress || "")}</div>
-          </div>
-          <div class="result-item">
-            <div class="label">Fortschritt inkl. Bonus</div>
-            <div class="value">${escapeHtml(data.progressBonus || "")}</div>
           </div>
         </div>
       </div>
