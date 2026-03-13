@@ -10,7 +10,7 @@ const FALLBACK_PROGRAM_META = {
     transferquelle: "PAYBACK",
     faktor: 1
   },
-  Avios: {
+  "Avios": {
     punktelabel: "Avios",
     kurzlabel: "Avios",
     transferquelle: "Membership Rewards",
@@ -22,7 +22,7 @@ const FALLBACK_PROGRAM_META = {
     transferquelle: "Membership Rewards",
     faktor: 0.8
   },
-  KrisFlyer: {
+  "KrisFlyer": {
     punktelabel: "KrisFlyer Meilen",
     kurzlabel: "KrisFlyer",
     transferquelle: "Membership Rewards",
@@ -44,7 +44,7 @@ const AFFILIATE_CONFIG = {
       }
     ]
   },
-  Avios: {
+  "Avios": {
     sourceLabel: "Membership Rewards Punkte",
     headline: "💡 Avios schneller aufbauen",
     text: "Aktuell starke Membership Rewards Boni können helfen, deine Avios-Lücke deutlich schneller zu verkleinern.",
@@ -94,7 +94,7 @@ const AFFILIATE_CONFIG = {
       }
     ]
   },
-  KrisFlyer: {
+  "KrisFlyer": {
     sourceLabel: "Membership Rewards Punkte",
     headline: "💡 KrisFlyer schneller aufbauen",
     text: "Aktuell starke Membership Rewards Boni können helfen, deine KrisFlyer Lücke deutlich schneller zu verkleinern.",
@@ -121,24 +121,28 @@ const AFFILIATE_CONFIG = {
   }
 };
 
+function $(id) {
+  return document.getElementById(id);
+}
+
 function zeigeErgebnisView() {
-  const inputView = document.getElementById("inputView");
-  const resultView = document.getElementById("resultView");
+  const inputView = $("inputView");
+  const resultView = $("resultView");
   if (inputView) inputView.classList.remove("active");
   if (resultView) resultView.classList.add("active");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function zurueckZuEingaben() {
-  const inputView = document.getElementById("inputView");
-  const resultView = document.getElementById("resultView");
+  const inputView = $("inputView");
+  const resultView = $("resultView");
   if (resultView) resultView.classList.remove("active");
   if (inputView) inputView.classList.add("active");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function escapeHtml(value) {
-  return String(value || "")
+  return String(value ?? "")
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -148,12 +152,10 @@ function escapeHtml(value) {
 
 function extractNumber(text) {
   if (!text) return NaN;
-
   const cleaned = String(text)
     .replace(/[^\d,.-]/g, "")
     .replace(/\./g, "")
     .replace(",", ".");
-
   return Number(cleaned);
 }
 
@@ -169,20 +171,17 @@ function formatPoints(value) {
 
 function formatDurationMonths(value) {
   const months = Number(value);
-
   if (Number.isNaN(months) || months <= 0) return "";
 
   const years = Math.floor(months / 12);
   const remainingMonths = months % 12;
 
-  if (years <= 0) {
+  if (years === 0) {
     return `${remainingMonths} Monat${remainingMonths === 1 ? "" : "e"}`;
   }
-
   if (remainingMonths === 0) {
     return `${years} Jahr${years === 1 ? "" : "e"}`;
   }
-
   return `${years} Jahr${years === 1 ? "" : "e"} und ${remainingMonths} Monat${remainingMonths === 1 ? "" : "e"}`;
 }
 
@@ -252,7 +251,7 @@ function buildProgressBar(percent) {
 }
 
 function populateSelect(id, values, placeholder = "Bitte wählen") {
-  const select = document.getElementById(id);
+  const select = $(id);
   if (!select) return;
 
   const currentValue = select.value;
@@ -267,13 +266,12 @@ function populateSelect(id, values, placeholder = "Bitte wählen") {
     const option = document.createElement("option");
     option.value = value;
     option.textContent = value;
-    if (value === currentValue) {
-      option.selected = true;
-    }
     select.appendChild(option);
   });
 
-  if (!currentValue) {
+  if (currentValue && values.includes(currentValue)) {
+    select.value = currentValue;
+  } else {
     select.value = "";
   }
 }
@@ -382,15 +380,15 @@ function buildTransferInfo(cfg) {
 }
 
 function updatePointsLabels() {
-  const programm = document.getElementById("programm")?.value;
+  const programm = $("programm")?.value;
   const cfg = getProgramConfig(programm);
 
-  const labelBestandAktuell = document.getElementById("labelBestandAktuell");
-  const labelTransferBestand = document.getElementById("labelTransferBestand");
-  const labelGeplanterBonus = document.getElementById("labelGeplanterBonus");
-  const labelMonatlicheSammelrate = document.getElementById("labelMonatlicheSammelrate");
-  const pointsHelper = document.getElementById("pointsHelper");
-  const resultTransferHint = document.getElementById("resultTransferHint");
+  const labelBestandAktuell = $("labelBestandAktuell");
+  const labelTransferBestand = $("labelTransferBestand");
+  const labelGeplanterBonus = $("labelGeplanterBonus");
+  const labelMonatlicheSammelrate = $("labelMonatlicheSammelrate");
+  const pointsHelper = $("pointsHelper");
+  const resultTransferHint = $("resultTransferHint");
 
   if (labelBestandAktuell) {
     labelBestandAktuell.textContent = `Aktueller Bestand (${cfg.punktelabel || "Meilen / Punkte"})`;
@@ -449,19 +447,19 @@ function updatePointsLabels() {
 }
 
 function setStepActive(id, isActive) {
-  const el = document.getElementById(id);
+  const el = $(id);
   if (!el) return;
   el.classList.toggle("active", isActive);
 }
 
 function updateFormFlow() {
-  const ziel = document.getElementById("ziel")?.value;
-  const personen = document.getElementById("personen")?.value;
-  const reiseklasse = document.getElementById("reiseklasse")?.value;
-  const reisezeit = document.getElementById("reisezeit")?.value;
-  const reisemonat = document.getElementById("reisemonat")?.value;
-  const reisejahr = document.getElementById("reisejahr")?.value;
-  const programm = document.getElementById("programm")?.value;
+  const ziel = $("ziel")?.value;
+  const personen = $("personen")?.value;
+  const reiseklasse = $("reiseklasse")?.value;
+  const reisezeit = $("reisezeit")?.value;
+  const reisemonat = $("reisemonat")?.value;
+  const reisejahr = $("reisejahr")?.value;
+  const programm = $("programm")?.value;
 
   setStepActive("step-ziel", true);
   setStepActive("step-personen", !!ziel);
@@ -521,11 +519,7 @@ function buildAffiliateBox(programm, fehlend, progressPercent) {
     <div class="affiliate-box">
       <h4>${escapeHtml(cfg.headline)}</h4>
       <p>${escapeHtml(cfg.text)}</p>
-      ${
-        urgencyText
-          ? `<p class="affiliate-urgency">${escapeHtml(urgencyText)}</p>`
-          : ""
-      }
+      ${urgencyText ? `<p class="affiliate-urgency">${escapeHtml(urgencyText)}</p>` : ""}
       <div class="affiliate-links">
         ${cardsHtml}
       </div>
@@ -573,7 +567,10 @@ function buildDecisionCard(data, programmName, fehlendValue, monateValue) {
       : (data.fehlend || "—");
 
   const durationText = formatDurationMonths(monateValue) || (data.monate || "—");
-  const introText = data.statusText || data.bewertung || "Hier siehst du auf einen Blick, wie realistisch dein Ziel aktuell ist.";
+  const introText =
+    data.statusText ||
+    data.bewertung ||
+    "Hier siehst du auf einen Blick, wie realistisch dein Ziel aktuell ist.";
 
   return `
     <div class="decision-card ${meta.className}">
@@ -609,10 +606,13 @@ function buildDecisionCard(data, programmName, fehlendValue, monateValue) {
 
 async function ladeDropdowns() {
   try {
-    const response = await fetch(`${API_URL}?action=options`, { cache: "no-store" });
+    const response = await fetch(`${API_URL}?action=options`, {
+      method: "GET",
+      cache: "no-store"
+    });
 
     if (!response.ok) {
-      throw new Error("Dropdowns konnten nicht geladen werden.");
+      throw new Error(`Dropdowns konnten nicht geladen werden (${response.status})`);
     }
 
     const data = await response.json();
@@ -640,15 +640,280 @@ async function ladeDropdowns() {
 }
 
 async function berechneMilesPlaner() {
-  const resultBox = document.getElementById("result");
-  const scenarioValue = document.getElementById("szenario")?.value || "realistisch";
+  const resultBox = $("result");
+  const scenarioValue = $("szenario")?.value || "realistisch";
   const fallbackScenarioLabel = getScenarioLabel(scenarioValue);
 
   const payload = {
     szenario: scenarioValue,
-    ziel: document.getElementById("ziel")?.value,
-    personen: document.getElementById("personen")?.value,
-    programm: document.getElementById("programm")?.value,
-    reiseklasse: document.getElementById("reiseklasse")?.value,
-    reisezeit: document.getElementById("reisezeit")?.value,
-    reisejahr: document.
+    ziel: $("ziel")?.value,
+    personen: $("personen")?.value,
+    programm: $("programm")?.value,
+    reiseklasse: $("reiseklasse")?.value,
+    reisezeit: $("reisezeit")?.value,
+    reisejahr: $("reisejahr")?.value,
+    reisemonat: $("reisemonat")?.value,
+    bestandAktuell: $("bestandAktuell")?.value,
+    transferBestand: $("transferBestand")?.value,
+    geplanterBonus: $("geplanterBonus")?.value,
+    monatlicheSammelrate: $("monatlicheSammelrate")?.value
+  };
+
+  if (
+    !payload.ziel ||
+    !payload.personen ||
+    !payload.reiseklasse ||
+    !payload.reisezeit ||
+    !payload.reisemonat ||
+    !payload.reisejahr ||
+    !payload.programm
+  ) {
+    
+alert("Bitte fülle die sichtbaren Schritte nacheinander aus.");
+    return;
+  }
+
+  if (!resultBox) {
+    alert("Ergebnisbereich nicht gefunden.");
+    return;
+  }
+
+  zeigeErgebnisView();
+  resultBox.innerHTML = "<p>Berechne...</p>";
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error("HTTP-Fehler: " + response.status);
+    }
+
+    const data = await response.json();
+
+    if (data.status === "error") {
+      throw new Error(data.message || "Unbekannter Fehler aus Apps Script");
+    }
+
+    const persons = Number(payload.personen) || 1;
+    const programmName = payload.programm || "Programm";
+    const cfg = getProgramConfig(programmName);
+
+    const finalScenarioKey = data.scenario || scenarioValue;
+    const finalScenarioLabel = data.scenarioLabel || fallbackScenarioLabel;
+    const scenarioMeta = getScenarioMeta(finalScenarioKey);
+    const scenarioBadgeClass = scenarioMeta.badgeClass;
+
+    const dealLabel = extractDealLabel(data.deal);
+    const dealDetail = extractDealDetail(data.deal);
+    const cpmValue = extractCpm(data.deal);
+
+    const taxesPP = extractTaxesPP(data.taxes);
+    const taxesTotal = extractTaxesTotal(data.taxes);
+    const finalTaxesPP = Number.isNaN(taxesPP) ? extractZuzahlungPP(data.cash) : taxesPP;
+    const finalTaxesTotal =
+      Number.isNaN(taxesTotal) && !Number.isNaN(finalTaxesPP)
+        ? finalTaxesPP * persons
+        : taxesTotal;
+
+    const cashPP = extractCashPP(data.cash);
+    const cashGesamt = !Number.isNaN(cashPP) ? cashPP * persons : NaN;
+
+    const ersparnisGesamt = extractErsparnisGesamt(data.cash);
+    const ersparnisPP =
+      !Number.isNaN(ersparnisGesamt) && persons > 0
+        ? ersparnisGesamt / persons
+        : NaN;
+
+    const progressHeute = extractPercent(data.progress);
+    const progressBonus = extractPercent(data.progressBonus);
+    const fehlendValue = extractNumber(data.fehlend);
+    const monateValue = extractNumber(data.monate);
+
+    const dealClass =
+      /guter deal|sehr guter deal|top deal|exzellenter deal/i.test(dealLabel)
+        ? "deal-good"
+        : /mittel|ok|solide/i.test(dealLabel)
+        ? "deal-medium"
+        : /schwach|schlechter deal|kein guter deal/i.test(dealLabel)
+        ? "deal-bad"
+        : "deal-neutral";
+
+    const affiliateBoxHtml = buildAffiliateBox(programmName, fehlendValue, progressBonus);
+    const decisionCardHtml = buildDecisionCard(data, programmName, fehlendValue, monateValue);
+
+    resultBox.innerHTML = `
+      <div class="result-card">
+
+        <div class="tool-card scenario-box">
+          <div class="result-section">
+            <div class="label">Aktives Szenario</div>
+            <span class="scenario-badge ${escapeHtml(scenarioBadgeClass)}">${escapeHtml(finalScenarioLabel)}</span>
+            <div class="scenario-headline">${escapeHtml(scenarioMeta.headline)}</div>
+            <div class="value-note">${escapeHtml(scenarioMeta.text)}</div>
+          </div>
+        </div>
+
+        ${decisionCardHtml}
+
+        <div class="result-section">
+          <h2>${escapeHtml(data.headline || "Ergebnis")}</h2>
+          <p class="subline">${escapeHtml(data.subline || "")}</p>
+          ${data.risiken ? `<p class="value-note">${escapeHtml(data.risiken)}</p>` : ""}
+          ${
+            data.betterProgramHint
+              ? `<div class="result-info-card"><strong>Alternative prüfen</strong><p>${escapeHtml(data.betterProgramHint)}</p></div>`
+              : ""
+          }
+        </div>
+
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Bestand heute (${escapeHtml(cfg.punktelabel || "Meilen / Punkte")})</div>
+            <div class="value">${escapeHtml(data.bestand || "")}</div>
+          </div>
+
+          <div class="result-item">
+            <div class="label">Bonus geplant (${escapeHtml((cfg.transferquelle || "Transferpartner") + " Punkte")})</div>
+            <div class="value">${escapeHtml(data.bonus || "")}</div>
+            <div class="value-note">${escapeHtml(data.transferInfo || buildTransferInfo(cfg))}</div>
+          </div>
+
+          <div class="result-item">
+            <div class="label">Zielbedarf</div>
+            <div class="value">${escapeHtml(data.zielbedarf || "")}</div>
+          </div>
+
+          <div class="result-item">
+            <div class="label">Fehlend</div>
+            <div class="value">${escapeHtml(data.fehlend || "")}</div>
+          </div>
+
+          <div class="result-item">
+            <div class="label">Monate bis Ziel</div>
+            <div class="value">${escapeHtml(data.monate || "")}</div>
+            ${
+              formatDurationMonths(monateValue)
+                ? `<div class="value-note">ca. ${escapeHtml(formatDurationMonths(monateValue))}</div>`
+                : ""
+            }
+          </div>
+
+          <div class="result-item">
+            <div class="label">Ziel erreicht ca.</div>
+            <div class="value value-small">${escapeHtml(data.zielErreicht || "")}</div>
+          </div>
+
+          <div class="result-item">
+            <div class="label">Geplante Reise</div>
+            <div class="value value-small">${escapeHtml(data.reise || "")}</div>
+          </div>
+
+          <div class="result-item">
+            <div class="label">Reisebewertung</div>
+            <div class="value value-small">${escapeHtml(data.bewertung || "")}</div>
+          </div>
+        </div>
+
+        ${affiliateBoxHtml}
+          <div class="result-section">
+          <h3>Sammelfortschritt</h3>
+
+          <div class="result-grid">
+            <div class="result-item">
+              <div class="label">Fortschritt zum ${escapeHtml(programmName)}-Ziel heute</div>
+              <div class="value value-small">${escapeHtml(data.progress || "")}</div>
+              ${buildProgressBar(progressHeute)}
+            </div>
+
+            <div class="result-item">
+              <div class="label">Fortschritt zum ${escapeHtml(programmName)}-Ziel inkl. Bonus</div>
+              <div class="value value-small">${escapeHtml(data.progressBonus || "")}</div>
+              ${buildProgressBar(progressBonus)}
+            </div>
+          </div>
+        </div>
+
+        <div class="result-section">
+          <h3>Deal & Kosten</h3>
+
+          <div class="result-grid">
+            <div class="result-item deal-highlight ${escapeHtml(dealClass)}">
+              <div class="label">Deal-Bewertung</div>
+              <div class="value value-small">${escapeHtml(dealLabel || data.deal || "")}</div>
+              ${cpmValue ? `<div class="cpm-badge">${escapeHtml(cpmValue)}</div>` : ""}
+              ${dealDetail ? `<div class="value-note">${escapeHtml(dealDetail)}</div>` : ""}
+            </div>
+
+            <div class="result-item">
+              <div class="label">Award-Zuzahlung</div>
+              <div class="value value-small">${escapeHtml(formatEuro(finalTaxesTotal) || data.taxes || "—")}</div>
+              ${
+                !Number.isNaN(finalTaxesPP)
+                  ? `<div class="value-note">ca. ${escapeHtml(formatEuro(finalTaxesPP))} p.P.</div>`
+                  : ""
+              }
+            </div>
+
+            <div class="result-item">
+              <div class="label">Cashpreis</div>
+              <div class="value value-small">${escapeHtml(formatEuro(cashGesamt) || "—")}</div>
+              ${
+                !Number.isNaN(cashPP)
+                  ? `<div class="value-note">ca. ${escapeHtml(formatEuro(cashPP))} p.P.</div>`
+                  : ""
+              }
+            </div>
+
+            <div class="result-item">
+              <div class="label">Ersparnis</div>
+              <div class="value value-small">${escapeHtml(formatEuro(ersparnisGesamt) || "—")}</div>
+              ${
+                !Number.isNaN(ersparnisPP)
+                  ? `<div class="value-note">ca. ${escapeHtml(formatEuro(ersparnisPP))} p.P.</div>`
+                  : ""
+              }
+            </div>
+          </div>
+        </div>
+
+      </div>
+    `;
+
+    updatePointsLabels();
+  } catch (error) {
+    resultBox.innerHTML = `
+      <div class="result-info-card">
+        <strong>Fehler: ${escapeHtml(error.message)}</strong>
+        <p>Bitte prüfe die Apps-Script-Web-App, die Sheet-Verknüpfung und die Szenario-Zuordnung.</p>
+      </div>
+    `;
+    console.error(error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  fillFallbackDropdowns();
+
+  ["ziel", "personen", "reiseklasse", "reisezeit", "reisemonat", "reisejahr", "programm"].forEach((id) => {
+    const el = $(id);
+    if (el) {
+      el.addEventListener("change", updateFormFlow);
+      el.addEventListener("input", updateFormFlow);
+    }
+  });
+
+  const programm = $("programm");
+  if (programm) {
+    programm.addEventListener("change", updatePointsLabels);
+  }
+
+  updatePointsLabels();
+  updateFormFlow();
+  ladeDropdowns();
+});
