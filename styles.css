@@ -977,3 +977,75 @@ h4 {
   background: #ffedd5;
   color: #c2410c;
 }
+.scenario-switch-wrap {
+  margin-bottom: 20px;
+}
+
+.scenario-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.scenario-switch {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 6px;
+  background: #f3f6fb;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.scenario-option {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-weight: bold;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.15s ease;
+  font-size: 14px;
+}
+
+.scenario-option:hover {
+  background: white;
+  color: var(--text);
+}
+
+.scenario-option.active {
+  background: white;
+  color: var(--primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.scenario-box {
+  background: #f8fbff;
+  border-color: #cfe0ff;
+}
+
+.scenario-badge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.scenario-badge-realistisch {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.scenario-badge-best {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.scenario-badge-konservativ {
+  background: #ffedd5;
+  color: #c2410c;
+}
