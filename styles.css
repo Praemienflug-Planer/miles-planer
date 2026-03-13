@@ -1056,3 +1056,35 @@ h4 {
   font-weight: bold;
   line-height: 1.3;
 }
+.points-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+.info-card {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #f8fbff;
+}
+
+.info-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.info-content p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .points-layout {
+    grid-template-columns: 1fr;
+  }
+}
