@@ -31,25 +31,19 @@ const FALLBACK_PROGRAM_META = {
 };
 
 const AFFILIATE_CONFIG = {
-  "Miles & More": {
-    sourceLabel: "PAYBACK Punkte",
-    headline: "💡 Miles & More Ziel schneller erreichen",
-    text: "Viele Nutzer schließen ihre Miles & More Lücke schneller über PAYBACK Punkte, Kreditkarten-Boni oder starke Punkteaktionen.",
-    offers: [
-      {
-        title: "PAYBACK Kreditkarte",
-        subtitle: "zusätzliche PAYBACK Punkte für Miles & More",
-        bonus: 2000,
-        url: "#"
-      },
-      {
-        title: "PAYBACK Aktionen & Partner",
-        subtitle: "regelmäßig starke Extra-Punkte-Aktionen",
-        bonus: 10000,
-        url: "#"
-      }
-    ]
-  },
+"Miles & More": {
+  sourceLabel: "PAYBACK Punkte",
+  headline: "💡 Miles & More Ziel schneller erreichen",
+  text: "Viele Nutzer schließen ihre Miles & More Lücke schneller über Kreditkarten-Boni oder Punkteaktionen.",
+  offers: [
+    {
+      title: "American Express PAYBACK Kreditkarte",
+      subtitle: "zusätzliche PAYBACK Punkte für Miles & More",
+      bonus: 5000,
+      url: "#"
+    }
+  ]
+},
   Avios: {
     sourceLabel: "Membership Rewards Punkte",
     headline: "💡 Avios schneller aufbauen",
@@ -664,3 +658,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     programm.addEventListener("change", updatePointsLabels);
   }
 });
+
