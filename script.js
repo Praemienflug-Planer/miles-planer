@@ -436,8 +436,15 @@ async function ladeDropdowns() {
 async function berechneMilesPlaner() {
   const resultBox = document.getElementById("result");
   const scenarioValue = document.getElementById("szenario").value;
-  const scenarioLabel = getScenarioLabel(scenarioValue);
+const scenarioLabel = data.scenarioLabel || getScenarioLabel(scenarioValue);
 
+const scenarioBadgeClass =
+  scenarioValue === "best"
+    ? "scenario-badge-best"
+    : scenarioValue === "konservativ"
+    ? "scenario-badge-konservativ"
+    : "scenario-badge-realistisch";
+  
   const payload = {
     szenario: scenarioValue,
     ziel: document.getElementById("ziel").value,
@@ -530,11 +537,11 @@ async function berechneMilesPlaner() {
 
     resultBox.innerHTML = `
       <div class="result-card">
-        <div class="result-item" style="background:#eff6ff;border-color:#cfe0ff;">
-          <div class="label">Aktives Szenario</div>
-          <div class="value value-small">${escapeHtml(scenarioLabel)}</div>
-          <div class="value-note">Es wird immer nur ein Szenario gleichzeitig angezeigt, damit das Ergebnis übersichtlich bleibt.</div>
-        </div>
+<div class="result-item scenario-box">
+  <div class="label">Aktives Szenario</div>
+  <div class="scenario-badge ${scenarioBadgeClass}">${escapeHtml(scenarioLabel)}</div>
+  <div class="value-note">Es wird immer nur ein Szenario gleichzeitig angezeigt, damit das Ergebnis übersichtlich bleibt.</div>
+</div>
 
         <h2>${escapeHtml(data.headline || "Ergebnis")}</h2>
         <p class="subline">${escapeHtml(data.subline || "")}</p>
@@ -680,3 +687,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     programm.addEventListener("change", updatePointsLabels);
   }
 });
+
