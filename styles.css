@@ -498,7 +498,7 @@ h4 {
 
 .tool-layout {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1.25fr 0.75fr;
   gap: 24px;
   align-items: start;
 }
@@ -681,19 +681,7 @@ h4 {
 
 /* Punktebereich */
 
-.points-cards-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 720px) 320px;
-  gap: 24px;
-  align-items: start;
-}
 
-.points-helper-card {
-  padding: 0;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
 
 .info-card,
 .info-card-standalone {
@@ -1018,5 +1006,14 @@ h4 {
   .container {
     padding: 0 16px;
   }
+}
+.points-helper-sidebar-card {
+  padding: 0;
+}
+
+.points-helper-sidebar-card .info-card {
+  border: none;
+  box-shadow: none;
+  border-radius: 16px;
 }
 
