@@ -67,16 +67,15 @@
                   <p>Fülle die Schritte nacheinander aus. Der Rechner passt die Punktelogik je nach Programm automatisch an.</p>
                 </div>
 
-                <div class="form-grid">
-                  <div class="field-group">
-                    <label for="szenario">Szenario</label>
-                    <select id="szenario">
-                      <option value="realistisch" selected>Realistisch</option>
-                      <option value="best">Best Case</option>
-                      <option value="konservativ">Konservativ</option>
-                    </select>
-                  </div>
-                </div>
+              <div class="scenario-switch-wrap">
+  <label class="scenario-label">Szenario</label>
+  <div class="scenario-switch" id="scenarioSwitch">
+    <button type="button" class="scenario-option active" data-value="realistisch">Realistisch</button>
+    <button type="button" class="scenario-option" data-value="best">Best Case</button>
+    <button type="button" class="scenario-option" data-value="konservativ">Konservativ</button>
+  </div>
+  <input type="hidden" id="szenario" value="realistisch" />
+</div>
 
                 <div class="trust-note" style="margin-bottom: 18px;">
                   Standard ist <strong>Realistisch</strong>. Best Case und Konservativ helfen dir, Chancen und Risiken besser einzuordnen,
