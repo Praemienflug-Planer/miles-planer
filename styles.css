@@ -875,3 +875,32 @@ h4 {
   font-weight: bold;
   color: var(--primary);
 }
+.scenario-box {
+  background: #f8fbff;
+  border-color: #cfe0ff;
+}
+
+.scenario-badge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.scenario-badge-realistisch {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.scenario-badge-best {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.scenario-badge-konservativ {
+  background: #ffedd5;
+  color: #c2410c;
+}
