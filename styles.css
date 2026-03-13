@@ -863,3 +863,15 @@ h4 {
     font-size: 20px;
   }
 }
+.bonus-note {
+  background: #f8fbff;
+  border: 1px solid #cfe0ff;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.bonus-example {
+  margin-top: 8px;
+  font-weight: bold;
+  color: var(--primary);
+}
