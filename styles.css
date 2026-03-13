@@ -423,4 +423,116 @@ h3 {
   }
 }
 }
+.hero-small {
+  padding: 56px 0 36px;
+}
+
+.seo-hero-grid {
+  align-items: start;
+}
+
+.seo-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.seo-content {
+  display: grid;
+  gap: 18px;
+}
+
+.seo-sidebar {
+  display: grid;
+  gap: 18px;
+}
+
+.seo-card {
+  padding: 24px;
+}
+
+.seo-card p,
+.seo-card li {
+  color: var(--muted);
+}
+
+.seo-card ul,
+.seo-card ol {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.seo-card p + ul,
+.seo-card p + ol,
+.seo-card p + p {
+  margin-top: 12px;
+}
+
+.seo-table-wrap {
+  overflow-x: auto;
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
+.seo-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+  background: white;
+}
+
+.seo-table th,
+.seo-table td {
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.seo-table th {
+  background: #f8fafc;
+}
+
+.faq-list {
+  display: grid;
+  gap: 16px;
+}
+
+.faq-item {
+  padding-top: 4px;
+}
+
+.faq-item h3 {
+  margin-bottom: 8px;
+}
+
+.sidebar-links {
+  display: grid;
+  gap: 12px;
+}
+
+.sidebar-links a {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.sidebar-links a:hover {
+  text-decoration: underline;
+}
+
+.sticky-card {
+  position: sticky;
+  top: 96px;
+}
+
+@media (max-width: 900px) {
+  .seo-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sticky-card {
+    position: static;
+  }
+}
 
