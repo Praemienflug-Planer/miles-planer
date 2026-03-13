@@ -313,23 +313,5 @@
 </script>
 
 <script src="/miles-planer/script.js"></script>
-  <script>
-    (function () {
-      const select = document.getElementById("reisejahr");
-      if (!select) return;
-
-      const currentYear = new Date().getFullYear();
-      const maxYear = currentYear + 10;
-
-      for (let year = currentYear; year <= maxYear; year++) {
-        const option = document.createElement("option");
-        option.value = year;
-        option.textContent = year;
-        select.appendChild(option);
-      }
-    })();
-  </script>
-
-  <script src="/miles-planer/script.js"></script>
 </body>
 </html>
