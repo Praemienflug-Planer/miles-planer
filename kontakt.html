@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt | Prämienflug-Planer</title>
+  <meta
+    name="description"
+    content="Kontakt zum Prämienflug-Planer. Fragen, Hinweise oder Feedback einfach über das Kontaktformular senden."
+  />
+  <link rel="stylesheet" href="/styles.css?v=14" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="/">Prämienflug-Planer</a>
+      <nav class="main-nav">
+        <a href="/rechner">Rechner</a>
+        <a href="/meilen-business-class">Business Class Meilen</a>
+        <a href="/meilen-thailand">Thailand</a>
+        <a href="/amex-meilen-umrechnen">Amex umrechnen</a>
+        <a href="/meilen-sammeln">Meilen sammeln</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-small">
+      <div class="container hero-grid contact-hero-grid">
+        <div>
+          <p class="eyebrow">Kontakt</p>
+          <h1>Fragen, Hinweise oder Feedback?</h1>
+          <p class="hero-text">
+            Wenn dir ein Fehler im Rechner auffällt, du eine Idee für eine Verbesserung hast
+            oder mit mir Kontakt aufnehmen möchtest, kannst du mir hier direkt schreiben.
+          </p>
+
+          <div class="trust-note">
+            Ich nutze für das Formular Formspree. Die eingegebenen Daten werden nur zur
+            Bearbeitung deiner Nachricht verwendet.
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h2>Wofür du das Formular nutzen kannst</h2>
+          <ul>
+            <li>Fehler oder Unstimmigkeiten im Rechner melden</li>
+            <li>Ideen für neue Programme oder Ziele schicken</li>
+            <li>Fragen zur Nutzung des Tools stellen</li>
+            <li>allgemeines Feedback zur Website geben</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container contact-layout">
+        <div class="contact-card">
+          <h2>Nachricht senden</h2>
+          <p class="contact-intro">
+            Ich antworte so schnell wie möglich.
+          </p>
+
+          <form
+            id="contactForm"
+            action="https://formspree.io/f/xaqpjkgd"
+            method="POST"
+            class="contact-form"
+          >
+            <label for="name">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Dein Name"
+              required
+            />
+
+            <label for="email">E-Mail</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="deine@email.de"
+              required
+            />
+
+            <label for="subject">Betreff</label>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              placeholder="Worum geht es?"
+              required
+            />
+
+            <label for="message">Nachricht</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="7"
+              placeholder="Deine Nachricht..."
+              required
+            ></textarea>
+
+            <!-- Honeypot-Spamschutz -->
+            <div class="hp-field" aria-hidden="true">
+              <label for="website">Bitte dieses Feld leer lassen</label>
+              <input
+                id="website"
+                type="text"
+                name="_gotcha"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
+
+            <!-- optionale Zusatzinfos -->
+            <input type="hidden" name="_subject" value="Neue Nachricht über kontakt.html" />
+            <input type="hidden" name="_language" value="de" />
+
+            <button type="submit" class="btn btn-primary">Nachricht senden</button>
+
+            <p class="form-note">
+              Mit dem Absenden erklärst du dich damit einverstanden, dass deine Angaben
+              zur Bearbeitung deiner Anfrage verarbeitet werden.
+            </p>
+
+            <div id="formStatus" class="form-status" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <aside class="contact-side">
+          <div class="contact-info-card">
+            <h3>Hinweise</h3>
+            <p>
+              Das Kontaktformular ist der einfachste Weg, um Feedback oder Rückfragen
+              zu senden.
+            </p>
+            <p>
+              Für rechtliche Informationen findest du im Footer zusätzlich:
+            </p>
+            <ul>
+              <li><a href="/impressum">Impressum</a></li>
+              <li><a href="/datenschutz">Datenschutz</a></li>
+              <li><a href="/transparenz">Transparenz</a></li>
+            </ul>
+          </div>
+
+          <div class="contact-info-card">
+            <h3>Typische Themen</h3>
+            <ul>
+              <li>falsche Werte im Rechner</li>
+              <li>Wunsch nach weiteren Zielen</li>
+              <li>Fragen zu Transferfaktoren</li>
+              <li>Feedback zur Nutzerführung</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand footer-brand">Prämienflug-Planer</div>
+        <p class="footer-text">
+          Planungstool für Prämienflüge mit Fokus auf Familien, Sammellücke und realistische Umsetzbarkeit.
+        </p>
+      </div>
+
+      <div>
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/rechner">Rechner</a></li>
+          <li><a href="/meilen-business-class">Business Class Meilen</a></li>
+          <li><a href="/meilen-thailand">Thailand</a></li>
+          <li><a href="/kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Rechtliches</h4>
+        <ul class="footer-links">
+          <li><a href="/impressum.html">Impressum</a></li>
+          <li><a href="/datenschutz.html">Datenschutz</a></li>
+          <li><a href="/transparenz.html">Transparenz</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("contactForm");
+    const statusBox = document.getElementById("formStatus");
+
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      statusBox.className = "form-status";
+      statusBox.textContent = "Nachricht wird gesendet...";
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (response.ok) {
+          form.reset();
+          statusBox.className = "form-status success";
+          statusBox.textContent = "Danke! Deine Nachricht wurde erfolgreich gesendet.";
+        } else {
+          const data = await response.json().catch(() => null);
+          statusBox.className = "form-status error";
+          statusBox.textContent =
+            data && data.errors && data.errors.length
+              ? data.errors.map((e) => e.message).join(" ")
+              : "Beim Senden ist ein Fehler aufgetreten. Bitte versuche es später erneut.";
+        }
+      } catch (error) {
+        statusBox.className = "form-status error";
+        statusBox.textContent =
+          "Beim Senden ist ein technischer Fehler aufgetreten. Bitte versuche es später erneut.";
+      }
+    });
+  </script>
+</body>
+</html>
