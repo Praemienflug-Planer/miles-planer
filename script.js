@@ -323,19 +323,23 @@ function updatePointsLabels() {
   const pointsHelper = document.getElementById("pointsHelper");
 
   if (labelBestandAktuell) {
-    labelBestandAktuell.textContent = `Aktueller Bestand (${cfg.punktelabel || "Meilen / Punkte"})`;
+    labelBestandAktuell.textContent =
+      `Aktueller Bestand (${cfg.punktelabel || "Meilen / Punkte"})`;
   }
 
   if (labelTransferBestand) {
-    labelTransferBestand.textContent = `Transferfähiger Bestand (${cfg.transferquelle || "Transferpartner"} Punkte)`;
+    labelTransferBestand.textContent =
+      `Transferfähiger Bestand (${cfg.transferquelle || "Transferpartner"} Punkte)`;
   }
 
   if (labelGeplanterBonus) {
-    labelGeplanterBonus.textContent = `Geplanter Bonus (${cfg.transferquelle || "Transferpartner"} Punkte)`;
+    labelGeplanterBonus.textContent =
+      `Geplanter Bonus (${cfg.transferquelle || "Transferpartner"} Punkte)`;
   }
 
   if (labelMonatlicheSammelrate) {
-    labelMonatlicheSammelrate.textContent = `Monatliche Sammelrate (${cfg.transferquelle || "Transferpartner"} Punkte)`;
+    labelMonatlicheSammelrate.textContent =
+      `Monatliche Sammelrate (${cfg.transferquelle || "Transferpartner"} Punkte)`;
   }
 
   if (pointsHelper) {
@@ -343,17 +347,17 @@ function updatePointsLabels() {
       <strong>Transferhinweis</strong>
       <p>${escapeHtml(buildTransferInfo(cfg))}</p>
       <p>
-        Bei <strong>PAYBACK → Miles &amp; More</strong> wird im Rechner konservativ mit einem
-        Transferverhältnis von <strong>1:1</strong> gerechnet.
+        Bei <strong>PAYBACK → Miles &amp; More</strong> rechnet der Rechner konservativ mit
+        <strong>1:1</strong>.
       </p>
       <p>
-        In der Praxis gibt es jedoch regelmäßig <strong>Transferboni von etwa 15–30&nbsp;%</strong>.
+        In der Praxis gibt es regelmäßig
+        <strong>Transferboni von etwa 15–30&nbsp;%</strong>.
         Dadurch kann sich deine tatsächliche Sammelzeit deutlich verkürzen.
       </p>
     `;
   }
 }
-
 function setStepActive(id, isActive) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -743,3 +747,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   updateFormFlow();
 });
+
