@@ -258,15 +258,30 @@ function getProgramConfig(programm) {
   );
 }
 
-function getScenarioLabel(value) {
+function getScenarioMeta(value) {
   switch (value) {
     case "best":
-      return "Best Case";
+      return {
+        label: "Best Case",
+        badgeClass: "scenario-badge-best",
+        headline: "Optimistische Planung",
+        text: "Dieses Szenario zeigt, wie dein Ziel erreichbar wäre, wenn Verfügbarkeit, Sammeltempo und Rahmenbedingungen gut laufen."
+      };
     case "konservativ":
-      return "Konservativ";
+      return {
+        label: "Konservativ",
+        badgeClass: "scenario-badge-konservativ",
+        headline: "Vorsichtige Planung",
+        text: "Dieses Szenario rechnet mit mehr Puffer und ist besonders hilfreich, wenn du lieber defensiv planst."
+      };
     case "realistisch":
     default:
-      return "Realistisch";
+      return {
+        label: "Realistisch",
+        badgeClass: "scenario-badge-realistisch",
+        headline: "Solide Planung",
+        text: "Dieses Szenario ist der beste Standardwert für die meisten Nutzer und bildet eine vernünftige mittlere Annahme ab."
+      };
   }
 }
 
@@ -435,16 +450,10 @@ async function ladeDropdowns() {
 
 async function berechneMilesPlaner() {
   const resultBox = document.getElementById("result");
-  const scenarioValue = document.getElementById("szenario").value;
-const scenarioLabel = data.scenarioLabel || getScenarioLabel(scenarioValue);
-
-const scenarioBadgeClass =
-  scenarioValue === "best"
-    ? "scenario-badge-best"
-    : scenarioValue === "konservativ"
-    ? "scenario-badge-konservativ"
-    : "scenario-badge-realistisch";
-  
+const scenarioValue = document.getElementById("szenario").value;
+const scenarioMeta = getScenarioMeta(data.scenario || scenarioValue);
+const scenarioLabel = data.scenarioLabel || scenarioMeta.label;
+const scenarioBadgeClass = scenarioMeta.badgeClass;
   const payload = {
     szenario: scenarioValue,
     ziel: document.getElementById("ziel").value,
@@ -540,7 +549,8 @@ const scenarioBadgeClass =
 <div class="result-item scenario-box">
   <div class="label">Aktives Szenario</div>
   <div class="scenario-badge ${scenarioBadgeClass}">${escapeHtml(scenarioLabel)}</div>
-  <div class="value-note">Es wird immer nur ein Szenario gleichzeitig angezeigt, damit das Ergebnis übersichtlich bleibt.</div>
+  <div class="scenario-headline">${escapeHtml(scenarioMeta.headline)}</div>
+  <div class="value-note">${escapeHtml(scenarioMeta.text)}</div>
 </div>
 
         <h2>${escapeHtml(data.headline || "Ergebnis")}</h2>
@@ -687,4 +697,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     programm.addEventListener("change", updatePointsLabels);
   }
 });
+
 
