@@ -1018,3 +1018,43 @@ h4 {
     grid-template-columns: 1fr;
   }
 }
+.points-cards-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+}
+
+.points-helper-card {
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.info-card-standalone {
+  display: flex;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: #f8fbff;
+}
+
+.info-content {
+  min-width: 0;
+}
+
+.info-content p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+@media (max-width: 900px) {
+  .points-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
