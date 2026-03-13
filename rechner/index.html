@@ -6,7 +6,7 @@
   <title>Prämienflug-Rechner | Prämienflug-Planer</title>
   <meta
     name="description"
-    content="Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Prämienflüge mit bis zu 4 Personen."
+    content="Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Prämienflüge mit bis zu 5 Personen."
   />
   <link rel="stylesheet" href="/miles-planer/styles.css?v=16" />
   <link rel="canonical" href="https://praemienflug-planer.github.io/miles-planer/rechner/" />
@@ -67,6 +67,22 @@
                   <p>Fülle die Schritte nacheinander aus. Der Rechner passt die Punktelogik je nach Programm automatisch an.</p>
                 </div>
 
+                <div class="form-grid">
+                  <div class="field-group">
+                    <label for="szenario">Szenario</label>
+                    <select id="szenario">
+                      <option value="realistisch" selected>Realistisch</option>
+                      <option value="best">Best Case</option>
+                      <option value="konservativ">Konservativ</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="trust-note" style="margin-bottom: 18px;">
+                  Standard ist <strong>Realistisch</strong>. Best Case und Konservativ helfen dir, Chancen und Risiken besser einzuordnen,
+                  ohne dass der Rechner unübersichtlich wird.
+                </div>
+
                 <div class="step-grid">
                   <section class="step-card active" id="step-ziel">
                     <div class="step-number">1</div>
@@ -77,14 +93,21 @@
                     </div>
                   </section>
 
-               <select id="personen">
-<option value="">Bitte wählen</option>
-<option value="1">1 Person</option>
-<option value="2">2 Personen</option>
-<option value="3">3 Personen</option>
-<option value="4">4 Personen</option>
-<option value="5">5 Personen</option>
-</select>
+                  <section class="step-card" id="step-personen">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                      <h3>Personen</h3>
+                      <label for="personen">Wie viele Personen reisen?</label>
+                      <select id="personen">
+                        <option value="">Bitte wählen</option>
+                        <option value="1">1 Person</option>
+                        <option value="2">2 Personen</option>
+                        <option value="3">3 Personen</option>
+                        <option value="4">4 Personen</option>
+                        <option value="5">5 Personen</option>
+                      </select>
+                    </div>
+                  </section>
 
                   <section class="step-card" id="step-reiseklasse">
                     <div class="step-number">3</div>
@@ -119,8 +142,8 @@
                       <h3>Reisejahr</h3>
                       <label for="reisejahr">Für welches Jahr planst du?</label>
                       <select id="reisejahr">
-  <option value="">Bitte wählen</option>
-</select>
+                        <option value="">Bitte wählen</option>
+                      </select>
                     </div>
                   </section>
 
@@ -140,8 +163,8 @@
                   <p class="eyebrow">Punktestand</p>
                   <h2>Bestand und Sammelrate</h2>
                   <p id="pointsHelper" class="helper-text">
-  Transferfaktor wird nach Programmauswahl angezeigt. Hinweis: Bei <strong>PAYBACK → Miles & More</strong> wird im Rechner grundsätzlich mit einem Transferverhältnis von <strong>1:1</strong> gerechnet. In der Praxis gibt es jedoch regelmäßig Transferboni von etwa <strong>15–30&nbsp;%</strong>. Diese können die effektive Meilenausbeute deutlich verbessern und die tatsächliche Sammelzeit verkürzen.
-</p>
+                    Transferfaktor wird nach Programmauswahl angezeigt. Hinweis: Bei <strong>PAYBACK → Miles & More</strong> wird im Rechner grundsätzlich mit einem Transferverhältnis von <strong>1:1</strong> gerechnet. In der Praxis gibt es jedoch regelmäßig Transferboni von etwa <strong>15–30&nbsp;%</strong>. Diese können die effektive Meilenausbeute deutlich verbessern und die tatsächliche Sammelzeit verkürzen.
+                  </p>
                 </div>
 
                 <div class="form-grid two-col">
@@ -187,7 +210,7 @@
                 <p class="eyebrow">Gut zu wissen</p>
                 <h3>Worauf du achten solltest</h3>
                 <ul class="plain-list">
-                  <li>Business Class für 4 Personen ist deutlich schwerer als für 1 Person</li>
+                  <li>Business Class für 4 oder 5 Personen ist deutlich schwerer als für 1 Person</li>
                   <li>Ein günstiger Awardwert ist nicht automatisch ein guter Deal</li>
                   <li>Steuern, Gebühren und Verfügbarkeit bleiben entscheidend</li>
                 </ul>
@@ -264,23 +287,22 @@
   </footer>
 
   <script>
-// Reisejahre automatisch generieren (aktuelles Jahr + 10 Jahre)
-(function(){
-  const select = document.getElementById("reisejahr");
-  if(!select) return;
+    (function () {
+      const select = document.getElementById("reisejahr");
+      if (!select) return;
 
-  const currentYear = new Date().getFullYear();
-  const maxYear = currentYear + 10;
+      const currentYear = new Date().getFullYear();
+      const maxYear = currentYear + 10;
 
-  for(let year = currentYear; year <= maxYear; year++){
-    const option = document.createElement("option");
-    option.value = year;
-    option.textContent = year;
-    select.appendChild(option);
-  }
-})();
-</script>
+      for (let year = currentYear; year <= maxYear; year++) {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        select.appendChild(option);
+      }
+    })();
+  </script>
 
-<script src="/miles-planer/script.js"></script>
+  <script src="/miles-planer/script.js"></script>
 </body>
 </html>
