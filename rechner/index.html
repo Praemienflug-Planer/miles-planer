@@ -145,7 +145,9 @@
                 <div class="section-head compact-head">
                   <p class="eyebrow">Punktestand</p>
                   <h2>Bestand und Sammelrate</h2>
-                  <p id="pointsHelper" class="helper-text">Transferfaktor wird nach Programmauswahl angezeigt.</p>
+                  <p id="pointsHelper" class="helper-text">
+  Transferfaktor wird nach Programmauswahl angezeigt. Hinweis: Bei <strong>PAYBACK → Miles & More</strong> wird im Rechner grundsätzlich mit einem Transferverhältnis von <strong>1:1</strong> gerechnet. In der Praxis gibt es jedoch regelmäßig Transferboni von etwa <strong>15–30&nbsp;%</strong>. Diese können die effektive Meilenausbeute deutlich verbessern und die tatsächliche Sammelzeit verkürzen.
+</p>
                 </div>
 
                 <div class="form-grid two-col">
@@ -210,6 +212,20 @@
               <button class="btn btn-secondary" type="button" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button>
             </div>
             <div id="result"></div>
+
+            <div class="result-section bonus-note">
+              <p>
+                Hinweis: Der Rechner rechnet konservativ mit dem Standard-Transferverhältnis.
+                Bei <strong>PAYBACK → Miles & More</strong> wird grundsätzlich mit
+                <strong>1:1</strong> gerechnet.
+              </p>
+              <p class="bonus-example">
+                In der Praxis gibt es jedoch regelmäßig Transferboni von etwa
+                <strong>15–30&nbsp;%</strong>. Mit einem typischen
+                <strong>20&nbsp;% Transferbonus</strong> könnte dein Ziel deutlich
+                früher erreichbar sein als in dieser konservativen Berechnung.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -262,6 +278,15 @@
   const currentYear = new Date().getFullYear();
   const maxYear = currentYear + 10;
 
-  for(l
+  for(let year = currentYear; year <= maxYear; year++){
+    const option = document.createElement("option");
+    option.value = year;
+    option.textContent = year;
+    select.appendChild(option);
+  }
+})();
+</script>
+
+<script src="/miles-planer/script.js"></script>
 </body>
 </html>
