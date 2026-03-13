@@ -451,7 +451,7 @@ async function ladeDropdowns() {
 async function berechneMilesPlaner() {
   const resultBox = document.getElementById("result");
 const scenarioValue = document.getElementById("szenario").value;
-const scenarioMeta = getScenarioMeta(data.scenario || scenarioValue);
+const scenarioLabel = getScenarioLabel(scenarioValue);
 const scenarioLabel = data.scenarioLabel || scenarioMeta.label;
 const scenarioBadgeClass = scenarioMeta.badgeClass;
   const payload = {
@@ -697,5 +697,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     programm.addEventListener("change", updatePointsLabels);
   }
 });
+
 
 
