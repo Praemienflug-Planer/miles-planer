@@ -122,14 +122,18 @@ const AFFILIATE_CONFIG = {
 };
 
 function zeigeErgebnisView() {
-  document.getElementById("inputView").classList.remove("active");
-  document.getElementById("resultView").classList.add("active");
+  const inputView = document.getElementById("inputView");
+  const resultView = document.getElementById("resultView");
+  if (inputView) inputView.classList.remove("active");
+  if (resultView) resultView.classList.add("active");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function zurueckZuEingaben() {
-  document.getElementById("resultView").classList.remove("active");
-  document.getElementById("inputView").classList.add("active");
+  const inputView = document.getElementById("inputView");
+  const resultView = document.getElementById("resultView");
+  if (resultView) resultView.classList.remove("active");
+  if (inputView) inputView.classList.add("active");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -166,9 +170,7 @@ function formatPoints(value) {
 function formatDurationMonths(value) {
   const months = Number(value);
 
-  if (Number.isNaN(months) || months <= 0) {
-    return "";
-  }
+  if (Number.isNaN(months) || months <= 0) return "";
 
   const years = Math.floor(months / 12);
   const remainingMonths = months % 12;
@@ -240,7 +242,6 @@ function extractErsparnisGesamt(text) {
 
 function buildProgressBar(percent) {
   const safePercent = Number.isNaN(percent) ? 0 : Math.max(0, Math.min(100, percent));
-
   return `
     <div class="progress-wrap">
       <div class="progress-bar">
@@ -254,20 +255,61 @@ function populateSelect(id, values, placeholder = "Bitte wählen") {
   const select = document.getElementById(id);
   if (!select) return;
 
+  const currentValue = select.value;
   select.innerHTML = "";
 
   const firstOption = document.createElement("option");
   firstOption.value = "";
   firstOption.textContent = placeholder;
-  firstOption.selected = true;
   select.appendChild(firstOption);
 
   values.forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
     option.textContent = value;
+    if (value === currentValue) {
+      option.selected = true;
+    }
     select.appendChild(option);
   });
+
+  if (!currentValue) {
+    select.value = "";
+  }
+}
+
+function fillFallbackDropdowns() {
+  PROGRAM_META = FALLBACK_PROGRAM_META;
+
+  populateSelect(
+    "ziel",
+    ["Dubai", "Japan", "Malediven", "Südafrika", "Thailand", "USA East", "USA West"],
+    "Bitte Ziel wählen"
+  );
+
+  populateSelect(
+    "reiseklasse",
+    ["Premium Economy", "Business"],
+    "Bitte Reiseklasse wählen"
+  );
+
+  populateSelect(
+    "reisezeit",
+    ["Nebensaison", "Hauptreisezeit", "Ferien"],
+    "Bitte Reisezeit wählen"
+  );
+
+  populateSelect(
+    "reisemonat",
+    ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+    "Bitte Reisemonat wählen"
+  );
+
+  populateSelect(
+    "programm",
+    ["Miles & More", "Avios", "Flying Blue", "KrisFlyer"],
+    "Bitte Programm wählen"
+  );
 }
 
 function getProgramConfig(programm) {
@@ -383,10 +425,16 @@ function updatePointsLabels() {
         Dadurch kann sich deine tatsächliche Sammelzeit deutlich verkürzen.
       </p>
     `;
-  } else {
+  } else if (programm) {
     helperHtml += `
       <p>
         Der Rechner nutzt hier das hinterlegte Standard-Transferverhältnis des gewählten Programms.
+      </p>
+    `;
+  } else {
+    helperHtml += `
+      <p>
+        Wähle zuerst ein Programm aus, damit der passende Transferhinweis angezeigt wird.
       </p>
     `;
   }
@@ -424,9 +472,7 @@ function updateFormFlow() {
   setStepActive("step-programm", !!ziel && !!personen && !!reiseklasse && !!reisezeit && !!reisemonat && !!reisejahr);
   setStepActive("step-punkte", !!ziel && !!personen && !!reiseklasse && !!reisezeit && !!reisemonat && !!reisejahr && !!programm);
 
-  if (programm) {
-    updatePointsLabels();
-  }
+  updatePointsLabels();
 }
 
 function getAffiliateConfig(programm) {
@@ -520,6 +566,7 @@ function getDecisionMeta(bewertungText, statusText) {
 
 function buildDecisionCard(data, programmName, fehlendValue, monateValue) {
   const meta = getDecisionMeta(data.bewertung, data.statusText);
+
   const fehlendText =
     !Number.isNaN(fehlendValue) && fehlendValue > 0
       ? `${formatPoints(fehlendValue)} ${programmName}`
@@ -574,7 +621,7 @@ async function ladeDropdowns() {
       throw new Error(data.message || "Fehler beim Laden der Dropdown-Werte.");
     }
 
-    PROGRAM_META = data.programMeta || {};
+    PROGRAM_META = data.programMeta || FALLBACK_PROGRAM_META;
 
     populateSelect("ziel", data.ziele || [], "Bitte Ziel wählen");
     populateSelect(
@@ -586,23 +633,7 @@ async function ladeDropdowns() {
     populateSelect("reisemonat", data.monate || [], "Bitte Reisemonat wählen");
     populateSelect("programm", data.programme || [], "Bitte Programm wählen");
   } catch (error) {
-    console.error(error);
-
-    PROGRAM_META = FALLBACK_PROGRAM_META;
-
-    populateSelect(
-      "ziel",
-      ["Dubai", "Japan", "Malediven", "Südafrika", "Thailand", "USA East", "USA West"],
-      "Bitte Ziel wählen"
-    );
-    populateSelect("reiseklasse", ["Premium Economy", "Business"], "Bitte Reiseklasse wählen");
-    populateSelect("reisezeit", ["Nebensaison", "Hauptreisezeit", "Ferien"], "Bitte Reisezeit wählen");
-    populateSelect(
-      "reisemonat",
-      ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
-      "Bitte Reisemonat wählen"
-    );
-    populateSelect("programm", ["Miles & More", "Avios", "Flying Blue", "KrisFlyer"], "Bitte Programm wählen");
+    console.error("Dropdown-API fehlgeschlagen, Fallback bleibt aktiv:", error);
   }
 
   updateFormFlow();
@@ -620,20 +651,4 @@ async function berechneMilesPlaner() {
     programm: document.getElementById("programm")?.value,
     reiseklasse: document.getElementById("reiseklasse")?.value,
     reisezeit: document.getElementById("reisezeit")?.value,
-    reisejahr: document.getElementById("reisejahr")?.value,
-    reisemonat: document.getElementById("reisemonat")?.value,
-    bestandAktuell: document.getElementById("bestandAktuell")?.value,
-    transferBestand: document.getElementById("transferBestand")?.value,
-    geplanterBonus: document.getElementById("geplanterBonus")?.value,
-    monatlicheSammelrate: document.getElementById("monatlicheSammelrate")?.value
-  };
-
-  if (
-    !payload.ziel ||
-    !payload.personen ||
-    !payload.reiseklasse ||
-    !payload.reisezeit ||
-    !payload.reisemonat ||
-    !payload.reisejahr ||
-    !payload.programm
-  
+    reisejahr: document.
