@@ -31,19 +31,19 @@ const FALLBACK_PROGRAM_META = {
 };
 
 const AFFILIATE_CONFIG = {
-"Miles & More": {
-  sourceLabel: "PAYBACK Punkte",
-  headline: "💡 Miles & More Ziel schneller erreichen",
-  text: "Viele Nutzer schließen ihre Miles & More Lücke schneller über Kreditkarten-Boni oder Punkteaktionen.",
-  offers: [
-    {
-      title: "American Express PAYBACK Kreditkarte",
-      subtitle: "zusätzliche PAYBACK Punkte für Miles & More",
-      bonus: 5000,
-      url: "#"
-    }
-  ]
-},
+  "Miles & More": {
+    sourceLabel: "PAYBACK Punkte",
+    headline: "💡 Miles & More Ziel schneller erreichen",
+    text: "Viele Nutzer schließen ihre Miles & More Lücke schneller über Kreditkarten-Boni oder Punkteaktionen.",
+    offers: [
+      {
+        title: "American Express PAYBACK Kreditkarte",
+        subtitle: "zusätzliche PAYBACK Punkte für Miles & More",
+        bonus: 5000,
+        url: "#"
+      }
+    ]
+  },
   Avios: {
     sourceLabel: "Membership Rewards Punkte",
     headline: "💡 Avios schneller aufbauen",
@@ -258,6 +258,18 @@ function getProgramConfig(programm) {
   );
 }
 
+function getScenarioLabel(value) {
+  switch (value) {
+    case "best":
+      return "Best Case";
+    case "konservativ":
+      return "Konservativ";
+    case "realistisch":
+    default:
+      return "Realistisch";
+  }
+}
+
 function buildTransferInfo(cfg) {
   if (!cfg) return "";
   const source = cfg.transferquelle || "Transferpartner";
@@ -289,7 +301,8 @@ function updatePointsLabels() {
   document.getElementById("labelMonatlicheSammelrate").textContent =
     `Monatliche Sammelrate (${cfg.transferquelle || "Transferpartner"} Punkte)`;
 
-  document.getElementById("pointsHelper").textContent = buildTransferInfo(cfg);
+  document.getElementById("pointsHelper").innerHTML =
+    `${buildTransferInfo(cfg)}. Hinweis: Bei <strong>PAYBACK → Miles & More</strong> wird im Rechner grundsätzlich mit einem Transferverhältnis von <strong>1:1</strong> gerechnet. In der Praxis gibt es jedoch regelmäßig Transferboni von etwa <strong>15–30&nbsp;%</strong>. Diese können die effektive Meilenausbeute deutlich verbessern und die tatsächliche Sammelzeit verkürzen.`;
 }
 
 function setStepActive(id, isActive) {
@@ -422,8 +435,11 @@ async function ladeDropdowns() {
 
 async function berechneMilesPlaner() {
   const resultBox = document.getElementById("result");
+  const scenarioValue = document.getElementById("szenario").value;
+  const scenarioLabel = getScenarioLabel(scenarioValue);
 
   const payload = {
+    szenario: scenarioValue,
     ziel: document.getElementById("ziel").value,
     personen: document.getElementById("personen").value,
     programm: document.getElementById("programm").value,
@@ -514,6 +530,12 @@ async function berechneMilesPlaner() {
 
     resultBox.innerHTML = `
       <div class="result-card">
+        <div class="result-item" style="background:#eff6ff;border-color:#cfe0ff;">
+          <div class="label">Aktives Szenario</div>
+          <div class="value value-small">${escapeHtml(scenarioLabel)}</div>
+          <div class="value-note">Es wird immer nur ein Szenario gleichzeitig angezeigt, damit das Ergebnis übersichtlich bleibt.</div>
+        </div>
+
         <h2>${escapeHtml(data.headline || "Ergebnis")}</h2>
         <p class="subline">${escapeHtml(data.subline || "")}</p>
 
@@ -636,7 +658,7 @@ async function berechneMilesPlaner() {
   } catch (error) {
     resultBox.innerHTML = `
       <p><strong>Fehler:</strong> ${escapeHtml(error.message)}</p>
-      <p>Bitte prüfe die Apps-Script-Web-App und die Sheet-Verknüpfung.</p>
+      <p>Bitte prüfe die Apps-Script-Web-App, die Sheet-Verknüpfung und die Szenario-Zuordnung.</p>
     `;
     console.error(error);
   }
@@ -658,4 +680,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     programm.addEventListener("change", updatePointsLabels);
   }
 });
-
