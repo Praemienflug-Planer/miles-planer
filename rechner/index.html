@@ -284,7 +284,35 @@
       </div>
     </div>
   </footer>
+<script>
+  (function () {
+    const select = document.getElementById("reisejahr");
+    if (select) {
+      const currentYear = new Date().getFullYear();
+      const maxYear = currentYear + 10;
 
+      for (let year = currentYear; year <= maxYear; year++) {
+        const option = document.createElement("option");
+        option.value = year;
+        option.textContent = year;
+        select.appendChild(option);
+      }
+    }
+
+    const hiddenScenarioInput = document.getElementById("szenario");
+    const scenarioButtons = document.querySelectorAll(".scenario-option");
+
+    scenarioButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        scenarioButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+        hiddenScenarioInput.value = button.dataset.value;
+      });
+    });
+  })();
+</script>
+
+<script src="/miles-planer/script.js"></script>
   <script>
     (function () {
       const select = document.getElementById("reisejahr");
