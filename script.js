@@ -321,6 +321,7 @@ function updatePointsLabels() {
   const labelGeplanterBonus = document.getElementById("labelGeplanterBonus");
   const labelMonatlicheSammelrate = document.getElementById("labelMonatlicheSammelrate");
   const pointsHelper = document.getElementById("pointsHelper");
+  const resultTransferHint = document.getElementById("resultTransferHint");
 
   if (labelBestandAktuell) {
     labelBestandAktuell.textContent =
@@ -342,22 +343,29 @@ function updatePointsLabels() {
       `Monatliche Sammelrate (${cfg.transferquelle || "Transferpartner"} Punkte)`;
   }
 
+  const helperHtml = `
+    <strong>Transferhinweis</strong>
+    <p>${escapeHtml(buildTransferInfo(cfg))}</p>
+    <p>
+      Bei <strong>PAYBACK → Miles &amp; More</strong> rechnet der Rechner konservativ mit
+      <strong>1:1</strong>.
+    </p>
+    <p>
+      In der Praxis gibt es regelmäßig
+      <strong>Transferboni von etwa 15–30&nbsp;%</strong>.
+      Dadurch kann sich deine tatsächliche Sammelzeit deutlich verkürzen.
+    </p>
+  `;
+
   if (pointsHelper) {
-    pointsHelper.innerHTML = `
-      <strong>Transferhinweis</strong>
-      <p>${escapeHtml(buildTransferInfo(cfg))}</p>
-      <p>
-        Bei <strong>PAYBACK → Miles &amp; More</strong> rechnet der Rechner konservativ mit
-        <strong>1:1</strong>.
-      </p>
-      <p>
-        In der Praxis gibt es regelmäßig
-        <strong>Transferboni von etwa 15–30&nbsp;%</strong>.
-        Dadurch kann sich deine tatsächliche Sammelzeit deutlich verkürzen.
-      </p>
-    `;
+    pointsHelper.innerHTML = helperHtml;
+  }
+
+  if (resultTransferHint) {
+    resultTransferHint.innerHTML = helperHtml;
   }
 }
+
 function setStepActive(id, isActive) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -720,6 +728,8 @@ async function berechneMilesPlaner() {
         </div>
       </div>
     `;
+
+    updatePointsLabels();
   } catch (error) {
     resultBox.innerHTML = `
       <p><strong>Fehler:</strong> ${escapeHtml(error.message)}</p>
@@ -747,5 +757,3 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   updateFormFlow();
 });
-
-
