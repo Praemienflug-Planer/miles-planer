@@ -683,7 +683,7 @@ h4 {
 
 .points-cards-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
+  grid-template-columns: minmax(0, 720px) 320px;
   gap: 24px;
   align-items: start;
 }
@@ -1019,3 +1019,4 @@ h4 {
     padding: 0 16px;
   }
 }
+
