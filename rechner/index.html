@@ -8,7 +8,7 @@
     name="description"
     content="Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Prämienflüge mit bis zu 5 Personen."
   />
-  <link rel="stylesheet" href="/miles-planer/styles.css?v=16" />
+  <link rel="stylesheet" href="/miles-planer/styles.css?v=17" />
   <link rel="canonical" href="https://praemienflug-planer.github.io/miles-planer/rechner/" />
   <meta name="robots" content="index,follow" />
 </head>
@@ -67,15 +67,15 @@
                   <p>Fülle die Schritte nacheinander aus. Der Rechner passt die Punktelogik je nach Programm automatisch an.</p>
                 </div>
 
-              <div class="scenario-switch-wrap">
-  <label class="scenario-label">Szenario</label>
-  <div class="scenario-switch" id="scenarioSwitch">
-    <button type="button" class="scenario-option active" data-value="realistisch">Realistisch</button>
-    <button type="button" class="scenario-option" data-value="best">Best Case</button>
-    <button type="button" class="scenario-option" data-value="konservativ">Konservativ</button>
-  </div>
-  <input type="hidden" id="szenario" value="realistisch" />
-</div>
+                <div class="scenario-switch-wrap">
+                  <label class="scenario-label">Szenario</label>
+                  <div class="scenario-switch" id="scenarioSwitch">
+                    <button type="button" class="scenario-option active" data-value="realistisch">Realistisch</button>
+                    <button type="button" class="scenario-option" data-value="best">Best Case</button>
+                    <button type="button" class="scenario-option" data-value="konservativ">Konservativ</button>
+                  </div>
+                  <input type="hidden" id="szenario" value="realistisch" />
+                </div>
 
                 <div class="trust-note" style="margin-bottom: 18px;">
                   Standard ist <strong>Realistisch</strong>. Best Case und Konservativ helfen dir, Chancen und Risiken besser einzuordnen,
@@ -161,30 +161,48 @@
                 <div class="section-head compact-head">
                   <p class="eyebrow">Punktestand</p>
                   <h2>Bestand und Sammelrate</h2>
-                  <p id="pointsHelper" class="helper-text">
-                    Transferfaktor wird nach Programmauswahl angezeigt. Hinweis: Bei <strong>PAYBACK → Miles & More</strong> wird im Rechner grundsätzlich mit einem Transferverhältnis von <strong>1:1</strong> gerechnet. In der Praxis gibt es jedoch regelmäßig Transferboni von etwa <strong>15–30&nbsp;%</strong>. Diese können die effektive Meilenausbeute deutlich verbessern und die tatsächliche Sammelzeit verkürzen.
-                  </p>
                 </div>
 
-                <div class="form-grid two-col">
-                  <div class="field-group">
-                    <label id="labelBestandAktuell" for="bestandAktuell">Aktueller Bestand (Meilen / Punkte)</label>
-                    <input id="bestandAktuell" type="number" min="0" step="1" placeholder="z. B. 120000" />
+                <div class="points-layout">
+                  <div class="points-inputs">
+                    <div class="form-grid two-col">
+                      <div class="field-group">
+                        <label id="labelBestandAktuell" for="bestandAktuell">Aktueller Bestand (Meilen / Punkte)</label>
+                        <input id="bestandAktuell" type="number" min="0" step="1" placeholder="z. B. 120000" />
+                      </div>
+
+                      <div class="field-group">
+                        <label id="labelTransferBestand" for="transferBestand">Transferfähiger Bestand (Transferpartner Punkte)</label>
+                        <input id="transferBestand" type="number" min="0" step="1" placeholder="z. B. 40000" />
+                      </div>
+
+                      <div class="field-group">
+                        <label id="labelGeplanterBonus" for="geplanterBonus">Geplanter Bonus (Transferpartner Punkte)</label>
+                        <input id="geplanterBonus" type="number" min="0" step="1" placeholder="z. B. 50000" />
+                      </div>
+
+                      <div class="field-group">
+                        <label id="labelMonatlicheSammelrate" for="monatlicheSammelrate">Monatliche Sammelrate (Transferpartner Punkte)</label>
+                        <input id="monatlicheSammelrate" type="number" min="0" step="1" placeholder="z. B. 5000" />
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="field-group">
-                    <label id="labelTransferBestand" for="transferBestand">Transferfähiger Bestand (Transferpartner Punkte)</label>
-                    <input id="transferBestand" type="number" min="0" step="1" placeholder="z. B. 40000" />
-                  </div>
-
-                  <div class="field-group">
-                    <label id="labelGeplanterBonus" for="geplanterBonus">Geplanter Bonus (Transferpartner Punkte)</label>
-                    <input id="geplanterBonus" type="number" min="0" step="1" placeholder="z. B. 50000" />
-                  </div>
-
-                  <div class="field-group">
-                    <label id="labelMonatlicheSammelrate" for="monatlicheSammelrate">Monatliche Sammelrate (Transferpartner Punkte)</label>
-                    <input id="monatlicheSammelrate" type="number" min="0" step="1" placeholder="z. B. 5000" />
+                  <div class="points-info">
+                    <div class="info-card">
+                      <div class="info-icon">💡</div>
+                      <div class="info-content" id="pointsHelper">
+                        <strong>Transferhinweis</strong>
+                        <p>
+                          Bei <strong>PAYBACK → Miles &amp; More</strong> wird im Rechner konservativ mit
+                          einem Transferverhältnis von <strong>1:1</strong> gerechnet.
+                        </p>
+                        <p>
+                          In der Praxis gibt es jedoch regelmäßig <strong>Transferboni von etwa 15–30&nbsp;%</strong>.
+                          Dadurch kann sich deine tatsächliche Sammelzeit deutlich verkürzen.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -284,34 +302,35 @@
       </div>
     </div>
   </footer>
-<script>
-  (function () {
-    const select = document.getElementById("reisejahr");
-    if (select) {
-      const currentYear = new Date().getFullYear();
-      const maxYear = currentYear + 10;
 
-      for (let year = currentYear; year <= maxYear; year++) {
-        const option = document.createElement("option");
-        option.value = year;
-        option.textContent = year;
-        select.appendChild(option);
+  <script>
+    (function () {
+      const yearSelect = document.getElementById("reisejahr");
+      if (yearSelect) {
+        const currentYear = new Date().getFullYear();
+        const maxYear = currentYear + 10;
+
+        for (let year = currentYear; year <= maxYear; year++) {
+          const option = document.createElement("option");
+          option.value = year;
+          option.textContent = year;
+          yearSelect.appendChild(option);
+        }
       }
-    }
 
-    const hiddenScenarioInput = document.getElementById("szenario");
-    const scenarioButtons = document.querySelectorAll(".scenario-option");
+      const hiddenScenarioInput = document.getElementById("szenario");
+      const scenarioButtons = document.querySelectorAll(".scenario-option");
 
-    scenarioButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        scenarioButtons.forEach((btn) => btn.classList.remove("active"));
-        button.classList.add("active");
-        hiddenScenarioInput.value = button.dataset.value;
+      scenarioButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          scenarioButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          hiddenScenarioInput.value = button.dataset.value;
+        });
       });
-    });
-  })();
-</script>
+    })();
+  </script>
 
-<script src="/miles-planer/script.js"></script>
+  <script src="/miles-planer/script.js"></script>
 </body>
 </html>
