@@ -343,19 +343,30 @@ function updatePointsLabels() {
       `Monatliche Sammelrate (${cfg.transferquelle || "Transferpartner"} Punkte)`;
   }
 
-  const helperHtml = `
+  let helperHtml = `
     <strong>Transferhinweis</strong>
     <p>${escapeHtml(buildTransferInfo(cfg))}</p>
-    <p>
-      Bei <strong>PAYBACK → Miles &amp; More</strong> rechnet der Rechner konservativ mit
-      <strong>1:1</strong>.
-    </p>
-    <p>
-      In der Praxis gibt es regelmäßig
-      <strong>Transferboni von etwa 15–30&nbsp;%</strong>.
-      Dadurch kann sich deine tatsächliche Sammelzeit deutlich verkürzen.
-    </p>
   `;
+
+  if (programm === "Miles & More") {
+    helperHtml += `
+      <p>
+        Bei <strong>PAYBACK → Miles &amp; More</strong> rechnet der Rechner konservativ mit
+        <strong>1:1</strong>.
+      </p>
+      <p>
+        In der Praxis gibt es regelmäßig
+        <strong>Transferboni von etwa 15–30&nbsp;%</strong>.
+        Dadurch kann sich deine tatsächliche Sammelzeit deutlich verkürzen.
+      </p>
+    `;
+  } else {
+    helperHtml += `
+      <p>
+        Der Rechner nutzt hier das hinterlegte Standard-Transferverhältnis des gewählten Programms.
+      </p>
+    `;
+  }
 
   if (pointsHelper) {
     pointsHelper.innerHTML = helperHtml;
@@ -757,3 +768,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   updateFormFlow();
 });
+
