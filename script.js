@@ -258,6 +258,18 @@ function getProgramConfig(programm) {
   );
 }
 
+function getScenarioLabel(value) {
+  switch (value) {
+    case "best":
+      return "Best Case";
+    case "konservativ":
+      return "Konservativ";
+    case "realistisch":
+    default:
+      return "Realistisch";
+  }
+}
+
 function getScenarioMeta(value) {
   switch (value) {
     case "best":
@@ -304,20 +316,42 @@ function updatePointsLabels() {
   const programm = document.getElementById("programm").value;
   const cfg = getProgramConfig(programm);
 
-  document.getElementById("labelBestandAktuell").textContent =
-    `Aktueller Bestand (${cfg.punktelabel || "Meilen / Punkte"})`;
+  const labelBestandAktuell = document.getElementById("labelBestandAktuell");
+  const labelTransferBestand = document.getElementById("labelTransferBestand");
+  const labelGeplanterBonus = document.getElementById("labelGeplanterBonus");
+  const labelMonatlicheSammelrate = document.getElementById("labelMonatlicheSammelrate");
+  const pointsHelper = document.getElementById("pointsHelper");
 
-  document.getElementById("labelTransferBestand").textContent =
-    `Transferfähiger Bestand (${cfg.transferquelle || "Transferpartner"} Punkte)`;
+  if (labelBestandAktuell) {
+    labelBestandAktuell.textContent = `Aktueller Bestand (${cfg.punktelabel || "Meilen / Punkte"})`;
+  }
 
-  document.getElementById("labelGeplanterBonus").textContent =
-    `Geplanter Bonus (${cfg.transferquelle || "Transferpartner"} Punkte)`;
+  if (labelTransferBestand) {
+    labelTransferBestand.textContent = `Transferfähiger Bestand (${cfg.transferquelle || "Transferpartner"} Punkte)`;
+  }
 
-  document.getElementById("labelMonatlicheSammelrate").textContent =
-    `Monatliche Sammelrate (${cfg.transferquelle || "Transferpartner"} Punkte)`;
+  if (labelGeplanterBonus) {
+    labelGeplanterBonus.textContent = `Geplanter Bonus (${cfg.transferquelle || "Transferpartner"} Punkte)`;
+  }
 
-  document.getElementById("pointsHelper").innerHTML =
-    `${buildTransferInfo(cfg)}. Hinweis: Bei <strong>PAYBACK → Miles & More</strong> wird im Rechner grundsätzlich mit einem Transferverhältnis von <strong>1:1</strong> gerechnet. In der Praxis gibt es jedoch regelmäßig Transferboni von etwa <strong>15–30&nbsp;%</strong>. Diese können die effektive Meilenausbeute deutlich verbessern und die tatsächliche Sammelzeit verkürzen.`;
+  if (labelMonatlicheSammelrate) {
+    labelMonatlicheSammelrate.textContent = `Monatliche Sammelrate (${cfg.transferquelle || "Transferpartner"} Punkte)`;
+  }
+
+  if (pointsHelper) {
+    pointsHelper.innerHTML = `
+      <strong>Transferhinweis</strong>
+      <p>${escapeHtml(buildTransferInfo(cfg))}</p>
+      <p>
+        Bei <strong>PAYBACK → Miles &amp; More</strong> wird im Rechner konservativ mit einem
+        Transferverhältnis von <strong>1:1</strong> gerechnet.
+      </p>
+      <p>
+        In der Praxis gibt es jedoch regelmäßig <strong>Transferboni von etwa 15–30&nbsp;%</strong>.
+        Dadurch kann sich deine tatsächliche Sammelzeit deutlich verkürzen.
+      </p>
+    `;
+  }
 }
 
 function setStepActive(id, isActive) {
@@ -327,13 +361,13 @@ function setStepActive(id, isActive) {
 }
 
 function updateFormFlow() {
-  const ziel = document.getElementById("ziel").value;
-  const personen = document.getElementById("personen").value;
-  const reiseklasse = document.getElementById("reiseklasse").value;
-  const reisezeit = document.getElementById("reisezeit").value;
-  const reisemonat = document.getElementById("reisemonat").value;
-  const reisejahr = document.getElementById("reisejahr").value;
-  const programm = document.getElementById("programm").value;
+  const ziel = document.getElementById("ziel")?.value;
+  const personen = document.getElementById("personen")?.value;
+  const reiseklasse = document.getElementById("reiseklasse")?.value;
+  const reisezeit = document.getElementById("reisezeit")?.value;
+  const reisemonat = document.getElementById("reisemonat")?.value;
+  const reisejahr = document.getElementById("reisejahr")?.value;
+  const programm = document.getElementById("programm")?.value;
 
   setStepActive("step-ziel", true);
   setStepActive("step-personen", !!ziel);
@@ -438,10 +472,11 @@ async function ladeDropdowns() {
     populateSelect("ziel", ["Dubai", "Japan", "Malediven", "Südafrika", "Thailand", "USA East", "USA West"], "Bitte Ziel wählen");
     populateSelect("reiseklasse", ["Premium Economy", "Business"], "Bitte Reiseklasse wählen");
     populateSelect("reisezeit", ["Nebensaison", "Hauptreisezeit", "Ferien"], "Bitte Reisezeit wählen");
-    populateSelect("reisemonat", [
-      "Januar", "Februar", "März", "April", "Mai", "Juni",
-      "Juli", "August", "September", "Oktober", "November", "Dezember"
-    ], "Bitte Reisemonat wählen");
+    populateSelect(
+      "reisemonat",
+      ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
+      "Bitte Reisemonat wählen"
+    );
     populateSelect("programm", ["Miles & More", "Avios", "Flying Blue", "KrisFlyer"], "Bitte Programm wählen");
   }
 
@@ -450,23 +485,22 @@ async function ladeDropdowns() {
 
 async function berechneMilesPlaner() {
   const resultBox = document.getElementById("result");
-const scenarioValue = document.getElementById("szenario").value;
-const scenarioLabel = getScenarioLabel(scenarioValue);
-const scenarioLabel = data.scenarioLabel || scenarioMeta.label;
-const scenarioBadgeClass = scenarioMeta.badgeClass;
+  const scenarioValue = document.getElementById("szenario")?.value || "realistisch";
+  const fallbackScenarioLabel = getScenarioLabel(scenarioValue);
+
   const payload = {
     szenario: scenarioValue,
-    ziel: document.getElementById("ziel").value,
-    personen: document.getElementById("personen").value,
-    programm: document.getElementById("programm").value,
-    reiseklasse: document.getElementById("reiseklasse").value,
-    reisezeit: document.getElementById("reisezeit").value,
-    reisejahr: document.getElementById("reisejahr").value,
-    reisemonat: document.getElementById("reisemonat").value,
-    bestandAktuell: document.getElementById("bestandAktuell").value,
-    transferBestand: document.getElementById("transferBestand").value,
-    geplanterBonus: document.getElementById("geplanterBonus").value,
-    monatlicheSammelrate: document.getElementById("monatlicheSammelrate").value,
+    ziel: document.getElementById("ziel")?.value,
+    personen: document.getElementById("personen")?.value,
+    programm: document.getElementById("programm")?.value,
+    reiseklasse: document.getElementById("reiseklasse")?.value,
+    reisezeit: document.getElementById("reisezeit")?.value,
+    reisejahr: document.getElementById("reisejahr")?.value,
+    reisemonat: document.getElementById("reisemonat")?.value,
+    bestandAktuell: document.getElementById("bestandAktuell")?.value,
+    transferBestand: document.getElementById("transferBestand")?.value,
+    geplanterBonus: document.getElementById("geplanterBonus")?.value,
+    monatlicheSammelrate: document.getElementById("monatlicheSammelrate")?.value
   };
 
   if (
@@ -489,9 +523,9 @@ const scenarioBadgeClass = scenarioMeta.badgeClass;
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
-        "Content-Type": "text/plain;charset=utf-8",
+        "Content-Type": "text/plain;charset=utf-8"
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {
@@ -504,9 +538,14 @@ const scenarioBadgeClass = scenarioMeta.badgeClass;
       throw new Error(data.message || "Unbekannter Fehler aus Apps Script");
     }
 
-    const personen = Number(payload.personen) || 1;
+    const persons = Number(payload.personen) || 1;
     const programmName = payload.programm || "Programm";
     const cfg = getProgramConfig(programmName);
+
+    const finalScenarioKey = data.scenario || scenarioValue;
+    const finalScenarioLabel = data.scenarioLabel || fallbackScenarioLabel;
+    const scenarioMeta = getScenarioMeta(finalScenarioKey);
+    const scenarioBadgeClass = scenarioMeta.badgeClass;
 
     const dealLabel = extractDealLabel(data.deal);
     const dealDetail = extractDealDetail(data.deal);
@@ -517,16 +556,16 @@ const scenarioBadgeClass = scenarioMeta.badgeClass;
     const finalTaxesPP = Number.isNaN(taxesPP) ? extractZuzahlungPP(data.cash) : taxesPP;
     const finalTaxesTotal =
       Number.isNaN(taxesTotal) && !Number.isNaN(finalTaxesPP)
-        ? finalTaxesPP * personen
+        ? finalTaxesPP * persons
         : taxesTotal;
 
     const cashPP = extractCashPP(data.cash);
-    const cashGesamt = !Number.isNaN(cashPP) ? cashPP * personen : NaN;
+    const cashGesamt = !Number.isNaN(cashPP) ? cashPP * persons : NaN;
 
     const ersparnisGesamt = extractErsparnisGesamt(data.cash);
     const ersparnisPP =
-      !Number.isNaN(ersparnisGesamt) && personen > 0
-        ? ersparnisGesamt / personen
+      !Number.isNaN(ersparnisGesamt) && persons > 0
+        ? ersparnisGesamt / persons
         : NaN;
 
     const progressHeute = extractPercent(data.progress);
@@ -534,7 +573,7 @@ const scenarioBadgeClass = scenarioMeta.badgeClass;
     const fehlendValue = extractNumber(data.fehlend);
 
     const dealClass =
-      /guter deal|sehr guter deal|top deal/i.test(dealLabel)
+      /guter deal|sehr guter deal|top deal|exzellenter deal/i.test(dealLabel)
         ? "deal-good"
         : /mittel|ok|solide/i.test(dealLabel)
         ? "deal-medium"
@@ -546,12 +585,12 @@ const scenarioBadgeClass = scenarioMeta.badgeClass;
 
     resultBox.innerHTML = `
       <div class="result-card">
-<div class="result-item scenario-box">
-  <div class="label">Aktives Szenario</div>
-  <div class="scenario-badge ${scenarioBadgeClass}">${escapeHtml(scenarioLabel)}</div>
-  <div class="scenario-headline">${escapeHtml(scenarioMeta.headline)}</div>
-  <div class="value-note">${escapeHtml(scenarioMeta.text)}</div>
-</div>
+        <div class="result-item scenario-box">
+          <div class="label">Aktives Szenario</div>
+          <div class="scenario-badge ${scenarioBadgeClass}">${escapeHtml(finalScenarioLabel)}</div>
+          <div class="scenario-headline">${escapeHtml(scenarioMeta.headline)}</div>
+          <div class="value-note">${escapeHtml(scenarioMeta.text)}</div>
+        </div>
 
         <h2>${escapeHtml(data.headline || "Ergebnis")}</h2>
         <p class="subline">${escapeHtml(data.subline || "")}</p>
@@ -559,6 +598,11 @@ const scenarioBadgeClass = scenarioMeta.badgeClass;
         <div class="result-section">
           <p><strong>${escapeHtml(data.statusText || "")}</strong></p>
           <p>${escapeHtml(data.risiken || "")}</p>
+          ${
+            data.betterProgramHint
+              ? `<p class="value-note">${escapeHtml(data.betterProgramHint)}</p>`
+              : ""
+          }
         </div>
 
         <div class="result-grid">
@@ -696,7 +740,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (programm) {
     programm.addEventListener("change", updatePointsLabels);
   }
+
+  updateFormFlow();
 });
-
-
-
