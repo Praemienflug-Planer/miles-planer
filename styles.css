@@ -1112,4 +1112,22 @@ h4 {
   .decision-title {
     font-size: 20px;
   }
+  .article-image {
+margin: 30px 0;
+text-align: center;
+}
+
+.article-image img {
+max-width: 100%;
+height: auto;
+border-radius: 8px;
+box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+cursor: zoom-in;
+}
+
+.article-image figcaption {
+font-size: 14px;
+color: #666;
+margin-top: 8px;
+}
 }
