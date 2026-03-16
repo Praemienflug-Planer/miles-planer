@@ -1156,4 +1156,11 @@ margin-top: 8px;
   line-height: 1.7;
   color: #444;
 }
+  .image-note{
+margin-top:10px;
+margin-bottom:25px;
+color:#555;
+font-size:15px;
+line-height:1.6;
+}
 }
