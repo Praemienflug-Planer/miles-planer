@@ -1130,4 +1130,30 @@ font-size: 14px;
 color: #666;
 margin-top: 8px;
 }
+  .article-image {
+  margin: 28px 0;
+  text-align: center;
+}
+
+.article-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  cursor: zoom-in;
+}
+
+.article-image figcaption {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.image-note {
+  margin-top: -8px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #444;
+}
 }
