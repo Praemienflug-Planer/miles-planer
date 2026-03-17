@@ -594,9 +594,17 @@ h4 {
   color: var(--muted);
 }
 
-.sticky-card {
+/* Sticky nur im Rechner */
+.tool-sidebar .sticky-card {
   position: sticky;
   top: 96px;
+}
+
+/* Auf SEO-Seiten keine sticky Sidebar */
+.seo-sidebar .sticky-card {
+  position: static;
+  top: auto;
+}
 }
 
 /* Szenario */
