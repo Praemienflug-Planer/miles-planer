@@ -8,115 +8,74 @@ const FALLBACK_PROGRAM_META = {
     punktelabel: "Miles & More Meilen",
     kurzlabel: "M&M",
     transferquelle: "PAYBACK",
-    faktor: 1
+    faktor: 1,
+    // Annahmen je Szenario (Transferboni sind NICHT garantiert)
+    transferBonusPct: { konservativ: 0, realistisch: 20, best: 30 },
+    // Familienregeln (werden im Backend korrekt angewendet + im Ergebnis erklärt)
+    childDiscountPct: 25,
+    infantDiscountPct: 90
   },
   "Avios": {
     punktelabel: "Avios",
     kurzlabel: "Avios",
     transferquelle: "Membership Rewards",
-    faktor: 0.8
+    faktor: 0.8,
+    transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 }
   },
   "Flying Blue": {
     punktelabel: "Flying Blue Meilen",
     kurzlabel: "Flying Blue",
     transferquelle: "Membership Rewards",
-    faktor: 0.8
+    faktor: 0.8,
+    transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 }
   },
   "KrisFlyer": {
     punktelabel: "KrisFlyer Meilen",
     kurzlabel: "KrisFlyer",
     transferquelle: "Membership Rewards",
-    faktor: 0.6667
+    faktor: 0.6667,
+    transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 }
   }
 };
 
 const AFFILIATE_CONFIG = {
+  // Achtung: Bonusbeträge ändern sich häufig -> idealerweise aus Sheet/API laden!
   "Miles & More": {
     sourceLabel: "PAYBACK Punkte",
-    headline: "💡 Miles & More Ziel schneller erreichen",
-    text: "Viele Nutzer schließen ihre Miles & More Lücke schneller über Kreditkarten-Boni oder Punkteaktionen.",
+    headline: "Schneller zur Miles & More Einlösung",
+    text: "Wenn die Lücke groß ist, kann ein einmaliger Bonus oder eine Aktion den Zeitplan stark verkürzen.",
     offers: [
       {
-        title: "American Express PAYBACK Kreditkarte",
-        subtitle: "zusätzliche PAYBACK Punkte für Miles & More",
+        title: "PAYBACK-geeignete Kreditkarte (Beispiel)",
+        subtitle: "Bonus-Punkte können deine Sammelzeit verkürzen",
         bonus: 5000,
-        url: "#"
+        url: "#",
+        isExample: true
       }
     ]
   },
   "Avios": {
     sourceLabel: "Membership Rewards Punkte",
-    headline: "💡 Avios schneller aufbauen",
-    text: "Aktuell starke Membership Rewards Boni können helfen, deine Avios-Lücke deutlich schneller zu verkleinern.",
+    headline: "Avios schneller aufbauen",
+    text: "Ein einmaliger Bonus kann deine Lücke deutlich reduzieren.",
     offers: [
-      {
-        title: "American Express Gold Rosé",
-        subtitle: "aktuell starker Bonus: bis zu 55.000 MR Punkte",
-        bonus: 55000,
-        url: "#"
-      },
-      {
-        title: "American Express Gold",
-        subtitle: "aktuell starker Bonus: bis zu 50.000 MR Punkte",
-        bonus: 50000,
-        url: "#"
-      },
-      {
-        title: "American Express Platinum",
-        subtitle: "aktuell starker Bonus: bis zu 85.000 MR Punkte",
-        bonus: 85000,
-        url: "#"
-      }
+      { title: "Kreditkarten-Bonus (Beispiel)", subtitle: "Bonus variiert – Details prüfen", bonus: 50000, url: "#", isExample: true }
     ]
   },
   "Flying Blue": {
     sourceLabel: "Membership Rewards Punkte",
-    headline: "💡 Flying Blue schneller aufbauen",
-    text: "Aktuell starke Membership Rewards Boni können helfen, deine Flying Blue Lücke deutlich schneller zu verkleinern.",
+    headline: "Flying Blue schneller aufbauen",
+    text: "Ein einmaliger Bonus kann deine Lücke deutlich reduzieren.",
     offers: [
-      {
-        title: "American Express Gold Rosé",
-        subtitle: "aktuell starker Bonus: bis zu 55.000 MR Punkte",
-        bonus: 55000,
-        url: "#"
-      },
-      {
-        title: "American Express Gold",
-        subtitle: "aktuell starker Bonus: bis zu 50.000 MR Punkte",
-        bonus: 50000,
-        url: "#"
-      },
-      {
-        title: "American Express Platinum",
-        subtitle: "aktuell starker Bonus: bis zu 85.000 MR Punkte",
-        bonus: 85000,
-        url: "#"
-      }
+      { title: "Kreditkarten-Bonus (Beispiel)", subtitle: "Bonus variiert – Details prüfen", bonus: 50000, url: "#", isExample: true }
     ]
   },
   "KrisFlyer": {
     sourceLabel: "Membership Rewards Punkte",
-    headline: "💡 KrisFlyer schneller aufbauen",
-    text: "Aktuell starke Membership Rewards Boni können helfen, deine KrisFlyer Lücke deutlich schneller zu verkleinern.",
+    headline: "KrisFlyer schneller aufbauen",
+    text: "Ein einmaliger Bonus kann deine Lücke deutlich reduzieren.",
     offers: [
-      {
-        title: "American Express Gold Rosé",
-        subtitle: "aktuell starker Bonus: bis zu 55.000 MR Punkte",
-        bonus: 55000,
-        url: "#"
-      },
-      {
-        title: "American Express Gold",
-        subtitle: "aktuell starker Bonus: bis zu 50.000 MR Punkte",
-        bonus: 50000,
-        url: "#"
-      },
-      {
-        title: "American Express Platinum",
-        subtitle: "aktuell starker Bonus: bis zu 85.000 MR Punkte",
-        bonus: 85000,
-        url: "#"
-      }
+      { title: "Kreditkarten-Bonus (Beispiel)", subtitle: "Bonus variiert – Details prüfen", bonus: 50000, url: "#", isExample: true }
     ]
   }
 };
@@ -151,7 +110,8 @@ function escapeHtml(value) {
 }
 
 function extractNumber(text) {
-  if (!text) return NaN;
+  if (text === null || text === undefined) return NaN;
+  if (typeof text === "number") return text;
   const cleaned = String(text)
     .replace(/[^\d,.-]/g, "")
     .replace(/\./g, "")
@@ -159,19 +119,27 @@ function extractNumber(text) {
   return Number(cleaned);
 }
 
+function clampInt(value, min = 0, max = 999999999) {
+  const n = Math.floor(Number(value));
+  if (Number.isNaN(n)) return min;
+  return Math.max(min, Math.min(max, n));
+}
+
 function formatEuro(value) {
-  if (value === null || value === undefined || Number.isNaN(value)) return "";
-  return `${Math.round(value).toLocaleString("de-DE")} €`;
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "";
+  return `${Math.round(n).toLocaleString("de-DE")} €`;
 }
 
 function formatPoints(value) {
-  if (value === null || value === undefined || Number.isNaN(value)) return "";
-  return Math.round(value).toLocaleString("de-DE");
+  const n = Number(value);
+  if (!Number.isFinite(n)) return "";
+  return Math.round(n).toLocaleString("de-DE");
 }
 
 function formatDurationMonths(value) {
-  const months = Number(value);
-  if (Number.isNaN(months) || months <= 0) return "";
+  const months = Math.max(0, Math.round(Number(value)));
+  if (!Number.isFinite(months) || months === 0) return "";
 
   const years = Math.floor(months / 12);
   const remainingMonths = months % 12;
@@ -183,60 +151,6 @@ function formatDurationMonths(value) {
     return `${years} Jahr${years === 1 ? "" : "e"}`;
   }
   return `${years} Jahr${years === 1 ? "" : "e"} und ${remainingMonths} Monat${remainingMonths === 1 ? "" : "e"}`;
-}
-
-function extractPercent(text) {
-  if (!text) return NaN;
-  const match = String(text).match(/(\d+(?:[.,]\d+)?)\s*%/);
-  if (!match) return NaN;
-  return Number(match[1].replace(",", "."));
-}
-
-function extractDealLabel(text) {
-  if (!text) return "";
-  return String(text).split("|")[0].trim();
-}
-
-function extractDealDetail(text) {
-  if (!text) return "";
-  const parts = String(text).split("|");
-  return parts.length > 1 ? parts.slice(1).join("|").trim() : "";
-}
-
-function extractCpm(text) {
-  if (!text) return "";
-  const match = String(text).match(/([0-9]+(?:[.,][0-9]+)?)\s*ct\s*pro\s*Meile/i);
-  return match ? `${match[1].replace(".", ",")} ct / Meile` : "";
-}
-
-function extractTaxesPP(text) {
-  if (!text) return NaN;
-  const match = String(text).match(/~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?/i);
-  return match ? extractNumber(match[1]) : NaN;
-}
-
-function extractTaxesTotal(text) {
-  if (!text) return NaN;
-  const match = String(text).match(/\(~?\s*([0-9\.\,]+)\s*€\s*(?:für|gesamt)/i);
-  return match ? extractNumber(match[1]) : NaN;
-}
-
-function extractCashPP(text) {
-  if (!text) return NaN;
-  const match = String(text).match(/~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?\s*Cash/i);
-  return match ? extractNumber(match[1]) : NaN;
-}
-
-function extractZuzahlungPP(text) {
-  if (!text) return NaN;
-  const match = String(text).match(/~?\s*([0-9\.\,]+)\s*€\s*p\.?P\.?\s*Zuzahlung/i);
-  return match ? extractNumber(match[1]) : NaN;
-}
-
-function extractErsparnisGesamt(text) {
-  if (!text) return NaN;
-  const match = String(text).match(/Ersparnis\s*~?\s*([0-9\.\,]+)\s*€\s*gesamt/i);
-  return match ? extractNumber(match[1]) : NaN;
 }
 
 function buildProgressBar(percent) {
@@ -287,7 +201,7 @@ function fillFallbackDropdowns() {
 
   populateSelect(
     "reiseklasse",
-    ["Premium Economy", "Business"],
+    ["Economy", "Premium Economy", "Business"],
     "Bitte Reiseklasse wählen"
   );
 
@@ -317,7 +231,8 @@ function getProgramConfig(programm) {
       punktelabel: "Meilen / Punkte",
       kurzlabel: programm || "Programm",
       transferquelle: "Transferpartner",
-      faktor: null
+      faktor: null,
+      transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 }
     }
   );
 }
@@ -341,14 +256,14 @@ function getScenarioMeta(value) {
         label: "Best Case",
         badgeClass: "scenario-badge-best",
         headline: "Optimistische Planung",
-        text: "Dieses Szenario zeigt, wie dein Ziel erreichbar wäre, wenn Verfügbarkeit, Sammeltempo und Rahmenbedingungen gut laufen."
+        text: "Dieses Szenario zeigt, wie dein Ziel erreichbar wäre, wenn Aktionen/Bonus & Rahmenbedingungen gut laufen."
       };
     case "konservativ":
       return {
         label: "Konservativ",
         badgeClass: "scenario-badge-konservativ",
         headline: "Vorsichtige Planung",
-        text: "Dieses Szenario rechnet mit mehr Puffer und ist besonders hilfreich, wenn du lieber defensiv planst."
+        text: "Dieses Szenario rechnet defensiv (mehr Puffer, weniger Bonusannahmen)."
       };
     case "realistisch":
     default:
@@ -356,31 +271,44 @@ function getScenarioMeta(value) {
         label: "Realistisch",
         badgeClass: "scenario-badge-realistisch",
         headline: "Solide Planung",
-        text: "Dieses Szenario ist der beste Standardwert für die meisten Nutzer und bildet eine vernünftige mittlere Annahme ab."
+        text: "Standardwert für die meisten Nutzer: realistische mittlere Annahme."
       };
   }
 }
 
-function buildTransferInfo(cfg) {
+function getAssumedTransferBonusPct(cfg, scenarioKey) {
+  const map = cfg?.transferBonusPct || {};
+  if (scenarioKey === "best") return Number(map.best || 0);
+  if (scenarioKey === "konservativ") return Number(map.konservativ || 0);
+  return Number(map.realistisch || 0);
+}
+
+function buildTransferInfo(cfg, scenarioKey) {
   if (!cfg) return "";
 
   const source = cfg.transferquelle || "Transferpartner";
   const target = cfg.kurzlabel || "Programm";
   const faktor = cfg.faktor;
+  const bonusPct = getAssumedTransferBonusPct(cfg, scenarioKey);
 
   if (faktor === 1) {
-    return `Transferfaktor: ${source} → ${target} 1:1`;
+    return bonusPct > 0
+      ? `Transfer: ${source} → ${target} 1:1 (Annahme: +${bonusPct}% Bonus im Szenario)`
+      : `Transfer: ${source} → ${target} 1:1`;
   }
 
   if (typeof faktor === "number" && !Number.isNaN(faktor)) {
-    return `Transferfaktor: ${source} → ${target} (${String(faktor).replace(".", ",")})`;
+    return bonusPct > 0
+      ? `Transfer: ${source} → ${target} (${String(faktor).replace(".", ",")}) (Annahme: +${bonusPct}%)`
+      : `Transfer: ${source} → ${target} (${String(faktor).replace(".", ",")})`;
   }
 
-  return `Transferfaktor: ${source} → ${target}`;
+  return `Transfer: ${source} → ${target}`;
 }
 
 function updatePointsLabels() {
   const programm = $("programm")?.value;
+  const scenarioKey = $("szenario")?.value || "realistisch";
   const cfg = getProgramConfig(programm);
 
   const labelBestandAktuell = $("labelBestandAktuell");
@@ -408,42 +336,26 @@ function updatePointsLabels() {
 
   let helperHtml = `
     <strong>Transferhinweis</strong>
-    <p>${escapeHtml(buildTransferInfo(cfg))}</p>
+    <p>${escapeHtml(buildTransferInfo(cfg, scenarioKey))}</p>
   `;
 
   if (programm === "Miles & More") {
     helperHtml += `
-      <p>
-        Bei <strong>PAYBACK → Miles &amp; More</strong> rechnet der Rechner konservativ mit
-        <strong>1:1</strong>.
-      </p>
-      <p>
-        In der Praxis gibt es regelmäßig
-        <strong>Transferboni von etwa 15–30&nbsp;%</strong>.
-        Dadurch kann sich deine tatsächliche Sammelzeit deutlich verkürzen.
-      </p>
+      <p><strong>Offiziell:</strong> PAYBACK → Miles &amp; More erfolgt 1:1.</p>
+      <p><strong>Praxis:</strong> Es gibt gelegentlich Aktionen/Transferboni. Szenario kann das als Annahme abbilden.</p>
     `;
   } else if (programm) {
     helperHtml += `
-      <p>
-        Der Rechner nutzt hier das hinterlegte Standard-Transferverhältnis des gewählten Programms.
-      </p>
+      <p>Der Rechner nutzt das hinterlegte Standard-Transferverhältnis des Programms.</p>
     `;
   } else {
     helperHtml += `
-      <p>
-        Wähle zuerst ein Programm aus, damit der passende Transferhinweis angezeigt wird.
-      </p>
+      <p>Wähle zuerst ein Programm aus, damit der passende Transferhinweis angezeigt wird.</p>
     `;
   }
 
-  if (pointsHelper) {
-    pointsHelper.innerHTML = helperHtml;
-  }
-
-  if (resultTransferHint) {
-    resultTransferHint.innerHTML = helperHtml;
-  }
+  if (pointsHelper) pointsHelper.innerHTML = helperHtml;
+  if (resultTransferHint) resultTransferHint.innerHTML = helperHtml;
 }
 
 function setStepActive(id, isActive) {
@@ -473,162 +385,19 @@ function updateFormFlow() {
   updatePointsLabels();
 }
 
-function getAffiliateConfig(programm) {
-  return AFFILIATE_CONFIG[programm] || null;
-}
-
-function buildAffiliateBox(programm, fehlend, progressPercent) {
-  const cfg = getAffiliateConfig(programm);
-  if (!cfg) return "";
-  if (Number.isNaN(fehlend) || fehlend <= 0) return "";
-
-  const cardsHtml = cfg.offers
-    .map((offer) => {
-      const coverage = Math.min(100, Math.round((offer.bonus / fehlend) * 100));
-
-      return `
-        <a href="${escapeHtml(offer.url)}" class="affiliate-card" target="_blank" rel="nofollow sponsored noopener">
-          <strong>${escapeHtml(offer.title)}</strong><br>
-          <span>${escapeHtml(offer.subtitle)}</span>
-          <div class="affiliate-meta">
-            Aktuell: ca. ${escapeHtml(formatPoints(offer.bonus))} ${escapeHtml(cfg.sourceLabel)}
-            ${
-              coverage > 0
-                ? `<br><span class="affiliate-coverage">könnte ca. ${coverage}% deiner aktuellen Lücke abdecken</span>`
-                : ""
-            }
-          </div>
-        </a>
-      `;
-    })
-    .join("");
-
-  let urgencyText = "";
-
-  if (!Number.isNaN(progressPercent)) {
-    if (progressPercent < 35) {
-      urgencyText = "Gerade bei einer größeren Lücke kann ein starker Willkommensbonus einen spürbaren Unterschied machen.";
-    } else if (progressPercent < 70) {
-      urgencyText = "Du bist schon unterwegs – ein starker Bonus kann dein Ziel deutlich näher rücken lassen.";
-    } else {
-      urgencyText = "Dir fehlt nicht mehr viel – ein Bonus oder eine Aktion kann die Restlücke schnell schließen.";
-    }
-  }
-
-  return `
-    <div class="affiliate-box">
-      <h4>${escapeHtml(cfg.headline)}</h4>
-      <p>${escapeHtml(cfg.text)}</p>
-      ${urgencyText ? `<p class="affiliate-urgency">${escapeHtml(urgencyText)}</p>` : ""}
-      <div class="affiliate-links">
-        ${cardsHtml}
-      </div>
-    </div>
-  `;
-}
-
-function getDecisionMeta(bewertungText, statusText) {
-  const combined = `${bewertungText || ""} ${statusText || ""}`.toLowerCase();
-
-  if (
-    combined.includes("erst nach der reise erreichbar") ||
-    combined.includes("nicht realistisch") ||
-    combined.includes("kritisch")
-  ) {
-    return {
-      className: "decision-card-bad",
-      badge: "🔴 Aktuell nicht realistisch"
-    };
-  }
-
-  if (
-    combined.includes("knapp") ||
-    combined.includes("schwierig") ||
-    combined.includes("unsicher")
-  ) {
-    return {
-      className: "decision-card-medium",
-      badge: "🟡 Eher knapp erreichbar"
-    };
-  }
-
-  return {
-    className: "decision-card-good",
-    badge: "🟢 Gut erreichbar"
-  };
-}
-
-function buildDecisionCard(data, programmName, fehlendValue, monateValue) {
-  const meta = getDecisionMeta(data.bewertung, data.statusText);
-
-  const fehlendText =
-    !Number.isNaN(fehlendValue) && fehlendValue > 0
-      ? `${formatPoints(fehlendValue)} ${programmName}`
-      : (data.fehlend || "—");
-
-  const durationText = formatDurationMonths(monateValue) || (data.monate || "—");
-  const introText =
-    data.statusText ||
-    data.bewertung ||
-    "Hier siehst du auf einen Blick, wie realistisch dein Ziel aktuell ist.";
-
-  return `
-    <div class="decision-card ${meta.className}">
-      <div class="decision-badge">${escapeHtml(meta.badge)}</div>
-      <h3 class="decision-title">${escapeHtml(introText)}</h3>
-      <p class="decision-text">
-        ${
-          data.zielErreicht
-            ? `Mit deinem aktuellen Stand erreichst du dein Ziel voraussichtlich erst <strong>${escapeHtml(data.zielErreicht)}</strong>.`
-            : "Mit deinem aktuellen Stand zeigt der Rechner eine klare Tendenz für die Erreichbarkeit deines Ziels."
-        }
-      </p>
-
-      <div class="decision-mini-grid">
-        <div class="decision-mini-item">
-          <span class="label">Fehlende Punkte</span>
-          <strong>${escapeHtml(fehlendText)}</strong>
-        </div>
-
-        <div class="decision-mini-item">
-          <span class="label">Sammeldauer</span>
-          <strong>${escapeHtml(durationText)}</strong>
-        </div>
-
-        <div class="decision-mini-item">
-          <span class="label">Geplante Reise</span>
-          <strong>${escapeHtml(data.reise || "—")}</strong>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
 async function ladeDropdowns() {
   try {
-    const response = await fetch(`${API_URL}?action=options`, {
-      method: "GET",
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      throw new Error(`Dropdowns konnten nicht geladen werden (${response.status})`);
-    }
+    const response = await fetch(`${API_URL}?action=options`, { method: "GET", cache: "no-store" });
+    if (!response.ok) throw new Error(`Dropdowns konnten nicht geladen werden (${response.status})`);
 
     const data = await response.json();
-
-    if (data.status !== "ok") {
-      throw new Error(data.message || "Fehler beim Laden der Dropdown-Werte.");
-    }
+    if (data.status !== "ok") throw new Error(data.message || "Fehler beim Laden der Dropdown-Werte.");
 
     PROGRAM_META = data.programMeta || FALLBACK_PROGRAM_META;
 
     populateSelect("ziel", data.ziele || [], "Bitte Ziel wählen");
-    populateSelect(
-      "reiseklasse",
-      (data.klassen || []).filter((k) => k !== "Economy"),
-      "Bitte Reiseklasse wählen"
-    );
+    // Economy nicht mehr herausfiltern, damit es als Fallback-Option verfügbar ist
+    populateSelect("reiseklasse", (data.klassen || []), "Bitte Reiseklasse wählen");
     populateSelect("reisezeit", data.reisezeiten || [], "Bitte Reisezeit wählen");
     populateSelect("reisemonat", data.monate || [], "Bitte Reisemonat wählen");
     populateSelect("programm", data.programme || [], "Bitte Programm wählen");
@@ -639,15 +408,64 @@ async function ladeDropdowns() {
   updateFormFlow();
 }
 
-async function berechneMilesPlaner() {
-  const resultBox = $("result");
+function clearValidationUI() {
+  const errorBox = $("formErrors");
+  if (errorBox) {
+    errorBox.style.display = "none";
+    errorBox.innerHTML = "";
+  }
+
+  const ids = [
+    "ziel","personen","reiseklasse","reisezeit","reisemonat","reisejahr","programm",
+    "bestandAktuell","transferBestand","geplanterBonus","monatlicheSammelrate",
+    "kinder2_11","infants0_1"
+  ];
+
+  ids.forEach((id) => {
+    const el = $(id);
+    if (!el) return;
+    el.classList.remove("field-invalid");
+    el.removeAttribute("aria-invalid");
+  });
+}
+
+function showValidationErrors(errors) {
+  const errorBox = $("formErrors");
+  if (!errorBox) return;
+
+  const list = errors.map(e => `<li>${escapeHtml(e.message)}</li>`).join("");
+  errorBox.innerHTML = `
+    <strong>Bitte prüfe deine Eingaben:</strong>
+    <ul>${list}</ul>
+  `;
+  errorBox.style.display = "block";
+
+  // markiere Felder
+  errors.forEach((e) => {
+    const el = $(e.field);
+    if (!el) return;
+    el.classList.add("field-invalid");
+    el.setAttribute("aria-invalid", "true");
+  });
+
+  // Fokus auf erstes Feld
+  const first = errors[0]?.field ? $(errors[0].field) : null;
+  if (first && typeof first.focus === "function") first.focus({ preventScroll: false });
+}
+
+function collectPayload() {
   const scenarioValue = $("szenario")?.value || "realistisch";
-  const fallbackScenarioLabel = getScenarioLabel(scenarioValue);
+
+  const personen = clampInt($("personen")?.value, 1, 8);
+  const kinder = clampInt($("kinder2_11")?.value, 0, 8);
+  const infants = clampInt($("infants0_1")?.value, 0, 8);
 
   const payload = {
     szenario: scenarioValue,
     ziel: $("ziel")?.value,
-    personen: $("personen")?.value,
+    personen: String(personen),
+    kinder2_11: String(kinder),
+    infants0_1: String(infants),
     programm: $("programm")?.value,
     reiseklasse: $("reiseklasse")?.value,
     reisezeit: $("reisezeit")?.value,
@@ -656,229 +474,400 @@ async function berechneMilesPlaner() {
     bestandAktuell: $("bestandAktuell")?.value,
     transferBestand: $("transferBestand")?.value,
     geplanterBonus: $("geplanterBonus")?.value,
-    monatlicheSammelrate: $("monatlicheSammelrate")?.value
+    monatlicheSammelrate: $("monatlicheSammelrate")?.value,
+    // optional Buchbarkeit
+    flexDays: $("flexDays")?.value || "0",
+    altAirports: $("altAirports")?.checked ? "1" : "0",
+    splitBooking: $("splitBooking")?.checked ? "1" : "0"
   };
 
-  if (
-    !payload.ziel ||
-    !payload.personen ||
-    !payload.reiseklasse ||
-    !payload.reisezeit ||
-    !payload.reisemonat ||
-    !payload.reisejahr ||
-    !payload.programm
-  ) {
-    
-alert("Bitte fülle die sichtbaren Schritte nacheinander aus.");
+  return payload;
+}
+
+function validatePayload(payload) {
+  const errors = [];
+
+  const requiredFields = ["ziel","personen","reiseklasse","reisezeit","reisemonat","reisejahr","programm"];
+  requiredFields.forEach((fieldId) => {
+    const el = $(fieldId);
+    const value = payload[fieldId];
+    if (!value) {
+      errors.push({ field: fieldId, message: `Bitte wähle ${el?.closest(".step-card")?.querySelector("h3")?.textContent || fieldId}.` });
+    }
+  });
+
+  const personen = clampInt(payload.personen, 1, 8);
+  const kinder = clampInt(payload.kinder2_11, 0, 8);
+  const infants = clampInt(payload.infants0_1, 0, 8);
+
+  if (kinder + infants > personen) {
+    errors.push({ field: "kinder2_11", message: "Kinder + Babys dürfen zusammen nicht mehr als die Anzahl Reisende sein." });
+  }
+  const adults = Math.max(0, personen - kinder - infants);
+  if ((kinder > 0 || infants > 0) && adults < 1) {
+    errors.push({ field: "personen", message: "Wenn Kinder/Babys mitreisen, muss mindestens 1 erwachsene Person dabei sein." });
+  }
+
+  // Zahlenfelder: leer ist ok (wird als 0 interpretiert), aber negative Werte nicht
+  const numericChecks = [
+    { id: "bestandAktuell", label: "Aktueller Bestand" },
+    { id: "transferBestand", label: "Transferfähiger Bestand" },
+    { id: "geplanterBonus", label: "Geplanter Bonus" }
+  ];
+  numericChecks.forEach(({ id, label }) => {
+    const n = extractNumber(payload[id]);
+    if (!Number.isNaN(n) && n < 0) {
+      errors.push({ field: id, message: `${label} darf nicht negativ sein.` });
+    }
+  });
+
+  const monthly = extractNumber(payload.monatlicheSammelrate);
+  if (Number.isNaN(monthly) || monthly <= 0) {
+    errors.push({ field: "monatlicheSammelrate", message: "Bitte gib eine monatliche Sammelrate größer 0 ein." });
+  }
+
+  return errors;
+}
+
+function parseGermanMonth(monthName) {
+  const map = {
+    Januar: 0, Februar: 1, März: 2, April: 3, Mai: 4, Juni: 5,
+    Juli: 6, August: 7, September: 8, Oktober: 9, November: 10, Dezember: 11
+  };
+  return map[String(monthName || "").trim()] ?? null;
+}
+
+function diffMonths(fromDate, toDate) {
+  const y1 = fromDate.getFullYear();
+  const m1 = fromDate.getMonth();
+  const y2 = toDate.getFullYear();
+  const m2 = toDate.getMonth();
+  return (y2 - y1) * 12 + (m2 - m1);
+}
+
+function formatMonthYear(date) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString("de-DE", { month: "long", year: "numeric" });
+}
+
+function addMonths(date, months) {
+  const d = new Date(date);
+  const targetMonth = d.getMonth() + months;
+  d.setMonth(targetMonth);
+  return d;
+}
+
+function classifyAmpel({ monthsToGoal, monthsUntilTravel, seatsNeeded, travelTime, flexDays, splitBooking }) {
+  if (!Number.isFinite(monthsToGoal) || monthsToGoal < 0) return { key: "bad", badge: "🔴", title: "Aktuell nicht berechenbar", text: "Bitte prüfe deine Eingaben." };
+
+  // Grundklassifikation nach Zeit
+  let key = "good";
+  if (monthsToGoal <= monthsUntilTravel) key = "good";
+  else if (monthsToGoal <= monthsUntilTravel + 3) key = "medium";
+  else key = "bad";
+
+  // Verfügbarkeitsrisiko für Gruppen/Urlaubsspitzen:
+  const isHighDemand = String(travelTime || "").toLowerCase().includes("ferien");
+  const isFixed = Number(flexDays) === 0;
+  const manySeats = Number(seatsNeeded) >= 4;
+
+  if (manySeats && isHighDemand && isFixed && !splitBooking) {
+    if (key === "good") key = "medium";
+    else if (key === "medium") key = "bad";
+  }
+
+  if (key === "good") return { key, badge: "🟢", title: "Gut erreichbar", text: "Zeitlich wirkt dein Ziel realistisch. Verfügbarkeit bleibt der wichtigste Faktor." };
+  if (key === "medium") return { key, badge: "🟡", title: "Knapp erreichbar", text: "Zeitlich möglich, aber mit Risiko. Boosts/Flexibilität erhöhen deine Chancen." };
+  return { key, badge: "🔴", title: "Eher nicht erreichbar", text: "Mit den aktuellen Annahmen ist dein Ziel bis zur Reise wahrscheinlich zu knapp." };
+}
+
+function buildAffiliateBox(programmName, fehlendTarget, progressPercent, cfg, scenarioKey) {
+  const aff = AFFILIATE_CONFIG[programmName] || null;
+  if (!aff) return "";
+  if (!Number.isFinite(fehlendTarget) || fehlendTarget <= 0) return "";
+
+  const transferBonusPct = getAssumedTransferBonusPct(cfg, scenarioKey);
+  const baseFactor = (typeof cfg?.faktor === "number" && Number.isFinite(cfg.faktor)) ? cfg.faktor : 1;
+  const effectiveFactor = baseFactor * (1 + (transferBonusPct / 100));
+
+  const cardsHtml = (aff.offers || []).map((offer) => {
+    const bonusSource = Number(offer.bonus || 0);
+    const bonusInTarget = bonusSource * effectiveFactor;
+    const coverage = Math.min(100, Math.round((bonusInTarget / fehlendTarget) * 100));
+
+    const partnerLabel = offer.url && offer.url !== "#" ? "Partnerlink*" : "Hinweis";
+    const rel = offer.url && offer.url !== "#"
+      ? 'rel="nofollow sponsored noopener noreferrer"'
+      : 'rel="nofollow noopener noreferrer"';
+
+    return `
+      <a href="${escapeHtml(offer.url || "#")}" class="affiliate-card" target="_blank" ${rel}>
+        <strong>${escapeHtml(offer.title)}</strong><br>
+        <span>${escapeHtml(offer.subtitle)}</span>
+        <div class="affiliate-meta">
+          ${partnerLabel}<br>
+          Bonus: ca. ${escapeHtml(formatPoints(bonusSource))} ${escapeHtml(aff.sourceLabel)}
+          ${
+            coverage > 0
+              ? `<br><span class="affiliate-coverage">entspricht ca. ${coverage}% deiner aktuellen Lücke (Umrechnung inkl. Szenario-Annahme)</span>`
+              : ""
+          }
+        </div>
+      </a>
+    `;
+  }).join("");
+
+  let urgencyText = "";
+  if (Number.isFinite(progressPercent)) {
+    if (progressPercent < 35) urgencyText = "Bei großer Lücke kann ein einmaliger Bonus einen spürbaren Unterschied machen.";
+    else if (progressPercent < 70) urgencyText = "Du bist schon unterwegs – ein Bonus kann das Ziel deutlich näher bringen.";
+    else urgencyText = "Dir fehlt nicht mehr viel – ein Bonus oder eine Aktion kann die Restlücke schnell schließen.";
+  }
+
+  return `
+    <div class="affiliate-box">
+      <h4>${escapeHtml(aff.headline)}</h4>
+      <p>${escapeHtml(aff.text)}</p>
+      ${urgencyText ? `<p class="affiliate-urgency">${escapeHtml(urgencyText)}</p>` : ""}
+      <div class="affiliate-links">
+        ${cardsHtml}
+      </div>
+      <p class="footer-text" style="margin-top:10px;">
+        * Partnerlink: Wenn du über einen mit * markierten Link abschließt/kaufst, erhalten wir ggf. eine Provision. Für dich entstehen keine Mehrkosten.
+      </p>
+    </div>
+  `;
+}
+
+async function berechneMilesPlaner() {
+  clearValidationUI();
+
+  const resultBox = $("result");
+  if (!resultBox) {
+    alert("Ergebnisbereich nicht gefunden."); // letzter Fallback
     return;
   }
 
-  if (!resultBox) {
-    alert("Ergebnisbereich nicht gefunden.");
+  const payload = collectPayload();
+  const errors = validatePayload(payload);
+
+  if (errors.length > 0) {
+    showValidationErrors(errors);
     return;
+  }
+
+  const calcBtn = $("calcButton");
+  if (calcBtn) {
+    calcBtn.disabled = true;
+    calcBtn.textContent = "Berechne…";
   }
 
   zeigeErgebnisView();
-  resultBox.innerHTML = "<p>Berechne...</p>";
+  resultBox.innerHTML = "<p>Berechne…</p>";
 
   try {
     const response = await fetch(API_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
     });
 
-    if (!response.ok) {
-      throw new Error("HTTP-Fehler: " + response.status);
-    }
+    if (!response.ok) throw new Error("HTTP-Fehler: " + response.status);
 
     const data = await response.json();
+    if (data.status === "error") throw new Error(data.message || "Unbekannter Fehler aus Apps Script");
 
-    if (data.status === "error") {
-      throw new Error(data.message || "Unbekannter Fehler aus Apps Script");
-    }
-
-    const persons = Number(payload.personen) || 1;
     const programmName = payload.programm || "Programm";
     const cfg = getProgramConfig(programmName);
 
-    const finalScenarioKey = data.scenario || scenarioValue;
-    const finalScenarioLabel = data.scenarioLabel || fallbackScenarioLabel;
-    const scenarioMeta = getScenarioMeta(finalScenarioKey);
-    const scenarioBadgeClass = scenarioMeta.badgeClass;
+    const scenarioKey = data.scenario || payload.szenario || "realistisch";
+    const scenarioLabel = data.scenarioLabel || getScenarioLabel(scenarioKey);
+    const scenarioMeta = getScenarioMeta(scenarioKey);
 
-    const dealLabel = extractDealLabel(data.deal);
-    const dealDetail = extractDealDetail(data.deal);
-    const cpmValue = extractCpm(data.deal);
+    const personenTotal = clampInt(payload.personen, 1, 8);
+    const infants = clampInt(payload.infants0_1, 0, 8);
+    const seatsNeeded = Math.max(1, personenTotal - infants);
 
-    const taxesPP = extractTaxesPP(data.taxes);
-    const taxesTotal = extractTaxesTotal(data.taxes);
-    const finalTaxesPP = Number.isNaN(taxesPP) ? extractZuzahlungPP(data.cash) : taxesPP;
-    const finalTaxesTotal =
-      Number.isNaN(taxesTotal) && !Number.isNaN(finalTaxesPP)
-        ? finalTaxesPP * persons
-        : taxesTotal;
-
-    const cashPP = extractCashPP(data.cash);
-    const cashGesamt = !Number.isNaN(cashPP) ? cashPP * persons : NaN;
-
-    const ersparnisGesamt = extractErsparnisGesamt(data.cash);
-    const ersparnisPP =
-      !Number.isNaN(ersparnisGesamt) && persons > 0
-        ? ersparnisGesamt / persons
-        : NaN;
-
-    const progressHeute = extractPercent(data.progress);
-    const progressBonus = extractPercent(data.progressBonus);
     const fehlendValue = extractNumber(data.fehlend);
     const monateValue = extractNumber(data.monate);
 
-    const dealClass =
-      /guter deal|sehr guter deal|top deal|exzellenter deal/i.test(dealLabel)
-        ? "deal-good"
-        : /mittel|ok|solide/i.test(dealLabel)
-        ? "deal-medium"
-        : /schwach|schlechter deal|kein guter deal/i.test(dealLabel)
-        ? "deal-bad"
-        : "deal-neutral";
+    // Reisezeitpunkt aus Eingabe ableiten (für Ampel/Timing)
+    const year = clampInt(payload.reisejahr, 2026, 2100);
+    const monthIndex = parseGermanMonth(payload.reisemonat);
+    const travelDate = (monthIndex === null) ? null : new Date(year, monthIndex, 1);
 
-    const affiliateBoxHtml = buildAffiliateBox(programmName, fehlendValue, progressBonus);
-    const decisionCardHtml = buildDecisionCard(data, programmName, fehlendValue, monateValue);
+    const now = new Date();
+    const monthsUntilTravel = travelDate ? diffMonths(now, travelDate) : NaN;
 
+    const flexDays = clampInt(payload.flexDays, 0, 99);
+    const splitBooking = payload.splitBooking === "1";
+    const travelTime = payload.reisezeit;
+
+    const ampel = classifyAmpel({
+      monthsToGoal: monateValue,
+      monthsUntilTravel,
+      seatsNeeded,
+      travelTime,
+      flexDays,
+      splitBooking
+    });
+
+    const affiliateBoxHtml = buildAffiliateBox(programmName, fehlendValue, extractNumber(data.progressBonus), cfg, scenarioKey);
+
+    const planCards = `
+      <div class="result-section">
+        <h3>Nächste Schritte für dein Ergebnis</h3>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Sammelrate erhöhen</div>
+            <div class="value value-small">
+              Wenn dir noch viele Punkte fehlen, zählt vor allem „mehr pro Monat“.
+            </div>
+            <div class="value-note">
+              <a href="/miles-planer/meilen-sammeln/">Zum Meilen-sammeln-Guide</a>
+            </div>
+          </div>
+
+          <div class="result-item">
+            <div class="label">Einmaliger Boost</div>
+            <div class="value value-small">
+              Ein Bonus/Transferaktion kann deine Sammelzeit stark verkürzen – besonders bei größerer Lücke.
+            </div>
+            <div class="value-note">
+              Siehe Empfehlungen unten (falls verfügbar).
+            </div>
+          </div>
+
+          <div class="result-item">
+            <div class="label">Verfügbarkeit erhöhen</div>
+            <div class="value value-small">
+              Für ${escapeHtml(String(seatsNeeded))} Plätze ist Flexibilität oft der Schlüssel (Alternative Airports, Split-Booking, Datumspuffer).
+            </div>
+            <div class="value-note">
+              <a href="/miles-planer/meilen-business-class/">Tipps zur Buchbarkeit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Primärer Hero + KPI-Block
     resultBox.innerHTML = `
       <div class="result-card">
 
         <div class="tool-card scenario-box">
           <div class="result-section">
-            <div class="label">Aktives Szenario</div>
-            <span class="scenario-badge ${escapeHtml(scenarioBadgeClass)}">${escapeHtml(finalScenarioLabel)}</span>
+            <div class="label">Szenario</div>
+            <span class="scenario-badge ${escapeHtml(scenarioMeta.badgeClass)}">${escapeHtml(scenarioLabel)}</span>
             <div class="scenario-headline">${escapeHtml(scenarioMeta.headline)}</div>
             <div class="value-note">${escapeHtml(scenarioMeta.text)}</div>
           </div>
         </div>
 
-        ${decisionCardHtml}
+        <div class="decision-card decision-card-${escapeHtml(ampel.key)}">
+          <div class="decision-badge">${escapeHtml(ampel.badge)} ${escapeHtml(ampel.title)}</div>
+          <h3 class="decision-title">${escapeHtml(ampel.text)}</h3>
+          <p class="decision-text">
+            Ziel: <strong>${escapeHtml(payload.ziel)}</strong> · Klasse: <strong>${escapeHtml(payload.reiseklasse)}</strong> · Reisende: <strong>${escapeHtml(payload.personen)}</strong>
+          </p>
 
-        <div class="result-section">
-          <h2>${escapeHtml(data.headline || "Ergebnis")}</h2>
-          <p class="subline">${escapeHtml(data.subline || "")}</p>
-          ${data.risiken ? `<p class="value-note">${escapeHtml(data.risiken)}</p>` : ""}
-          ${
-            data.betterProgramHint
-              ? `<div class="result-info-card"><strong>Alternative prüfen</strong><p>${escapeHtml(data.betterProgramHint)}</p></div>`
-              : ""
-          }
+          <div class="decision-mini-grid">
+            <div class="decision-mini-item">
+              <span class="label">Fehlende Punkte</span>
+              <strong>${escapeHtml(!Number.isNaN(fehlendValue) ? `${formatPoints(fehlendValue)} ${programmName}` : (data.fehlend || "—"))}</strong>
+            </div>
+            <div class="decision-mini-item">
+              <span class="label">Sammeldauer</span>
+              <strong>${escapeHtml(formatDurationMonths(monateValue) || data.monate || "—")}</strong>
+            </div>
+            <div class="decision-mini-item">
+              <span class="label">Reise geplant</span>
+              <strong>${escapeHtml(data.reise || `${payload.reisemonat} ${payload.reisejahr}`)}</strong>
+            </div>
+          </div>
         </div>
 
-        <div class="result-grid">
-          <div class="result-item">
-            <div class="label">Bestand heute (${escapeHtml(cfg.punktelabel || "Meilen / Punkte")})</div>
-            <div class="value">${escapeHtml(data.bestand || "")}</div>
-          </div>
+        ${planCards}
 
-          <div class="result-item">
-            <div class="label">Bonus geplant (${escapeHtml((cfg.transferquelle || "Transferpartner") + " Punkte")})</div>
-            <div class="value">${escapeHtml(data.bonus || "")}</div>
-            <div class="value-note">${escapeHtml(data.transferInfo || buildTransferInfo(cfg))}</div>
-          </div>
-
-          <div class="result-item">
-            <div class="label">Zielbedarf</div>
-            <div class="value">${escapeHtml(data.zielbedarf || "")}</div>
-          </div>
-
-          <div class="result-item">
-            <div class="label">Fehlend</div>
-            <div class="value">${escapeHtml(data.fehlend || "")}</div>
-          </div>
-
-          <div class="result-item">
-            <div class="label">Monate bis Ziel</div>
-            <div class="value">${escapeHtml(data.monate || "")}</div>
-            ${
-              formatDurationMonths(monateValue)
-                ? `<div class="value-note">ca. ${escapeHtml(formatDurationMonths(monateValue))}</div>`
-                : ""
-            }
-          </div>
-
-          <div class="result-item">
-            <div class="label">Ziel erreicht ca.</div>
-            <div class="value value-small">${escapeHtml(data.zielErreicht || "")}</div>
-          </div>
-
-          <div class="result-item">
-            <div class="label">Geplante Reise</div>
-            <div class="value value-small">${escapeHtml(data.reise || "")}</div>
-          </div>
-
-          <div class="result-item">
-            <div class="label">Reisebewertung</div>
-            <div class="value value-small">${escapeHtml(data.bewertung || "")}</div>
+        <div class="result-section">
+          <h3>Deine Kennzahlen</h3>
+          <div class="result-grid">
+            <div class="result-item">
+              <div class="label">Bestand heute (${escapeHtml(cfg.punktelabel || "Meilen / Punkte")})</div>
+              <div class="value">${escapeHtml(data.bestand || "")}</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Zielbedarf</div>
+              <div class="value">${escapeHtml(data.zielbedarf || "")}</div>
+              <div class="value-note">
+                Hinweis: Tabellen-/Schätzwert; tatsächliche Werte können je nach Airline/Regelwerk variieren.
+              </div>
+            </div>
+            <div class="result-item">
+              <div class="label">Ziel erreicht ca.</div>
+              <div class="value value-small">${escapeHtml(data.zielErreicht || "")}</div>
+            </div>
+            <div class="result-item">
+              <div class="label">Transferannahme</div>
+              <div class="value value-small">${escapeHtml(buildTransferInfo(cfg, scenarioKey))}</div>
+            </div>
           </div>
         </div>
 
         ${affiliateBoxHtml}
-          <div class="result-section">
-          <h3>Sammelfortschritt</h3>
 
+        <div class="result-section">
+          <h3>Sammelfortschritt</h3>
           <div class="result-grid">
             <div class="result-item">
-              <div class="label">Fortschritt zum ${escapeHtml(programmName)}-Ziel heute</div>
+              <div class="label">Fortschritt heute</div>
               <div class="value value-small">${escapeHtml(data.progress || "")}</div>
-              ${buildProgressBar(progressHeute)}
+              ${buildProgressBar(extractNumber(data.progress))}
             </div>
-
             <div class="result-item">
-              <div class="label">Fortschritt zum ${escapeHtml(programmName)}-Ziel inkl. Bonus</div>
+              <div class="label">Fortschritt inkl. Bonus/Transfer</div>
               <div class="value value-small">${escapeHtml(data.progressBonus || "")}</div>
-              ${buildProgressBar(progressBonus)}
+              ${buildProgressBar(extractNumber(data.progressBonus))}
             </div>
           </div>
         </div>
 
         <div class="result-section">
-          <h3>Deal & Kosten</h3>
-
+          <h3>Deal &amp; Kosten</h3>
+          <div class="value-note">
+            Steuern/Gebühren/Zuschläge können bei Award Flights zusätzlich anfallen; echte Buchung kann abweichen.
+          </div>
           <div class="result-grid">
-            <div class="result-item deal-highlight ${escapeHtml(dealClass)}">
-              <div class="label">Deal-Bewertung</div>
-              <div class="value value-small">${escapeHtml(dealLabel || data.deal || "")}</div>
-              ${cpmValue ? `<div class="cpm-badge">${escapeHtml(cpmValue)}</div>` : ""}
-              ${dealDetail ? `<div class="value-note">${escapeHtml(dealDetail)}</div>` : ""}
+            <div class="result-item">
+              <div class="label">Deal</div>
+              <div class="value value-small">${escapeHtml(data.deal || "—")}</div>
             </div>
-
             <div class="result-item">
               <div class="label">Award-Zuzahlung</div>
-              <div class="value value-small">${escapeHtml(formatEuro(finalTaxesTotal) || data.taxes || "—")}</div>
-              ${
-                !Number.isNaN(finalTaxesPP)
-                  ? `<div class="value-note">ca. ${escapeHtml(formatEuro(finalTaxesPP))} p.P.</div>`
-                  : ""
-              }
+              <div class="value value-small">${escapeHtml(data.taxes || "—")}</div>
             </div>
-
             <div class="result-item">
               <div class="label">Cashpreis</div>
-              <div class="value value-small">${escapeHtml(formatEuro(cashGesamt) || "—")}</div>
-              ${
-                !Number.isNaN(cashPP)
-                  ? `<div class="value-note">ca. ${escapeHtml(formatEuro(cashPP))} p.P.</div>`
-                  : ""
-              }
+              <div class="value value-small">${escapeHtml(data.cash || "—")}</div>
             </div>
+          </div>
+        </div>
 
-            <div class="result-item">
-              <div class="label">Ersparnis</div>
-              <div class="value value-small">${escapeHtml(formatEuro(ersparnisGesamt) || "—")}</div>
-              ${
-                !Number.isNaN(ersparnisPP)
-                  ? `<div class="value-note">ca. ${escapeHtml(formatEuro(ersparnisPP))} p.P.</div>`
-                  : ""
-              }
-            </div>
+        <div class="result-section">
+          <h3>Annahmen &amp; Hinweise</h3>
+          <div class="result-info-card">
+            <strong>Familienregeln</strong>
+            <p>
+              Wenn du Kinder/Babys angegeben hast, gelten je nach Programm besondere Regeln (z. B. Kinderermäßigungen).
+              Prüfe vor der Buchung die offiziellen Bedingungen.
+            </p>
+          </div>
+          <div class="result-info-card">
+            <strong>Verfügbarkeit</strong>
+            <p>
+              Besonders bei Ferien/Fixdaten und mehreren Plätzen ist Verfügbarkeit häufig der Engpass.
+              Flexibilität (Datum/Abflughafen/Split) erhöht die Chancen.
+            </p>
           </div>
         </div>
 
@@ -894,13 +883,20 @@ alert("Bitte fülle die sichtbaren Schritte nacheinander aus.");
       </div>
     `;
     console.error(error);
+  } finally {
+    const calcBtn = $("calcButton");
+    if (calcBtn) {
+      calcBtn.disabled = false;
+      calcBtn.textContent = "Jetzt berechnen";
+    }
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   fillFallbackDropdowns();
 
-  ["ziel", "personen", "reiseklasse", "reisezeit", "reisemonat", "reisejahr", "programm"].forEach((id) => {
+  const watched = ["ziel","personen","reiseklasse","reisezeit","reisemonat","reisejahr","programm","szenario"];
+  watched.forEach((id) => {
     const el = $(id);
     if (el) {
       el.addEventListener("change", updateFormFlow);
@@ -908,9 +904,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Clear inline field style on edit
+  const clearOnEdit = ["bestandAktuell","transferBestand","geplanterBonus","monatlicheSammelrate","kinder2_11","infants0_1"];
+  clearOnEdit.forEach((id) => {
+    const el = $(id);
+    if (!el) return;
+    el.addEventListener("input", () => el.classList.remove("field-invalid"));
+  });
+
   const programm = $("programm");
-  if (programm) {
-    programm.addEventListener("change", updatePointsLabels);
+  if (programm) programm.addEventListener("change", updatePointsLabels);
+
+  const form = $("milesForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      berechneMilesPlaner();
+    });
   }
 
   updatePointsLabels();
