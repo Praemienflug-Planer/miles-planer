@@ -1270,4 +1270,20 @@ line-height:1.6;
 .article-image.image-wide img {
   max-width: 720px;
 }
+  /* Minimal: Fehlerdarstellung */
+.field-invalid {
+  outline: 2px solid #c81e1e;
+  outline-offset: 2px;
+}
+#formErrors {
+  margin-top: 12px;
+}
+#formErrors ul {
+  margin: 8px 0 0 18px;
+}
+.btn[disabled] {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
 }
