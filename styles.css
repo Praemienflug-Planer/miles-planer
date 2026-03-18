@@ -1318,3 +1318,19 @@ line-height:1.6;
 .total-savings .metric-value { font-size: 1.5rem; color: #096; }
 
 }
+/* Flex-Layout für Eingabe- und Info-Karten */
+.points-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+.input-container {
+  flex: 3;           /* deutlich breitere Eingabekachel */
+}
+.info-container {
+  flex: 1;           /* schmalere Spalte für Info-Karten */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+}
