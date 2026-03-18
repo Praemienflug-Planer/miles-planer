@@ -59,7 +59,13 @@ const AFFILIATE_CONFIG = {
     headline: "Avios schneller aufbauen",
     text: "Ein einmaliger Bonus kann deine Lücke deutlich reduzieren.",
     offers: [
-      { title: "Kreditkarten-Bonus (Beispiel)", subtitle: "Bonus variiert – Details prüfen", bonus: 50000, url: "#", isExample: true }
+      {
+        title: "Kreditkarten-Bonus (Beispiel)",
+        subtitle: "Bonus variiert – Details prüfen",
+        bonus: 50000,
+        url: "#",
+        isExample: true
+      }
     ]
   },
   "Flying Blue": {
@@ -67,7 +73,13 @@ const AFFILIATE_CONFIG = {
     headline: "Flying Blue schneller aufbauen",
     text: "Ein einmaliger Bonus kann deine Lücke deutlich reduzieren.",
     offers: [
-      { title: "Kreditkarten-Bonus (Beispiel)", subtitle: "Bonus variiert – Details prüfen", bonus: 50000, url: "#", isExample: true }
+      {
+        title: "Kreditkarten-Bonus (Beispiel)",
+        subtitle: "Bonus variiert – Details prüfen",
+        bonus: 50000,
+        url: "#",
+        isExample: true
+      }
     ]
   },
   "KrisFlyer": {
@@ -75,7 +87,13 @@ const AFFILIATE_CONFIG = {
     headline: "KrisFlyer schneller aufbauen",
     text: "Ein einmaliger Bonus kann deine Lücke deutlich reduzieren.",
     offers: [
-      { title: "Kreditkarten-Bonus (Beispiel)", subtitle: "Bonus variiert – Details prüfen", bonus: 50000, url: "#", isExample: true }
+      {
+        title: "Kreditkarten-Bonus (Beispiel)",
+        subtitle: "Bonus variiert – Details prüfen",
+        bonus: 50000,
+        url: "#",
+        isExample: true
+      }
     ]
   }
 };
@@ -397,7 +415,7 @@ async function ladeDropdowns() {
 
     populateSelect("ziel", data.ziele || [], "Bitte Ziel wählen");
     // Economy nicht mehr herausfiltern, damit es als Fallback-Option verfügbar ist
-    populateSelect("reiseklasse", (data.klassen || []), "Bitte Reiseklasse wählen");
+    populateSelect("reiseklasse", data.klassen || [], "Bitte Reiseklasse wählen");
     populateSelect("reisezeit", data.reisezeiten || [], "Bitte Reisezeit wählen");
     populateSelect("reisemonat", data.monate || [], "Bitte Reisemonat wählen");
     populateSelect("programm", data.programme || [], "Bitte Programm wählen");
@@ -619,9 +637,13 @@ function buildAffiliateBox(programmName, fehlendTarget, progressPercent, cfg, sc
 
   let urgencyText = "";
   if (Number.isFinite(progressPercent)) {
-    if (progressPercent < 35) urgencyText = "Bei großer Lücke kann ein einmaliger Bonus einen spürbaren Unterschied machen.";
-    else if (progressPercent < 70) urgencyText = "Du bist schon unterwegs – ein Bonus kann das Ziel deutlich näher bringen.";
-    else urgencyText = "Dir fehlt nicht mehr viel – ein Bonus oder eine Aktion kann die Restlücke schnell schließen.";
+    if (progressPercent < 35) {
+      urgencyText = "Bei großer Lücke kann ein einmaliger Bonus einen spürbaren Unterschied machen.";
+    } else if (progressPercent < 70) {
+      urgencyText = "Du bist schon unterwegs – ein Bonus kann das Ziel deutlich näher bringen.";
+    } else {
+      urgencyText = "Dir fehlt nicht mehr viel – ein Bonus oder eine Aktion kann die Restlücke schnell schließen.";
+    }
   }
 
   return `
@@ -713,13 +735,7 @@ async function berechneMilesPlaner() {
     });
 
     const affiliateBoxHtml = buildAffiliateBox(programmName, fehlendValue, extractNumber(data.progressBonus), cfg, scenarioKey);
-<div class="input-container"><!-- Linke Spalte: Eingabe -->
-  ... <!-- Bestand, Boost & Sammelrate Fields -->
-</div>
-<div class="info-container"><!-- Rechte Spalte: Info -->
-  <div class="how-it-works">So funktioniert’s: ...</div>
-  <div class="transfer-hint">Hinweis: … (Transferbonus/Payback etc.)</div>
-</div>
+
     const planCards = `
       <div class="result-section">
         <h3>Nächste Schritte für dein Ergebnis</h3>
@@ -747,7 +763,7 @@ async function berechneMilesPlaner() {
           <div class="result-item">
             <div class="label">Verfügbarkeit erhöhen</div>
             <div class="value value-small">
-              Für ${escapeHtml(String(seatsNeeded))} Plätze ist Flexibilität oft der Schlüssel (Alternative Airports, Split-Booking, Datumspuffer).
+              Für ${escapeHtml(String(seatsNeeded))} Plätze ist Flexibilität oft der Schlüssel (Alternative Airports, Split-Booking, Datumspuffer).
             </div>
             <div class="value-note">
               <a href="/miles-planer/meilen-business-class/">Tipps zur Buchbarkeit</a>
@@ -757,7 +773,40 @@ async function berechneMilesPlaner() {
       </div>
     `;
 
-    // Primärer Hero + KPI-Block
+    // **Gesamtersparnis berechnen** (Euro-Differenz zwischen Cashpreis und Award-Zuzahlung)
+    let savingsDisplay = "—";
+    if (data.cash && data.taxes && !String(data.cash).includes("⚠") && !String(data.taxes).includes("⚠")) {
+      try {
+        const cashMatch = String(data.cash).match(/~([\d.,]+)\s*€\s*p\.P\./);
+        const awardMatch = String(data.cash).match(/\|\s*~([\d.,]+)\s*€\s*p\.P/);
+        const totalMatch = String(data.taxes).match(/\(~([\d.,]+)\s*€\s*für/);
+        if (cashMatch) {
+          const cashPP = parseFloat(cashMatch[1].replace(/\./g, "").replace(",", "."));
+          if (!Number.isNaN(cashPP)) {
+            const totalCash = cashPP * personenTotal;
+            let awardTotal = NaN;
+            if (totalMatch) {
+              awardTotal = parseFloat(totalMatch[1].replace(/\./g, "").replace(",", "."));
+            } else if (awardMatch) {
+              const awardPP = parseFloat(awardMatch[1].replace(/\./g, "").replace(",", "."));
+              if (!Number.isNaN(awardPP)) {
+                awardTotal = awardPP * personenTotal;
+              }
+            }
+            if (!Number.isNaN(totalCash) && !Number.isNaN(awardTotal)) {
+              const totalSavings = Math.round(totalCash - awardTotal);
+              if (Number.isFinite(totalSavings)) {
+                savingsDisplay = formatEuro(totalSavings);
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Gesamtersparnis Berechnung fehlgeschlagen:", e);
+      }
+    }
+
+    // Primärer Ergebnis-Output (Ampel + Kennzahlen + Details)
     resultBox.innerHTML = `
       <div class="result-card">
 
@@ -780,7 +829,7 @@ async function berechneMilesPlaner() {
           <div class="decision-mini-grid">
             <div class="decision-mini-item">
               <span class="label">Fehlende Punkte</span>
-              <strong>${escapeHtml(!Number.isNaN(fehlendValue) ? `${formatPoints(fehlendValue)} ${programmName}` : (data.fehlend || "—"))}</strong>
+              <strong>${escapeHtml(!Number.isNaN(fehlendValue) ? `${formatPoints(fehlendValue)} ${programmName}` : (data.fehlend || "—"))}</strong>
             </div>
             <div class="decision-mini-item">
               <span class="label">Sammeldauer</span>
@@ -788,7 +837,7 @@ async function berechneMilesPlaner() {
             </div>
             <div class="decision-mini-item">
               <span class="label">Reise geplant</span>
-              <strong>${escapeHtml(data.reise || `${payload.reisemonat} ${payload.reisejahr}`)}</strong>
+              <strong>${escapeHtml(data.reise || `${payload.reisemonat} ${payload.reisejahr}`)}</strong>
             </div>
           </div>
         </div>
@@ -818,9 +867,9 @@ async function berechneMilesPlaner() {
               <div class="value value-small">${escapeHtml(buildTransferInfo(cfg, scenarioKey))}</div>
             </div>
             <div class="result-metric tile total-savings">
-  <div class="metric-value">{{ totalSavings }} €</div>
-  <div class="metric-label">Gesamtersparnis</div>
-</div>
+              <div class="metric-value">${escapeHtml(savingsDisplay)}</div>
+              <div class="metric-label">Gesamtersparnis</div>
+            </div>
           </div>
         </div>
 
@@ -868,7 +917,7 @@ async function berechneMilesPlaner() {
           <div class="result-info-card">
             <strong>Familienregeln</strong>
             <p>
-              Wenn du Kinder/Babys angegeben hast, gelten je nach Programm besondere Regeln (z. B. Kinderermäßigungen).
+              Wenn du Kinder/Babys angegeben hast, gelten je nach Programm besondere Regeln (z. B. Kinderermäßigungen).
               Prüfe vor der Buchung die offiziellen Bedingungen.
             </p>
           </div>
