@@ -777,9 +777,22 @@ const totalCash = Number(data.cash_total || 0);
 const awardTotal = Number(data.award_total || 0);
 const totalSavings = Number(data.savings_total || 0);
 
-const savingsDisplay = Number.isFinite(totalSavings)
-  ? formatEuro(totalSavings)
+const safePersons = Math.max(1, personenTotal);
+
+const cashTotalDisplay = Number.isFinite(totalCash) ? formatEuro(totalCash) : "—";
+const awardTotalDisplay = Number.isFinite(awardTotal) ? formatEuro(awardTotal) : "—";
+const savingsDisplay = Number.isFinite(totalSavings) ? formatEuro(totalSavings) : "—";
+
+const cashPerPersonDisplay = Number.isFinite(totalCash)
+  ? formatEuro(totalCash / safePersons)
   : "—";
+
+const awardPerPersonDisplay = Number.isFinite(awardTotal)
+  ? formatEuro(awardTotal / safePersons)
+  : "—";
+
+const cpmDisplay = data.cpm ? String(data.cpm) : "—";
+const dealDisplay = data.deal ? String(data.deal) : "—";
     // Primärer Ergebnis-Output (Ampel + Kennzahlen + Details)
     resultBox.innerHTML = `
       <div class="result-card">
@@ -862,6 +875,7 @@ const savingsDisplay = Number.isFinite(totalSavings)
           </div>
         </div>
         <div class="result-section deal-section">
+        
   <h3>Deal &amp; Kosten</h3>
   <div class="value-note deal-intro">
     Die Bewertung basiert auf der effektiven Ersparnis pro eingesetzter Meile.
