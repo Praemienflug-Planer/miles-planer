@@ -697,6 +697,7 @@ async function berechneMilesPlaner() {
     if (!response.ok) throw new Error("HTTP-Fehler: " + response.status);
 
     const data = await response.json();
+    console.log("API data:", data);
     if (data.status === "error") throw new Error(data.message || "Unbekannter Fehler aus Apps Script");
 
     const programmName = payload.programm || "Programm";
