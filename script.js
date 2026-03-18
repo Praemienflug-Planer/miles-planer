@@ -772,7 +772,6 @@ async function berechneMilesPlaner() {
         </div>
       </div>
     `;
-const personenTotal = Number(data.personen || 0);
 
 const totalCash = Number(data.cash_total || 0);
 const awardTotal = Number(data.award_total || 0);
