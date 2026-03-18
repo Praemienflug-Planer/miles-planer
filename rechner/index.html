@@ -35,6 +35,7 @@
                       realistische Einschätzung deiner Chancen.
                     </p>
                   </div>
+                  <form id="milesForm">
                  <div class="step-grid">
   <section id="step-ziel" class="step-card active">
     <div class="step-number">1</div>
@@ -135,9 +136,11 @@
         <option value="realistisch" selected>Realistisch</option>
         <option value="konservativ">Konservativ</option>
       </select>
+      </form>
     </div>
+    <div id="formErrors" class="form-status error" style="display:none;"></div>
     <div class="tool-actions">
-      <button class="btn btn-primary" onclick="berechneMilesPlaner()">Jetzt berechnen</button>
+     <button id="calcButton" type="submit" class="btn btn-primary">Jetzt berechnen</button>
     </div>
   </div>
   <div class="tool-card points-transfer-card">
