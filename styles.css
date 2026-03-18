@@ -1285,5 +1285,14 @@ line-height:1.6;
   opacity: .6;
   cursor: not-allowed;
 }
-
+@media (min-width: 768px) {
+  .metrics-section {  
+    display: grid;  
+    grid-template-columns: 1fr 1fr; /* zwei Spalten */  
+    grid-gap: 1rem;                /* Abstand zwischen Kacheln */  
+  }  
+  .metrics-section .tile { 
+    /* alle vier Kacheln fügen sich ins Grid ein */ 
+  }
+}
 }
