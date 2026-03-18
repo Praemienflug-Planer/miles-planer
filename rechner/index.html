@@ -62,7 +62,7 @@
                       <div class="field-group">
                         <label for="infants0_1">Babys (0–1, ohne Sitz)</label>
                         <input id="infants0_1" type="number" min="0" max="8" value="0" inputmode="numeric">
-                        <div class="value-note">Optional. Berücksichtigt nur, wenn Programm es erlaubt.</div>
+                        <div class="value-note">Optional. Wird nur berücksichtigt, wenn das Programm passende Regeln hat.</div>
                       </div>
                     </div>
                   </div>
@@ -110,14 +110,14 @@
               </div>
             </div>
 
-            <!-- Punktestand und Sammelrate (linke Spalte) -->
+            <!-- Punktestand und Sammelrate (Eingabe-Kachel) -->
             <div class="points-row">
               <div class="input-container">
                 <div id="step-punkte" class="tool-card points-main-card">
                   <div class="section-head compact-head">
                     <p class="eyebrow">Punktestand</p>
                     <h2>Bestand, Boost &amp; Sammelrate</h2>
-                    <p class="value-note">Gib realistische Werte ein. Das Szenario gibt Puffer für Ungewissheiten.</p>
+                    <p class="value-note">Gib Werte ein, die du realistisch erreichst. Szenario hilft dir beim Einplanen von Puffer.</p>
                   </div>
                   <div class="form-grid two-col">
                     <div class="field-group">
@@ -146,22 +146,12 @@
                     </select>
                   </div>
                   <div class="tool-actions">
-                    <button class="btn btn-primary" type="button" id="calcButton">Jetzt berechnen</button>
+                    <button id="calcButton" class="btn btn-primary" type="button">Jetzt berechnen</button>
                   </div>
-                  <p class="footer-text" style="margin-top:10px;">Hinweis: Deine Eingaben werden an den Berechnungsdienst gesendet.</p>
+                  <p class="footer-text" style="margin-top:10px;">Hinweis: Für die Berechnung werden deine Eingaben an den Berechnungsdienst übertragen. Details siehe Datenschutz.</p>
                 </div>
               </div>
               <div class="info-container">
-                <div class="tool-card points-transfer-card">
-                  <div class="info-card">
-                    <div class="info-icon">💡</div>
-                    <div class="info-content" id="pointsHelper">
-                      <strong>Transferhinweis</strong>
-                      <p><strong>Transferfaktor: PAYBACK → M&M 1:1</strong></p>
-                      <p>In der Praxis gibt es häufig Aktionen (15–30% Bonus), was deine Lücke schneller schließen kann.</p>
-                    </div>
-                  </div>
-                </div>
                 <div class="tool-card sticky-card">
                   <p class="eyebrow">So funktioniert es</p>
                   <h3>In wenigen Minuten zum Plan</h3>
@@ -171,6 +161,16 @@
                     <li>Bestand + Sammelrate eingeben</li>
                     <li>Ergebnis: Ampel, Lücke, Zeitplan &amp; nächste Schritte</li>
                   </ul>
+                </div>
+                <div class="tool-card points-transfer-card">
+                  <div class="info-card">
+                    <div class="info-icon">💡</div>
+                    <div class="info-content" id="pointsHelper">
+                      <strong>Transferhinweis</strong>
+                      <p><strong>Offiziell:</strong> PAYBACK → Miles &amp; More 1:1.</p>
+                      <p><strong>Praxis:</strong> Es gibt gelegentlich Transferboni. Szenario kann dies als Annahme abbilden.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -182,8 +182,8 @@
       <div id="resultView" class="tool-view">
         <div class="tool-layout">
           <div class="tool-main">
-            <div class="tool-card result-wrapper" id="result">
-              <!-- Hier wird das Ergebnis dynamisch eingefügt -->
+            <div class="tool-card result-wrapper">
+              <div id="result"></div>
             </div>
             <div class="result-section">
               <h3>Deine Kennzahlen</h3>
@@ -206,19 +206,19 @@
                 </div>
               </div>
             </div>
-            <!-- Affiliate Box (falls vorhanden) -->
+            <!-- Affiliate-Box (falls vorhanden) -->
           </div>
           <aside class="tool-sidebar">
             <div class="tool-card sticky-card">
               <p class="eyebrow">Ergebnis</p>
               <h3>Deine Planung</h3>
-              <p class="footer-text">Ampel, Lücke, Sammelzeit, Dealwert – plus konkrete nächste Schritte.</p>
+              <p class="footer-text">Ampel, Lücke, Sammelzeit, Dealwert – plus nächste Schritte.</p>
               <div id="resultTransferHint" class="result-info-card">
                 <strong>Transferhinweis</strong>
                 <p>Die Transferdetails erscheinen hier nach der Berechnung.</p>
               </div>
               <div class="tool-actions">
-                <button class="btn btn-secondary" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button>
+                <button class="btn btn-secondary" type="button" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button>
               </div>
             </div>
           </aside>
