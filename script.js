@@ -907,13 +907,13 @@ async function berechneMilesPlaner() {
               <div class="value value-small">${escapeHtml(data.cash || "—")}</div>
             </div>
 
-    <div class="result-item total-savings">
-      <div class="label">Gesamtersparnis</div>
-      <div class="value">${escapeHtml(savingsDisplay)}</div>
-      <div class="value-note">
-        Differenz zwischen geschätztem Cashpreis und Award-Zuzahlung.
+              <div class="result-item total-savings">
+              <div class="label">Gesamtersparnis</div>
+              <div class="value">${escapeHtml(savingsDisplay)}</div>
+              <div class="value-note">
+              Differenz zwischen geschätztem Cashpreis und Award-Zuzahlung.
+            </div>
           </div>
-        </div>
 
         <div class="result-section">
           <h3>Annahmen &amp; Hinweise</h3>
