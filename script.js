@@ -660,29 +660,18 @@ function buildAffiliateBox(programmName, fehlendTarget, progressPercent, cfg, sc
     </div>
   `;
 }
-
+// --- (bleibender Code unverändert bis zum JSON-Empfang) ---
 async function berechneMilesPlaner() {
   clearValidationUI();
-
   const resultBox = $("result");
-  if (!resultBox) {
-    alert("Ergebnisbereich nicht gefunden."); // letzter Fallback
-    return;
-  }
+  if (!resultBox) return;
 
   const payload = collectPayload();
   const errors = validatePayload(payload);
-
-  if (errors.length > 0) {
-    showValidationErrors(errors);
-    return;
-  }
+  if (errors.length > 0) { showValidationErrors(errors); return; }
 
   const calcBtn = $("calcButton");
-  if (calcBtn) {
-    calcBtn.disabled = true;
-    calcBtn.textContent = "Berechne…";
-  }
+  if (calcBtn) { calcBtn.disabled = true; calcBtn.textContent = "Berechne…"; }
 
   zeigeErgebnisView();
   resultBox.innerHTML = "<p>Berechne…</p>";
@@ -693,296 +682,165 @@ async function berechneMilesPlaner() {
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify(payload)
     });
-
     if (!response.ok) throw new Error("HTTP-Fehler: " + response.status);
 
     const data = await response.json();
-    if (data.status === "error") throw new Error(data.message || "Unbekannter Fehler aus Apps Script");
+    if (data.status === "error") throw new Error(data.message || "Unbekannter Fehler");
 
     const programmName = payload.programm || "Programm";
     const cfg = getProgramConfig(programmName);
-
     const scenarioKey = data.scenario || payload.szenario || "realistisch";
     const scenarioLabel = data.scenarioLabel || getScenarioLabel(scenarioKey);
     const scenarioMeta = getScenarioMeta(scenarioKey);
 
-    const personenTotal = clampInt(payload.personen, 1, 8);
-    const infants = clampInt(payload.infants0_1, 0, 8);
-    const seatsNeeded = Math.max(1, personenTotal - infants);
-
+    const persons = Number(payload.personen) || 1;
+    const infants = Number(payload.infants0_1) || 0;
+    const seatsNeeded = Math.max(1, persons - infants);
     const fehlendValue = extractNumber(data.fehlend);
     const monateValue = extractNumber(data.monate);
 
-    // Reisezeitpunkt aus Eingabe ableiten (für Ampel/Timing)
-    const year = clampInt(payload.reisejahr, 2026, 2100);
+    // Ampel-Klassifikation
+    const year = Number(payload.reisejahr) || new Date().getFullYear();
     const monthIndex = parseGermanMonth(payload.reisemonat);
-    const travelDate = (monthIndex === null) ? null : new Date(year, monthIndex, 1);
-
-    const now = new Date();
-    const monthsUntilTravel = travelDate ? diffMonths(now, travelDate) : NaN;
-
-    const flexDays = clampInt(payload.flexDays, 0, 99);
+    const travelDate = (monthIndex !== null) ? new Date(year, monthIndex, 1) : null;
+    const monthsUntilTravel = travelDate ? diffMonths(new Date(), travelDate) : NaN;
+    const flexDays = Number(payload.flexDays) || 0;
     const splitBooking = payload.splitBooking === "1";
     const travelTime = payload.reisezeit;
+    const ampel = classifyAmpel({monthsToGoal: monateValue, monthsUntilTravel, seatsNeeded, travelTime, flexDays, splitBooking});
 
-    const ampel = classifyAmpel({
-      monthsToGoal: monateValue,
-      monthsUntilTravel,
-      seatsNeeded,
-      travelTime,
-      flexDays,
-      splitBooking
-    });
-
+    // Affiliate-Box (falls nötig)
     const affiliateBoxHtml = buildAffiliateBox(programmName, fehlendValue, extractNumber(data.progressBonus), cfg, scenarioKey);
 
+    // PLankarten (Nächste Schritte)
     const planCards = `
       <div class="result-section">
-        <h3>Nächste Schritte für dein Ergebnis</h3>
+        <h3>Nächste Schritte</h3>
         <div class="result-grid">
           <div class="result-item">
             <div class="label">Sammelrate erhöhen</div>
-            <div class="value value-small">
-              Wenn dir noch viele Punkte fehlen, zählt vor allem „mehr pro Monat“.
-            </div>
-            <div class="value-note">
-              <a href="/miles-planer/meilen-sammeln/">Zum Meilen-sammeln-Guide</a>
-            </div>
+            <div class="value-small">Mehr Punkte pro Monat verkürzt die Lücke.</div>
+            <div class="value-note"><a href="/miles-planer/meilen-sammeln/">Zum Sammel-Guide</a></div>
           </div>
-
           <div class="result-item">
             <div class="label">Einmaliger Boost</div>
-            <div class="value value-small">
-              Ein Bonus/Transferaktion kann deine Sammelzeit stark verkürzen – besonders bei größerer Lücke.
-            </div>
-            <div class="value-note">
-              Siehe Empfehlungen unten (falls verfügbar).
-            </div>
+            <div class="value-small">Starke Bonusaktionen können deine Lücke spürbar verkleinern.</div>
+            <div class="value-note">Siehe Empfehlungen unten.</div>
           </div>
-
           <div class="result-item">
-            <div class="label">Verfügbarkeit erhöhen</div>
-            <div class="value value-small">
-              Für ${escapeHtml(String(seatsNeeded))} Plätze ist Flexibilität oft der Schlüssel (Alternative Airports, Split-Booking, Datumspuffer).
-            </div>
-            <div class="value-note">
-              <a href="/miles-planer/meilen-business-class/">Tipps zur Buchbarkeit</a>
-            </div>
+            <div class="label">Verfügbarkeit</div>
+            <div class="value-small">Bei ${escapeHtml(String(seatsNeeded))} Reisenden hilft Flexibilität (Datum, Flughafen, Split) am meisten.</div>
+            <div class="value-note"><a href="/miles-planer/meilen-business-class/">Tipps zur Buchbarkeit</a></div>
           </div>
         </div>
-      </div>
-    `;
+      </div>`;
 
-    // **Gesamtersparnis berechnen** (Euro-Differenz zwischen Cashpreis und Award-Zuzahlung)
-    let savingsDisplay = "—";
-    if (data.cash && data.taxes && !String(data.cash).includes("⚠") && !String(data.taxes).includes("⚠")) {
-      try {
-        const cashMatch = String(data.cash).match(/~([\d.,]+)\s*€\s*p\.P\./);
-        const awardMatch = String(data.cash).match(/\|\s*~([\d.,]+)\s*€\s*p\.P/);
-        const totalMatch = String(data.taxes).match(/\(~([\d.,]+)\s*€\s*für/);
-        if (cashMatch) {
-          const cashPP = parseFloat(cashMatch[1].replace(/\./g, "").replace(",", "."));
-          if (!Number.isNaN(cashPP)) {
-            const totalCash = cashPP * personenTotal;
-            let awardTotal = NaN;
-            if (totalMatch) {
-              awardTotal = parseFloat(totalMatch[1].replace(/\./g, "").replace(",", "."));
-            } else if (awardMatch) {
-              const awardPP = parseFloat(awardMatch[1].replace(/\./g, "").replace(",", "."));
-              if (!Number.isNaN(awardPP)) {
-                awardTotal = awardPP * personenTotal;
-              }
-            }
-            if (!Number.isNaN(totalCash) && !Number.isNaN(awardTotal)) {
-              const totalSavings = Math.round(totalCash - awardTotal);
-              if (Number.isFinite(totalSavings)) {
-                savingsDisplay = formatEuro(totalSavings);
-              }
-            }
-          }
-        }
-      } catch (e) {
-        console.error("Gesamtersparnis Berechnung fehlgeschlagen:", e);
-      }
-    }
-
-    // Primärer Ergebnis-Output (Ampel + Kennzahlen + Details)
+    // Ergebnis-GUI zusammenbauen
     resultBox.innerHTML = `
-      <div class="result-card">
-
-        <div class="tool-card scenario-box">
-          <div class="result-section">
-            <div class="label">Szenario</div>
-            <span class="scenario-badge ${escapeHtml(scenarioMeta.badgeClass)}">${escapeHtml(scenarioLabel)}</span>
-            <div class="scenario-headline">${escapeHtml(scenarioMeta.headline)}</div>
-            <div class="value-note">${escapeHtml(scenarioMeta.text)}</div>
-          </div>
-        </div>
-
-        <div class="decision-card decision-card-${escapeHtml(ampel.key)}">
-          <div class="decision-badge">${escapeHtml(ampel.badge)} ${escapeHtml(ampel.title)}</div>
-          <h3 class="decision-title">${escapeHtml(ampel.text)}</h3>
-          <p class="decision-text">
-            Ziel: <strong>${escapeHtml(payload.ziel)}</strong> · Klasse: <strong>${escapeHtml(payload.reiseklasse)}</strong> · Reisende: <strong>${escapeHtml(payload.personen)}</strong>
-          </p>
-
-          <div class="decision-mini-grid">
-            <div class="decision-mini-item">
-              <span class="label">Fehlende Punkte</span>
-              <strong>${escapeHtml(!Number.isNaN(fehlendValue) ? `${formatPoints(fehlendValue)} ${programmName}` : (data.fehlend || "—"))}</strong>
-            </div>
-            <div class="decision-mini-item">
-              <span class="label">Sammeldauer</span>
-              <strong>${escapeHtml(formatDurationMonths(monateValue) || data.monate || "—")}</strong>
-            </div>
-            <div class="decision-mini-item">
-              <span class="label">Reise geplant</span>
-              <strong>${escapeHtml(data.reise || `${payload.reisemonat} ${payload.reisejahr}`)}</strong>
-            </div>
-          </div>
-        </div>
-
-        ${planCards}
-
+      <div class="tool-card scenario-box">
         <div class="result-section">
-          <h3>Deine Kennzahlen</h3>
-          <div class="result-grid">
-            <div class="result-item">
-              <div class="label">Bestand heute (${escapeHtml(cfg.punktelabel || "Meilen / Punkte")})</div>
-              <div class="value">${escapeHtml(data.bestand || "")}</div>
-            </div>
-            <div class="result-item">
-              <div class="label">Zielbedarf</div>
-              <div class="value">${escapeHtml(data.zielbedarf || "")}</div>
-              <div class="value-note">
-                Hinweis: Tabellen-/Schätzwert; tatsächliche Werte können je nach Airline/Regelwerk variieren.
-              </div>
-            </div>
-            <div class="result-item">
-              <div class="label">Ziel erreicht ca.</div>
-              <div class="value value-small">${escapeHtml(data.zielErreicht || "")}</div>
-            </div>
-            <div class="result-item">
-              <div class="label">Transferannahme</div>
-              <div class="value value-small">${escapeHtml(buildTransferInfo(cfg, scenarioKey))}</div>
-            </div>
-            <div class="result-metric tile total-savings">
-              <div class="metric-value">${escapeHtml(savingsDisplay)}</div>
-              <div class="metric-label">Gesamtersparnis</div>
-            </div>
+          <div class="label">Szenario</div>
+          <span class="scenario-badge ${escapeHtml(scenarioMeta.badgeClass)}">${escapeHtml(scenarioLabel)}</span>
+          <div class="scenario-headline">${escapeHtml(scenarioMeta.headline)}</div>
+          <div class="value-note">${escapeHtml(scenarioMeta.text)}</div>
+        </div>
+      </div>
+
+      <div class="decision-card decision-card-${escapeHtml(ampel.key)}">
+        <div class="decision-badge">${escapeHtml(ampel.badge)} ${escapeHtml(ampel.title)}</div>
+        <h3 class="decision-title">${escapeHtml(ampel.text)}</h3>
+        <p class="decision-text">
+          Ziel: <strong>${escapeHtml(payload.ziel)}</strong> · Klasse: <strong>${escapeHtml(payload.reiseklasse)}</strong> · Reisende: <strong>${escapeHtml(payload.personen)}</strong>
+        </p>
+        <div class="decision-mini-grid">
+          <div class="decision-mini-item">
+            <span class="label">Fehlende Punkte</span>
+            <strong>${escapeHtml(!isNaN(fehlendValue) ? `${formatPoints(fehlendValue)} ${programmName}` : (data.fehlend||"—"))}</strong>
+          </div>
+          <div class="decision-mini-item">
+            <span class="label">Sammeldauer</span>
+            <strong>${escapeHtml(formatDurationMonths(monateValue) || data.monate||"—")}</strong>
+          </div>
+          <div class="decision-mini-item">
+            <span class="label">Reise geplant</span>
+            <strong>${escapeHtml(data.reise || `${payload.reisemonat} ${payload.reisejahr}`)}</strong>
           </div>
         </div>
+      </div>
 
-        ${affiliateBoxHtml}
+      ${planCards}
 
-        <div class="result-section">
-          <h3>Sammelfortschritt</h3>
-          <div class="result-grid">
-            <div class="result-item">
-              <div class="label">Fortschritt heute</div>
-              <div class="value value-small">${escapeHtml(data.progress || "")}</div>
-              ${buildProgressBar(extractNumber(data.progress))}
-            </div>
-            <div class="result-item">
-              <div class="label">Fortschritt inkl. Bonus/Transfer</div>
-              <div class="value value-small">${escapeHtml(data.progressBonus || "")}</div>
-              ${buildProgressBar(extractNumber(data.progressBonus))}
-            </div>
+      <div class="result-section">
+        <h3>Deine Kennzahlen</h3>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Bestand heute</div>
+            <div class="value">${escapeHtml(data.bestand||"—")}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Zielbedarf</div>
+            <div class="value">${escapeHtml(data.zielbedarf||"—")}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Ziel erreicht ca.</div>
+            <div class="value value-small">${escapeHtml(data.zielErreicht||"—")}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Gesamtersparnis</div>
+            <div class="value value-small"><span id="ersparnis">—</span> €</div>
           </div>
         </div>
+      </div>
 
-        <div class="result-section">
-          <h3>Deal &amp; Kosten</h3>
-          <div class="value-note">
-            Steuern/Gebühren/Zuschläge können bei Award Flights zusätzlich anfallen; echte Buchung kann abweichen.
+      ${affiliateBoxHtml}
+
+      <div class="result-section">
+        <h3>Deal &amp; Kosten</h3>
+        <div class="value-note">
+          Steuern/Gebühren können beim Award-Flug extra anfallen; exakte Preise variieren.
+        </div>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Deal</div>
+            <div class="value">${escapeHtml(data.deal||"—")}</div>
           </div>
-          <div class="result-grid">
-            <div class="result-item">
-              <div class="label">Deal</div>
-              <div class="value value-small">${escapeHtml(data.deal || "—")}</div>
-            </div>
-            <div class="result-item">
-              <div class="label">Award-Zuzahlung</div>
-              <div class="value value-small">${escapeHtml(data.taxes || "—")}</div>
-            </div>
-            <div class="result-item">
-              <div class="label">Cashpreis</div>
-              <div class="value value-small">${escapeHtml(data.cash || "—")}</div>
-            </div>
+          <div class="result-item">
+            <div class="label">Award-Zuzahlung</div>
+            <div class="value">${escapeHtml(data.taxes||"—")}</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Cashpreis</div>
+            <div class="value">${escapeHtml(data.cash||"—")}</div>
           </div>
         </div>
+      </div>
 
-        <div class="result-section">
-          <h3>Annahmen &amp; Hinweise</h3>
-          <div class="result-info-card">
-            <strong>Familienregeln</strong>
-            <p>
-              Wenn du Kinder/Babys angegeben hast, gelten je nach Programm besondere Regeln (z. B. Kinderermäßigungen).
-              Prüfe vor der Buchung die offiziellen Bedingungen.
-            </p>
-          </div>
-          <div class="result-info-card">
-            <strong>Verfügbarkeit</strong>
-            <p>
-              Besonders bei Ferien/Fixdaten und mehreren Plätzen ist Verfügbarkeit häufig der Engpass.
-              Flexibilität (Datum/Abflughafen/Split) erhöht die Chancen.
-            </p>
-          </div>
+      <div class="result-section">
+        <h3>Annahmen &amp; Hinweise</h3>
+        <div class="result-info-card">
+          <strong>Familienregeln</strong>
+          <p>Bei Kindern/Babys gelten je nach Programm besondere Regeln (z.B. Kinder-Ermäßigung). Prüfe vor der Buchung die Bedingungen.</p>
         </div>
-
+        <div class="result-info-card">
+          <strong>Verfügbarkeit</strong>
+          <p>Gerade bei Ferien und mehreren Plätzen ist Verfügbarkeit oft der Engpass. Flexibilität (Datum, Abflughafen, Split) verbessert die Chancen.</p>
+        </div>
       </div>
     `;
+    // Werte in Kacheln einfügen
+    $("bestand").textContent = data.bestand || "—";
+    $("zielbedarf").textContent = data.zielbedarf || "—";
+    $("zielErreicht").textContent = data.zielErreicht || "—";
+    // Gesamtersparnis: aus data.cash extrahieren (Achtung: Text enthält 'Ersparnis ~X € gesamt')
+    const ersMatch = data.cash.match(/Ersparnis\s*~\s*([0-9\.\,]+)\s*€/);
+    $("ersparnis").textContent = ersMatch ? ersMatch[1] : "—";
+    $("ersparnis").textContent += " €";  // Währungszeichen anfügen
 
     updatePointsLabels();
   } catch (error) {
-    resultBox.innerHTML = `
-      <div class="result-info-card">
-        <strong>Fehler: ${escapeHtml(error.message)}</strong>
-        <p>Bitte prüfe die Apps-Script-Web-App, die Sheet-Verknüpfung und die Szenario-Zuordnung.</p>
-      </div>
-    `;
+    resultBox.innerHTML = `<div class="result-info-card"><strong>Fehler: ${escapeHtml(error.message)}</strong><p>Bitte überprüfe die Berechnungs-API und Datenverbindung.</p></div>`;
     console.error(error);
   } finally {
-    const calcBtn = $("calcButton");
-    if (calcBtn) {
-      calcBtn.disabled = false;
-      calcBtn.textContent = "Jetzt berechnen";
-    }
+    if (calcBtn) { calcBtn.disabled = false; calcBtn.textContent = "Jetzt berechnen"; }
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  fillFallbackDropdowns();
-
-  const watched = ["ziel","personen","reiseklasse","reisezeit","reisemonat","reisejahr","programm","szenario"];
-  watched.forEach((id) => {
-    const el = $(id);
-    if (el) {
-      el.addEventListener("change", updateFormFlow);
-      el.addEventListener("input", updateFormFlow);
-    }
-  });
-
-  // Clear inline field style on edit
-  const clearOnEdit = ["bestandAktuell","transferBestand","geplanterBonus","monatlicheSammelrate","kinder2_11","infants0_1"];
-  clearOnEdit.forEach((id) => {
-    const el = $(id);
-    if (!el) return;
-    el.addEventListener("input", () => el.classList.remove("field-invalid"));
-  });
-
-  const programm = $("programm");
-  if (programm) programm.addEventListener("change", updatePointsLabels);
-
-  const form = $("milesForm");
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      berechneMilesPlaner();
-    });
-  }
-
-  updatePointsLabels();
-  updateFormFlow();
-  ladeDropdowns();
-});
