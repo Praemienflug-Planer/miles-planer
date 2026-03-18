@@ -3,331 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prämienflug Rechner</title>
-  <meta name="description" content="Prämienflug für 1–8 Personen planen: Meilenbedarf, Sammellücke, Sammelzeit und Dealwert berechnen.">
-  <link rel="stylesheet" href="/miles-planer/styles.css">
+  <title>Prämienflug-Rechner</title>
+  <link rel="stylesheet" href="/miles-planer/style.css">
 </head>
-
 <body>
 
-<header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="/miles-planer/">Prämienflug-Planer</a>
+  <header>
+    <h1>Prämienflug-Rechner</h1>
+  </header>
 
-    <nav class="main-nav">
-      <a href="/miles-planer/rechner/">Rechner</a>
-      <a href="/miles-planer/meilen-business-class/">Business Class</a>
-      <a href="/miles-planer/meilen-thailand/">Thailand</a>
-      <a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a>
-      <a href="/miles-planer/kontakt.html">Kontakt</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <section class="section">
-    <div class="container">
-
-      <!-- INPUT VIEW -->
-      <div id="inputView" class="tool-view active">
-        <form id="milesForm" class="tool-layout" novalidate>
-
-          <div class="tool-main">
-
-            <div class="tool-card">
-              <div class="section-head compact-head">
-                <p class="eyebrow">Prämienflug Rechner</p>
-                <h2>Prämienflug planen (Familien &amp; Gruppen)</h2>
-                <p>
-                  Der Rechner zeigt dir Meilenbedarf, Sammellücke, Sammelzeit und eine Ampel-Einschätzung
-                  – plus konkrete nächste Schritte für dein Ergebnis.
-                </p>
-              </div>
-
-              <div class="step-grid">
-
-                <section id="step-ziel" class="step-card active">
-                  <div class="step-number">1</div>
-                  <div class="step-content">
-                    <h3>Ziel</h3>
-                    <select id="ziel" required></select>
-                  </div>
-                </section>
-
-                <section id="step-personen" class="step-card">
-                  <div class="step-number">2</div>
-                  <div class="step-content">
-                    <h3>Reisende</h3>
-
-                    <label class="sr-only" for="personen">Anzahl Reisende</label>
-                    <select id="personen" required>
-                      <option value="">Bitte wählen</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                    </select>
-
-                    <div class="form-grid two-col" style="margin-top:12px;">
-                      <div class="field-group">
-                        <label for="kinder2_11">Kinder (2–11)</label>
-                        <input id="kinder2_11" type="number" min="0" max="8" value="0" inputmode="numeric">
-                        <div class="value-note">
-                          Optional. Bei Miles &amp; More gibt es teils 25% Meilenrabatt für Kinder.
-                        </div>
-                      </div>
-
-                      <div class="field-group">
-                        <label for="infants0_1">Babys (0–1, ohne Sitz)</label>
-                        <input id="infants0_1" type="number" min="0" max="8" value="0" inputmode="numeric">
-                        <div class="value-note">
-                          Optional. Wird nur berücksichtigt, wenn das Programm passende Regeln hat.
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </section>
-
-                <section id="step-reiseklasse" class="step-card">
-                  <div class="step-number">3</div>
-                  <div class="step-content">
-                    <h3>Reiseklasse</h3>
-                    <select id="reiseklasse" required></select>
-                  </div>
-                </section>
-
-                <section id="step-reisezeit" class="step-card">
-                  <div class="step-number">4</div>
-                  <div class="step-content">
-                    <h3>Reisezeit</h3>
-                    <select id="reisezeit" required></select>
-                  </div>
-                </section>
-
-                <section id="step-reisemonat" class="step-card">
-                  <div class="step-number">5</div>
-                  <div class="step-content">
-                    <h3>Reisemonat</h3>
-                    <select id="reisemonat" required></select>
-                  </div>
-                </section>
-
-                <section id="step-reisejahr" class="step-card">
-                  <div class="step-number">6</div>
-                  <div class="step-content">
-                    <h3>Reisejahr</h3>
-                    <select id="reisejahr" required>
-                      <option value="">Bitte Reisejahr wählen</option>
-                      <option value="2026">2026</option>
-                      <option value="2027">2027</option>
-                      <option value="2028">2028</option>
-                      <option value="2029">2029</option>
-                      <option value="2030">2030</option>
-                    </select>
-                  </div>
-                </section>
-
-                <section id="step-programm" class="step-card">
-                  <div class="step-number">7</div>
-                  <div class="step-content">
-                    <h3>Programm</h3>
-                    <select id="programm" required></select>
-                  </div>
-                </section>
-
-              </div>
-            </div>
-
-            <div class="points-row">
-
-              <div id="step-punkte" class="tool-card points-main-card">
-                <div class="section-head compact-head">
-                  <p class="eyebrow">Punktestand</p>
-                  <h2>Bestand, Boost &amp; Sammelrate</h2>
-                  <p class="value-note">
-                    Gib Werte ein, die du realistisch erreichst. Szenario hilft dir beim Einplanen von Puffer.
-                  </p>
-                </div>
-
-                <div class="form-grid two-col">
-                  <div class="field-group">
-                    <label id="labelBestandAktuell" for="bestandAktuell">Aktueller Bestand</label>
-                    <input id="bestandAktuell" type="number" placeholder="z. B. 120000" inputmode="numeric">
-                  </div>
-
-                  <div class="field-group">
-                    <label id="labelTransferBestand" for="transferBestand">Transferfähiger Bestand</label>
-                    <input id="transferBestand" type="number" placeholder="z. B. 40000" inputmode="numeric">
-                  </div>
-
-                  <div class="field-group">
-                    <label id="labelGeplanterBonus" for="geplanterBonus">Geplanter Bonus</label>
-                    <input id="geplanterBonus" type="number" placeholder="z. B. 50000" inputmode="numeric">
-                  </div>
-
-                  <div class="field-group">
-                    <label id="labelMonatlicheSammelrate" for="monatlicheSammelrate">Monatliche Sammelrate</label>
-                    <input id="monatlicheSammelrate" type="number" placeholder="z. B. 5000" inputmode="numeric">
-                  </div>
-                </div>
-
-                <div class="scenario-switch-wrap">
-                  <label class="scenario-label" for="szenario">Szenario</label>
-                  <select id="szenario">
-                    <option value="best">Best Case</option>
-                    <option value="realistisch" selected>Realistisch</option>
-                    <option value="konservativ">Konservativ</option>
-                  </select>
-                </div>
-
-                <div class="section-head compact-head" style="margin-top:16px;">
-                  <p class="eyebrow">Buchbarkeit</p>
-                  <h2>Flexibilität (optional)</h2>
-                  <p class="value-note">
-                    Für 3+ Personen ist Flexibilität oft wichtiger als Meilen. Je flexibler, desto bessere Chancen auf mehrere Plätze.
-                  </p>
-                </div>
-
-                <div class="form-grid two-col">
-                  <div class="field-group">
-                    <label for="flexDays">Datum-Flexibilität</label>
-                    <select id="flexDays">
-                      <option value="0" selected>Fixe Daten</option>
-                      <option value="3">±3 Tage</option>
-                      <option value="7">±7 Tage</option>
-                      <option value="28">Flexibel (2–4 Wochen)</option>
-                    </select>
-                  </div>
-
-                  <div class="field-group">
-                    <label>
-                      <input id="altAirports" type="checkbox">
-                      Alternative Abflughäfen ok
-                    </label>
-                    <div class="value-note">Erhöht in der Praxis oft die Verfügbarkeit.</div>
-                  </div>
-
-                  <div class="field-group">
-                    <label>
-                      <input id="splitBooking" type="checkbox" checked>
-                      Split-Booking ok (z. B. 2+2 Plätze)
-                    </label>
-                    <div class="value-note">Hilft besonders bei Familien &amp; Ferien.</div>
-                  </div>
-                </div>
-
-                <div id="formErrors" class="result-info-card" style="display:none;" role="alert" aria-live="polite"></div>
-
-                <div class="tool-actions">
-                  <button id="calcButton" class="btn btn-primary" type="submit">
-                    Jetzt berechnen
-                  </button>
-                </div>
-
-                <p class="footer-text" style="margin-top:10px;">
-                  Hinweis: Für die Berechnung werden deine Eingaben an den Berechnungsdienst übertragen. Details siehe Datenschutz.
-                </p>
-              </div>
-
-              <div class="tool-card points-transfer-card">
-                <div class="info-card">
-                  <div class="info-icon">💡</div>
-                  <div class="info-content" id="pointsHelper">
-                    <strong>Transferhinweis</strong>
-                    <p>Wähle zuerst ein Programm, dann siehst du den passenden Transferfaktor.</p>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-          <aside class="tool-sidebar">
-            <div class="tool-card sticky-card">
-              <p class="eyebrow">So funktioniert es</p>
-              <h3>In wenigen Minuten zum Plan</h3>
-              <ul class="plain-list">
-                <li>Ziel, Reisende und Klasse wählen</li>
-                <li>Reisezeitraum festlegen</li>
-                <li>Bestand + Sammelrate eingeben</li>
-                <li>Ergebnis: Ampel, Lücke, Zeitplan &amp; nächste Schritte</li>
-              </ul>
-            </div>
-          </aside>
-
-        </form>
-      </div>
-
-      <!-- RESULT VIEW -->
-      <div id="resultView" class="tool-view">
-        <div class="tool-layout">
-
-          <div class="tool-main">
-            <div class="tool-card result-wrapper">
-              <div id="result"></div>
-            </div>
-          </div>
-
-          <aside class="tool-sidebar">
-            <div class="tool-card sticky-card">
-              <p class="eyebrow">Ergebnis</p>
-              <h3>Deine Planung</h3>
-              <p class="footer-text">
-                Ampel, Lücke, Sammelzeit, Dealwert – plus konkrete nächste Schritte.
-              </p>
-
-              <div id="resultTransferHint" class="result-info-card">
-                <strong>Transferhinweis</strong>
-                <p>Die Transferdetails werden nach der Berechnung hier angezeigt.</p>
-              </div>
-
-              <div class="tool-actions">
-                <button class="btn btn-secondary" type="button" onclick="zurueckZuEingaben()">
-                  Zurück zu den Eingaben
-                </button>
-              </div>
-            </div>
-          </aside>
-
+  <div class="tool-container">
+    <!-- Hauptinhalt -->
+    <div class="tool-main">
+      <!-- Reiseparameter Eingabefelder -->
+      <div class="travel-fields">
+        <div class="col">
+          <p>
+            <label for="ziel">Ziel:</label><br>
+            <select id="ziel" name="ziel">
+              <option value="" disabled selected>Reiseziel auswählen</option>
+            </select>
+          </p>
+          <p>
+            <label for="personen">Personen:</label><br>
+            <input id="personen" name="personen" type="number" min="1" value="1">
+          </p>
+          <p>
+            <label for="reisemonat">Reisemonat:</label><br>
+            <select id="reisemonat" name="reisemonat">
+              <option value="" disabled selected>Monat</option>
+              <option value="Januar">Januar</option>
+              <option value="Februar">Februar</option>
+              <option value="März">März</option>
+              <option value="April">April</option>
+              <option value="Mai">Mai</option>
+              <option value="Juni">Juni</option>
+              <option value="Juli">Juli</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="Oktober">Oktober</option>
+              <option value="November">November</option>
+              <option value="Dezember">Dezember</option>
+            </select>
+          </p>
+          <p>
+            <label for="reisejahr">Reisejahr:</label><br>
+            <select id="reisejahr" name="reisejahr">
+              <option value="" disabled selected>Jahr</option>
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+              <option value="2028">2028</option>
+              <option value="2029">2029</option>
+              <option value="2030">2030</option>
+            </select>
+          </p>
+        </div>
+        <div class="col">
+          <p>
+            <label for="programm">Programm:</label><br>
+            <select id="programm" name="programm">
+              <option value="" disabled selected>Programm auswählen</option>
+            </select>
+          </p>
+          <p>
+            <label for="reiseklasse">Reiseklasse:</label><br>
+            <select id="reiseklasse" name="reiseklasse">
+              <option value="" disabled selected>Klasse auswählen</option>
+            </select>
+          </p>
+          <p>
+            <label for="reisezeit">Reisezeit:</label><br>
+            <select id="reisezeit" name="reisezeit">
+              <option value="Nebensaison">Nebensaison (Off-Peak)</option>
+              <option value="Hauptsaison">Hauptsaison (Ferien)</option>
+            </select>
+          </p>
         </div>
       </div>
 
-    </div>
-  </section>
-</main>
+      <!-- Punkte-Stand und Sammelrate -->
+      <div class="points-card">
+        <h2>Punktestand</h2>
+        <p>
+          <label for="bestandAktuell">Aktueller Bestand:</label><br>
+          <input id="bestandAktuell" name="bestandAktuell" type="number" value="0">
+        </p>
+        <p>
+          <label for="transferBestand">Transferfähiger Bestand:</label><br>
+          <input id="transferBestand" name="transferBestand" type="number" value="0">
+        </p>
+        <p>
+          <label for="geplanterBonus">Geplanter Bonus:</label><br>
+          <input id="geplanterBonus" name="geplanterBonus" type="number" value="0">
+        </p>
+        <p>
+          <label for="monatlicheSammelrate">Monatliche Sammelrate:</label><br>
+          <input id="monatlicheSammelrate" name="monatlicheSammelrate" type="number" value="0">
+        </p>
+      </div>
 
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <div class="brand footer-brand">Prämienflug-Planer</div>
-      <p class="footer-text">Planungstool für Prämienflüge.</p>
+      <!-- Berechnen Button -->
+      <p>
+        <button id="calculate" type="button">Berechnen</button>
+      </p>
+
+      <!-- Ergebnisbereich -->
+      <div id="resultView" style="display:none;">
+        <!-- Ergebnis-Header mit Zusammenfassung -->
+        <div id="resultHeader">
+          <h2 id="headline"></h2>
+          <p id="subline"></p>
+          <p id="statusText"></p>
+          <p id="risiken"></p>
+        </div>
+        <!-- Kennzahlen (2x2 Kachel-Grid) -->
+        <div class="kpi-section">
+          <div class="kpi-row">
+            <div class="kpi-tile">
+              <span class="kpi-label">Bestand</span><br>
+              <span id="bestand" class="kpi-value"></span>
+            </div>
+            <div class="kpi-tile">
+              <span class="kpi-label">Zielbedarf</span><br>
+              <span id="zielbedarf" class="kpi-value"></span>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-tile">
+              <span class="kpi-label">Ziel erreicht ca.</span><br>
+              <span id="zielErreicht" class="kpi-value"></span>
+            </div>
+            <div class="kpi-tile">
+              <span class="kpi-label">Gesamtersparnis</span><br>
+              <span id="ersparnis" class="kpi-value"></span> <span class="einheit">€</span>
+            </div>
+          </div>
+        </div>
+        <!-- Deal & Kosten Sektion -->
+        <div class="deal-section">
+          <h3>Deal &amp; Kosten</h3>
+          <p id="deal"></p>
+          <p id="taxes"></p>
+          <p id="cash"></p>
+          <p id="betterProgramHint"></p>
+        </div>
+      </div>
     </div>
 
-    <div>
-      <h4>Navigation</h4>
-      <ul class="footer-links">
-        <li><a href="/miles-planer/rechner/">Rechner</a></li>
-        <li><a href="/miles-planer/meilen-business-class/">Business Class</a></li>
-        <li><a href="/miles-planer/meilen-thailand/">Thailand</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h4>Rechtliches</h4>
-      <ul class="footer-links">
-        <li><a href="/miles-planer/impressum.html">Impressum</a></li>
-        <li><a href="/miles-planer/datenschutz.html">Datenschutz</a></li>
-      </ul>
+    <!-- Rechte Sidebar -->
+    <div class="tool-sidebar">
+      <div class="sidebar-section">
+        <h2>So funktioniert es</h2>
+        <ul>
+          <li>Wähle dein Reiseziel, Vielfliegerprogramm und die Reiseklasse aus.</li>
+          <li>Gib deinen aktuellen Meilen-/Punktestand sowie ggf. transferierbare Punkte, geplante Bonuspunkte und deine monatliche Sammelrate an.</li>
+          <li>Klicke auf <strong>Berechnen</strong>, um zu sehen, wie viele Meilen dir noch fehlen und bis wann du dein Sammelziel voraussichtlich erreichst.</li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h2>💡 Transferhinweis</h2>
+        <p id="transferInfo"></p>
+        <p>Transferpartner-Punkte (z.&nbsp;B. Payback) werden im angegebenen Verhältnis in das gewählte Programm übertragen. Beachte, dass ein Transfer zu Miles &amp; More meist in Blöcken (z.&nbsp;B. 2000&nbsp;Punkte) erfolgt.</p>
+      </div>
     </div>
   </div>
-</footer>
 
-<script src="/miles-planer/script.js"></script>
+  <footer>
+    <p>Alle Angaben ohne Gewähr. Die tatsächlichen Meilenpreise können variieren und sind erst bei der Buchung verbindlich.</p>
+  </footer>
+
+  <script src="/miles-planer/script.js"></script>
 </body>
 </html>
