@@ -713,7 +713,13 @@ async function berechneMilesPlaner() {
     });
 
     const affiliateBoxHtml = buildAffiliateBox(programmName, fehlendValue, extractNumber(data.progressBonus), cfg, scenarioKey);
-
+<div class="input-container"><!-- Linke Spalte: Eingabe -->
+  ... <!-- Bestand, Boost & Sammelrate Fields -->
+</div>
+<div class="info-container"><!-- Rechte Spalte: Info -->
+  <div class="how-it-works">So funktioniert’s: ...</div>
+  <div class="transfer-hint">Hinweis: … (Transferbonus/Payback etc.)</div>
+</div>
     const planCards = `
       <div class="result-section">
         <h3>Nächste Schritte für dein Ergebnis</h3>
