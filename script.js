@@ -772,40 +772,15 @@ async function berechneMilesPlaner() {
         </div>
       </div>
     `;
+const personenTotal = Number(data.personen || 0);
 
-    // **Gesamtersparnis berechnen** (Euro-Differenz zwischen Cashpreis und Award-Zuzahlung)
-    let savingsDisplay = "—";
-    if (data.cash && data.taxes && !String(data.cash).includes("⚠") && !String(data.taxes).includes("⚠")) {
-      try {
-        const cashMatch = String(data.cash).match(/~([\d.,]+)\s*€\s*p\.P\./);
-        const awardMatch = String(data.cash).match(/\|\s*~([\d.,]+)\s*€\s*p\.P/);
-        const totalMatch = String(data.taxes).match(/\(~([\d.,]+)\s*€\s*für/);
-        if (cashMatch) {
-          const cashPP = parseFloat(cashMatch[1].replace(/\./g, "").replace(",", "."));
-          if (!Number.isNaN(cashPP)) {
-            const totalCash = cashPP * personenTotal;
-            let awardTotal = NaN;
-            if (totalMatch) {
-              awardTotal = parseFloat(totalMatch[1].replace(/\./g, "").replace(",", "."));
-            } else if (awardMatch) {
-              const awardPP = parseFloat(awardMatch[1].replace(/\./g, "").replace(",", "."));
-              if (!Number.isNaN(awardPP)) {
-                awardTotal = awardPP * personenTotal;
-              }
-            }
-            if (!Number.isNaN(totalCash) && !Number.isNaN(awardTotal)) {
-              const totalSavings = Math.round(totalCash - awardTotal);
-              if (Number.isFinite(totalSavings)) {
-                savingsDisplay = formatEuro(totalSavings);
-              }
-            }
-          }
-        }
-      } catch (e) {
-        console.error("Gesamtersparnis Berechnung fehlgeschlagen:", e);
-      }
-    }
+const totalCash = Number(data.cash_total || 0);
+const awardTotal = Number(data.award_total || 0);
+const totalSavings = Number(data.savings_total || 0);
 
+const savingsDisplay = Number.isFinite(totalSavings)
+  ? formatEuro(totalSavings)
+  : "—";
     // Primärer Ergebnis-Output (Ampel + Kennzahlen + Details)
     resultBox.innerHTML = `
       <div class="result-card">
@@ -887,12 +862,6 @@ async function berechneMilesPlaner() {
             </div>
           </div>
         </div>
-const personenTotal = Number(data.personen || 0);
-
-const totalCash = Number(data.cash_total || 0);
-const awardTotal = Number(data.award_total || 0);
-const totalSavings = Number(data.savings_total || 0);
-
         <div class="result-section deal-section">
   <h3>Deal &amp; Kosten</h3>
   <div class="value-note deal-intro">
