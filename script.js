@@ -888,32 +888,50 @@ async function berechneMilesPlaner() {
           </div>
         </div>
 
-        <div class="result-section">
-          <h3>Deal &amp; Kosten</h3>
-          <div class="value-note">
-            Steuern/Gebühren/Zuschläge können bei Award Flights zusätzlich anfallen; echte Buchung kann abweichen.
-          </div>
-          <div class="result-grid">
-            <div class="result-item">
-              <div class="label">Deal</div>
-              <div class="value value-small">${escapeHtml(data.deal || "—")}</div>
-            </div>
-            <div class="result-item">
-              <div class="label">Award-Zuzahlung</div>
-              <div class="value value-small">${escapeHtml(data.taxes || "—")}</div>
-            </div>
-            <div class="result-item">
-              <div class="label">Cashpreis</div>
-              <div class="value value-small">${escapeHtml(data.cash || "—")}</div>
-            </div>
+        <div class="result-section deal-section">
+  <h3>Deal &amp; Kosten</h3>
+  <div class="value-note deal-intro">
+    Die Bewertung basiert auf der effektiven Ersparnis pro eingesetzter Meile.
+  </div>
 
-              <div class="result-item total-savings">
-              <div class="label">Gesamtersparnis</div>
-              <div class="value">${escapeHtml(savingsDisplay)}</div>
-              <div class="value-note">
-              Differenz zwischen geschätztem Cashpreis und Award-Zuzahlung.
-            </div>
-          </div>
+  <div class="result-grid deal-grid">
+    <div class="result-item deal-tile">
+      <div class="deal-icon">💶</div>
+      <div class="label">Cashpreis gesamt</div>
+      <div class="value">${Number.isFinite(totalCash) ? escapeHtml(formatEuro(totalCash)) : "—"}</div>
+      <div class="value-note">
+        ${Number.isFinite(totalCash) ? `≈ ${escapeHtml(formatEuro(totalCash / personenTotal))} pro Person` : "Geschätzter Barpreis"}
+      </div>
+    </div>
+
+    <div class="result-item deal-tile">
+      <div class="deal-icon">💳</div>
+      <div class="label">Award-Zuzahlung gesamt</div>
+      <div class="value">${Number.isFinite(awardTotal) ? escapeHtml(formatEuro(awardTotal)) : "—"}</div>
+      <div class="value-note">
+        ${Number.isFinite(awardTotal) ? `≈ ${escapeHtml(formatEuro(awardTotal / personenTotal))} pro Person` : "Steuern, Gebühren und Zuschläge"}
+      </div>
+    </div>
+
+    <div class="result-item deal-tile total-savings">
+      <div class="deal-icon">✨</div>
+      <div class="label">Gesamtersparnis</div>
+      <div class="value">${Number.isFinite(totalSavings) ? escapeHtml(formatEuro(totalSavings)) : "—"}</div>
+      <div class="value-note">
+        Cashpreis gesamt minus Award-Zuzahlung
+      </div>
+    </div>
+
+    <div class="result-item deal-tile deal-highlight">
+      <div class="deal-badge">${escapeHtml(data.deal || "—")}</div>
+      <div class="label">Wert pro Meile</div>
+      <div class="value">${escapeHtml(data.cpm || "—")}</div>
+      <div class="value-note">
+        Effektive Ersparnis pro eingesetzter Meile
+      </div>
+    </div>
+  </div>
+</div>
 
         <div class="result-section">
           <h3>Annahmen &amp; Hinweise</h3>
