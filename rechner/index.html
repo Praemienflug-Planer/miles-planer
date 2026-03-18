@@ -25,6 +25,7 @@
           <!-- INPUT VIEW -->
           <div id="inputView" class="tool-view active">
             <div class="tool-layout">
+              <form id="milesForm">
               <div class="tool-main">
                 <div class="tool-card">
                   <div class="section-head compact-head">
@@ -129,33 +130,46 @@
         <input id="monatlicheSammelrate" type="number" placeholder="z. B. 5000" />
       </div>
     </div>
-    <div class="scenario-switch-wrap">
-      <label class="scenario-label" for="szenario">Szenario</label>
-      <select id="szenario">
-        <option value="best">Best Case</option>
-        <option value="realistisch" selected>Realistisch</option>
-        <option value="konservativ">Konservativ</option>
-      </select>
-      </form>
-    </div>
-    <div id="formErrors" class="form-status error" style="display:none;"></div>
-    <div class="tool-actions">
-     <button id="calcButton" type="submit" class="btn btn-primary">Jetzt berechnen</button>
-    </div>
-  </div>
-  <div class="tool-card points-transfer-card">
-    <div class="info-card">
-      <div class="info-icon">💡</div>
-      <div class="info-content" id="pointsHelper">
-        <strong>Transferhinweis</strong>
-        <p>Bei <strong>PAYBACK → Miles &amp; More</strong> rechnet der Rechner konservativ mit <strong>1:1</strong>.</p>
-        <p>In der Praxis gibt es regelmäßig <strong>Transferboni von etwa 15–30 %</strong>. Dadurch kann sich deine Sammelzeit deutlich verkürzen.</p>
-      </div>
-    </div>
-  </div>
+<div class="scenario-switch-wrap">
+  <label class="scenario-label" for="szenario">Szenario</label>
+  <select id="szenario">
+    <option value="best">Best Case</option>
+    <option value="realistisch" selected>Realistisch</option>
+    <option value="konservativ">Konservativ</option>
+  </select>
+</div>
+
+<div id="formErrors" class="form-status error" style="display:none;"></div>
+
+<div class="tool-actions">
+  <button id="calcButton" type="submit" class="btn btn-primary">Jetzt berechnen</button>
 </div>
               </div>
-              <aside class="tool-sidebar">
+
+              <div class="tool-card points-transfer-card">
+                <div class="info-card">
+                  <div class="info-icon">💡</div>
+                  <div class="info-content" id="pointsHelper">
+                    <strong>Transferhinweis</strong>
+                    <p>
+                      Bei <strong>PAYBACK → Miles &amp; More</strong> rechnet der Rechner konservativ mit
+                      <strong>1:1</strong>.
+                    </p>
+                    <p>
+                      In der Praxis gibt es regelmäßig
+                      <strong>Transferboni von etwa 15–30 %</strong>.
+                      Dadurch kann sich deine Sammelzeit deutlich verkürzen.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </form>
+
+          <aside class="tool-sidebar">
                 <div class="tool-card sticky-card">
                   <p class="eyebrow">So funktioniert es</p>
                   <h3>In 4 Schritten zum Ergebnis</h3>
