@@ -866,10 +866,7 @@ async function berechneMilesPlaner() {
               <div class="label">Transferannahme</div>
               <div class="value value-small">${escapeHtml(buildTransferInfo(cfg, scenarioKey))}</div>
             </div>
-            <div class="result-metric tile total-savings">
-              <div class="metric-value">${escapeHtml(savingsDisplay)}</div>
-              <div class="metric-label">Gesamtersparnis</div>
-            </div>
+
           </div>
         </div>
 
@@ -908,6 +905,10 @@ async function berechneMilesPlaner() {
             <div class="result-item">
               <div class="label">Cashpreis</div>
               <div class="value value-small">${escapeHtml(data.cash || "—")}</div>
+            </div>
+              <div class="result-metric tile total-savings">
+              <div class="metric-value">${escapeHtml(savingsDisplay)}</div>
+              <div class="metric-label">Gesamtersparnis</div>
             </div>
           </div>
         </div>
