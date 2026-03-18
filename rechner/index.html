@@ -3,136 +3,137 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prämienflug-Rechner</title>
+  <title>Prämienflug Rechner</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container nav">
-      <div class="brand">Prämienflug-Rechner</div>
+      <div class="brand">Prämienflug Planer</div>
+      <nav class="main-nav">
+        <a href="index.html">Rechner</a>
+        <a href="business-class.html">Business Class</a>
+        <a href="thailand.html">Thailand</a>
+        <a href="newyork.html">New York</a>
+        <a href="meilen-sammeln.html">Meilen sammeln</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
     </div>
   </header>
 
-  <main class="container">
-    <section class="section">
+  <main class="container section">
+    <div id="inputView" class="tool-view active">
       <div class="tool-layout">
-        <div class="tool-main">
+        <div class="tool-main input-container">
           <div class="tool-card">
-            <h2>Reisedaten</h2>
+            <h2>Deine Reisedaten</h2>
             <div class="form-grid two-col">
-              <div class="field-group">
+              <div>
+                <label for="reisejahr">Reisejahr</label>
+                <select id="reisejahr">
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                </select>
+              </div>
+              <div>
                 <label for="ziel">Ziel</label>
                 <select id="ziel">
                   <option value="">Bitte wählen</option>
                   <option value="thailand">Thailand</option>
                   <option value="newyork">New York</option>
+                  <option value="tokio">Tokio</option>
                 </select>
               </div>
-              <div class="field-group">
-                <label for="personen">Personen</label>
-                <input id="personen" type="number" value="1" min="1" />
-              </div>
-              <div class="field-group">
-                <label for="monat">Reisemonat</label>
-                <select id="monat">
-                  <option>Januar</option><option>Februar</option><option>März</option>
-                  <option>April</option><option>Mai</option><option>Juni</option>
-                  <option>Juli</option><option>August</option><option>September</option>
-                  <option>Oktober</option><option>November</option><option>Dezember</option>
-                </select>
-              </div>
-              <div class="field-group">
-                <label for="jahr">Reisejahr</label>
-                <select id="jahr"></select>
-              </div>
-              <div class="field-group">
-                <label for="programm">Programm</label>
-                <select id="programm">
-                  <option value="">Bitte wählen</option>
-                  <option>Miles & More</option>
-                </select>
-              </div>
-              <div class="field-group">
-                <label for="klasse">Reiseklasse</label>
-                <select id="klasse">
-                  <option>Economy</option><option>Premium Economy</option>
-                  <option>Business</option><option>First</option>
-                </select>
-              </div>
-              <div class="field-group">
-                <label for="zeit">Reisezeit</label>
-                <select id="zeit">
-                  <option>Hauptsaison</option><option>Nebensaison</option>
-                </select>
-              </div>
-              <div class="field-group">
-                <label for="flex">Flexibilität</label>
-                <select id="flex">
-                  <option value="">Bitte wählen</option>
-                  <option value="0">Keine</option>
-                  <option value="3">+/- 3 Tage</option>
-                  <option value="7">+/- 1 Woche</option>
-                </select>
-              </div>
+            </div>
+            <div class="form-grid">
+              <label for="programm">Vielfliegerprogramm</label>
+              <select id="programm">
+                <option value="lh">Lufthansa Miles & More</option>
+                <option value="sq">Singapore KrisFlyer</option>
+              </select>
+              <label for="punktestand">Punktestand</label>
+              <input type="number" id="punktestand" placeholder="z. B. 85000" />
             </div>
           </div>
 
           <div class="tool-card">
-            <h2>Punktestand</h2>
-            <div class="form-grid two-col">
-              <div class="field-group">
-                <label for="bestand">Aktueller Bestand</label>
-                <input id="bestand" type="number" value="" />
-              </div>
-              <div class="field-group">
-                <label for="transfer">Transferfähiger Bestand</label>
-                <input id="transfer" type="number" value="" />
-              </div>
-              <div class="field-group">
-                <label for="bonus">Geplanter Bonus</label>
-                <input id="bonus" type="number" value="" />
-              </div>
-              <div class="field-group">
-                <label for="rate">Monatliche Sammelrate</label>
-                <input id="rate" type="number" value="" />
-              </div>
-            </div>
-            <button class="btn btn-primary" onclick="berechne()">Jetzt berechnen</button>
+            <h3>Flexibilität</h3>
+            <label><input type="checkbox" id="flex-datum" /> ±3 Tage beim Abflug</label><br />
+            <label><input type="checkbox" id="flex-airport" /> Auch andere Flughäfen</label><br />
+            <label><input type="checkbox" id="splitbooking" /> Split Booking erlaubt</label>
+          </div>
+
+          <div class="tool-actions">
+            <button class="btn btn-primary" onclick="berechneErgebnis()">Jetzt berechnen</button>
           </div>
         </div>
 
-        <div class="tool-sidebar">
-          <div class="tool-card">
-            <h3>So funktioniert es</h3>
-            <ul>
-              <li>Ziel, Reisende und Klasse wählen</li>
-              <li>Reisezeitraum festlegen</li>
-              <li>Punktestand eingeben</li>
-              <li>Ergebnis: Ampel, Lücke, Zeitplan</li>
-            </ul>
+        <div class="tool-sidebar info-container">
+          <div class="info-card">
+            <strong>So funktioniert es</strong>
+            <p>Wähle dein Ziel, Programm und Punktestand. Wir zeigen dir passende Deals.</p>
           </div>
-          <div class="tool-card">
-            <h3>Transferhinweis</h3>
-            <p>Wähle ein Programm aus, um den passenden Hinweis zu sehen.</p>
+          <div class="info-card">
+            <strong>Transferhinweis</strong>
+            <p>Transfers können je nach Programm unterschiedlich lange dauern.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <div id="resultView" class="tool-view">
+      <div class="result-wrapper">
+        <div class="result-topbar">
+          <h2>Dein Ergebnis</h2>
+          <button class="btn btn-secondary" onclick="zurueckZurEingabe()">Neue Berechnung</button>
+        </div>
+
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="label">Zielbedarf</div>
+            <div class="value" id="zielbedarf">–</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Lücke</div>
+            <div class="value" id="luecke">–</div>
+          </div>
+          <div class="result-item">
+            <div class="label">Deal-Bewertung</div>
+            <div class="value" id="dealwert">–</div>
+          </div>
+          <div class="result-item total-savings">
+            <div class="label">Ersparnis in €</div>
+            <div class="value" id="ersparnis">–</div>
+          </div>
+        </div>
+
+        <div class="affiliate-box">
+          <h4>Programme & Kreditkarten</h4>
+          <p>Jetzt Punkte sammeln mit attraktiven Partnerprogrammen:</p>
+          <div class="affiliate-links">
+            <a href="#" class="affiliate-card">American Express Gold</a>
+            <a href="#" class="affiliate-card">Miles & More Kreditkarte</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <script>
-    // Füge Jahresauswahl automatisch hinzu
-    const jahrSelect = document.getElementById("jahr");
-    const currentYear = new Date().getFullYear();
-    for (let i = 0; i < 10; i++) {
-      const opt = document.createElement("option");
-      opt.value = opt.text = currentYear + i;
-      jahrSelect.appendChild(opt);
+    function berechneErgebnis() {
+      document.getElementById('inputView').classList.remove('active');
+      document.getElementById('resultView').classList.add('active');
+
+      // Beispielhafte Werte – echte Logik muss ergänzt werden
+      document.getElementById('zielbedarf').textContent = '112.000';
+      document.getElementById('luecke').textContent = '27.000';
+      document.getElementById('dealwert').textContent = '✅ Sehr gut';
+      document.getElementById('ersparnis').textContent = '480 €';
     }
 
-    function berechne() {
-      // Beispielaktion: Ersetze durch Navigationslogik oder Ergebnisausgabe
-      alert("Berechnung gestartet - Implementierung folgt");
+    function zurueckZurEingabe() {
+      document.getElementById('resultView').classList.remove('active');
+      document.getElementById('inputView').classList.add('active');
     }
   </script>
 </body>
