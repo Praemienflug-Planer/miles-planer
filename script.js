@@ -887,6 +887,11 @@ async function berechneMilesPlaner() {
             </div>
           </div>
         </div>
+const personenTotal = Number(data.personen || 0);
+
+const totalCash = Number(data.cash_total || 0);
+const awardTotal = Number(data.award_total || 0);
+const totalSavings = Number(data.savings_total || 0);
 
         <div class="result-section deal-section">
   <h3>Deal &amp; Kosten</h3>
