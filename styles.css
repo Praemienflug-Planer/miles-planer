@@ -159,4 +159,82 @@
   .result-grid {
     grid-template-columns: 1fr;
   }
+  /* Ergebnisansicht stabilisieren */
+.result-wrapper {
+  padding: 24px;
+}
+
+.result-card {
+  display: grid;
+  gap: 22px;
+}
+
+.result-section {
+  display: grid;
+  gap: 10px;
+}
+
+.result-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+}
+
+.result-item {
+  background: #fbfdff !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  padding: 16px !important;
+}
+
+.result-item .label {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.result-item .value {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.result-item .value-small {
+  font-size: 20px;
+}
+
+.value-note {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.progress-wrap {
+  margin-top: 12px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: #e5edf9;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 999px;
+}
+
+.total-savings {
+  background: #eefaf2 !important;
+  border-color: #bbf7d0 !important;
+}
+
+@media (max-width: 768px) {
+  .result-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
 }
