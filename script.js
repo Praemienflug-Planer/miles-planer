@@ -811,6 +811,10 @@ async function berechneMilesPlaner() {
               <div class="label">Transferannahme</div>
               <div class="value value-small">${escapeHtml(buildTransferInfo(cfg, scenarioKey))}</div>
             </div>
+            <div class="result-metric tile total-savings">
+  <div class="metric-value">{{ totalSavings }} €</div>
+  <div class="metric-label">Gesamtersparnis</div>
+</div>
           </div>
         </div>
 
