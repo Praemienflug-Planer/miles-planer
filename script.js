@@ -885,34 +885,34 @@ const dealDisplay = data.deal ? String(data.deal) : "—";
     <div class="result-item deal-tile">
       <div class="deal-icon">💶</div>
       <div class="label">Cashpreis gesamt</div>
-      <div class="value">${Number.isFinite(totalCash) ? escapeHtml(formatEuro(totalCash)) : "—"}</div>
+      <div class="value">${escapeHtml(cashTotalDisplay)}</div>
       <div class="value-note">
-        ${Number.isFinite(totalCash) ? `≈ ${escapeHtml(formatEuro(totalCash / personenTotal))} pro Person` : "Geschätzter Barpreis"}
+        ${cashPerPersonDisplay !== "—" ? `≈ ${escapeHtml(cashPerPersonDisplay)} pro Person` : "Geschätzter Barpreis"}
       </div>
     </div>
 
     <div class="result-item deal-tile">
       <div class="deal-icon">💳</div>
       <div class="label">Award-Zuzahlung gesamt</div>
-      <div class="value">${Number.isFinite(awardTotal) ? escapeHtml(formatEuro(awardTotal)) : "—"}</div>
+      <div class="value">${escapeHtml(awardTotalDisplay)}</div>
       <div class="value-note">
-        ${Number.isFinite(awardTotal) ? `≈ ${escapeHtml(formatEuro(awardTotal / personenTotal))} pro Person` : "Steuern, Gebühren und Zuschläge"}
+       ${awardPerPersonDisplay !== "—" ? `≈ ${escapeHtml(awardPerPersonDisplay)} pro Person` : "Steuern, Gebühren und Zuschläge"}
       </div>
     </div>
 
     <div class="result-item deal-tile total-savings">
       <div class="deal-icon">✨</div>
       <div class="label">Gesamtersparnis</div>
-      <div class="value">${Number.isFinite(totalSavings) ? escapeHtml(formatEuro(totalSavings)) : "—"}</div>
+      <div class="value">${escapeHtml(savingsDisplay)}</div>
       <div class="value-note">
         Cashpreis gesamt minus Award-Zuzahlung
       </div>
     </div>
 
     <div class="result-item deal-tile deal-highlight">
-      <div class="deal-badge">${escapeHtml(data.deal || "—")}</div>
+      <div class="deal-badge">${escapeHtml(dealDisplay)}</div>
       <div class="label">Wert pro Meile</div>
-      <div class="value">${escapeHtml(data.cpm || "—")}</div>
+     <div class="value">${escapeHtml(cpmDisplay)}</div>
       <div class="value-note">
         Effektive Ersparnis pro eingesetzter Meile
       </div>
