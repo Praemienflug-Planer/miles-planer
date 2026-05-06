@@ -703,3 +703,64 @@ body { margin: 0; font-family: Arial, sans-serif; color: var(--text); background
   }
 }     
 }
+/* SEO-Artikel Layout: Content + Sidebar sauber trennen */
+.seo-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 28px;
+  align-items: start;
+}
+
+.seo-content {
+  min-width: 0;
+}
+
+.seo-sidebar {
+  min-width: 0;
+  width: 100%;
+}
+
+.seo-sidebar .seo-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.seo-card {
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+}
+
+/* Tabellen dürfen den Content nicht unter die Sidebar schieben */
+.seo-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.seo-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Sticky Sidebar nur auf Desktop */
+@media (min-width: 901px) {
+  .seo-sidebar .sticky-card {
+    position: sticky;
+    top: 96px;
+  }
+}
+
+/* Auf Tablet/Mobile: alles untereinander */
+@media (max-width: 900px) {
+  .seo-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .seo-sidebar {
+    width: 100%;
+  }
+
+  .seo-sidebar .sticky-card {
+    position: static;
+  }
+}
