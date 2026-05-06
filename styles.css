@@ -764,3 +764,23 @@ body { margin: 0; font-family: Arial, sans-serif; color: var(--text); background
     position: static;
   }
 }
+.legal-page {
+  max-width: 900px;
+}
+
+.legal-page .seo-card {
+  padding: 34px;
+}
+
+.legal-page h2 {
+  margin-top: 28px;
+  margin-bottom: 10px;
+}
+
+.legal-page h2:first-child {
+  margin-top: 0;
+}
+
+.legal-page p {
+  line-height: 1.75;
+}
