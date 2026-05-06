@@ -784,3 +784,30 @@ body { margin: 0; font-family: Arial, sans-serif; color: var(--text); background
 .legal-page p {
   line-height: 1.75;
 }
+/* Rechte SEO-Sidebar als kompletter Block sticky machen */
+@media (min-width: 901px) {
+  .seo-sidebar {
+    position: sticky;
+    top: 96px;
+    align-self: start;
+  }
+
+  .seo-sidebar .sticky-card {
+    position: static;
+    top: auto;
+  }
+}
+
+/* Abstand zwischen den rechten Kästchen */
+.seo-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Mobil/tablet: nicht sticky, sondern normal untereinander */
+@media (max-width: 900px) {
+  .seo-sidebar {
+    position: static;
+  }
+}
