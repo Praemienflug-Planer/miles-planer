@@ -422,3 +422,73 @@ if (form) {
     trackEvent("calculator_submit", { program: $("programm")?.value || "" });
   });
 }
+// Hilfsfunktion zum Füllen eines <select> mit Optionen
+function populateSelect(id, values, placeholder) {
+  const select = document.getElementById(id);
+  if (!select) return;
+  select.innerHTML = ''; 
+  const opt = document.createElement('option');
+  opt.value = ""; opt.textContent = placeholder;
+  select.appendChild(opt);
+  values.forEach(val => {
+    const option = document.createElement('option');
+    option.value = val;
+    option.textContent = val;
+    select.appendChild(option);
+  });
+}
+
+// Optional: Fallback-Optionen, falls API ausfällt
+function fillFallbackDropdowns() {
+  populateSelect("ziel", ["Dubai","Japan","Malediven","Südafrika","Thailand","USA East","USA West"], "Bitte Ziel wählen");
+  populateSelect("reiseklasse", ["Economy","Premium Economy","Business"], "Bitte Reiseklasse wählen");
+  populateSelect("reisezeit", ["Nebensaison","Hauptreisezeit","Ferien"], "Bitte Reisezeit wählen");
+  populateSelect("reisemonat", ["Januar","Februar", /*...*/ "Dezember"], "Bitte Reisemonat wählen");
+  populateSelect("programm", ["Miles & More","Avios","Flying Blue","KrisFlyer"], "Bitte Programm wählen");
+}
+
+// Funktion zum Laden der Dropdown-Daten von Google Sheets
+async function ladeDropdowns() {
+  try {
+    const response = await fetch(`${API_URL}?action=options`);
+    if (!response.ok) throw new Error("Dropdown-API nicht erreichbar");
+    const data = await response.json();
+    // Ersetze Fallback-Meta durch API-Daten (z.B. Punktelabel)
+    PROGRAM_META = data.programMeta || PROGRAM_META;
+    // Befülle die Select-Felder
+    populateSelect("ziel", data.ziele || [], "Bitte Ziel wählen");
+    populateSelect("reiseklasse", data.klassen || [], "Bitte Reiseklasse wählen");
+    populateSelect("reisezeit", data.reisezeiten || [], "Bitte Reisezeit wählen");
+    populateSelect("reisemonat", data.monate || [], "Bitte Reisemonat wählen");
+    populateSelect("programm", data.programme || [], "Bitte Programm wählen");
+  } catch (err) {
+    console.error("Dropdown-Laden fehlgeschlagen:", err);
+    fillFallbackDropdowns();
+  }
+  updateFormFlow();
+}
+
+// DOMContentLoaded anpassen:
+document.addEventListener("DOMContentLoaded", () => {
+  // Bestehende Initialisierungen:
+  updatePointsLabels();
+  updateFormFlow();
+  // Fügt das Laden der Dropdowns hinzu:
+  ladeDropdowns();
+  // (Tracking ggf. entfernen oder definieren)
+});
+// NEU: Funktionen zur Dropdown-Befüllung
+function populateSelect(id, values, placeholder) {
+  const select = document.getElementById(id);
+  if (!select) return;
+  select.innerHTML = '';
+  const opt = document.createElement('option');
+  opt.value = ""; opt.textContent = placeholder;
+  select.appendChild(opt);
+  values.forEach(val => {
+    const option = document.createElement('option');
+    option.value = val;
+    option.textContent = val;
+    select.appendChild(option);
+  });
+}
