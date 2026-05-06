@@ -492,3 +492,46 @@ function populateSelect(id, values, placeholder) {
     select.appendChild(option);
   });
 }
+// --- Dropdowns laden (neu) ---
++ async function ladeDropdowns() {
++   try {
++     const response = await fetch(`${API_URL}?action=options`);
++     const data = await response.json();
++     populateSelect("ziel", data.ziele || [], "Bitte Ziel wählen");
++     populateSelect("reiseklasse", data.klassen || [], "Bitte Reiseklasse wählen");
++     populateSelect("reisezeit", data.reisezeiten || [], "Bitte Reisezeit wählen");
++     populateSelect("reisemonat", data.monate || [], "Bitte Reisemonat wählen");
++     populateSelect("programm", data.programme || [], "Bitte Programm wählen");
++   } catch (error) {
++     console.error("Dropdown-API-Fehler:", error);
++   }
++ }
+
+// --- Event-Handler beim Laden der Seite (anpassen) ---
+ document.addEventListener("DOMContentLoaded", () => {
+-  updatePointsLabels();
+-  updateFormFlow();
+-  setupTracking(); // ggf. entfernen, falls undefined
++  updatePointsLabels();
++  updateFormFlow();
++  ladeDropdowns();  // Daten vom Backend laden
+ });
+
+// --- Formular abschicken (unverändert) ---
+ const form = $("milesForm");
+ if (form) {
+   form.addEventListener("submit", (e) => {
+     e.preventDefault();
+     berechneMilesPlaner();
+-    trackEvent("calculator_submit", { program: $("programm")?.value || "" });
++    // trackEvent kann entfernt werden oder nur aufrufen, wenn definiert
+   });
+ }
+
+// --- Restliche Funktionen (updatePointsLabels, updateFormFlow, berechneMilesPlaner, etc.) bleiben gleich ---
+
+// --- Entfernen / Auskommentieren:**
+// Die doGet/doPost-Methoden und das Google Apps Script gehören NICHT in die Client-Seite.
+// Entferne oder verschiebe folgenden Block (Apps-Script-Code) komplett:
+- function doGet(e) { ... }
+- function doPost(e) { ... }
