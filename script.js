@@ -83,6 +83,65 @@ function updatePointsLabels() {
   if (labelRate) labelRate.textContent = `Monatliche Sammelrate (${cfg.transferquelle || "Transferpartner"} Punkte)`;
 }
 
+// Dropdowns füllen mit Daten aus Sheets
+async function ladeDropdowns() {
+  try {
+    const res = await fetch(`${API_URL}?action=options`);
+    if (!res.ok) throw new Error("Fehler beim Laden der Optionen");
+    const data = await res.json();
+    if (data.status !== "ok") throw new Error(data.message || "Fehler in Options-API");
+    PROGRAM_META = data.programMeta || PROGRAM_META;
+    populateSelect("ziel", data.ziele || [], "Bitte Ziel wählen");
+    populateSelect("reiseklasse", data.klassen || [], "Bitte Reiseklasse wählen");
+    populateSelect("reisezeit", data.reisezeiten || [], "Bitte Reisezeit wählen");
+    populateSelect("reisemonat", data.monate || [], "Bitte Reisemonat wählen");
+    populateSelect("programm", data.programme || [], "Bitte Programm wählen");
+  } catch (e) {
+    console.error("Dropdown-Optionen konnten nicht geladen werden:", e);
+  }
+}
+
+// Utility: Select mit Optionen füllen
+function populateSelect(id, options, placeholder) {
+  const sel = $(id);
+  if (!sel) return;
+  sel.innerHTML = `<option value="">${placeholder}</option>`;
+  options.forEach(val => {
+    const opt = document.createElement("option");
+    opt.value = val;
+    opt.textContent = val;
+    sel.appendChild(opt);
+  });
+}
+
+// Markiere Felder als ungültig
+function markInvalid(fieldId) {
+  const el = $(fieldId);
+  if (!el) return;
+  el.classList.add("field-invalid");
+  el.setAttribute("aria-invalid", "true");
+}
+function showValidationErrors(errors) {
+  const box = $("formErrors");
+  if (!box) return;
+  box.innerHTML = "<strong>Fehler:</strong><ul>" + errors.map(e => `<li>${e.message}</li>`).join("") + "</ul>";
+  box.style.display = "block";
+  if (errors[0]) $(errors[0].field)?.focus();
+}
+function clearValidationUI() {
+  $("formErrors").style.display = "none";
+  ["ziel","personen","reiseklasse","reisezeit","reisemonat","reisejahr","programm",
+   "bestandAktuell","transferBestand","geplanterBonus","monatlicheSammelrate",
+   "kinder2_11","infants0_1"].forEach(id => {
+    const el = $(id);
+    if (el) {
+      el.classList.remove("field-invalid");
+      el.removeAttribute("aria-invalid");
+    }
+  });
+}
+
+
 // setzt automatischen Schritt-Fortschritt bei Formular-Eingaben
 function setStepActive(id, isActive) {
   const el = $(id);
