@@ -2,59 +2,95 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prämienflug-Planer für Familien | Meilenbedarf, Sammelzeit & Dealwert</title>
-  <meta
-    name="description"
-    content="Plane Prämienflüge für bis zu 8 Personen. Berechne Meilenbedarf, Sammelzeit, fehlende Punkte und den Vergleich zum Cash-Preis."
-  />
-  <link rel="stylesheet" href="styles.css?v=15" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- 1. Title und Beschreibung optimiert (Familien, Meilenrechner als zentrale Keywords) -->
+  <title>Prämienflug-Planer für Familien | Meilenrechner für 2–8 Personen</title>
+  <meta name="description" content="Plane Prämienflüge für bis zu 8 Personen mit unserem kostenlosen Meilenrechner. Berechne Meilenbedarf, Sammellücke und Dealwert in einer Ansicht." />
+  <!-- 2. Canonical und hreflang -->
+  <link rel="canonical" href="https://praemienflug-planer.github.io/miles-planer/" />
+  <link rel="alternate" hreflang="de" href="https://praemienflug-planer.github.io/miles-planer/" />
+  <!-- 3. Open Graph Meta-Tags (Platzhalter für og:image) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="Prämienflug-Planer" />
+  <meta property="og:title" content="Prämienflug-Planer für Familien | Meilenrechner für 2–8 Personen" />
+  <meta property="og:description" content="Plane Prämienflüge für bis zu 8 Personen mit unserem kostenlosen Meilenrechner. Berechne Meilenbedarf, Sammellücke und Dealwert auf einen Blick." />
+  <meta property="og:url" content="https://praemienflug-planer.github.io/miles-planer/" />
+  <meta property="og:image" content="https://praemienflug-planer.github.io/miles-planer/assets/og/og-home.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Prämienflug-Planer für Familien | Meilenrechner für 2–8 Personen" />
+  <meta name="twitter:description" content="Plane Prämienflüge für bis zu 8 Personen mit unserem kostenlosen Meilenrechner." />
+  <meta name="twitter:image" content="https://praemienflug-planer.github.io/miles-planer/assets/og/og-home.jpg" />
+  <!-- 4. JSON-LD für Website und Organisation -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://praemienflug-planer.github.io/miles-planer/#website",
+        "url": "https://praemienflug-planer.github.io/miles-planer/",
+        "name": "Prämienflug-Planer",
+        "inLanguage": "de-DE"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://praemienflug-planer.github.io/miles-planer/#organization",
+        "name": "Prämienflug-Planer",
+        "url": "https://praemienflug-planer.github.io/miles-planer/"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Prämienflug-Planer",
+        "url": "https://praemienflug-planer.github.io/miles-planer/",
+        "applicationCategory": "Travel",
+        "operatingSystem": "Web"
+      }
+    ]
+  }
+  </script>
+  <!-- 5. CSS Preload (kritische Datei) -->
+  <link rel="preload" as="style" href="styles.css?v=16" />
+  <link rel="stylesheet" href="styles.css?v=16" />
 </head>
 <body>
- <header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="/miles-planer/">Prämienflug-Planer</a>
-    <nav class="main-nav">
-      <a href="/miles-planer/rechner/">Rechner</a>
-      <a href="/miles-planer/meilen-business-class/">Business Class Meilen</a>
-      <a href="/miles-planer/meilen-thailand/">Thailand</a>
-      <a href="/miles-planer/amex-meilen-umrechnen/">Amex umrechnen</a>
-      <a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a>
-      <a href="/miles-planer/kontakt.html">Kontakt</a>
-    </nav>
-  </div>
-</header>
+  <!-- 6. Skip-Link für Barrierefreiheit -->
+  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
 
-  <main>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="/miles-planer/" aria-label="Startseite Prämienflug-Planer">Prämienflug-Planer</a>
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="/miles-planer/rechner/">Rechner</a></li>
+          <li><a href="/miles-planer/meilen-business-class/">Business Class Meilen</a></li>
+          <li><a href="/miles-planer/meilen-thailand/">Thailand</a></li>
+          <li><a href="/miles-planer/amex-meilen-umrechnen/">Amex umrechnen</a></li>
+          <li><a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a></li>
+          <li><a href="/miles-planer/kontakt.html">Kontakt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
     <section class="hero">
       <div class="container hero-grid">
         <div>
           <p class="eyebrow">Prämienflug-Planer für Familien</p>
           <h1>Plane Prämienflüge für bis zu 8 Personen</h1>
           <p class="hero-text">
-            Berechne Meilenbedarf, Sammelzeit, Sammellücke und Dealwert in wenigen
-            Sekunden – deutlich mehr als ein normaler Meilenrechner.
+            Berechne Meilenbedarf, Sammellücke und Dealwert für Familienreisen. Unser Tool zeigt,
+            wie viele Punkte du brauchst und ob sich der Prämienflug im Vergleich zum normalen Ticket lohnt.
           </p>
-
           <div class="hero-actions">
-            <a class="btn btn-primary" href="/miles-planer/rechner/">Rechner starten</a>
-            <a class="btn btn-secondary" href="#so-funktioniert-es">So funktioniert es</a>
+            <a class="btn btn-primary" href="/miles-planer/rechner/" data-event="start_calculator">Rechner starten</a>
+            <a class="btn btn-secondary" href="#so-funktioniert-es">Mehr erfahren</a>
           </div>
-
-          <div class="trust-note">
-            Kostenlos nutzbar. Auf einzelnen Seiten können Empfehlungen mit Partnerlinks erscheinen.
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <h2>Was der Planer beantwortet</h2>
-          <ul>
-            <li>Wie viele Meilen brauche ich?</li>
-            <li>Reichen meine aktuellen Punkte?</li>
-            <li>Wie viele fehlen noch?</li>
-            <li>Wie lange dauert das Sammeln?</li>
-            <li>Lohnt sich der Award im Vergleich zum Cash-Preis?</li>
-          </ul>
+          <p class="hero-meta">
+            <!-- 7. Hier wird das aktuelle Datum per JS eingefügt -->
+            Zuletzt aktualisiert: <span id="lastUpdated">...</span>
+          </p>
         </div>
       </div>
     </section>
@@ -65,159 +101,114 @@
           <p class="eyebrow">Warum dieses Tool?</p>
           <h2>Mehr als ein Meilenrechner</h2>
           <p>
-            Die meisten Rechner zeigen nur einen Awardpreis. Der Prämienflug-Planer hilft dir
-            bei der eigentlichen Entscheidung: Ist dein Ziel realistisch erreichbar – und lohnt
-            sich der Flug überhaupt?
+            Der Prämienflug-Planer geht über klassische Meilenrechner hinaus. Er berücksichtigt
+            Gruppengröße, Sammelrate und Echtzeit-Awardwerte, damit du realistisch planen kannst.
           </p>
         </div>
-
         <div class="feature-grid">
           <article class="feature-card">
             <h3>Meilenbedarf</h3>
-            <p>Berechnet den Bedarf pro Person und für die gesamte Reisegruppe.</p>
+            <p>Berechnet den Bedarf pro Person und für die gesamte Gruppe.</p>
           </article>
-
           <article class="feature-card">
             <h3>Sammellücke</h3>
-            <p>Zeigt dir, wie viele Meilen oder Punkte aktuell noch fehlen.</p>
+            <p>Zeigt, wie viele Punkte aktuell noch fehlen.</p>
           </article>
-
           <article class="feature-card">
             <h3>Sammelzeit</h3>
-            <p>Schätzt, wann du dein Ziel mit deiner aktuellen Sammelrate erreichst.</p>
+            <p>Schätzt, wann du dein Ziel mit deiner aktuellen Rate erreichst.</p>
           </article>
-
           <article class="feature-card">
             <h3>Dealwert</h3>
-            <p>Vergleicht Award-Zuzahlung und Cashpreis, damit du bessere Entscheidungen triffst.</p>
+            <p>Vergleicht die Award-Zuzahlung mit dem Barpreis, damit du bessere Entscheidungen triffst.</p>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- 8. Schnelleinstiege -->
     <section class="section alt">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Für wen ist das gedacht?</p>
-          <h2>Besonders hilfreich für Familien</h2>
-          <p>
-            Ein einzelner Business-Class-Sitz ist oft schnell gefunden. Vier Plätze für eine Familie
-            sind eine ganz andere Herausforderung. Genau hier setzt der Prämienflug-Planer an.
-          </p>
+          <p class="eyebrow">Schnelleinstiege</p>
+          <h2>Wähle dein Ziel</h2>
         </div>
-
-        <div class="audience-grid">
-          <div class="audience-card">
-            <h3>Familien mit 2–8 Personen</h3>
-            <p>Plane realistisch statt nur auf den nackten Awardpreis zu schauen.</p>
-          </div>
-          <div class="audience-card">
-            <h3>Membership Rewards Nutzer</h3>
-            <p>Berücksichtige Transferlogik zu Avios, Flying Blue oder KrisFlyer.</p>
-          </div>
-          <div class="audience-card">
-            <h3>Miles & More Nutzer</h3>
-            <p>Prüfe Sammellücke, Zeithorizont und Award-Zuzahlung auf einen Blick.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Weiterführende Inhalte</p>
-          <h2>Beliebte Themen rund um Prämienflüge</h2>
-        </div>
-
         <div class="article-grid">
-          <a class="article-card" href="/miles-planer/meilen-business-class">
-            <h3>Wie viele Meilen braucht man für Business Class?</h3>
-            <p>Einordnung typischer Awardpreise und was Familien beachten sollten.</p>
+          <a class="article-card" href="/miles-planer/meilen-business-class/">
+            <h3>Business Class Meilen</h3>
+            <p>Einordnung typischer Awardpreise und Planung für mehrere Plätze.</p>
           </a>
-
-          <a class="article-card" href="/miles-planer/meilen-thailand">
-            <h3>Wie viele Meilen nach Thailand?</h3>
-            <p>Typische Größenordnungen für Thailand in Premium Economy und Business Class.</p>
+          <a class="article-card" href="/miles-planer/meilen-thailand/">
+            <h3>Meilen nach Thailand</h3>
+            <p>Typische Meilenwerte für Thailand in Premium Economy und Business.</p>
           </a>
-          <a class="article-card" href="/miles-planer/amex-meilen-umrechnen">
-            <h3>Amex Punkte in Meilen umrechnen</h3>
+          <a class="article-card" href="/miles-planer/amex-meilen-umrechnen/">
+            <h3>Amex Punkte umrechnen</h3>
             <p>Wie Membership Rewards Punkte zu Airline-Meilen werden.</p>
           </a>
-
-          <a class="article-card" href="/miles-planer/meilen-sammeln">
-            <h3>Wie sammelt man schnell Meilen?</h3>
-            <p>Welche Wege beim Aufbau einer Sammelstrategie besonders wichtig sind.</p>
+          <a class="article-card" href="/miles-planer/meilen-sammeln/">
+            <h3>Meilen sammeln</h3>
+            <p>Strategien und Einstiegstipps für den schnellen Punkteaufbau.</p>
           </a>
-
-          <a class="article-card" href="/miles-planer/praemienfluege-kinder">
-            <h3>Prämienflüge mit Kindern buchen</h3>
+          <a class="article-card" href="/miles-planer/miles-more-tabelle/">
+            <h3>Miles & More Tabelle</h3>
+            <p>Typische Einlösungen und Meilenwerte im Überblick.</p>
+          </a>
+          <a class="article-card" href="/miles-planer/praemienfluege-kinder/">
+            <h3>Prämienflüge mit Kindern</h3>
             <p>Warum Familien anders planen müssen als Einzelreisende.</p>
           </a>
-
-          <a class="article-card" href="/miles-planer/miles-more-tabelle">
-            <h3>Miles & More Meilentabelle</h3>
-            <p>Ein kompakter Überblick über typische Einlösungen und Größenordnungen.</p>
-          </a>
         </div>
       </div>
     </section>
 
-    <section class="section cta-section">
-      <div class="container cta-box">
-        <div>
-          <p class="eyebrow">Jetzt starten</p>
-          <h2>Prämienflug für deine Familie planen</h2>
-          <p>
-            Nutze den Rechner, um Meilenbedarf, Sammelzeit und Dealwert für dein gewähltes
-            Programm direkt zu prüfen.
-          </p>
-        </div>
-        <a class="btn btn-primary" href="/miles-planer/rechner/">Zum Rechner</a>
-      </div>
-    </section>
-
+    <!-- 9. Wichtiger Hinweis (ersetzt Affiliate-Box) -->
     <section class="section legal-note-section">
       <div class="container legal-note">
-        <strong>Hinweis:</strong> Diese Website dient der Information und Planung.
-        Verfügbarkeiten, Zuschläge und Transferverhältnisse können sich ändern.
-        Empfehlungen mit Partnerlinks werden transparent gekennzeichnet.
+        <strong>Hinweis:</strong> Ich nutze selbst verschiedene Karten- und Punkteprogramme und gebe hier
+        ausschließlich meine persönliche Einordnung wieder. Wenn du Fragen zu einer konkreten
+        Karte oder zu Transferwegen hast, kannst du mich über das
+        <a href="/miles-planer/kontakt.html">Kontaktbereich</a> erreichen. Ich gebe keine
+        Finanz-, Steuer- oder Rechtsberatung und mache keine individuellen Produktempfehlungen.
       </div>
     </section>
   </main>
 
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <div class="brand footer-brand">Prämienflug-Planer</div>
-      <p class="footer-text">
-        Planungstool für Prämienflüge mit Fokus auf Familien, Sammellücke und realistische Umsetzbarkeit.
-      </p>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand footer-brand">Prämienflug-Planer</div>
+        <p class="footer-text">
+          Planungstool für Prämienflüge mit Fokus auf Familien, Sammellücke und realistische Umsetzbarkeit.
+        </p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="/miles-planer/rechner/">Rechner</a></li>
+          <li><a href="/miles-planer/meilen-business-class/">Business Class Meilen</a></li>
+          <li><a href="/miles-planer/meilen-thailand/">Thailand</a></li>
+          <li><a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a></li>
+          <li><a href="/miles-planer/kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul class="footer-links">
+          <li><a href="/miles-planer/impressum.html">Impressum</a></li>
+          <li><a href="/miles-planer/datenschutz.html">Datenschutz</a></li>
+          <li><a href="/miles-planer/transparenz.html">Transparenz</a></li>
+        </ul>
+      </div>
     </div>
+  </footer>
 
-    <div>
-      <h4>Navigation</h4>
-      <ul class="footer-links">
-        <li><a href="/miles-planer/rechner/">Rechner</a></li>
-        <li><a href="/miles-planer/meilen-business-class/">Business Class Meilen</a></li>
-        <li><a href="/miles-planer/meilen-thailand/">Thailand</a></li>
-        <li><a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a></li>
-        <li><a href="/miles-planer/kontakt.html">Kontakt</a></li>
-      </ul>
-    </div>
-
-    <div>
-      <h4>Rechtliches</h4>
-      <ul class="footer-links">
-        <li><a href="/miles-planer/impressum.html">Impressum</a></li>
-        <li><a href="/miles-planer/datenschutz.html">Datenschutz</a></li>
-        <li><a href="/miles-planer/transparenz.html">Transparenz</a></li>
-      </ul>
-    </div>
-  </div>
-</footer>
+  <!-- 10. Letzte Aktualisierung per JavaScript setzen -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var today = new Date().toISOString().slice(0, 10);
+      document.getElementById("lastUpdated").textContent = today;
+    });
+  </script>
 </body>
 </html>
-
-
-
