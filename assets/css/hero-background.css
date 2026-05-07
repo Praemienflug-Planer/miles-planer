@@ -7,7 +7,7 @@
    /assets/hero/new-york.png
    /assets/hero/amex.png
    /assets/hero/sammeln.png
-   /assets/hero/contact.png
+   /assets/hero/kontakt.png
    /assets/hero/legal.png
 */
 
@@ -77,7 +77,7 @@
   background-position: center right;
   background-image:
     linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.94) 38%, rgba(245, 247, 251, 0.68) 66%, rgba(245, 247, 251, 0.36) 100%),
-    url('/miles-planer/assets/hero/contact.png');
+    url('/miles-planer/assets/hero/kontakt.png');
 }
 
 .hero-legal {
@@ -137,7 +137,7 @@
   .hero-new-york { --hero-mobile-image: url('/miles-planer/assets/hero/new-york.png'); }
   .hero-amex { --hero-mobile-image: url('/miles-planer/assets/hero/amex.png'); }
   .hero-sammeln { --hero-mobile-image: url('/miles-planer/assets/hero/sammeln.png'); }
-  .hero-contact { --hero-mobile-image: url('/miles-planer/assets/hero/contact.png'); }
+  .hero-contact { --hero-mobile-image: url('/miles-planer/assets/hero/kontakt.png'); }
   .hero-legal { --hero-mobile-image: url('/miles-planer/assets/hero/legal.png'); }
 
   .hero { padding: 64px 0 48px; }
