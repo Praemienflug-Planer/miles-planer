@@ -1,12 +1,16 @@
-/* Hero-Hintergrund für die Startseite */
+/* Hero-Hintergrund für die Startseite
+   Nutzt assets/background.png statt og-home.jpg.
+   Datei muss im Repo unter /assets/background.png liegen.
+*/
 
 .hero {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  background-color: #eef6ff;
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.96) 0%, rgba(245, 247, 251, 0.86) 38%, rgba(245, 247, 251, 0.38) 68%, rgba(245, 247, 251, 0.18) 100%),
-    url('/miles-planer/assets/og/og-home.jpg');
+    linear-gradient(90deg, rgba(245, 247, 251, 0.98) 0%, rgba(245, 247, 251, 0.88) 36%, rgba(245, 247, 251, 0.40) 68%, rgba(245, 247, 251, 0.16) 100%),
+    url('/miles-planer/assets/background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -19,8 +23,8 @@
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.72), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(245, 247, 251, 0.78));
+    radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.70), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(245, 247, 251, 0.72));
 }
 
 .hero .container {
@@ -44,8 +48,8 @@
 @media (max-width: 900px) {
   .hero {
     background-image:
-      linear-gradient(180deg, rgba(245, 247, 251, 0.96) 0%, rgba(245, 247, 251, 0.9) 58%, rgba(245, 247, 251, 0.72) 100%),
-      url('/miles-planer/assets/og/og-home.jpg');
+      linear-gradient(180deg, rgba(245, 247, 251, 0.98) 0%, rgba(245, 247, 251, 0.92) 58%, rgba(245, 247, 251, 0.74) 100%),
+      url('/miles-planer/assets/background.png');
     background-position: center top;
     padding: 64px 0 48px;
   }
