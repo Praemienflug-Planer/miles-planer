@@ -1,0 +1,77 @@
+/* Rechner: einheitliches Layout für Eingabe und Sticky-Hinweise */
+
+/* Der Punktestand-Block soll dieselbe Breite wie der obere Planungsblock haben. */
+.points-row {
+  display: block;
+}
+
+.points-main-card {
+  width: 100%;
+}
+
+/* Transferhinweis sitzt jetzt in der rechten Sticky-Spalte. */
+.sidebar-transfer-hint {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.sidebar-transfer-hint .info-card {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+.sidebar-transfer-hint .info-icon {
+  line-height: 1.4;
+}
+
+.sidebar-transfer-hint strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.sidebar-transfer-hint p {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.65;
+}
+
+/* Einheitlichere Eingabefelder im Punktestand-Block. */
+.points-main-card .form-grid.two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 18px;
+}
+
+.points-main-card .field-group input,
+.points-main-card .scenario-switch-wrap select {
+  width: 100%;
+}
+
+.scenario-switch-wrap {
+  margin-top: 18px;
+  max-width: 360px;
+}
+
+.scenario-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* Mobile bleibt sauber untereinander. */
+@media (max-width: 900px) {
+  .sidebar-transfer-hint {
+    margin-top: 18px;
+  }
+
+  .points-main-card .form-grid.two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .scenario-switch-wrap {
+    max-width: none;
+  }
+}
