@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://praemienflug-planer.github.io/miles-planer/sitemap.xml
