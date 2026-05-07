@@ -2,6 +2,7 @@
    Erwartete Dateien:
    /assets/hero/home.png
    /assets/hero/rechner.png
+   /assets/hero/business.png
 */
 
 .hero,
@@ -34,6 +35,13 @@
   background-image:
     linear-gradient(90deg, rgba(245, 247, 251, 0.98) 0%, rgba(245, 247, 251, 0.92) 42%, rgba(245, 247, 251, 0.72) 68%, rgba(245, 247, 251, 0.50) 100%),
     url('/miles-planer/assets/hero/rechner.png');
+}
+
+.hero-business {
+  background-position: center right;
+  background-image:
+    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.93) 34%, rgba(245, 247, 251, 0.64) 60%, rgba(245, 247, 251, 0.30) 100%),
+    url('/miles-planer/assets/hero/business.png');
 }
 
 .hero::after,
@@ -85,6 +93,10 @@
   .hero-rechner,
   .rechner-hero-bg {
     --hero-mobile-image: url('/miles-planer/assets/hero/rechner.png');
+  }
+
+  .hero-business {
+    --hero-mobile-image: url('/miles-planer/assets/hero/business.png');
   }
 
   .hero {
