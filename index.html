@@ -57,8 +57,8 @@
   }
   </script>
 
-  <link rel="preload" href="/miles-planer/styles.css?v=16" as="style" />
-  <link rel="stylesheet" href="/miles-planer/styles.css?v=16" />
+  <link rel="preload" href="/miles-planer/assets/css/site.css?v=20260507-1" as="style" />
+  <link rel="stylesheet" href="/miles-planer/assets/css/site.css?v=20260507-1" />
   <link rel="stylesheet" href="/miles-planer/assets/css/hero-background.css?v=20260507-2" />
 </head>
 <body>
@@ -95,7 +95,6 @@
             <a class="btn btn-primary" href="/miles-planer/rechner/" data-event="start_calculator">Rechner starten</a>
             <a class="btn btn-secondary" href="#so-funktioniert-es">Mehr erfahren</a>
           </div>
-          <p class="hero-meta">Zuletzt aktualisiert: <span id="lastUpdated">...</span></p>
         </div>
 
         <div class="hero-card">
@@ -184,12 +183,5 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var lastUpdated = document.getElementById("lastUpdated");
-      if (lastUpdated) lastUpdated.textContent = new Date().toISOString().slice(0, 10);
-    });
-  </script>
 </body>
 </html>
