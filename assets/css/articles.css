@@ -14,7 +14,21 @@
 .sidebar-links { display: grid; gap: 12px; }
 .sidebar-links a { color: var(--primary); font-weight: 800; }
 .sidebar-links a:hover { text-decoration: underline; }
-@media (min-width: 901px) { .seo-sidebar .sticky-card { position: sticky; top: 96px; } }
+
+@media (min-width: 901px) {
+  .seo-sidebar {
+    position: sticky;
+    top: 96px;
+    align-self: start;
+    max-height: calc(100vh - 112px);
+    overflow: auto;
+  }
+
+  .seo-sidebar .sticky-card {
+    position: static;
+    top: auto;
+  }
+}
 
 .article-image { margin: 28px 0; text-align: center; }
 .article-image a { display: inline-block; max-width: 100%; }
@@ -26,6 +40,7 @@
 
 @media (max-width: 900px) {
   .seo-layout { grid-template-columns: 1fr; }
-  .seo-sidebar .sticky-card { position: static; top: auto; }
+  .seo-sidebar,
+  .seo-sidebar .sticky-card { position: static; top: auto; max-height: none; overflow: visible; }
   .seo-table { min-width: 620px; }
 }
