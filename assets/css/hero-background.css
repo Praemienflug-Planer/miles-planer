@@ -4,6 +4,9 @@
    /assets/hero/rechner.png
    /assets/hero/business.png
    /assets/hero/thailand.png
+   /assets/hero/new-york.png
+   /assets/hero/amex.png
+   /assets/hero/sammeln.png
 */
 
 .hero,
@@ -50,6 +53,27 @@
   background-image:
     linear-gradient(90deg, rgba(245, 247, 251, 0.98) 0%, rgba(245, 247, 251, 0.88) 34%, rgba(245, 247, 251, 0.52) 62%, rgba(245, 247, 251, 0.22) 100%),
     url('/miles-planer/assets/hero/thailand.png');
+}
+
+.hero-new-york {
+  background-position: center right;
+  background-image:
+    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.92) 35%, rgba(245, 247, 251, 0.58) 63%, rgba(245, 247, 251, 0.24) 100%),
+    url('/miles-planer/assets/hero/new-york.png');
+}
+
+.hero-amex {
+  background-position: center right;
+  background-image:
+    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.94) 38%, rgba(245, 247, 251, 0.66) 66%, rgba(245, 247, 251, 0.34) 100%),
+    url('/miles-planer/assets/hero/amex.png');
+}
+
+.hero-sammeln {
+  background-position: center right;
+  background-image:
+    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.94) 36%, rgba(245, 247, 251, 0.62) 64%, rgba(245, 247, 251, 0.28) 100%),
+    url('/miles-planer/assets/hero/sammeln.png');
 }
 
 .hero::after,
@@ -109,6 +133,18 @@
 
   .hero-thailand {
     --hero-mobile-image: url('/miles-planer/assets/hero/thailand.png');
+  }
+
+  .hero-new-york {
+    --hero-mobile-image: url('/miles-planer/assets/hero/new-york.png');
+  }
+
+  .hero-amex {
+    --hero-mobile-image: url('/miles-planer/assets/hero/amex.png');
+  }
+
+  .hero-sammeln {
+    --hero-mobile-image: url('/miles-planer/assets/hero/sammeln.png');
   }
 
   .hero {
