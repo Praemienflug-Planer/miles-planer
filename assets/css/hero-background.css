@@ -3,6 +3,7 @@
    /assets/hero/home.png
    /assets/hero/rechner.png
    /assets/hero/business.png
+   /assets/hero/thailand.png
 */
 
 .hero,
@@ -42,6 +43,13 @@
   background-image:
     linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.93) 34%, rgba(245, 247, 251, 0.64) 60%, rgba(245, 247, 251, 0.30) 100%),
     url('/miles-planer/assets/hero/business.png');
+}
+
+.hero-thailand {
+  background-position: center right;
+  background-image:
+    linear-gradient(90deg, rgba(245, 247, 251, 0.98) 0%, rgba(245, 247, 251, 0.88) 34%, rgba(245, 247, 251, 0.52) 62%, rgba(245, 247, 251, 0.22) 100%),
+    url('/miles-planer/assets/hero/thailand.png');
 }
 
 .hero::after,
@@ -97,6 +105,10 @@
 
   .hero-business {
     --hero-mobile-image: url('/miles-planer/assets/hero/business.png');
+  }
+
+  .hero-thailand {
+    --hero-mobile-image: url('/miles-planer/assets/hero/thailand.png');
   }
 
   .hero {
