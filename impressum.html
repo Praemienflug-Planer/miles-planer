@@ -55,8 +55,14 @@
         <h2>Kontakt</h2>
         <p>
           E-Mail:
-          <span id="email"></span>
+          <a id="email" href="/miles-planer/kontakt.html" rel="nofollow">E-Mail-Adresse anzeigen</a>
         </p>
+        <noscript>
+          <p>
+            Alternativ ist eine Kontaktaufnahme über das
+            <a href="/miles-planer/kontakt.html">Kontaktformular</a> möglich.
+          </p>
+        </noscript>
 
         <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
         <p>
@@ -114,10 +120,15 @@
 </footer>
 
 <script>
-  const user = "dominikhermanski";
-  const domain = "googlemail.com";
-  document.getElementById("email").innerHTML =
-    `<a href="mailto:${user}@${domain}">${user}@${domain}</a>`;
+  (function () {
+    const encoded = [100,111,109,105,110,105,107,104,101,114,109,97,110,115,107,105,64,103,111,111,103,108,101,109,97,105,108,46,99,111,109];
+    const address = encoded.map(function (code) { return String.fromCharCode(code); }).join("");
+    const emailLink = document.getElementById("email");
+    if (emailLink) {
+      emailLink.href = "mailto:" + address;
+      emailLink.textContent = address.replace("@", " [at] ").replace(".", " [punkt] ");
+    }
+  })();
 </script>
 
 </body>
