@@ -19,36 +19,36 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Update Amex FAQ and transfer warning
-        shell: python
+        shell: bash
         run: |
+          set -euo pipefail
+          python - <<'PY'
           from pathlib import Path
-          print('Updating Amex FAQ and irreversible transfer warning.')
 
           path = Path('meilen-sammeln/amex/index.html')
           text = path.read_text(encoding='utf-8')
 
-          old_schema = '''    "mainEntity": [
+          text = text.replace(
+          '''    "mainEntity": [
       {"@type":"Question","name":"Was sind American Express Membership Rewards Punkte?","acceptedAnswer":{"@type":"Answer","text":"Membership Rewards ist das Punkteprogramm von American Express. Die Punkte können gesammelt und später zu verschiedenen Airline- und Hotelprogrammen übertragen oder anderweitig eingelöst werden."}},
       {"@type":"Question","name":"Welche Amex Transferpartner sind besonders interessant?","acceptedAnswer":{"@type":"Answer","text":"Für Prämienflüge sind vor allem Airline-Partner wie British Airways Club, Iberia Club, Flying Blue, SAS EuroBonus, Singapore Airlines KrisFlyer, Cathay Pacific Asia Miles oder Emirates Skywards interessant. Entscheidend sind jedoch Transferverhältnis, Verfügbarkeit und Gebühren."}},
       {"@type":"Question","name":"Wie viele Meilen bekomme ich aus 100.000 Membership Rewards Punkten?","acceptedAnswer":{"@type":"Answer","text":"Das hängt vom Transferpartner ab. Bei 5:4 entstehen 80.000 Einheiten, bei 3:2 rund 66.667 Einheiten, bei 2:1 50.000 Einheiten, bei 1:1 100.000 Einheiten und bei 1:2 200.000 Einheiten."}},
       {"@type":"Question","name":"Sollte man Amex Punkte sofort übertragen?","acceptedAnswer":{"@type":"Answer","text":"In der Regel sollte man Membership Rewards Punkte erst übertragen, wenn Zielprogramm, Verfügbarkeit und konkrete Einlösung geprüft sind. Transfers sind meist endgültig."}}
-    ]'''
-
-          new_schema = '''    "mainEntity": [
+    ]''',
+          '''    "mainEntity": [
       {"@type":"Question","name":"Was sind American Express Membership Rewards Punkte?","acceptedAnswer":{"@type":"Answer","text":"Membership Rewards ist das Punkteprogramm von American Express. Die Punkte können gesammelt und später zu verschiedenen Airline- und Hotelprogrammen übertragen oder anderweitig eingelöst werden."}},
       {"@type":"Question","name":"Welche Amex Transferpartner gibt es?","acceptedAnswer":{"@type":"Answer","text":"Zu den Partnern gehören unter anderem British Airways Club, Iberia Club, Qatar Airways Privilege Club, Finnair Plus, Aer Lingus AerClub, SAS EuroBonus, Air France/KLM Flying Blue, Cathay Pacific Asia Miles, Etihad Guest, Singapore Airlines KrisFlyer, Delta SkyMiles, Emirates Skywards sowie Hotelprogramme wie Hilton Honors, Marriott Bonvoy und Radisson Rewards."}},
       {"@type":"Question","name":"Wie viele Meilen bekomme ich aus 100.000 Membership Rewards Punkten?","acceptedAnswer":{"@type":"Answer","text":"Das hängt vom Transferpartner ab. Bei 5:4 entstehen 80.000 Einheiten, bei 3:2 rund 66.667 Einheiten, bei 2:1 50.000 Einheiten, bei 1:1 100.000 Einheiten und bei 1:2 200.000 Einheiten."}},
       {"@type":"Question","name":"Ist ein Amex Punkte Transfer unumkehrbar?","acceptedAnswer":{"@type":"Answer","text":"Ein Transfer sollte als endgültig betrachtet werden. Sobald Membership Rewards Punkte zu einem Partnerprogramm übertragen wurden, können sie in der Regel nicht zurück zu American Express übertragen werden."}},
       {"@type":"Question","name":"Wann sollte man Amex Punkte übertragen?","acceptedAnswer":{"@type":"Answer","text":"In der Regel erst dann, wenn Zielprogramm, Verfügbarkeit, Gebühren und konkrete Einlösung geprüft sind. Solange die Punkte bei American Express liegen, bleiben sie flexibler."}}
-    ]'''
-          text = text.replace(old_schema, new_schema)
+    ]''')
 
           transfer_paragraph = '<p>Die wichtigste Regel lautet: <strong>Nicht vorschnell übertragen.</strong> Solange deine Punkte bei American Express liegen, bleiben sie flexibel. Nach dem Transfer bist du an das Zielprogramm gebunden.</p>'
-          transfer_warning = transfer_paragraph + '\n        <div class="warning-box"><strong>Transfer ist in der Regel unumkehrbar:</strong><br><br>Übertrage Membership Rewards Punkte erst, wenn du Zielprogramm, Verfügbarkeit, Gebühren und konkrete Einlösung geprüft hast. Nach dem Transfer können die Punkte normalerweise nicht zurück zu American Express übertragen werden.</div>'
           if 'Transfer ist in der Regel unumkehrbar' not in text:
-              text = text.replace(transfer_paragraph, transfer_warning)
+              text = text.replace(transfer_paragraph, transfer_paragraph + '\n        <div class="warning-box"><strong>Transfer ist in der Regel unumkehrbar:</strong><br><br>Übertrage Membership Rewards Punkte erst, wenn du Zielprogramm, Verfügbarkeit, Gebühren und konkrete Einlösung geprüft hast. Nach dem Transfer können die Punkte normalerweise nicht zurück zu American Express übertragen werden.</div>')
 
-          old_faq = '''      <div class="article-card seo-card" id="faq">
+          text = text.replace(
+          '''      <div class="article-card seo-card" id="faq">
         <p class="eyebrow">FAQ</p>
         <h2>Häufige Fragen zu American Express Membership Rewards</h2>
         <div class="faq-list">
@@ -73,9 +73,8 @@ jobs:
             <p>Meistens nein. Der Transfer sollte erst erfolgen, wenn Zielprogramm, Verfügbarkeit und Einlösung geprüft sind.</p>
           </div>
         </div>
-      </div>'''
-
-          new_faq = '''      <div class="article-card seo-card" id="faq">
+      </div>''',
+          '''      <div class="article-card seo-card" id="faq">
         <p class="eyebrow">FAQ</p>
         <h2>Die 5 wichtigsten Fragen zu American Express Membership Rewards</h2>
         <div class="faq-list">
@@ -100,10 +99,10 @@ jobs:
             <p>Meistens erst dann, wenn Zielprogramm, Verfügbarkeit, Gebühren und konkrete Einlösung geprüft sind. Solange deine Punkte bei American Express liegen, bleiben sie deutlich flexibler.</p>
           </div>
         </div>
-      </div>'''
-          text = text.replace(old_faq, new_faq)
+      </div>''')
 
           path.write_text(text, encoding='utf-8')
+          PY
 
       - name: Commit changes
         shell: bash
