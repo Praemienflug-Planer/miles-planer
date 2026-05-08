@@ -1,0 +1,16 @@
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="/miles-planer/" aria-label="Startseite Prämienflug-Planer">Prämienflug-Planer</a>
+    <nav class="main-nav" aria-label="Hauptnavigation">
+      <a href="/miles-planer/rechner/"{% if page.url == '/rechner/' %} aria-current="page"{% endif %}>Rechner</a>
+      <a href="/miles-planer/tools/"{% if page.url == '/tools/' %} aria-current="page"{% endif %}>Tools</a>
+      <a href="/miles-planer/meilen-business-class/"{% if page.url == '/meilen-business-class/' %} aria-current="page"{% endif %}>Business Class</a>
+      <a href="/miles-planer/meilen-thailand/"{% if page.url == '/meilen-thailand/' %} aria-current="page"{% endif %}>Thailand</a>
+      <a href="/miles-planer/meilen-new-york/"{% if page.url == '/meilen-new-york/' %} aria-current="page"{% endif %}>New York</a>
+      <a href="/miles-planer/amex-meilen-umrechnen/"{% if page.url == '/amex-meilen-umrechnen/' %} aria-current="page"{% endif %}>Amex umrechnen</a>
+      <a href="/miles-planer/meilen-sammeln/"{% if page.url contains '/meilen-sammeln/' %} aria-current="page"{% endif %}>Meilen sammeln</a>
+      <a href="/miles-planer/faq/"{% if page.url == '/faq/' %} aria-current="page"{% endif %}>FAQ</a>
+      <a href="/miles-planer/kontakt.html"{% if page.url == '/kontakt.html' %} aria-current="page"{% endif %}>Kontakt</a>
+    </nav>
+  </div>
+</header>
