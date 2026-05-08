@@ -27,6 +27,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo "Preparing existing HTML pages for the central site shell."
 
           while IFS= read -r -d '' file; do
             case "$file" in
