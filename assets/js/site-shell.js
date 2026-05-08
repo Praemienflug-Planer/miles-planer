@@ -88,6 +88,43 @@
     return footer;
   }
 
+  function enhanceAmexTurboSection() {
+    if (normalizePath(window.location.pathname) !== `${BASE}/meilen-sammeln/amex/`) return;
+    if (document.querySelector('[data-amex-turbo-details]')) return;
+
+    const section = document.querySelector('#sammeln');
+    if (!section) return;
+
+    const intro = Array.from(section.querySelectorAll('p')).find((p) =>
+      p.textContent.includes('Rewards Turbo') && p.textContent.includes('Punkteausbeute')
+    );
+    if (!intro) return;
+
+    const detail = document.createElement('div');
+    detail.setAttribute('data-amex-turbo-details', 'true');
+    detail.innerHTML = `
+      <div class="warning-box">
+        <strong>Rewards Turbo aktivieren:</strong><br><br>
+        Der Rewards Turbo ist nicht automatisch aktiv, sondern muss manuell aktiviert werden. Laut American Express kostet der Punkteturbo <strong>15&nbsp;€ pro Jahr</strong>. Er erhöht die Punkteausbeute auf <strong>1,5 Membership Rewards Punkte je 1&nbsp;€ Umsatz</strong> und gilt für Umsätze bis zu <strong>40.000&nbsp;€ pro Jahr</strong>. Maßgeblich sind immer die aktuellen Bedingungen von American Express.
+      </div>
+      <p>Für aktive Meilensammler ist der Rewards Turbo aus meiner Sicht sehr empfehlenswert, weil er aus ohnehin geplanten Kartenumsätzen deutlich mehr Punkte macht. Gerade bei regelmäßigen Alltagsausgaben, Reisen, Versicherungen oder größeren geplanten Zahlungen kann der Effekt über ein Jahr spürbar sein.</p>
+      <div class="seo-table-wrap">
+        <table class="seo-table">
+          <thead><tr><th>Jahresumsatz mit Amex</th><th>Zusätzliche Punkte durch Turbo*</th><th>Einordnung</th></tr></thead>
+          <tbody>
+            <tr><td>5.000&nbsp;€</td><td>ca. 2.500 Punkte</td><td>kleiner, aber sichtbarer Zusatznutzen</td></tr>
+            <tr><td>10.000&nbsp;€</td><td>ca. 5.000 Punkte</td><td>für aktive Sammler meist interessant</td></tr>
+            <tr><td>20.000&nbsp;€</td><td>ca. 10.000 Punkte</td><td>deutlicher Hebel für langfristige Reiseziele</td></tr>
+            <tr><td>40.000&nbsp;€</td><td>ca. 20.000 Punkte</td><td>maximaler Effekt bis zur genannten Jahresgrenze</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="image-note">*Vereinfachte Rechnung mit zusätzlich 0,5 Membership Rewards Punkten pro 1&nbsp;€ Umsatz durch den Rewards Turbo. Quelle/Hinweis: American Express Punkteturbo, 15&nbsp;€ pro Jahr und bis 40.000&nbsp;€ Jahresumsatz; Bedingungen können sich ändern.</p>
+    `;
+
+    intro.insertAdjacentElement('afterend', detail);
+  }
+
   function mountShell() {
     document.querySelector('header.site-header')?.remove();
     document.querySelector('footer.site-footer')?.remove();
@@ -103,6 +140,7 @@
     }
 
     document.body.appendChild(footer);
+    enhanceAmexTurboSection();
   }
 
   if (document.readyState === 'loading') {
