@@ -1,6 +1,6 @@
 {% comment %}
   Transitional default layout for existing static HTML pages.
   The repository still contains full HTML documents. This layout keeps their content intact
-  and injects the central header/footer shell script before </body>.
+  and injects central JavaScript before </body>.
 {% endcomment %}
-{{ content | replace: '</body>', '<script src="/miles-planer/assets/js/site-shell.js?v=20260508-1"></script></body>' }}
+{{ content | replace: '</body>', '<script src="/miles-planer/assets/js/site-shell.js?v=20260508-1"></script><script src="/miles-planer/assets/js/page-enhancements.js?v=20260508-1"></script></body>' }}
