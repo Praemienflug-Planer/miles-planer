@@ -10,7 +10,8 @@
 .brand { font-weight: 800; font-size: 20px; color: var(--text); }
 .main-nav, .main-nav ul { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
 .main-nav a { color: var(--muted); font-size: 14px; }
-.main-nav a:hover { color: var(--primary); }
+.main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--primary); }
+.main-nav a[aria-current="page"] { font-weight: 800; }
 
 .hero { padding: 72px 0 56px; }
 .hero-small { padding: 56px 0 36px; }
