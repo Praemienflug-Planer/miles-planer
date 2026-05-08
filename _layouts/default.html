@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{{ page.title | default: site.title }}</title>
+  {% if page.description %}<meta name="description" content="{{ page.description }}" />{% endif %}
+  {% if page.canonical %}<link rel="canonical" href="{{ page.canonical }}" />{% endif %}
+  <meta name="robots" content="{{ page.robots | default: 'index,follow' }}" />
+
+  <link rel="stylesheet" href="/miles-planer/assets/css/site.css?v={{ site.time | date: '%Y%m%d%H%M' }}" />
+  <link rel="stylesheet" href="/miles-planer/assets/css/hero-background.css?v={{ site.time | date: '%Y%m%d%H%M' }}" />
+  {% if page.extra_css %}
+    {% for css in page.extra_css %}<link rel="stylesheet" href="{{ css }}" />{% endfor %}
+  {% endif %}
+
+  {{ page.head_extra }}
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+  {% include header.html %}
+
+  <main id="main-content">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+  {% if page.extra_js %}
+    {% for js in page.extra_js %}<script src="{{ js }}"></script>{% endfor %}
+  {% endif %}
+</body>
+</html>
