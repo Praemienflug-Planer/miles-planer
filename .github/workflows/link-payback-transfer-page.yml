@@ -23,6 +23,7 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
+          print('Linking PAYBACK transfer guide internally.')
 
           new_url = '/miles-planer/meilen-sammeln/payback-punkte-miles-and-more/'
 
