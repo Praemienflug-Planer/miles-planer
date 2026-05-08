@@ -92,6 +92,17 @@
     return normalizePath(window.location.pathname) === `${BASE}/meilen-sammeln/amex/`;
   }
 
+  function addSidebarLink(href, text, beforeHref = null) {
+    const sidebarLinks = document.querySelector('.seo-sidebar .sidebar-links');
+    if (!sidebarLinks || sidebarLinks.querySelector(`a[href="${href}"]`)) return;
+    const link = document.createElement('a');
+    link.href = href;
+    link.textContent = text;
+    const before = beforeHref ? sidebarLinks.querySelector(`a[href="${beforeHref}"]`) : null;
+    if (before) before.insertAdjacentElement('beforebegin', link);
+    else sidebarLinks.appendChild(link);
+  }
+
   function enhanceAmexTurboSection() {
     if (!isAmexGuidePage()) return;
     if (document.querySelector('[data-amex-turbo-details]')) return;
@@ -181,19 +192,39 @@
     `;
 
     target.insertAdjacentElement('beforebegin', section);
+    addSidebarLink('#kosten-benefits', 'Kosten & Benefits', '#transferpartner');
+  }
 
-    const sidebarLinks = document.querySelector('.seo-sidebar .sidebar-links');
-    if (sidebarLinks && !sidebarLinks.querySelector('a[href="#kosten-benefits"]')) {
-      const link = document.createElement('a');
-      link.href = '#kosten-benefits';
-      link.textContent = 'Kosten & Benefits';
-      const transferLink = sidebarLinks.querySelector('a[href="#transferpartner"]');
-      if (transferLink) {
-        transferLink.insertAdjacentElement('beforebegin', link);
-      } else {
-        sidebarLinks.appendChild(link);
-      }
-    }
+  function enhanceAmexAviosSection() {
+    if (!isAmexGuidePage()) return;
+    if (document.querySelector('[data-amex-avios-flexibility]')) return;
+
+    const target = document.querySelector('#partnergruppen') || document.querySelector('#transferpartner');
+    if (!target || !target.parentNode) return;
+
+    const section = document.createElement('div');
+    section.className = 'article-card seo-card';
+    section.id = 'avios-verschieben';
+    section.setAttribute('data-amex-avios-flexibility', 'true');
+    section.innerHTML = `
+      <p class="eyebrow">Avios-Sweet-Spot</p>
+      <h2>Wichtig: Avios können zwischen Programmen verschoben werden</h2>
+      <p>Bei Avios-Programmen lohnt ein genauer Blick auf den Transferweg. British Airways Club, Iberia Club, Qatar Airways Privilege Club, Finnair Plus und Aer Lingus AerClub nutzen Avios. Avios können zwischen verknüpften Konten dieser Programme teilweise hin- und hergeschoben werden.</p>
+      <p>Das kann bei American Express besonders interessant sein: Der direkte Transfer zu Qatar Airways Privilege Club ist in der aktuellen Übersicht mit <strong>3:2</strong> angegeben. British Airways Club und Iberia Club stehen dagegen bei <strong>5:4</strong>. Wer Avios später zu Qatar verschieben möchte, kann dadurch unter Umständen besser fahren, wenn zuerst zu British Airways oder Iberia transferiert wird.</p>
+      <div class="seo-table-wrap">
+        <table class="seo-table">
+          <thead><tr><th>Transferweg</th><th>Umrechnung aus 100.000 MR</th><th>Einordnung</th></tr></thead>
+          <tbody>
+            <tr><td>direkt zu Qatar Airways Privilege Club</td><td>ca. 66.667 Avios</td><td>einfacher, aber schlechteres MR-Verhältnis laut aktueller Übersicht</td></tr>
+            <tr><td>zu British Airways Club oder Iberia Club</td><td>80.000 Avios</td><td>besseres 5:4-Verhältnis; Avios können je nach Kontoverknüpfung anschließend verschoben werden</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warning-box"><strong>Vorher Bedingungen prüfen:</strong><br><br>Avios-Transfers zwischen Programmen können von Kontoverknüpfung, identischen persönlichen Daten, Mindestanforderungen oder Programmregeln abhängen. Deshalb vor dem Amex-Transfer immer prüfen, ob der gewünschte Avios-Transferweg im konkreten Fall funktioniert.</div>
+    `;
+
+    target.insertAdjacentElement('beforebegin', section);
+    addSidebarLink('#avios-verschieben', 'Avios verschieben', '#partnergruppen');
   }
 
   function mountShell() {
@@ -213,6 +244,7 @@
     document.body.appendChild(footer);
     enhanceAmexTurboSection();
     enhanceAmexBenefitsSection();
+    enhanceAmexAviosSection();
   }
 
   if (document.readyState === 'loading') {
