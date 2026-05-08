@@ -10,6 +10,14 @@
     return normalizePath(window.location.pathname) === `${BASE}/meilen-sammeln/payback/`;
   }
 
+  function isMilesMoreCardPage() {
+    return normalizePath(window.location.pathname) === `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`;
+  }
+
+  function isAmexGuidePage() {
+    return normalizePath(window.location.pathname) === `${BASE}/meilen-sammeln/amex/`;
+  }
+
   function enhancePaybackMilesIntro() {
     if (!isPaybackGuidePage()) return;
     if (document.querySelector('[data-payback-miles-intro]')) return;
@@ -84,9 +92,97 @@
     }
   }
 
+  function addMilesMorePartnerOverview() {
+    if (!isMilesMoreCardPage()) return;
+    if (document.querySelector('[data-mm-partner-overview]')) return;
+
+    const anchor = document.querySelector('.article-card.seo-card');
+    if (!anchor || !anchor.parentNode) return;
+
+    const card = document.createElement('div');
+    card.className = 'article-card seo-card';
+    card.id = 'miles-more-partner';
+    card.setAttribute('data-mm-partner-overview', 'true');
+    card.innerHTML = `
+      <p class="eyebrow">Partner &amp; Sammelstellen</p>
+      <h2>Wichtige Miles &amp; More Partner und Sammelwege</h2>
+      <p>Miles &amp; More besteht nicht nur aus Flügen und Kreditkartenumsätzen. Zusätzliche Meilen können auch über Partner, Online-Shopping, Hotels, Mietwagen, Finanz- und Mobilitätsangebote oder zeitlich begrenzte Aktionen entstehen.</p>
+      <div class="seo-table-wrap">
+        <table class="seo-table">
+          <thead><tr><th>Bereich</th><th>Beispiele</th><th>Warum interessant?</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Flüge</strong></td><td>Lufthansa Group, Star Alliance und weitere Airline-Partner</td><td>klassischer Sammelweg, vor allem bei bezahlten Flügen und Status-/Prämienmeilen relevant</td></tr>
+            <tr><td><strong>Kreditkarte</strong></td><td>Miles-&amp;-More-Kreditkarten</td><td>direktes Sammeln über Alltagsumsätze, teilweise mit Willkommensmeilen und Zusatzleistungen</td></tr>
+            <tr><td><strong>Online-Shopping</strong></td><td>Miles &amp; More Online Shopping, temporäre Händleraktionen</td><td>zusätzliche Meilen bei ohnehin geplanten Online-Einkäufen</td></tr>
+            <tr><td><strong>Hotels &amp; Mietwagen</strong></td><td>Hotel-, Mietwagen- und Reiseanbieter</td><td>hilfreich bei Reisen, Stopovern, Airporthotels oder Mietwagenbuchungen</td></tr>
+            <tr><td><strong>Finanzen, Mobilität &amp; Alltag</strong></td><td>zeitlich befristete Aktionen, Challenges, Partnerangebote</td><td>können starke Meilen-Booster sein, wenn die Ausgabe ohnehin geplant ist</td></tr>
+            <tr><td><strong>PAYBACK</strong></td><td>PAYBACK Punkte 1:1 zu Miles &amp; More übertragen</td><td>besonders wichtig, weil Alltagsausgaben über PAYBACK später zu Miles-&amp;-More-Meilen werden können</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warning-box"><strong>Partner und Aktionen regelmäßig prüfen:</strong><br><br>Miles-&amp;-More-Partner, Meilenraten, Challenges und Bedingungen können sich ändern. Prüfe vor einem Kauf oder Abschluss immer, ob der Partner aktuell teilnimmt, ob eine Registrierung nötig ist und ob die Meilengutschrift zu deiner Strategie passt.</div>
+      <p><a class="btn btn-secondary" href="https://www.miles-and-more.com/de/de/earn.html" target="_blank" rel="noopener noreferrer">Aktuelle Miles-&amp;-More-Sammelpartner öffnen</a></p>
+    `;
+
+    anchor.insertAdjacentElement('afterend', card);
+
+    const sidebarLinks = document.querySelector('.seo-sidebar .sidebar-links');
+    if (sidebarLinks && !sidebarLinks.querySelector('a[href="#miles-more-partner"]')) {
+      const link = document.createElement('a');
+      link.href = '#miles-more-partner';
+      link.textContent = 'Miles & More Partner';
+      sidebarLinks.insertAdjacentElement('afterbegin', link);
+    }
+  }
+
+  function addAmexOffersSection() {
+    if (!isAmexGuidePage()) return;
+    if (document.querySelector('[data-amex-offers-section]')) return;
+
+    const target = document.querySelector('#kosten-benefits') || document.querySelector('#willkommensbonus');
+    if (!target || !target.parentNode) return;
+
+    const card = document.createElement('div');
+    card.className = 'article-card seo-card';
+    card.id = 'amex-offers';
+    card.setAttribute('data-amex-offers-section', 'true');
+    card.innerHTML = `
+      <p class="eyebrow">Zusätzlicher Vorteil</p>
+      <h2>Amex Offers: zusätzliche Guthaben und Aktionen nutzen</h2>
+      <p>Amex Offers sind zeitlich begrenzte Angebote in deinem American-Express-Konto. Je nach Karte und Nutzerprofil können dort zum Beispiel Cashback-, Gutschein-, Punkte- oder Rabattaktionen bei ausgewählten Händlern erscheinen.</p>
+      <p>Für Meilensammler sind Amex Offers interessant, weil sie den Kartenwert zusätzlich verbessern können. Wenn du einen Einkauf ohnehin geplant hast und ein passendes Offer aktivierst, kann daraus ein echter Zusatznutzen entstehen.</p>
+      <div class="seo-table-wrap">
+        <table class="seo-table">
+          <thead><tr><th>Offer-Typ</th><th>Beispielhafte Wirkung</th><th>Einordnung</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Cashback/Gutschrift</strong></td><td>z. B. Betrag zurück nach Mindestumsatz</td><td>kann die effektiven Kosten eines ohnehin geplanten Kaufs senken</td></tr>
+            <tr><td><strong>Zusatzpunkte</strong></td><td>mehr Membership Rewards Punkte bei ausgewählten Partnern</td><td>kann die Punkteausbeute zusätzlich zum Rewards Turbo erhöhen</td></tr>
+            <tr><td><strong>Reise &amp; Hotel</strong></td><td>Angebote bei Hotels, Reiseportalen oder Mobilitätspartnern</td><td>spannend, wenn es zur geplanten Reise passt</td></tr>
+            <tr><td><strong>Shopping &amp; Alltag</strong></td><td>Aktionen bei Online-Shops, Marken oder Services</td><td>nur sinnvoll, wenn kein unnötiger Mehrkonsum entsteht</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="warning-box"><strong>Offers müssen meist aktiviert werden:</strong><br><br>Amex Offers sind häufig personalisiert, zeitlich begrenzt und an Bedingungen wie Mindestumsatz, Händler, Zeitraum oder Zahlungsart geknüpft. Vor dem Einkauf immer in der Amex App oder im Onlinekonto aktivieren und die Bedingungen prüfen.</div>
+    `;
+
+    target.insertAdjacentElement('afterend', card);
+
+    const sidebarLinks = document.querySelector('.seo-sidebar .sidebar-links');
+    if (sidebarLinks && !sidebarLinks.querySelector('a[href="#amex-offers"]')) {
+      const link = document.createElement('a');
+      link.href = '#amex-offers';
+      link.textContent = 'Amex Offers';
+      const before = sidebarLinks.querySelector('a[href="#transferpartner"]');
+      if (before) before.insertAdjacentElement('beforebegin', link);
+      else sidebarLinks.appendChild(link);
+    }
+  }
+
   function runEnhancements() {
     enhancePaybackMilesIntro();
     addPaybackPartnerOverview();
+    addMilesMorePartnerOverview();
+    addAmexOffersSection();
   }
 
   if (document.readyState === 'loading') {
