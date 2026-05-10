@@ -16,7 +16,7 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background-color: #eef6ff;
+  background-color: var(--bg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -27,63 +27,63 @@
 
 .hero-home {
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.98) 0%, rgba(245, 247, 251, 0.88) 36%, rgba(245, 247, 251, 0.40) 68%, rgba(245, 247, 251, 0.16) 100%),
+    linear-gradient(90deg, rgba(7, 17, 31, 0.96) 0%, rgba(7, 17, 31, 0.86) 38%, rgba(7, 17, 31, 0.54) 68%, rgba(7, 17, 31, 0.32) 100%),
     url('/miles-planer/assets/hero/home.png');
 }
 
 .hero-rechner,
 .rechner-hero-bg {
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.98) 0%, rgba(245, 247, 251, 0.92) 42%, rgba(245, 247, 251, 0.72) 68%, rgba(245, 247, 251, 0.50) 100%),
+    linear-gradient(90deg, rgba(7, 17, 31, 0.96) 0%, rgba(7, 17, 31, 0.88) 42%, rgba(7, 17, 31, 0.64) 68%, rgba(7, 17, 31, 0.42) 100%),
     url('/miles-planer/assets/hero/rechner.png');
 }
 
 .hero-business {
   background-position: center right;
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.93) 34%, rgba(245, 247, 251, 0.64) 60%, rgba(245, 247, 251, 0.30) 100%),
+    linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.88) 36%, rgba(7, 17, 31, 0.54) 62%, rgba(7, 17, 31, 0.28) 100%),
     url('/miles-planer/assets/hero/business.png');
 }
 
 .hero-thailand {
   background-position: center right;
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.98) 0%, rgba(245, 247, 251, 0.88) 34%, rgba(245, 247, 251, 0.52) 62%, rgba(245, 247, 251, 0.22) 100%),
+    linear-gradient(90deg, rgba(7, 17, 31, 0.96) 0%, rgba(7, 17, 31, 0.84) 34%, rgba(7, 17, 31, 0.48) 62%, rgba(7, 17, 31, 0.24) 100%),
     url('/miles-planer/assets/hero/thailand.png');
 }
 
 .hero-new-york {
   background-position: center right;
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.92) 35%, rgba(245, 247, 251, 0.58) 63%, rgba(245, 247, 251, 0.24) 100%),
+    linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.86) 35%, rgba(7, 17, 31, 0.52) 63%, rgba(7, 17, 31, 0.26) 100%),
     url('/miles-planer/assets/hero/new-york.png');
 }
 
 .hero-amex {
   background-position: center right;
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.94) 38%, rgba(245, 247, 251, 0.66) 66%, rgba(245, 247, 251, 0.34) 100%),
+    linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.88) 38%, rgba(7, 17, 31, 0.58) 66%, rgba(7, 17, 31, 0.34) 100%),
     url('/miles-planer/assets/hero/amex.png');
 }
 
 .hero-sammeln {
   background-position: center right;
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.94) 36%, rgba(245, 247, 251, 0.62) 64%, rgba(245, 247, 251, 0.28) 100%),
+    linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.88) 36%, rgba(7, 17, 31, 0.56) 64%, rgba(7, 17, 31, 0.30) 100%),
     url('/miles-planer/assets/hero/sammeln.png');
 }
 
 .hero-contact {
   background-position: center right;
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.94) 38%, rgba(245, 247, 251, 0.68) 66%, rgba(245, 247, 251, 0.36) 100%),
+    linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.88) 38%, rgba(7, 17, 31, 0.60) 66%, rgba(7, 17, 31, 0.36) 100%),
     url('/miles-planer/assets/hero/kontakt.png');
 }
 
 .hero-legal {
   background-position: center right;
   background-image:
-    linear-gradient(90deg, rgba(245, 247, 251, 0.99) 0%, rgba(245, 247, 251, 0.95) 40%, rgba(245, 247, 251, 0.74) 70%, rgba(245, 247, 251, 0.48) 100%),
+    linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.90) 40%, rgba(7, 17, 31, 0.68) 70%, rgba(7, 17, 31, 0.48) 100%),
     url('/miles-planer/assets/hero/legal.png');
 }
 
@@ -94,8 +94,8 @@
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.70), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(245, 247, 251, 0.72));
+    radial-gradient(circle at 18% 28%, rgba(96, 165, 250, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(7, 17, 31, 0.06), rgba(5, 10, 19, 0.50));
 }
 
 .hero .container,
@@ -109,22 +109,22 @@
 .hero .hero-meta,
 .rechner-hero-bg h2,
 .rechner-hero-bg p {
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
 }
 
 .hero .hero-card,
 .rechner-hero-bg .tool-card {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
-  border-color: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.14);
+  background: rgba(16, 28, 47, 0.90);
+  backdrop-filter: blur(10px);
+  border-color: rgba(96, 165, 250, 0.26);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.32);
 }
 
 @media (max-width: 900px) {
   .hero,
   .rechner-hero-bg {
     background-image:
-      linear-gradient(180deg, rgba(245, 247, 251, 0.98) 0%, rgba(245, 247, 251, 0.92) 58%, rgba(245, 247, 251, 0.78) 100%),
+      linear-gradient(180deg, rgba(7, 17, 31, 0.84) 0%, rgba(7, 17, 31, 0.72) 48%, rgba(7, 17, 31, 0.90) 100%),
       var(--hero-mobile-image);
     background-position: center top;
   }
@@ -142,4 +142,15 @@
 
   .hero { padding: 64px 0 48px; }
   .hero-small { padding: 52px 0 40px; }
+}
+
+@media (max-width: 560px) {
+  .hero,
+  .rechner-hero-bg {
+    background-image:
+      linear-gradient(180deg, rgba(7, 17, 31, 0.76) 0%, rgba(7, 17, 31, 0.72) 44%, rgba(7, 17, 31, 0.94) 100%),
+      var(--hero-mobile-image);
+    background-size: auto 100%, cover;
+    background-position: center top;
+  }
 }
