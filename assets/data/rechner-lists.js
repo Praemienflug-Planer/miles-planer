@@ -1,6 +1,6 @@
 window.MILES_PLANNER_LISTS = {
   dataStand: "10.05.2026",
-  source: "GitHub Stammdaten-Spiegel für Dropdowns. Live-Dropdowns laufen vorerst weiter über Google Apps Script / Google Sheets.",
+  source: "GitHub Stammdaten für Dropdowns. Der Rechner fokussiert bewusst Premium Economy und Business Class, weil diese Klassen für Familien-Prämienflüge meist den relevanteren Meilenwert liefern.",
   ziele: [
     "Dubai",
     "Japan",
@@ -11,7 +11,6 @@ window.MILES_PLANNER_LISTS = {
     "USA West"
   ],
   reiseklassen: [
-    "Economy",
     "Premium Economy",
     "Business"
   ],
