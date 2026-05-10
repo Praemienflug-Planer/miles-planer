@@ -235,6 +235,24 @@
     }
   }
 
+  function installSubmitOverride() {
+    const form = $("milesForm");
+    if (!form || form.dataset.githubSubmitOverride === "1") return;
+
+    form.dataset.githubSubmitOverride = "1";
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      berechneMilesPlanerMitGithubFallback();
+    }, true);
+  }
+
   window.ladeDropdowns = ladeDropdownsAusGithub;
   window.berechneMilesPlaner = berechneMilesPlanerMitGithubFallback;
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", installSubmitOverride);
+  } else {
+    installSubmitOverride();
+  }
 })();
