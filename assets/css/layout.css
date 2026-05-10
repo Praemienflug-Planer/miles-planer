@@ -8,7 +8,7 @@
 }
 .nav { display: flex; justify-content: space-between; align-items: center; min-height: 72px; gap: 20px; }
 .brand { font-weight: 800; font-size: 20px; color: var(--text); }
-.main-nav, .main-nav ul { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; }
+.main-nav, .main-nav ul { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; min-width: 0; }
 .main-nav a { color: var(--muted); font-size: 14px; }
 .main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--primary); }
 .main-nav a[aria-current="page"] { font-weight: 800; }
@@ -26,13 +26,14 @@
   border: 1px solid var(--line);
   border-radius: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  min-width: 0;
 }
 .hero-card, .feature-card, .audience-card, .article-card, .contact-card, .contact-info-card, .tool-card, .seo-card { padding: 24px; }
 .hero-card ul { margin: 0; padding-left: 18px; }
 .section { padding: 56px 0; }
 .section.alt { background: #f8fafc; }
 .section-head { margin-bottom: 26px; }
-.feature-grid, .audience-grid, .article-grid { display: grid; gap: 16px; }
+.feature-grid, .audience-grid, .article-grid { display: grid; gap: 16px; min-width: 0; }
 .feature-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 .audience-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .article-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
@@ -74,8 +75,42 @@
   .hero-small { padding: 48px 0 34px; }
 }
 
+@media (max-width: 700px) {
+  .site-header { position: static; }
+  .nav {
+    gap: 14px;
+    min-height: auto;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .brand {
+    width: 100%;
+    font-size: 18px;
+  }
+  .main-nav, .main-nav ul {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .main-nav a {
+    display: block;
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    font-size: 13px;
+    text-align: center;
+    white-space: normal;
+  }
+}
+
 @media (max-width: 560px) {
-  .main-nav, .main-nav ul { gap: 12px; }
-  .main-nav a { font-size: 13px; }
+  .main-nav, .main-nav ul { gap: 8px; }
   .hero-card, .article-card, .seo-card, .tool-card, .contact-card, .contact-info-card { padding: 18px; }
+  .feature-grid, .audience-grid, .article-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero-actions { width: 100%; }
+  .hero-actions .btn { width: 100%; text-align: center; }
+  .cta-box { padding: 20px; }
 }
