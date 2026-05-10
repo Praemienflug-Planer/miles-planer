@@ -8,7 +8,7 @@ layout: default
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Prämienflug-Rechner für Familien | Meilenbedarf & Sammellücke berechnen</title>
-  <meta name="description" content="Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Prämienflüge mit 1 bis 8 Personen. Kostenloser Meilenrechner für Familienreisen." />
+  <meta name="description" content="Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Prämienflüge mit der Familie. Kostenloser Meilenrechner für Familienreisen von 2 bis 8 Personen." />
   <link rel="canonical" href="https://praemienflug-planer.github.io/miles-planer/rechner/" />
   <meta name="robots" content="index,follow" />
 
@@ -16,7 +16,7 @@ layout: default
   <meta property="og:locale" content="de_DE" />
   <meta property="og:site_name" content="Prämienflug-Planer" />
   <meta property="og:title" content="Prämienflug-Rechner für Familien" />
-  <meta property="og:description" content="Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Prämienflüge mit bis zu 8 Personen." />
+  <meta property="og:description" content="Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Familien-Prämienflüge von 2 bis 8 Personen." />
   <meta property="og:url" content="https://praemienflug-planer.github.io/miles-planer/rechner/" />
   <meta property="og:image" content="https://praemienflug-planer.github.io/miles-planer/assets/og/og-home.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -25,19 +25,19 @@ layout: default
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Prämienflug-Rechner für Familien" />
-  <meta name="twitter:description" content="Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Prämienflüge berechnen." />
+  <meta name="twitter:description" content="Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Familien-Prämienflüge berechnen." />
   <meta name="twitter:image" content="https://praemienflug-planer.github.io/miles-planer/assets/og/og-home.jpg" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Prämienflug-Rechner",
+    "name": "Prämienflug-Rechner für Familien",
     "url": "https://praemienflug-planer.github.io/miles-planer/rechner/",
     "applicationCategory": "TravelApplication",
     "operatingSystem": "Web",
     "inLanguage": "de-DE",
-    "description": "Kostenloser Rechner für Meilenbedarf, Sammellücke, Sammelzeit und Dealwert von Prämienflügen."
+    "description": "Kostenloser Rechner für Meilenbedarf, Sammellücke, Sammelzeit und Dealwert von Familien-Prämienflügen."
   }
   </script>
 
@@ -73,13 +73,13 @@ layout: default
               <div class="tool-main">
                 <div class="tool-card">
                   <div class="section-head compact-head">
-                    <p class="eyebrow">Prämienflug Rechner</p>
-                    <h1>Prämienflug planen</h1>
-                    <p>Der Rechner zeigt dir Meilenbedarf, Sammellücke und eine realistische Einschätzung deiner Chancen.</p>
+                    <p class="eyebrow">Prämienflug-Rechner für Familien</p>
+                    <h1>Familien-Prämienflug planen</h1>
+                    <p>Der Rechner zeigt dir Meilenbedarf, Sammellücke und eine realistische Einschätzung deiner Chancen für Familienreisen von 2 bis 8 Personen.</p>
                   </div>
                   <div class="step-grid">
                     <section id="step-ziel" class="step-card active"><div class="step-number">1</div><div class="step-content"><h3>Ziel</h3><select id="ziel"></select></div></section>
-                    <section id="step-personen" class="step-card"><div class="step-number">2</div><div class="step-content"><h3>Personen</h3><select id="personen"><option value="">Bitte wählen</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div></section>
+                    <section id="step-personen" class="step-card"><div class="step-number">2</div><div class="step-content"><h3>Familiengröße</h3><select id="personen"><option value="">Bitte wählen</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div></section>
                     <section id="step-reiseklasse" class="step-card"><div class="step-number">3</div><div class="step-content"><h3>Reiseklasse</h3><select id="reiseklasse"></select></div></section>
                     <section id="step-reisezeit" class="step-card"><div class="step-number">4</div><div class="step-content"><h3>Reisezeit</h3><select id="reisezeit"></select></div></section>
                     <section id="step-reisemonat" class="step-card"><div class="step-number">5</div><div class="step-content"><h3>Reisemonat</h3><select id="reisemonat"></select></div></section>
@@ -103,10 +103,10 @@ layout: default
                 </div>
               </div>
             </form>
-            <aside class="tool-sidebar"><div class="tool-card sticky-card"><p class="eyebrow">So funktioniert es</p><h3>In 4 Schritten zum Ergebnis</h3><ul class="plain-list"><li>Ziel, Personen und Reiseklasse wählen</li><li>Reisezeit, Monat und Jahr festlegen</li><li>Programm und Punktestand eingeben</li><li>Machbarkeit, Lücke und Bewertung prüfen</li></ul><div class="sidebar-transfer-hint"><div class="result-info-card"><div class="info-content" id="pointsHelper"><strong>Transferhinweis</strong><p>Wähle zuerst ein Programm aus, damit der passende Transferhinweis angezeigt wird.</p></div></div></div></div></aside>
+            <aside class="tool-sidebar"><div class="tool-card sticky-card"><p class="eyebrow">So funktioniert es</p><h3>In 4 Schritten zum Familien-Ergebnis</h3><ul class="plain-list"><li>Ziel, Familiengröße und Reiseklasse wählen</li><li>Reisezeit, Monat und Jahr festlegen</li><li>Programm und Punktestand eingeben</li><li>Machbarkeit, Lücke und Bewertung prüfen</li></ul><div class="sidebar-transfer-hint"><div class="result-info-card"><div class="info-content" id="pointsHelper"><strong>Transferhinweis</strong><p>Wähle zuerst ein Programm aus, damit der passende Transferhinweis angezeigt wird.</p></div></div></div></div></aside>
           </div>
         </div>
-        <div id="resultView" class="tool-view"><div class="tool-layout"><div class="tool-main"><div class="tool-card result-wrapper"><div id="result"></div></div></div><aside class="tool-sidebar"><div class="tool-card sticky-card"><p class="eyebrow">Ergebnis</p><h3>Deine Planung</h3><p class="footer-text">Hier siehst du Sammellücke, Zeit bis zum Ziel und die Bewertung der Einlösung.</p><div id="resultTransferHint" class="result-info-card"><strong>Transferhinweis</strong><p>Die Transferdetails werden nach der Berechnung hier angezeigt.</p></div><div class="tool-actions"><button class="btn btn-secondary" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button></div></div></aside></div></div>
+        <div id="resultView" class="tool-view"><div class="tool-layout"><div class="tool-main"><div class="tool-card result-wrapper"><div id="result"></div></div></div><aside class="tool-sidebar"><div class="tool-card sticky-card"><p class="eyebrow">Ergebnis</p><h3>Deine Familienplanung</h3><p class="footer-text">Hier siehst du Sammellücke, Zeit bis zum Ziel und die Bewertung der Einlösung.</p><div id="resultTransferHint" class="result-info-card"><strong>Transferhinweis</strong><p>Die Transferdetails werden nach der Berechnung hier angezeigt.</p></div><div class="tool-actions"><button class="btn btn-secondary" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button></div></div></aside></div></div>
       </div>
     </section>
   </main>
