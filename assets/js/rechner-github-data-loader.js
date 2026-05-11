@@ -84,6 +84,38 @@
     return date.toLocaleDateString("de-DE", { month: "long", year: "numeric" });
   }
 
+  function getCpmNumber(cpmText) {
+    return Number(String(cpmText || "0").replace(" ct", "").replace(",", "."));
+  }
+
+  function buildDealRecommendation(cpmText, payload, data) {
+    const cpm = getCpmNumber(cpmText);
+    const klasse = payload.reiseklasse || "Prämienflug";
+    const programm = payload.programm || "Programm";
+
+    if (!Number.isFinite(cpm) || cpm <= 0) {
+      return "Der rechnerische Gegenwert lässt sich mit den aktuellen Eingaben nicht sinnvoll bewerten.";
+    }
+
+    if (cpm >= 2.0) {
+      return `Sehr starker Gegenwert: ${cpmText} pro Meile ist für ${klasse} mit ${programm} attraktiv. Prüfe als Nächstes vor allem Verfügbarkeit und reale Zuzahlungen.`;
+    }
+
+    if (cpm >= 1.5) {
+      return `Guter Gegenwert: ${cpmText} pro Meile spricht grundsätzlich für eine sinnvolle Einlösung, sofern Verfügbarkeit und Flugzeiten passen.`;
+    }
+
+    if (cpm >= 1.0) {
+      return `Solider Gegenwert: ${cpmText} pro Meile kann sich lohnen, ist aber kein Selbstläufer. Vergleiche unbedingt mit Cashpreisen und alternativen Programmen.`;
+    }
+
+    if (cpm >= 0.6) {
+      return `Eher schwacher Gegenwert: ${cpmText} pro Meile ist nur dann interessant, wenn Cashpreise hoch sind oder du Meilen gezielt abbauen möchtest.`;
+    }
+
+    return `Schwacher Gegenwert: ${cpmText} pro Meile spricht eher gegen diese Einlösung. Ein Cash-Ticket oder ein anderes Programm könnte sinnvoller sein.`;
+  }
+
   function buildGithubResult(payload, rate) {
     const prefix = getScenarioPrefix(payload.szenario);
     const persons = extractNumber(payload.personen);
@@ -107,7 +139,7 @@
     const savingsTotal = Math.max(0, cashTotal - awardTotal);
     const cpm = targetMiles > 0 ? ((savingsTotal / targetMiles) * 100).toFixed(2).replace(".", ",") + " ct" : "—";
 
-    return {
+    const data = {
       status: "ok",
       source: "github",
       bestand: `${formatPoints(availableTotal)} ${cfg.kurzlabel || "Punkte"}`,
@@ -120,9 +152,13 @@
       award_total: awardTotal,
       savings_total: savingsTotal,
       cpm,
-      deal: `Berechnet aus GitHub-Planungswerten, Datenstand ${window.MILES_PLANNER_AWARD_RATES?.dataStand || "unbekannt"}. ${rate.hinweis || ""}`,
       rate
     };
+
+    data.deal = buildDealRecommendation(cpm, payload, data);
+    data.sourceHint = `Berechnet aus GitHub-Planungswerten, Datenstand ${window.MILES_PLANNER_AWARD_RATES?.dataStand || "unbekannt"}. ${rate.hinweis || ""}`;
+
+    return data;
   }
 
   async function berechneMilesPlanerMitGithubFallback() {
@@ -204,6 +240,7 @@
               <div class="result-item"><div class="label">Ersparnis gesamt</div><div class="value">${formatEuro(data.savings_total)}</div></div>
               <div class="result-item"><div class="label">Wert pro Meile</div><div class="value">${escapeHtml(data.cpm || "—")}</div><div class="value-note">${escapeHtml(data.deal || "")}</div></div>
             </div>
+            <div class="result-info-card"><strong>Hinweis zu den Planungswerten</strong><p>${escapeHtml(data.sourceHint || "")}</p></div>
           </div>
 
           <div class="result-section">
