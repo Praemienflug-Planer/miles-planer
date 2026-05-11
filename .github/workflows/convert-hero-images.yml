@@ -1,5 +1,6 @@
 name: Convert hero images to WebP
 
+# Touch this workflow file to trigger a fresh conversion run when needed.
 on:
   workflow_dispatch:
   push:
