@@ -19,14 +19,32 @@ jobs:
 
       - name: Replace hero background CSS version
         run: |
-          set -euo pipefail
-          NEW_VERSION="20260511-2"
-          grep -RIl "hero-background.css?v=" . \
-            --include='*.html' \
-            --include='*.md' \
-            --exclude-dir='.git' \
-            --exclude-dir='_site' \
-            | xargs sed -i -E "s#hero-background\.css\?v=[0-9]{8}-[0-9]+#hero-background.css?v=${NEW_VERSION}#g"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          new_version = "20260511-2"
+          pattern = re.compile(r"hero-background\.css\?v=\d{8}-\d+")
+          replacement = f"hero-background.css?v={new_version}"
+          changed = []
+
+          for suffix in ("*.html", "*.md"):
+              for path in Path(".").rglob(suffix):
+                  if any(part in {".git", "_site"} for part in path.parts):
+                      continue
+                  text = path.read_text(encoding="utf-8")
+                  new_text = pattern.sub(replacement, text)
+                  if new_text != text:
+                      path.write_text(new_text, encoding="utf-8")
+                      changed.append(str(path))
+
+          if changed:
+              print("Updated hero CSS cache version in:")
+              for item in changed:
+                  print(f"- {item}")
+          else:
+              print("No hero CSS cache versions needed updating.")
+          PY
 
       - name: Show changed files
         run: git status --short
