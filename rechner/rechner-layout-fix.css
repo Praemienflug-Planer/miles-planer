@@ -1,5 +1,90 @@
 /* Rechner: einheitliches Layout für Eingabe und Sticky-Hinweise */
 
+.calculator-intro-card {
+  border-color: rgba(96, 165, 250, 0.34);
+}
+
+.calculator-start-hint {
+  margin: 18px 0 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(96, 165, 250, 0.28);
+  border-radius: 14px;
+  background: rgba(16, 39, 68, 0.72);
+}
+
+.calculator-start-hint strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.calculator-start-hint p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.calculator-progress {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0 22px;
+}
+
+.progress-phase {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(7, 17, 31, 0.48);
+}
+
+.progress-phase span {
+  grid-row: span 2;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--soft);
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.progress-phase strong {
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.progress-phase small {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.progress-phase.active {
+  border-color: rgba(96, 165, 250, 0.46);
+  background: rgba(16, 39, 68, 0.76);
+}
+
+.step-help {
+  margin: -2px 0 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.calculator-benefit-card {
+  border-color: rgba(96, 165, 250, 0.28);
+}
+
+.benefit-list li + li {
+  margin-top: 8px;
+}
+
 /* Der Punktestand-Block soll dieselbe Breite wie der obere Planungsblock haben. */
 .points-row {
   display: block;
@@ -30,12 +115,12 @@
 .sidebar-transfer-hint strong {
   display: block;
   margin-bottom: 8px;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .sidebar-transfer-hint p {
   margin: 0;
-  color: #4b5563;
+  color: var(--muted);
   line-height: 1.65;
 }
 
@@ -63,6 +148,10 @@
 
 /* Mobile bleibt sauber untereinander. */
 @media (max-width: 900px) {
+  .calculator-progress {
+    grid-template-columns: 1fr;
+  }
+
   .sidebar-transfer-hint {
     margin-top: 18px;
   }
