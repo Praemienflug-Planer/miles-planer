@@ -1,7 +1,11 @@
 name: Bump hero CSS version
 
+# Touch this workflow file to trigger a cache-version bump run when needed.
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/bump-hero-css-version.yml'
 
 permissions:
   contents: write
