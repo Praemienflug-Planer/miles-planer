@@ -8,7 +8,12 @@ window.MILES_PLANNER_LISTS = {
     "Südafrika",
     "Thailand",
     "USA East",
-    "USA West"
+    "USA West",
+    "Singapur",
+    "Karibik",
+    "Kanada",
+    "Australien",
+    "Mauritius"
   ],
   reiseklassen: [
     "Premium Economy",
