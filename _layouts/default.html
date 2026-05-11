@@ -1,6 +1,10 @@
 {% comment %}
   Transitional default layout for existing static HTML pages.
   The repository still contains full HTML documents. This layout keeps their content intact
-  and injects central JavaScript before </body>.
+  and injects the central navigation/footer shell before </body>.
+
+  Important:
+  - navigation-shell.js removes legacy page-level header/footer and injects the current central shell.
+  - site-shell.js is no longer loaded here to avoid duplicate shell work.
 {% endcomment %}
-{{ content | replace: '</body>', '<script src="/miles-planer/assets/js/site-shell.js?v=20260508-1"></script><script src="/miles-planer/assets/js/navigation-shell.js?v=20260511-1"></script><script src="/miles-planer/assets/js/page-enhancements.js?v=20260508-1"></script></body>' }}
+{{ content | replace: '</body>', '<script src="/miles-planer/assets/js/navigation-shell.js?v=20260511-2"></script><script src="/miles-planer/assets/js/page-enhancements.js?v=20260508-1"></script></body>' }}
