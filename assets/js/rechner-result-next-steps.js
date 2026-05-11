@@ -76,7 +76,7 @@
   function renderNextStepBox(programm) {
     const config = getNextStepConfig(programm);
     return `
-      <div class="result-section next-step-box">
+      <div class="result-section next-step-box" data-enhanced-result="true">
         <p class="eyebrow">Nächster Schritt</p>
         <h3>${config.title}</h3>
         <p>${config.text}</p>
@@ -88,9 +88,25 @@
     `;
   }
 
+  function renderSammelwegeBox() {
+    return `
+      <h4>Du möchtest passende Sammelwege einordnen?</h4>
+      <p>
+        Der Rechner zeigt nur, ob dein Ziel rechnerisch realistisch wirkt. Der nächste Schritt ist die Frage,
+        welcher Sammelweg zu deinem Programm passt: PAYBACK, American Express Membership Rewards,
+        Miles & More Kreditkarte, Wunschgutschein oder einzelne Meilenangebote.
+      </p>
+      <p>
+        Ich nutze selbst verschiedene Punkte- und Meilenprogramme und ordne diese hier aus Planungssicht ein.
+        Bitte prüfe Konditionen, Gebühren und Kartenbedingungen immer selbst vor einem Abschluss.
+      </p>
+    `;
+  }
+
   function enhanceResultNextSteps() {
     const result = document.getElementById('result');
-    if (!result || result.querySelector('.next-step-box')) return;
+    if (!result || !result.querySelector('.result-card')) return;
+    if (result.querySelector('.next-step-box')) return;
 
     const payload = getPayloadSafe();
     const affiliateBox = result.querySelector('.affiliate-box');
@@ -103,30 +119,28 @@
     } else if (affiliateBox) {
       affiliateBox.insertAdjacentHTML('beforebegin', renderNextStepBox(payload.programm));
     }
+
+    if (affiliateBox && !affiliateBox.classList.contains('result-sammelwege-box')) {
+      affiliateBox.classList.add('result-sammelwege-box');
+      affiliateBox.innerHTML = renderSammelwegeBox();
+    }
   }
 
-  window.buildAffiliateBox = function buildAffiliateBox() {
-    return `
-      <div class="affiliate-box neutral-box result-sammelwege-box">
-        <h4>Du möchtest passende Sammelwege einordnen?</h4>
-        <p>
-          Der Rechner zeigt nur, ob dein Ziel rechnerisch realistisch wirkt. Der nächste Schritt ist die Frage,
-          welcher Sammelweg zu deinem Programm passt: PAYBACK, American Express Membership Rewards,
-          Miles & More Kreditkarte, Wunschgutschein oder einzelne Meilenangebote.
-        </p>
-        <p>
-          Ich nutze selbst verschiedene Punkte- und Meilenprogramme und ordne diese hier aus Planungssicht ein.
-          Bitte prüfe Konditionen, Gebühren und Kartenbedingungen immer selbst vor einem Abschluss.
-        </p>
-      </div>
-    `;
-  };
+  function startResultObserver() {
+    const result = document.getElementById('result');
+    if (!result) return;
 
-  if (typeof window.berechneMilesPlaner === 'function') {
-    const originalBerechneMilesPlaner = window.berechneMilesPlaner;
-    window.berechneMilesPlaner = async function enhancedBerechneMilesPlaner() {
-      await originalBerechneMilesPlaner();
+    const observer = new MutationObserver(() => {
       enhanceResultNextSteps();
-    };
+    });
+
+    observer.observe(result, { childList: true, subtree: true });
+    enhanceResultNextSteps();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startResultObserver);
+  } else {
+    startResultObserver();
   }
 })();
