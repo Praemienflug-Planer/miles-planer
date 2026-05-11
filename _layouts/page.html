@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{{ page.title | default: 'Prämienflug-Planer' }}</title>
+  {% if page.description %}<meta name="description" content="{{ page.description }}" />{% endif %}
+  <link rel="canonical" href="{{ page.canonical | default: page.url | absolute_url }}" />
+  <meta name="robots" content="{{ page.robots | default: 'index,follow' }}" />
+
+  <meta property="og:type" content="{{ page.og_type | default: 'website' }}" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:site_name" content="Prämienflug-Planer" />
+  <meta property="og:title" content="{{ page.og_title | default: page.title | default: 'Prämienflug-Planer' }}" />
+  {% if page.description %}<meta property="og:description" content="{{ page.og_description | default: page.description }}" />{% endif %}
+  <meta property="og:url" content="{{ page.canonical | default: page.url | absolute_url }}" />
+  <meta property="og:image" content="{{ page.og_image | default: '/miles-planer/assets/og/og-home.jpg' | absolute_url }}" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ page.twitter_title | default: page.og_title | default: page.title | default: 'Prämienflug-Planer' }}" />
+  {% if page.description %}<meta name="twitter:description" content="{{ page.twitter_description | default: page.og_description | default: page.description }}" />{% endif %}
+  <meta name="twitter:image" content="{{ page.og_image | default: '/miles-planer/assets/og/og-home.jpg' | absolute_url }}" />
+
+  {% if page.schema_json %}
+  <script type="application/ld+json">
+{{ page.schema_json }}
+  </script>
+  {% endif %}
+
+  <link rel="stylesheet" href="/miles-planer/assets/css/site.css?v=20260511-1" />
+  <link rel="stylesheet" href="/miles-planer/assets/css/hero-background.css?v=20260507-6" />
+  {% if page.extra_css %}
+    {% for css in page.extra_css %}<link rel="stylesheet" href="{{ css }}" />{% endfor %}
+  {% endif %}
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+  {% include header.html %}
+
+  <main id="main-content">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+  <script src="/miles-planer/assets/js/nav-toggle.js?v=20260511-1"></script>
+  <script src="/miles-planer/assets/js/page-enhancements.js?v=20260508-1"></script>
+  {% if page.extra_js %}
+    {% for js in page.extra_js %}<script src="{{ js }}"></script>{% endfor %}
+  {% endif %}
+</body>
+</html>
