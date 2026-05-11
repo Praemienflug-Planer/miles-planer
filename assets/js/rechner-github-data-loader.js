@@ -61,6 +61,7 @@
   function classifyCpmValue(cpmText) {
     const cpm = getCpmNumber(cpmText);
     if (!Number.isFinite(cpm) || cpm < 1.0) return "weak";
+    if (cpm >= 2.0) return "top";
     if (cpm >= 1.5) return "good";
     return "medium";
   }
