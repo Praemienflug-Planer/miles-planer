@@ -1,0 +1,51 @@
+name: Convert hero images to WebP
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'assets/hero/*.png'
+      - '.github/workflows/convert-hero-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: Convert hero PNG files to WebP
+        run: |
+          set -e
+          for file in assets/hero/*.png; do
+            [ -f "$file" ] || continue
+            output="${file%.png}.webp"
+            magick "$file" -strip -resize '1920x1080>' -quality 78 "$output"
+            echo "Converted $file -> $output"
+          done
+
+      - name: Show generated files
+        run: |
+          ls -lh assets/hero
+
+      - name: Commit WebP files
+        run: |
+          if git diff --quiet -- assets/hero/*.webp; then
+            echo "No WebP changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/hero/*.webp
+          git commit -m "Generate WebP hero images"
+          git push
