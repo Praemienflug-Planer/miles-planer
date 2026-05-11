@@ -156,7 +156,7 @@
     };
 
     data.deal = buildDealRecommendation(cpm, payload, data);
-    data.sourceHint = `Berechnet aus GitHub-Planungswerten, Datenstand ${window.MILES_PLANNER_AWARD_RATES?.dataStand || "unbekannt"}. ${rate.hinweis || ""}`;
+    data.sourceHint = `Planungswert, Datenstand ${window.MILES_PLANNER_AWARD_RATES?.dataStand || "unbekannt"}. ${rate.hinweis || ""}`;
 
     return data;
   }
@@ -213,11 +213,6 @@
               Klasse: <strong>${escapeHtml(payload.reiseklasse)}</strong> ·
               Reisende: <strong>${escapeHtml(payload.personen)}</strong>
             </p>
-          </div>
-
-          <div class="result-info-card">
-            <strong>Datenquelle</strong>
-            <p>Dieses Ergebnis wurde aus den GitHub-Planungswerten berechnet. Google Sheets bleibt als Fallback aktiv, wenn keine passende Kombination in GitHub gepflegt ist.</p>
           </div>
 
           <div class="result-section">
