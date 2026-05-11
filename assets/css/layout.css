@@ -9,9 +9,40 @@
 .nav { display: flex; justify-content: space-between; align-items: center; min-height: 72px; gap: 20px; }
 .brand { font-weight: 800; font-size: 20px; color: var(--text); }
 .main-nav, .main-nav ul { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; min-width: 0; }
-.main-nav a { color: var(--muted); font-size: 14px; }
-.main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--primary); }
-.main-nav a[aria-current="page"] { font-weight: 800; }
+.nav-item { position: relative; }
+.nav-link, .main-nav a { color: var(--muted); font-size: 14px; }
+.nav-link:hover, .main-nav a:hover, .nav-link[aria-current="page"], .main-nav a[aria-current="page"] { color: var(--primary); }
+.nav-link[aria-current="page"], .main-nav a[aria-current="page"] { font-weight: 800; }
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 230px;
+  padding: 10px;
+  border: 1px solid rgba(96, 165, 250, 0.24);
+  border-radius: 14px;
+  background: rgba(7, 17, 31, 0.98);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.34);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: 0.15s ease;
+}
+.nav-dropdown a {
+  display: block;
+  padding: 9px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.nav-dropdown a:hover { background: rgba(96, 165, 250, 0.12); }
+.has-dropdown:hover .nav-dropdown, .has-dropdown:focus-within .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-toggle { display: none; }
 
 .hero { padding: 72px 0 56px; }
 .hero-small { padding: 56px 0 36px; }
@@ -73,44 +104,72 @@
 
 @media (max-width: 900px) {
   .nav, .cta-box { align-items: flex-start; flex-direction: column; }
+  .nav { gap: 14px; min-height: auto; padding-top: 14px; padding-bottom: 14px; }
+  .brand { width: 100%; font-size: 18px; padding-right: 56px; }
+  .nav-toggle {
+    position: absolute;
+    right: 20px;
+    top: 14px;
+    width: 44px;
+    height: 40px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(16, 28, 47, 0.92);
+    cursor: pointer;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 18px;
+    height: 2px;
+    margin: 0 auto;
+    border-radius: 999px;
+    background: var(--text);
+  }
+  .main-nav {
+    width: 100%;
+    display: none;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .site-header.nav-open .main-nav { display: grid; }
+  .nav-item { width: 100%; }
+  .nav-link, .main-nav a {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(16, 28, 47, 0.92);
+    font-size: 14px;
+    text-align: left;
+  }
+  .nav-dropdown {
+    position: static;
+    transform: none;
+    min-width: 0;
+    margin-top: 8px;
+    padding: 8px;
+    display: grid;
+    gap: 6px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    box-shadow: none;
+    background: rgba(5, 10, 19, 0.42);
+  }
+  .nav-dropdown a { padding: 9px 10px 9px 18px; white-space: normal; font-size: 13px; }
   .hero-grid, .contact-layout, .footer-grid { grid-template-columns: 1fr; }
   .hero { padding: 56px 0 42px; }
   .hero-small { padding: 48px 0 34px; }
 }
 
-@media (max-width: 700px) {
-  .site-header { position: static; }
-  .nav {
-    gap: 14px;
-    min-height: auto;
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-  .brand {
-    width: 100%;
-    font-size: 18px;
-  }
-  .main-nav, .main-nav ul {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-  .main-nav a {
-    display: block;
-    width: 100%;
-    padding: 9px 10px;
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    background: rgba(16, 28, 47, 0.92);
-    font-size: 13px;
-    text-align: center;
-    white-space: normal;
-  }
-}
-
 @media (max-width: 560px) {
-  .main-nav, .main-nav ul { gap: 8px; }
+  .container { padding-left: 16px; padding-right: 16px; }
+  .nav-toggle { right: 16px; }
   .hero-card, .article-card, .seo-card, .tool-card, .contact-card, .contact-info-card { padding: 18px; }
   .feature-grid, .audience-grid, .article-grid { grid-template-columns: minmax(0, 1fr); }
   .hero-actions { width: 100%; }
