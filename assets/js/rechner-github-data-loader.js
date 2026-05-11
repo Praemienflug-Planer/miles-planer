@@ -58,6 +58,13 @@
     return Number(String(cpmText || "0").replace(" ct", "").replace(",", "."));
   }
 
+  function classifyCpmValue(cpmText) {
+    const cpm = getCpmNumber(cpmText);
+    if (!Number.isFinite(cpm) || cpm < 1.0) return "weak";
+    if (cpm >= 1.5) return "good";
+    return "medium";
+  }
+
   function buildDealRecommendation(cpmText, payload) {
     const cpm = getCpmNumber(cpmText);
     const klasse = payload.reiseklasse || "Prämienflug";
@@ -103,6 +110,7 @@
       award_total: awardTotal,
       savings_total: savingsTotal,
       cpm,
+      cpmClass: classifyCpmValue(cpm),
       deal: buildDealRecommendation(cpm, payload),
       rate
     };
@@ -152,7 +160,7 @@
               <div class="result-item"><div class="label">Cashpreis gesamt</div><div class="value">${formatEuro(data.cash_total)}</div></div>
               <div class="result-item"><div class="label">Award-Zuzahlung gesamt</div><div class="value">${formatEuro(data.award_total)}</div></div>
               <div class="result-item"><div class="label">Ersparnis gesamt</div><div class="value">${formatEuro(data.savings_total)}</div></div>
-              <div class="result-item"><div class="label">Wert pro Meile</div><div class="value">${escapeHtml(data.cpm || "—")}</div><div class="value-note">${escapeHtml(data.deal || "")}</div></div>
+              <div class="result-item cpm-tile cpm-${escapeHtml(data.cpmClass || "weak")}"><div class="label">Wert pro Meile</div><div class="value">${escapeHtml(data.cpm || "—")}</div><div class="value-note">${escapeHtml(data.deal || "")}</div></div>
             </div>
           </div>
           <div class="result-section"><h3>Nächste Schritte</h3><ul><li>Prüfe, ob dein Reisezeitraum flexibel genug ist.</li><li>Vergleiche alternative Programme, falls der Meilenbedarf stark abweicht.</li><li>Nutze Aktionen und planbare Sammelwege, statt spontan Meilen zu kaufen.</li></ul></div>
