@@ -4,9 +4,9 @@
 .seo-card p, .seo-card li { color: var(--muted); }
 .seo-card ul, .seo-card ol { padding-left: 20px; margin: 0; }
 .seo-card p + ul, .seo-card p + ol, .seo-card p + p { margin-top: 12px; }
-.seo-table-wrap { width: 100%; max-width: 100%; overflow-x: auto; margin: 18px 0; border-radius: 12px; border: 1px solid var(--line); }
-.seo-table { width: 100%; min-width: 700px; border-collapse: collapse; background: var(--card); color: var(--text); }
-.seo-table th, .seo-table td { border: 1px solid var(--line); padding: 12px 14px; text-align: left; vertical-align: top; }
+.seo-table-wrap { width: 100%; max-width: 100%; overflow-x: visible; margin: 18px 0; border-radius: 12px; border: 1px solid var(--line); }
+.seo-table { width: 100%; min-width: 0; table-layout: fixed; border-collapse: collapse; background: var(--card); color: var(--text); }
+.seo-table th, .seo-table td { border: 1px solid var(--line); padding: 12px 14px; text-align: left; vertical-align: top; overflow-wrap: anywhere; word-break: normal; hyphens: auto; }
 .seo-table th { background: var(--card-strong); color: var(--text); }
 .seo-table td { color: var(--muted); }
 .faq-list { display: grid; gap: 16px; }
@@ -43,5 +43,9 @@
   .seo-layout { grid-template-columns: 1fr; }
   .seo-sidebar,
   .seo-sidebar .sticky-card { position: static; top: auto; max-height: none; overflow: visible; }
-  .seo-table { min-width: 620px; }
+  .seo-table th, .seo-table td { padding: 10px 9px; font-size: 14px; }
+}
+
+@media (max-width: 560px) {
+  .seo-table th, .seo-table td { padding: 9px 7px; font-size: 13px; }
 }
