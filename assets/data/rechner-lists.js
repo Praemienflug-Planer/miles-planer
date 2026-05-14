@@ -1,5 +1,5 @@
 window.MILES_PLANNER_LISTS = {
-  dataStand: "10.05.2026",
+  dataStand: "14.05.2026",
   source: "GitHub Stammdaten für Dropdowns. Der Rechner fokussiert bewusst Premium Economy und Business Class, weil diese Klassen für Familien-Prämienflüge meist den relevanteren Meilenwert liefern.",
   ziele: [
     "Dubai",
@@ -13,7 +13,13 @@ window.MILES_PLANNER_LISTS = {
     "Karibik",
     "Kanada",
     "Australien",
-    "Mauritius"
+    "Mauritius",
+    "Seychellen",
+    "Bali",
+    "Vietnam",
+    "Oman",
+    "Mexiko",
+    "Sri Lanka"
   ],
   reiseklassen: [
     "Premium Economy",
