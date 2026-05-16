@@ -21,6 +21,7 @@
       { label: 'Business Class mit Meilen', href: `${BASE}/meilen-business-class/` },
       { label: 'Amex Punkte umrechnen', href: `${BASE}/amex-meilen-umrechnen/` },
       { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` },
+      { label: 'Warum diese Seite?', href: `${BASE}/ueber-das-projekt/` },
       { label: 'FAQ', href: `${BASE}/faq/` }
     ] },
     { label: 'Kontakt', href: `${BASE}/kontakt.html` }
@@ -31,7 +32,8 @@
     ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`],
     ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`], ['Thailand', `${BASE}/meilen-thailand/`],
     ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
-    ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`], ['FAQ', `${BASE}/faq/`]
+    ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`],
+    ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`], ['FAQ', `${BASE}/faq/`]
   ];
 
   const legalNav = [
