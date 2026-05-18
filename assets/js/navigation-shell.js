@@ -9,6 +9,7 @@
       { label: 'PAYBACK Punkte sammeln', href: `${BASE}/meilen-sammeln/payback/` },
       { label: 'PAYBACK zu Miles & More', href: `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/` },
       { label: 'Amex Membership Rewards', href: `${BASE}/meilen-sammeln/amex/` },
+      { label: 'Amex oder PAYBACK?', href: `${BASE}/amex-oder-payback/` },
       { label: 'Miles & More Kreditkarte', href: `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/` },
       { label: 'Wunschgutschein', href: `${BASE}/meilen-sammeln/wunschgutschein/` },
       { label: 'Zeitschriftenabo-Meilen', href: `${BASE}/meilen-sammeln/zeitschriftenabo/` }
@@ -21,6 +22,7 @@
       { label: 'Business Class mit Meilen', href: `${BASE}/meilen-business-class/` },
       { label: 'Business Class mit Kindern', href: `${BASE}/business-class-mit-kindern/` },
       { label: 'Premium Economy mit Kindern', href: `${BASE}/premium-economy-mit-kindern/` },
+      { label: 'Premium Economy oder Business?', href: `${BASE}/premium-economy-oder-business-class/` },
       { label: '4 Prämienflug-Plätze finden', href: `${BASE}/vier-praemienflug-plaetze-finden/` },
       { label: 'Amex Punkte umrechnen', href: `${BASE}/amex-meilen-umrechnen/` },
       { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` },
@@ -33,11 +35,12 @@
   const footerNav = [
     ['Rechner', `${BASE}/rechner/`], ['Tools', `${BASE}/tools/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`],
     ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`],
-    ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`], ['Thailand', `${BASE}/meilen-thailand/`],
-    ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
+    ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`],
+    ['Thailand', `${BASE}/meilen-thailand/`], ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
     ['Business Class mit Kindern', `${BASE}/business-class-mit-kindern/`], ['Premium Economy mit Kindern', `${BASE}/premium-economy-mit-kindern/`],
-    ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`],
-    ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`], ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`], ['FAQ', `${BASE}/faq/`]
+    ['Premium Economy oder Business?', `${BASE}/premium-economy-oder-business-class/`], ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`],
+    ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`],
+    ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`], ['FAQ', `${BASE}/faq/`]
   ];
 
   const legalNav = [
