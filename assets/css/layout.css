@@ -94,13 +94,24 @@
   border-radius: 8px;
   background: #07111f;
   color: var(--text);
-  font-size: 15px;
+  font-size: 16px;
   font-family: Arial, sans-serif;
 }
 .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid rgba(96, 165, 250, 0.45); border-color: var(--primary); }
 .contact-form textarea { resize: vertical; }
 .hp-field { position: absolute; left: -5000px; opacity: 0; pointer-events: none; }
 .form-note { margin-top: 14px; font-size: 13px; color: var(--muted); }
+
+.seo-table-wrap, .table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+img, iframe, video {
+  max-width: 100%;
+  height: auto;
+}
 
 @media (max-width: 900px) {
   .nav, .cta-box { align-items: flex-start; flex-direction: column; }
@@ -134,17 +145,20 @@
     display: none;
     grid-template-columns: 1fr;
     gap: 10px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    padding-bottom: 10px;
   }
   .site-header.nav-open .main-nav { display: grid; }
   .nav-item { width: 100%; }
   .nav-link, .main-nav a {
     display: block;
     width: 100%;
-    padding: 10px 12px;
+    padding: 11px 12px;
     border: 1px solid var(--line);
     border-radius: 10px;
     background: rgba(16, 28, 47, 0.92);
-    font-size: 14px;
+    font-size: 15px;
     text-align: left;
   }
   .nav-dropdown {
@@ -161,10 +175,11 @@
     box-shadow: none;
     background: rgba(5, 10, 19, 0.42);
   }
-  .nav-dropdown a { padding: 9px 10px 9px 18px; white-space: normal; font-size: 13px; }
+  .nav-dropdown a { padding: 9px 10px 9px 18px; white-space: normal; font-size: 14px; }
   .hero-grid, .contact-layout, .footer-grid { grid-template-columns: 1fr; }
-  .hero { padding: 56px 0 42px; }
-  .hero-small { padding: 48px 0 34px; }
+  .hero { padding: 48px 0 40px; }
+  .hero-small { padding: 42px 0 30px; }
+  .section { padding: 42px 0; }
 }
 
 @media (max-width: 560px) {
@@ -173,6 +188,9 @@
   .hero-card, .article-card, .seo-card, .tool-card, .contact-card, .contact-info-card { padding: 18px; }
   .feature-grid, .audience-grid, .article-grid { grid-template-columns: minmax(0, 1fr); }
   .hero-actions { width: 100%; }
-  .hero-actions .btn { width: 100%; text-align: center; }
+  .hero-actions .btn { width: 100%; text-align: center; justify-content: center; }
   .cta-box { padding: 20px; }
+  h1 { font-size: clamp(2rem, 10vw, 2.65rem); }
+  h2 { font-size: clamp(1.45rem, 7vw, 2rem); }
+  .hero-text, .section-head p { font-size: 16px; }
 }
