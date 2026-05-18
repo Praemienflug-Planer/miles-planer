@@ -19,6 +19,9 @@
     ] },
     { label: 'Ratgeber', href: `${BASE}/meilen-business-class/`, children: [
       { label: 'Business Class mit Meilen', href: `${BASE}/meilen-business-class/` },
+      { label: 'Business Class mit Kindern', href: `${BASE}/business-class-mit-kindern/` },
+      { label: 'Premium Economy mit Kindern', href: `${BASE}/premium-economy-mit-kindern/` },
+      { label: '4 Prämienflug-Plätze finden', href: `${BASE}/vier-praemienflug-plaetze-finden/` },
       { label: 'Amex Punkte umrechnen', href: `${BASE}/amex-meilen-umrechnen/` },
       { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` },
       { label: 'Warum diese Seite?', href: `${BASE}/ueber-das-projekt/` },
@@ -32,8 +35,9 @@
     ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`],
     ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`], ['Thailand', `${BASE}/meilen-thailand/`],
     ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
-    ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`],
-    ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`], ['FAQ', `${BASE}/faq/`]
+    ['Business Class mit Kindern', `${BASE}/business-class-mit-kindern/`], ['Premium Economy mit Kindern', `${BASE}/premium-economy-mit-kindern/`],
+    ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`],
+    ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`], ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`], ['FAQ', `${BASE}/faq/`]
   ];
 
   const legalNav = [
