@@ -116,7 +116,6 @@
   border-color: rgba(52, 211, 153, 0.28);
 }
 
-/* Der Punktestand-Block soll dieselbe Breite wie der obere Planungsblock haben. */
 .points-row {
   display: block;
 }
@@ -125,7 +124,6 @@
   width: 100%;
 }
 
-/* Transferhinweis sitzt jetzt in der rechten Sticky-Spalte. */
 .sidebar-transfer-hint {
   margin-top: 20px;
   padding-top: 18px;
@@ -155,7 +153,6 @@
   line-height: 1.65;
 }
 
-/* Einheitlichere Eingabefelder im Punktestand-Block. */
 .points-main-card .form-grid.two-col {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px 18px;
@@ -177,7 +174,157 @@
   margin-bottom: 6px;
 }
 
-/* Mobile bleibt sauber untereinander. */
+.result-loading {
+  padding: 22px;
+  border: 1px solid rgba(96, 165, 250, 0.28);
+  border-radius: 18px;
+  background: rgba(16, 39, 68, 0.72);
+  color: var(--text);
+  font-weight: 800;
+}
+
+.optimized-result-card .result-section,
+.optimized-result-card .result-action-box {
+  margin-top: 20px;
+}
+
+.result-hero-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 210px;
+  gap: 20px;
+  align-items: center;
+  padding: 24px;
+  border-radius: 22px;
+}
+
+.result-hero-summary h2 {
+  margin: 10px 0 8px;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+}
+
+.result-hero-summary p {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.84);
+  line-height: 1.65;
+}
+
+.result-main-number {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(7, 17, 31, 0.52);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.result-main-number span,
+.result-main-number small {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.result-main-number strong {
+  display: block;
+  margin: 7px 0;
+  color: var(--text);
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  line-height: 1.1;
+}
+
+.result-grid-priority .result-item-highlight {
+  border-color: rgba(96, 165, 250, 0.30);
+  background: rgba(16, 39, 68, 0.58);
+}
+
+.result-context-note {
+  margin: 16px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.result-action-box {
+  padding: 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.20);
+  background: rgba(16, 28, 47, 0.78);
+}
+
+.result-action-box h3 {
+  margin: 8px 0 10px;
+  color: var(--text);
+}
+
+.result-action-box p,
+.result-action-box li {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.result-action-box ul {
+  margin-bottom: 0;
+}
+
+.result-action-good {
+  border-color: rgba(52, 211, 153, 0.34);
+  background: linear-gradient(180deg, rgba(6, 78, 59, 0.32), rgba(16, 28, 47, 0.82));
+}
+
+.result-action-medium {
+  border-color: rgba(251, 191, 36, 0.34);
+  background: linear-gradient(180deg, rgba(120, 83, 12, 0.30), rgba(16, 28, 47, 0.82));
+}
+
+.result-action-bad {
+  border-color: rgba(248, 113, 113, 0.34);
+  background: linear-gradient(180deg, rgba(127, 29, 29, 0.30), rgba(16, 28, 47, 0.82));
+}
+
+.optimized-affiliate-box {
+  border-color: rgba(96, 165, 250, 0.34);
+  background:
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.14), transparent 32%),
+    rgba(16, 39, 68, 0.80);
+}
+
+.affiliate-disclosure {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(7, 17, 31, 0.42);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  font-size: 14px;
+}
+
+.result-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.result-link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.result-link-grid a {
+  display: block;
+  padding: 14px 15px;
+  border-radius: 14px;
+  border: 1px solid rgba(96, 165, 250, 0.20);
+  background: rgba(7, 17, 31, 0.42);
+  color: #bfdbfe;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.result-link-grid a:hover {
+  border-color: rgba(96, 165, 250, 0.45);
+  background: rgba(16, 39, 68, 0.72);
+}
+
 @media (max-width: 900px) {
   .calculator-progress {
     grid-template-columns: 1fr;
@@ -194,15 +341,35 @@
   .scenario-switch-wrap {
     max-width: none;
   }
+
+  .result-hero-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .result-main-number {
+    text-align: left;
+  }
 }
 
 @media (max-width: 560px) {
   .next-step-actions,
-  .next-step-actions .btn {
+  .next-step-actions .btn,
+  .result-action-buttons,
+  .result-action-buttons .btn {
     width: 100%;
   }
 
-  .next-step-actions .btn {
+  .next-step-actions .btn,
+  .result-action-buttons .btn {
     text-align: center;
+  }
+
+  .result-link-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-hero-summary,
+  .result-action-box {
+    padding: 18px;
   }
 }
