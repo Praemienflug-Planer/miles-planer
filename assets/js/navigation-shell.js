@@ -44,6 +44,14 @@
     ['Transparenz', `${BASE}/transparenz.html`], ['Kontakt', `${BASE}/kontakt.html`]
   ];
 
+  const officialCardImages = {
+    platinum: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/goldcard.png',
+    green: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/american-express-card.png',
+    rose: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/rose-gold-card.png',
+    gold: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/goldcard.png',
+    payback: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/payback-karte.png'
+  };
+
   function normalize(path) {
     return (!path.endsWith('/') && !path.endsWith('.html')) ? `${path}/` : path;
   }
@@ -89,6 +97,72 @@
     return footer;
   }
 
+  function injectCardImageStyles() {
+    if (document.getElementById('official-card-image-style')) return;
+    const style = document.createElement('style');
+    style.id = 'official-card-image-style';
+    style.textContent = `.official-card-image-wrap{background:#fff;padding:18px;display:flex;align-items:center;justify-content:center;min-height:170px}.official-card-img,.amex-card-image{display:block;width:100%;max-width:260px;height:auto}.amex-card-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center}.amex-card-pair .official-card-img,.amex-card-pair .amex-card-image{max-width:170px}.official-card-figure{margin:16px 0 20px;background:#fff;border-radius:16px;padding:18px;text-align:center}.official-card-figure img{display:block;max-width:280px;width:100%;height:auto;margin:0 auto}.official-card-figure figcaption{color:#475569;font-size:13px;margin-top:10px}@media(max-width:560px){.amex-card-pair{grid-template-columns:1fr}.amex-card-pair .official-card-img,.amex-card-pair .amex-card-image{max-width:240px}}`;
+    document.head.appendChild(style);
+  }
+
+  function setImage(selector, src, alt) {
+    const img = document.querySelector(selector);
+    if (!img) return null;
+    img.setAttribute('src', src);
+    img.setAttribute('alt', alt);
+    img.classList.add('official-card-img');
+    img.parentElement?.classList.add('official-card-image-wrap');
+    return img;
+  }
+
+  function addOfficialCardToGrid(grid, key, title, badge, text, ctaLabel = 'Link anfragen') {
+    if (!grid || grid.querySelector(`[data-card-key="${key}"]`)) return;
+    const article = document.createElement('article');
+    article.className = 'amex-offer-card';
+    article.dataset.cardKey = key;
+    article.innerHTML = `<div class="amex-card-image-wrap official-card-image-wrap"><img class="amex-card-image official-card-img" src="${officialCardImages[key]}" alt="${title}" loading="lazy"></div><div class="amex-offer-body"><span class="amex-badge">${badge}</span><h3>${title}</h3><p>${text}</p><div class="amex-actions"><a class="btn btn-primary" href="${BASE}/kontakt.html">${ctaLabel}</a></div></div>`;
+    grid.appendChild(article);
+  }
+
+  function improveAmexCardsPage() {
+    const grid = document.querySelector('.amex-card-grid');
+    const platinum = setImage('img[src$="/amex-platin.svg"]', officialCardImages.platinum, 'American Express Platinum Card');
+    const rose = setImage('img[src$="/amex-rosegold.svg"]', officialCardImages.rose, 'American Express Rose Gold Card');
+    if (rose && rose.parentElement && !rose.parentElement.querySelector('img[data-official-gold="true"]')) {
+      rose.parentElement.classList.add('amex-card-pair');
+      const gold = document.createElement('img');
+      gold.className = 'amex-card-image official-card-img';
+      gold.dataset.officialGold = 'true';
+      gold.src = officialCardImages.gold;
+      gold.alt = 'American Express Gold Card';
+      gold.loading = 'lazy';
+      rose.insertAdjacentElement('beforebegin', gold);
+    }
+    platinum?.parentElement?.classList.add('official-card-image-wrap');
+    addOfficialCardToGrid(grid, 'green', 'American Express Green', 'Schlanker Einstieg', 'Interessant, wenn du einen einfachen Einstieg in Membership Rewards suchst und keine Premium-Leistungen brauchst.');
+    addOfficialCardToGrid(grid, 'payback', 'PAYBACK American Express', 'PAYBACK / Miles & More', 'Passt besonders, wenn du PAYBACK Punkte sammelst und später zu Miles & More übertragen möchtest.');
+  }
+
+  function insertPaybackCardFigure() {
+    if (document.querySelector('[data-official-payback-card="true"]')) return;
+    const target = document.querySelector('[data-event*="payback_amex_contact"]')?.closest('.article-card, .result-action-box, .seo-card');
+    if (!target) return;
+    const figure = document.createElement('figure');
+    figure.className = 'official-card-figure';
+    figure.dataset.officialPaybackCard = 'true';
+    figure.innerHTML = `<img src="${officialCardImages.payback}" alt="PAYBACK American Express Karte" loading="lazy"><figcaption>PAYBACK American Express Karte.</figcaption>`;
+    const headline = target.querySelector('h2, h3');
+    if (headline) headline.insertAdjacentElement('afterend', figure);
+    else target.prepend(figure);
+  }
+
+  function applyOfficialCardImages() {
+    injectCardImageStyles();
+    const path = window.location.pathname;
+    if (path.includes('/meilen-sammeln/amex-kreditkarten/')) improveAmexCardsPage();
+    if (path.includes('/meilen-sammeln/payback/') || path.includes('/amex-oder-payback/')) insertPaybackCardFigure();
+  }
+
   function mount() {
     document.querySelector('header.site-header')?.remove();
     document.querySelector('footer.site-footer')?.remove();
@@ -98,6 +172,7 @@
     if (skip && skip.parentNode === document.body) skip.insertAdjacentElement('afterend', header);
     else document.body.prepend(header);
     document.body.appendChild(footer);
+    applyOfficialCardImages();
 
     const toggle = header.querySelector('.nav-toggle');
     const nav = header.querySelector('.main-nav');
