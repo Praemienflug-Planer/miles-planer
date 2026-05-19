@@ -6,6 +6,7 @@
     { label: 'Tools', href: `${BASE}/tools/` },
     { label: 'Meilen sammeln', href: `${BASE}/meilen-sammeln/`, children: [
       { label: 'Übersicht', href: `${BASE}/meilen-sammeln/` },
+      { label: 'Miles & More Grundlagen', href: `${BASE}/meilen-sammeln/miles-and-more/` },
       { label: 'PAYBACK Punkte sammeln', href: `${BASE}/meilen-sammeln/payback/` },
       { label: 'PAYBACK zu Miles & More', href: `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/` },
       { label: 'Amex Membership Rewards', href: `${BASE}/meilen-sammeln/amex/` },
@@ -34,9 +35,10 @@
 
   const footerNav = [
     ['Rechner', `${BASE}/rechner/`], ['Tools', `${BASE}/tools/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`],
-    ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`],
-    ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`],
-    ['Thailand', `${BASE}/meilen-thailand/`], ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
+    ['Miles & More Grundlagen', `${BASE}/meilen-sammeln/miles-and-more/`], ['PAYBACK', `${BASE}/meilen-sammeln/payback/`],
+    ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`],
+    ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`], ['Thailand', `${BASE}/meilen-thailand/`],
+    ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
     ['Business Class mit Kindern', `${BASE}/business-class-mit-kindern/`], ['Premium Economy mit Kindern', `${BASE}/premium-economy-mit-kindern/`],
     ['Premium Economy oder Business?', `${BASE}/premium-economy-oder-business-class/`], ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`],
     ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`],
