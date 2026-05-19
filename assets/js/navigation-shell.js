@@ -45,7 +45,7 @@
   ];
 
   const officialCardImages = {
-    platinum: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/goldcard.png',
+    platinum: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/platinum-card.png',
     green: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/american-express-card.png',
     rose: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/rose-gold-card.png',
     gold: 'https://icm.aexp-static.com/Internet/internationalcardshop/de_de/images/cards/goldcard.png',
