@@ -11,47 +11,47 @@
 
     if (normalized.includes('miles') || normalized.includes('more')) {
       return {
-        title: 'Dein nächster sinnvoller Schritt: Miles-&-More-Sammelweg prüfen',
-        text: 'Wenn dein Ergebnis auf Miles & More basiert, sind PAYBACK, Transferboni und die Miles-&-More-Kreditkarte die naheliegenden nächsten Themen.',
+        title: 'Dein Ergebnis passt zu Miles & More: Sammelweg gezielt verbessern',
+        text: 'Wenn dein Plan auf Miles & More basiert, sind meistens drei Bausteine relevant: PAYBACK im Alltag, Transferbonus-Aktionen und eine passende Miles-&-More-/Eurowings-Kreditkarte. Prüfe diese Reihenfolge, bevor du Punkte überträgst oder eine Karte beantragst.',
         links: [
-          ['PAYBACK Punkte sammeln', `${BASE}/meilen-sammeln/payback/`],
-          ['PAYBACK zu Miles & More übertragen', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
-          ['Miles & More Kreditkarte einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]
+          ['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`],
+          ['Transfer zu Miles & More prüfen', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
+          ['Kreditkarte seriös einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]
         ],
-        note: 'Achte besonders auf Zuzahlungen, Verfügbarkeiten für mehrere Plätze und Transferbonus-Aktionen.'
+        note: 'Kreditkarten nur nutzen, wenn die Abrechnung immer vollständig bezahlt wird. Meilen sind kein Grund für Konsumschulden.'
       };
     }
 
     if (normalized.includes('flying')) {
       return {
-        title: 'Dein nächster sinnvoller Schritt: flexible Amex-Punkte prüfen',
-        text: 'Für Flying Blue sind flexible Punkte wie American Express Membership Rewards besonders interessant, weil sie später gezielt übertragen werden können.',
+        title: 'Dein Ergebnis passt zu Flying Blue: flexible Amex-Punkte prüfen',
+        text: 'Für Flying Blue sind flexible Punkte wie American Express Membership Rewards besonders interessant, weil du sie erst später gezielt übertragen kannst. Das ist bei schwankenden Flying-Blue-Preisen oft wertvoller als ein zu früher Transfer.',
         links: [
           ['Amex Membership Rewards verstehen', `${BASE}/meilen-sammeln/amex/`],
           ['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`],
-          ['Meilen sammeln im Alltag', `${BASE}/meilen-sammeln/`]
+          ['Amex oder PAYBACK vergleichen', `${BASE}/amex-oder-payback/`]
         ],
-        note: 'Flying-Blue-Preise können stark schwanken. Plane deshalb eher mit Puffer und prüfe Alternativdaten.'
+        note: 'Flying-Blue-Preise können stark schwanken. Plane mit Puffer und übertrage Punkte erst, wenn Verfügbarkeit und Buchungslogik klar sind.'
       };
     }
 
     if (normalized.includes('avios')) {
       return {
-        title: 'Dein nächster sinnvoller Schritt: Avios- und Amex-Logik prüfen',
-        text: 'Bei Avios lohnt sich der Blick auf Transferwege, Partnerprogramme und die Umrechnung aus Membership Rewards Punkten.',
+        title: 'Dein Ergebnis passt zu Avios: Transferlogik und Sweet Spot prüfen',
+        text: 'Bei Avios kommt es stark auf Strecke, Airline und Programm an. Flexible Punkte können sinnvoll sein, wenn du noch offen bleiben möchtest.',
         links: [
           ['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`],
           ['Amex Membership Rewards sammeln', `${BASE}/meilen-sammeln/amex/`],
-          ['Meilen sammeln im Alltag', `${BASE}/meilen-sammeln/`]
+          ['Amex oder PAYBACK vergleichen', `${BASE}/amex-oder-payback/`]
         ],
-        note: 'Avios können je nach Programm und Strecke sehr unterschiedlich stark sein. Prüfe daher den konkreten Sweet Spot.'
+        note: 'Avios können sehr stark sein, aber nicht pauschal. Prüfe den konkreten Sweet Spot und mögliche Gebühren.'
       };
     }
 
     if (normalized.includes('kris')) {
       return {
-        title: 'Dein nächster sinnvoller Schritt: Transferzeit und Puffer prüfen',
-        text: 'Bei KrisFlyer sind Transferzeiten und Verfügbarkeiten besonders wichtig. Plane nicht zu knapp und übertrage Punkte erst, wenn die Buchungslogik klar ist.',
+        title: 'Dein Ergebnis passt zu KrisFlyer: Transferzeit und Puffer prüfen',
+        text: 'Bei KrisFlyer sind Transferzeiten, Ablaufdaten und Verfügbarkeiten besonders wichtig. Übertrage Punkte nicht zu früh und plane nicht zu knapp.',
         links: [
           ['Amex Membership Rewards sammeln', `${BASE}/meilen-sammeln/amex/`],
           ['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`],
@@ -62,12 +62,12 @@
     }
 
     return {
-      title: 'Dein nächster sinnvoller Schritt: Sammelweg passend zum Ziel prüfen',
-      text: 'Nach dem Ergebnis solltest du zuerst klären, welcher Sammelweg zu deinem Programm, deiner Familie und deinem Reisezeitraum passt.',
+      title: 'Dein nächster Schritt: Sammelweg passend zum Ziel prüfen',
+      text: 'Nach dem Ergebnis solltest du zuerst klären, welcher Sammelweg zu deinem Programm, deiner Familie und deinem Reisezeitraum passt. Entscheidend ist nicht die Karte an sich, sondern ob sie deine konkrete Lücke sinnvoll schließt.',
       links: [
         ['Meilen sammeln im Alltag', `${BASE}/meilen-sammeln/`],
-        ['Tools & Rechner ansehen', `${BASE}/tools/`],
-        ['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`]
+        ['Amex oder PAYBACK vergleichen', `${BASE}/amex-oder-payback/`],
+        ['Tools & Rechner ansehen', `${BASE}/tools/`]
       ],
       note: 'Entscheidend ist nicht nur die Punktzahl, sondern auch Verfügbarkeit, Gebühren und realistische Sammelrate.'
     };
@@ -77,11 +77,11 @@
     const config = getNextStepConfig(programm);
     return `
       <div class="result-section next-step-box" data-enhanced-result="true">
-        <p class="eyebrow">Nächster Schritt</p>
+        <p class="eyebrow">Empfohlener nächster Schritt</p>
         <h3>${config.title}</h3>
         <p>${config.text}</p>
         <div class="next-step-actions">
-          ${config.links.map(([label, href]) => `<a class="btn btn-secondary" href="${href}">${label}</a>`).join('')}
+          ${config.links.map(([label, href], index) => `<a class="btn ${index === 0 ? 'btn-primary' : 'btn-secondary'}" href="${href}">${label}</a>`).join('')}
         </div>
         <p class="next-step-note">${config.note}</p>
       </div>
@@ -90,14 +90,14 @@
 
   function renderSammelwegeBox() {
     return `
-      <h4>Du möchtest passende Sammelwege einordnen?</h4>
+      <h4>Warum diese Sammelwege angezeigt werden</h4>
       <p>
-        Der Rechner zeigt nur, ob dein Ziel rechnerisch realistisch wirkt. Der nächste Schritt ist die Frage,
-        welcher Sammelweg zu deinem Programm passt: PAYBACK, American Express Membership Rewards,
+        Der Rechner zeigt zuerst, ob dein Ziel rechnerisch realistisch wirkt. Erst danach lohnt sich die Frage,
+        welcher Sammelweg die Lücke sinnvoll schließt: PAYBACK, American Express Membership Rewards,
         Miles & More Kreditkarte, Wunschgutschein oder einzelne Meilenangebote.
       </p>
       <p>
-        Ich nutze selbst verschiedene Punkte- und Meilenprogramme und ordne diese hier aus Planungssicht ein.
+        Ich ordne diese Wege aus Planungssicht ein. Affiliate-Links werden transparent gekennzeichnet.
         Bitte prüfe Konditionen, Gebühren und Kartenbedingungen immer selbst vor einem Abschluss.
       </p>
     `;
