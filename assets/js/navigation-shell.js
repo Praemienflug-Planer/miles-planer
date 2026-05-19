@@ -115,17 +115,7 @@
     return img;
   }
 
-  function addOfficialCardToGrid(grid, key, title, badge, text, ctaLabel = 'Link anfragen') {
-    if (!grid || grid.querySelector(`[data-card-key="${key}"]`)) return;
-    const article = document.createElement('article');
-    article.className = 'amex-offer-card';
-    article.dataset.cardKey = key;
-    article.innerHTML = `<div class="amex-card-image-wrap official-card-image-wrap"><img class="amex-card-image official-card-img" src="${officialCardImages[key]}" alt="${title}" loading="lazy"></div><div class="amex-offer-body"><span class="amex-badge">${badge}</span><h3>${title}</h3><p>${text}</p><div class="amex-actions"><a class="btn btn-primary" href="${BASE}/kontakt.html">${ctaLabel}</a></div></div>`;
-    grid.appendChild(article);
-  }
-
   function improveAmexCardsPage() {
-    const grid = document.querySelector('.amex-card-grid');
     const platinum = setImage('img[src$="/amex-platin.svg"]', officialCardImages.platinum, 'American Express Platinum Card');
     const rose = setImage('img[src$="/amex-rosegold.svg"]', officialCardImages.rose, 'American Express Rose Gold Card');
     if (rose && rose.parentElement && !rose.parentElement.querySelector('img[data-official-gold="true"]')) {
@@ -139,8 +129,6 @@
       rose.insertAdjacentElement('beforebegin', gold);
     }
     platinum?.parentElement?.classList.add('official-card-image-wrap');
-    addOfficialCardToGrid(grid, 'green', 'American Express Green', 'Schlanker Einstieg', 'Interessant, wenn du einen einfachen Einstieg in Membership Rewards suchst und keine Premium-Leistungen brauchst.');
-    addOfficialCardToGrid(grid, 'payback', 'PAYBACK American Express', 'PAYBACK / Miles & More', 'Passt besonders, wenn du PAYBACK Punkte sammelst und später zu Miles & More übertragen möchtest.');
   }
 
   function insertPaybackCardFigure() {
