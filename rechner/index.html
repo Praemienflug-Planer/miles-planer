@@ -43,28 +43,12 @@ layout: default
 
   <link rel="stylesheet" href="/miles-planer/assets/css/site.css?v=20260511-1" />
   <link rel="stylesheet" href="/miles-planer/assets/css/hero-background.css?v=20260511-2" />
-  <link rel="stylesheet" href="/miles-planer/rechner/rechner-layout-fix.css?v=20260518-result-1" />
-  <script src="/miles-planer/assets/js/navigation-shell.js?v=20260518-5" defer></script>
+  <link rel="stylesheet" href="/miles-planer/rechner/rechner-layout-fix.css?v=20260519-conversion-1" />
+  <script src="/miles-planer/assets/js/navigation-shell.js?v=20260519-conversion-1" defer></script>
   <script src="/miles-planer/assets/js/conversion-events.js?v=20260518-1" defer></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
-
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="/miles-planer/" aria-label="Startseite Prämienflug-Planer">Prämienflug-Planer</a>
-      <nav class="main-nav" aria-label="Hauptnavigation">
-        <a href="/miles-planer/rechner/">Rechner</a>
-        <a href="/miles-planer/meilen-business-class/">Business Class</a>
-        <a href="/miles-planer/meilen-thailand/">Thailand</a>
-        <a href="/miles-planer/meilen-new-york/">New York</a>
-        <a href="/miles-planer/amex-meilen-umrechnen/">Amex umrechnen</a>
-        <a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a>
-        <a href="/miles-planer/faq/">FAQ</a>
-        <a href="/miles-planer/kontakt.html">Kontakt</a>
-      </nav>
-    </div>
-  </header>
 
   <main id="main-content">
     <section class="section rechner-hero-bg">
@@ -76,13 +60,13 @@ layout: default
                 <div class="tool-card calculator-intro-card">
                   <div class="section-head compact-head">
                     <p class="eyebrow">Prämienflug-Rechner für Familien</p>
-                    <h1>Familien-Prämienflug planen</h1>
-                    <p>Starte mit Ziel, Familiengröße und Reiseklasse. Danach ergänzt du Reisezeit, Programm und deinen Punktestand – der Rechner zeigt dir, ob dein Familienziel realistisch wirkt.</p>
+                    <h1>Familien-Prämienflug realistisch prüfen</h1>
+                    <p>Starte mit Ziel, Familiengröße und Reiseklasse. Danach ergänzt du Reisezeit, Programm und deinen Punktestand – der Rechner zeigt dir, ob dein Familienziel realistisch wirkt und welcher Sammelweg als nächstes sinnvoll ist.</p>
                   </div>
 
                   <div class="calculator-start-hint">
                     <strong>So startest du:</strong>
-                    <p>Wähle die Felder der Reihe nach aus. Neue Schritte werden automatisch hervorgehoben, sobald die vorherigen Angaben gesetzt sind.</p>
+                    <p>Wähle die Felder der Reihe nach aus. Nach dem Ergebnis bekommst du passende nächste Schritte zu PAYBACK, Amex, Miles & More, Avios oder Flying Blue.</p>
                   </div>
 
                   <div class="calculator-progress" aria-label="Rechner-Ablauf">
@@ -131,18 +115,18 @@ layout: default
                   <li>voraussichtlicher Zielmonat</li>
                   <li>Dealwert gegenüber Cashpreis</li>
                   <li>Ampel-Einschätzung zur Machbarkeit</li>
+                  <li>passende nächste Sammelwege</li>
                 </ul>
                 <div class="sidebar-transfer-hint"><div class="result-info-card"><div class="info-content" id="pointsHelper"><strong>Transferhinweis</strong><p>Wähle zuerst ein Programm aus, damit der passende Transferhinweis angezeigt wird.</p></div></div></div>
               </div>
             </aside>
           </div>
         </div>
-        <div id="resultView" class="tool-view"><div class="tool-layout"><div class="tool-main"><div class="tool-card result-wrapper"><div id="result"></div></div></div><aside class="tool-sidebar"><div class="tool-card sticky-card"><p class="eyebrow">Ergebnis</p><h3>Deine Familienplanung</h3><p class="footer-text">Hier siehst du Sammellücke, Zeit bis zum Ziel und die Bewertung der Einlösung.</p><div id="resultTransferHint" class="result-info-card"><strong>Transferhinweis</strong><p>Die Transferdetails werden nach der Berechnung hier angezeigt.</p></div><div class="tool-actions"><button class="btn btn-secondary" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button></div></div></aside></div></div>
+        <div id="resultView" class="tool-view"><div class="tool-layout"><div class="tool-main"><div class="tool-card result-wrapper"><div id="result"></div></div></div><aside class="tool-sidebar"><div class="tool-card sticky-card"><p class="eyebrow">Ergebnis</p><h3>Deine Familienplanung</h3><p class="footer-text">Hier siehst du Sammellücke, Zeit bis zum Ziel und die Bewertung der Einlösung. Danach zeigt dir der Planer, welcher Sammelweg als nächstes logisch ist.</p><div id="resultTransferHint" class="result-info-card"><strong>Transferhinweis</strong><p>Die Transferdetails werden nach der Berechnung hier angezeigt.</p></div><div class="tool-actions"><button class="btn btn-secondary" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button></div></div></aside></div></div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer"><div class="container footer-grid"><div><div class="brand footer-brand">Prämienflug-Planer</div><p class="footer-text">Planungstool für Prämienflüge mit Fokus auf Familien, Sammellücke und realistische Umsetzbarkeit.</p></div><div><h4>Navigation</h4><ul class="footer-links"><li><a href="/miles-planer/rechner/">Rechner</a></li><li><a href="/miles-planer/meilen-business-class/">Business Class</a></li><li><a href="/miles-planer/meilen-thailand/">Thailand</a></li><li><a href="/miles-planer/meilen-new-york/">New York</a></li><li><a href="/miles-planer/amex-meilen-umrechnen/">Amex umrechnen</a></li><li><a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a></li><li><a href="/miles-planer/faq/">FAQ</a></li></ul></div><div><h4>Rechtliches</h4><ul class="footer-links"><li><a href="/miles-planer/impressum.html">Impressum</a></li><li><a href="/miles-planer/datenschutz.html">Datenschutz</a></li><li><a href="/miles-planer/transparenz.html">Transparenz</a></li><li><a href="/miles-planer/kontakt.html">Kontakt</a></li></ul></div></div></footer>
   <script src="/miles-planer/assets/data/rechner-lists.js?v=20260510-3"></script>
   <script src="/miles-planer/assets/data/rechner-programs.js?v=20260510-1"></script>
   <script src="/miles-planer/assets/data/rechner-award-rates.js?v=20260510-2"></script>
@@ -151,6 +135,6 @@ layout: default
   <script src="/miles-planer/script.js?v=20260510-3"></script>
   <script src="/miles-planer/assets/js/rechner-result-optimizer.js?v=20260518-1"></script>
   <script src="/miles-planer/assets/js/rechner-github-data-loader.js?v=20260510-6"></script>
-  <script src="/miles-planer/assets/js/rechner-result-next-steps.js?v=20260511-1"></script>
+  <script src="/miles-planer/assets/js/rechner-result-next-steps.js?v=20260519-conversion-1"></script>
 </body>
 </html>
