@@ -101,7 +101,7 @@
     if (document.getElementById('official-card-image-style')) return;
     const style = document.createElement('style');
     style.id = 'official-card-image-style';
-    style.textContent = `.official-card-image-wrap{background:#fff;padding:18px;display:flex;align-items:center;justify-content:center;min-height:170px}.official-card-img,.amex-card-image{display:block;width:100%;max-width:260px;height:auto}.amex-card-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center}.amex-card-pair .official-card-img,.amex-card-pair .amex-card-image{max-width:170px}.official-card-figure{margin:16px 0 20px;background:#fff;border-radius:16px;padding:18px;text-align:center}.official-card-figure img{display:block;max-width:280px;width:100%;height:auto;margin:0 auto}.official-card-figure figcaption{color:#475569;font-size:13px;margin-top:10px}@media(max-width:560px){.amex-card-pair{grid-template-columns:1fr}.amex-card-pair .official-card-img,.amex-card-pair .amex-card-image{max-width:240px}}`;
+    style.textContent = `.official-card-image-wrap{background:#fff;padding:18px;display:flex;align-items:center;justify-content:center;min-height:170px}.official-card-img,.amex-card-image{display:block;width:100%;max-width:260px;height:auto}.amex-card-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center}.amex-card-pair .official-card-img,.amex-card-pair .amex-card-image{max-width:170px}.official-card-figure{margin:16px 0 20px;background:#fff;border-radius:16px;padding:18px;text-align:center}.official-card-figure img{display:block;max-width:280px;width:100%;height:auto;margin:0 auto}.official-card-figure figcaption{color:#475569;font-size:13px;margin-top:10px}.payback-amex-promo{margin:16px 0 22px;padding:18px;border:1px solid rgba(251,191,36,.34);border-radius:16px;background:linear-gradient(135deg,rgba(251,191,36,.12),rgba(16,28,47,.96))}.payback-amex-promo-media{background:#fff;border-radius:14px;padding:18px;margin-bottom:14px;text-align:center}.payback-amex-promo-media img{display:block;max-width:300px;width:100%;height:auto;margin:0 auto}.payback-amex-promo strong{color:#fff}.payback-amex-promo ul{margin:10px 0 0;padding-left:18px;color:var(--muted)}.payback-amex-promo .btn{margin-top:14px}@media(max-width:560px){.amex-card-pair{grid-template-columns:1fr}.amex-card-pair .official-card-img,.amex-card-pair .amex-card-image{max-width:240px}}`;
     document.head.appendChild(style);
   }
 
@@ -135,13 +135,13 @@
     if (document.querySelector('[data-official-payback-card="true"]')) return;
     const target = document.querySelector('[data-event*="payback_amex_contact"]')?.closest('.article-card, .result-action-box, .seo-card');
     if (!target) return;
-    const figure = document.createElement('figure');
-    figure.className = 'official-card-figure';
-    figure.dataset.officialPaybackCard = 'true';
-    figure.innerHTML = `<img src="${officialCardImages.payback}" alt="PAYBACK American Express Karte" loading="lazy"><figcaption>PAYBACK American Express Karte.</figcaption>`;
+    const block = document.createElement('div');
+    block.className = 'payback-amex-promo';
+    block.dataset.officialPaybackCard = 'true';
+    block.innerHTML = `<div class="payback-amex-promo-media"><img src="${officialCardImages.payback}" alt="PAYBACK American Express Karte" loading="lazy"></div><p><strong>Aktuell über deinen Link:</strong> 4.000 PAYBACK Punkte möglich.</p><ul><li>PAYBACK Punkte verfallen durch aktive PAYBACK Amex nicht mehr.</li><li>Guter Basisbaustein, wenn du auf PAYBACK → Miles &amp; More sammelst.</li><li>Die Karte sammelt PAYBACK Punkte, nicht Membership Rewards.</li></ul><a class="btn btn-primary" href="${BASE}/kontakt.html" data-event="payback_amex_contact_inline">PAYBACK-Amex-Link anfragen</a>`;
     const headline = target.querySelector('h2, h3');
-    if (headline) headline.insertAdjacentElement('afterend', figure);
-    else target.prepend(figure);
+    if (headline) headline.insertAdjacentElement('afterend', block);
+    else target.prepend(block);
   }
 
   function applyOfficialCardImages() {
