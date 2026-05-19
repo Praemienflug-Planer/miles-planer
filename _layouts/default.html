@@ -5,6 +5,7 @@
 
   Important:
   - navigation-shell.js removes legacy page-level header/footer and injects the current central shell.
-  - site-shell.js is no longer loaded here to avoid duplicate shell work.
+  - Plausible is used for cookieless, aggregate analytics and conversion events.
+  - conversion-events.js sends only aggregate event names and limited link metadata. It does not use cookies, localStorage, sessionStorage or user IDs.
 {% endcomment %}
-{{ content | replace: '</body>', '<script src="/miles-planer/assets/js/navigation-shell.js?v=20260511-2"></script><script src="/miles-planer/assets/js/page-enhancements.js?v=20260508-1"></script></body>' }}
+{{ content | replace: '</body>', '<script defer data-domain="praemienflug-planer.github.io" src="https://plausible.io/js/script.js"></script><script>window.plausible = window.plausible || function(){ (window.plausible.q = window.plausible.q || []).push(arguments) }</script><script src="/miles-planer/assets/js/navigation-shell.js?v=20260519-conversion-1"></script><script src="/miles-planer/assets/js/page-enhancements.js?v=20260508-1"></script><script src="/miles-planer/assets/js/conversion-events.js?v=20260519-cookieless-1"></script></body>' }}
