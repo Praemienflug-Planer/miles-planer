@@ -1,0 +1,51 @@
+/* Conversion-focused refinements loaded after the base layout. */
+.nav-item-cta { margin-left: 2px; }
+
+.main-nav .nav-cta {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.2);
+  white-space: nowrap;
+}
+
+.main-nav .nav-cta:hover,
+.main-nav .nav-cta:focus {
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.next-step-box {
+  border-color: rgba(96, 165, 250, 0.42);
+  background: linear-gradient(135deg, rgba(16, 39, 68, 0.96), rgba(16, 28, 47, 0.94));
+}
+
+.next-step-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.next-step-note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .nav-item-cta { margin-left: 0; }
+  .main-nav .nav-cta {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .next-step-actions .btn { width: 100%; justify-content: center; text-align: center; }
+}
