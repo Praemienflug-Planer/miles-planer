@@ -3,44 +3,37 @@
 
   const mainNav = [
     { label: 'Rechner', href: `${BASE}/rechner/` },
-    { label: 'Tools', href: `${BASE}/tools/` },
     { label: 'Meilen sammeln', href: `${BASE}/meilen-sammeln/`, children: [
       { label: 'Übersicht', href: `${BASE}/meilen-sammeln/` },
-      { label: 'Miles & More Grundlagen', href: `${BASE}/meilen-sammeln/miles-and-more/` },
+      { label: 'Amex oder PAYBACK?', href: `${BASE}/amex-oder-payback/` },
       { label: 'PAYBACK Punkte sammeln', href: `${BASE}/meilen-sammeln/payback/` },
       { label: 'PAYBACK zu Miles & More', href: `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/` },
       { label: 'Amex Membership Rewards', href: `${BASE}/meilen-sammeln/amex/` },
-      { label: 'Amex oder PAYBACK?', href: `${BASE}/amex-oder-payback/` },
       { label: 'Miles & More Kreditkarte', href: `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/` },
       { label: 'Wunschgutschein', href: `${BASE}/meilen-sammeln/wunschgutschein/` },
       { label: 'Zeitschriftenabo-Meilen', href: `${BASE}/meilen-sammeln/zeitschriftenabo/` }
     ] },
-    { label: 'Reiseziele', href: `${BASE}/meilen-thailand/`, children: [
+    { label: 'Beispiele', href: `${BASE}/meilen-thailand/`, children: [
       { label: 'Thailand mit Meilen', href: `${BASE}/meilen-thailand/` },
-      { label: 'New York mit Meilen', href: `${BASE}/meilen-new-york/` }
-    ] },
-    { label: 'Ratgeber', href: `${BASE}/meilen-business-class/`, children: [
+      { label: 'New York mit Meilen', href: `${BASE}/meilen-new-york/` },
       { label: 'Business Class mit Meilen', href: `${BASE}/meilen-business-class/` },
-      { label: 'Business Class mit Kindern', href: `${BASE}/business-class-mit-kindern/` },
-      { label: 'Premium Economy mit Kindern', href: `${BASE}/premium-economy-mit-kindern/` },
-      { label: 'Premium Economy oder Business?', href: `${BASE}/premium-economy-oder-business-class/` },
-      { label: '4 Prämienflug-Plätze finden', href: `${BASE}/vier-praemienflug-plaetze-finden/` },
-      { label: 'Amex Punkte umrechnen', href: `${BASE}/amex-meilen-umrechnen/` },
-      { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` },
-      { label: 'Warum diese Seite?', href: `${BASE}/ueber-das-projekt/` },
-      { label: 'FAQ', href: `${BASE}/faq/` }
+      { label: '4 Prämienflug-Plätze finden', href: `${BASE}/vier-praemienflug-plaetze-finden/` }
     ] },
-    { label: 'Kontakt', href: `${BASE}/kontakt.html` }
+    { label: 'Tools', href: `${BASE}/tools/`, children: [
+      { label: 'Alle Tools', href: `${BASE}/tools/` },
+      { label: 'Amex Punkte umrechnen', href: `${BASE}/amex-meilen-umrechnen/` },
+      { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` }
+    ] },
+    { label: 'FAQ', href: `${BASE}/faq/` },
+    { label: 'Warum diese Seite?', href: `${BASE}/ueber-das-projekt/` }
   ];
 
   const footerNav = [
-    ['Rechner', `${BASE}/rechner/`], ['Tools', `${BASE}/tools/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`],
-    ['Miles & More Grundlagen', `${BASE}/meilen-sammeln/miles-and-more/`], ['PAYBACK', `${BASE}/meilen-sammeln/payback/`],
-    ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`],
-    ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`], ['Thailand', `${BASE}/meilen-thailand/`],
-    ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
-    ['Business Class mit Kindern', `${BASE}/business-class-mit-kindern/`], ['Premium Economy mit Kindern', `${BASE}/premium-economy-mit-kindern/`],
-    ['Premium Economy oder Business?', `${BASE}/premium-economy-oder-business-class/`], ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`],
+    ['Rechner', `${BASE}/rechner/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`], ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`],
+    ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
+    ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`],
+    ['Thailand', `${BASE}/meilen-thailand/`], ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
+    ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Tools', `${BASE}/tools/`],
     ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`],
     ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`], ['FAQ', `${BASE}/faq/`]
   ];
@@ -67,11 +60,13 @@
   }
 
   function renderMainNav() {
-    return mainNav.map(item => {
+    const items = mainNav.map(item => {
       const active = activeFor(item) ? ' aria-current="page"' : '';
       const dropdown = item.children ? ' has-dropdown' : '';
       return `<div class="nav-item${dropdown}"><a class="nav-link" href="${item.href}"${active}>${item.label}</a>${renderDropdown(item.children)}</div>`;
-    }).join('');
+    });
+    items.push(`<div class="nav-item nav-item-cta"><a class="btn btn-primary nav-cta" href="${BASE}/rechner/" data-event="nav_start_calculator">Kostenlos prüfen</a></div>`);
+    return items.join('');
   }
 
   function createHeader() {
