@@ -1,5 +1,5 @@
 window.MILES_PLANNER_PROGRAMS = {
-  dataStand: "10.05.2026",
+  dataStand: "20.05.2026",
   source: "GitHub Stammdaten-Spiegel für den Prämienflug-Rechner. Bestehende Live-Berechnung läuft vorerst weiter über Google Apps Script / Google Sheets.",
   programs: {
     "Miles & More": {
@@ -45,6 +45,17 @@ window.MILES_PLANNER_PROGRAMS = {
       transferDuration: "bis zu 15 Werktage",
       transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 },
       hinweis: "KrisFlyer-Transfers können länger dauern. Verfügbarkeit vor Transfer besonders sorgfältig prüfen."
+    },
+    "Emirates Skywards": {
+      punktelabel: "Emirates Skywards Meilen",
+      kurzlabel: "Skywards",
+      transferquelle: "Membership Rewards",
+      faktor: 0.5,
+      transferRatioLabel: "Membership Rewards → Emirates Skywards (2:1)",
+      transferMinimum: 1000,
+      transferDuration: "meist wenige Werktage",
+      transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 },
+      hinweis: "Emirates Skywards ist weiterhin als Amex-Transferpartner gelistet, aber für deutsche Amex-Karten gilt nach Emirates-Angabe ein Verhältnis von 2:1. Zusätzlich wurden Skywards-Classic-Rewards ab 20.05.2026 teurer."
     }
   }
 };
