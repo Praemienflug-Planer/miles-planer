@@ -18,12 +18,13 @@
       { label: 'Thailand mit Meilen', href: `${BASE}/meilen-thailand/` },
       { label: 'New York mit Meilen', href: `${BASE}/meilen-new-york/` },
       { label: 'Business Class mit Meilen', href: `${BASE}/meilen-business-class/` },
-      { label: '4 Prämienflug-Plätze finden', href: `${BASE}/vier-praemienflug-plaetze-finden/` }
+      { label: '4 Prämienflug-Plätze finden', href: `${BASE}/vier-praemienflug-plaetze-finden/` },
+      { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` }
     ] },
     { label: 'Tools', href: `${BASE}/tools/`, children: [
       { label: 'Alle Tools', href: `${BASE}/tools/` },
-      { label: 'Amex Punkte umrechnen', href: `${BASE}/amex-meilen-umrechnen/` },
-      { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` }
+      { label: 'Amex Punkte umrechnen', href: `${BASE}/amex-meilen-umrechnen/#mr-rechner` },
+      { label: 'Zeitschriftenabo-Meilenrechner', href: `${BASE}/meilen-sammeln/zeitschriftenabo/#abo-rechner` }
     ] },
     { label: 'FAQ', href: `${BASE}/faq/` },
     { label: 'Warum diese Seite?', href: `${BASE}/ueber-das-projekt/` }
@@ -34,8 +35,8 @@
     ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
     ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Amex Kreditkarten', `${BASE}/meilen-sammeln/amex-kreditkarten/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`],
     ['Thailand', `${BASE}/meilen-thailand/`], ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
-    ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Tools', `${BASE}/tools/`],
-    ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`],
+    ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`], ['Tools', `${BASE}/tools/`],
+    ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Zeitschriftenabo-Meilenrechner', `${BASE}/meilen-sammeln/zeitschriftenabo/#abo-rechner`],
     ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`], ['FAQ', `${BASE}/faq/`]
   ];
 
