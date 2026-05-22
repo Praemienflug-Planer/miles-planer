@@ -84,6 +84,19 @@ Jede öffentliche Seite sollte enthalten:
 - einheitlichen Footer
 - `site.css` und bei Bedarf `hero-background.css`
 
+## SEO-Artikelstandard
+Neue Ratgeberseiten sollen nach Möglichkeit zusätzlich enthalten:
+
+- klare Suchintention im ersten Absatz: für wen ist die Seite und welches Problem löst sie?
+- sprechende URL mit Hauptkeyword, z. B. `/business-class-familie-meilen/`
+- mindestens 3 interne Links zu passenden Cluster-Seiten
+- sichtbarer CTA zum Rechner oberhalb der Seitenmitte und im Fazit
+- Sidebar mit passenden Ratgeberlinks
+- FAQ-Block mit 3 bis 5 echten Nutzerfragen
+- strukturierte Daten: `Article`, bei FAQ zusätzlich `FAQPage`, bei Ratgeberclustern zusätzlich `BreadcrumbList`
+- Eintrag in `sitemap.xml` mit aktuellem `lastmod`
+- mindestens eine interne Verlinkung von Navigation, Hub-Seite oder thematisch passender Seite
+
 ## Bildstandard
 Bilder nur behalten, wenn sie mindestens eine der folgenden Funktionen erfüllen:
 
