@@ -10,9 +10,10 @@
       <div class="nav-item"><a class="nav-link" href="/miles-planer/rechner/"{% if page.url == '/rechner/' %} aria-current="page"{% endif %}>Rechner</a></div>
       <div class="nav-item"><a class="nav-link" href="/miles-planer/tools/"{% if page.url == '/tools/' %} aria-current="page"{% endif %}>Tools</a></div>
       <div class="nav-item has-dropdown">
-        <a class="nav-link" href="/miles-planer/meilen-sammeln/"{% if page.url contains '/meilen-sammeln/' %} aria-current="page"{% endif %}>Meilen sammeln</a>
+        <a class="nav-link" href="/miles-planer/meilen-sammeln/"{% if page.url contains '/meilen-sammeln/' or page.url == '/meilen-sammeln-familie/' %} aria-current="page"{% endif %}>Meilen sammeln</a>
         <div class="nav-dropdown">
           <a href="/miles-planer/meilen-sammeln/">Übersicht</a>
+          <a href="/miles-planer/meilen-sammeln-familie/">Meilen sammeln als Familie</a>
           <a href="/miles-planer/meilen-sammeln/payback/">PAYBACK Punkte sammeln</a>
           <a href="/miles-planer/meilen-sammeln/payback-punkte-miles-and-more/">PAYBACK zu Miles &amp; More</a>
           <a href="/miles-planer/meilen-sammeln/amex/">Amex Membership Rewards</a>
