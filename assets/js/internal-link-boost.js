@@ -29,6 +29,7 @@
       .internal-link-card strong{display:block;margin-bottom:6px;color:#0f172a}.internal-link-card span{display:block;color:#475569;font-size:.95rem;line-height:1.45}
       .payback-hub-extra .mini-table{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}.payback-hub-extra .mini-table div{background:#fff;border:1px solid rgba(148,163,184,.24);border-radius:14px;padding:14px}.payback-hub-extra .mini-table strong{display:block;margin-bottom:6px;color:#0f172a}
       .payback-toc{margin:22px 0;padding:18px;border-radius:18px;background:#fff;border:1px solid rgba(148,163,184,.24)}.payback-toc ul{margin:10px 0 0;padding-left:18px}.payback-toc li{margin:6px 0}
+      .keyword-faq{display:grid;gap:12px;margin-top:16px}.keyword-faq details{background:#fff;border:1px solid rgba(148,163,184,.24);border-radius:14px;padding:14px}.keyword-faq summary{cursor:pointer;font-weight:700;color:#0f172a}.keyword-faq p{margin:10px 0 0;color:#475569}.keyword-list{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}.keyword-pill{display:inline-flex;align-items:center;border-radius:999px;background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.14);color:#1e3a8a;padding:7px 10px;font-size:.9rem;font-weight:600}
       @media(max-width:760px){.internal-link-grid,.internal-link-grid.three,.payback-hub-extra .mini-table{grid-template-columns:1fr}.internal-link-boost{padding:18px}}
     `;
     document.head.appendChild(style);
@@ -86,6 +87,33 @@
     if (transferBlock) transferBlock.insertAdjacentHTML('beforebegin', familyExample);
   }
 
+  function enhancePaybackSearchDemand() {
+    if (document.querySelector('[data-internal-link-boost="payback-keyword-faq"]')) return;
+    const target = document.querySelector('#historische-transferboni') || document.querySelector('.seo-content .article-card:last-of-type');
+    if (!target) return;
+    const html = `
+      <div class="article-card seo-card payback-hub-extra" data-internal-link-boost="payback-keyword-faq">
+        <p class="eyebrow">Häufig gesucht</p>
+        <h2>Häufige Fragen zu PAYBACK, Meilen und Miles &amp; More</h2>
+        <p>Viele suchen nicht direkt nach einem Prämienflug-Rechner, sondern erst nach ganz konkreten PAYBACK-Fragen. Deshalb findest du hier die wichtigsten Antworten kurz und verständlich gebündelt.</p>
+        <div class="keyword-list" aria-label="Häufig gesuchte Begriffe"><span class="keyword-pill">wunschgutschein payback</span><span class="keyword-pill">payback punkte in meilen umwandeln</span><span class="keyword-pill">payback zu miles and more</span><span class="keyword-pill">payback punkte umrechnen</span><span class="keyword-pill">payback punkte meilen aktion</span></div>
+        <div class="keyword-faq">
+          <details open><summary>Wie wandle ich PAYBACK Punkte in Meilen um?</summary><p>PAYBACK Punkte können zu Miles-&amp;-More-Meilen übertragen werden. Standardmäßig gilt die einfache Logik: 1 PAYBACK Punkt entspricht grundsätzlich 1 Miles-&amp;-More-Meile. Vor dem Transfer solltest du aber prüfen, ob eine konkrete Einlösung oder eine Bonusaktion ansteht.</p></details>
+          <details><summary>Lohnt sich PAYBACK zu Miles &amp; More?</summary><p>Es lohnt sich vor allem dann, wenn du die Meilen später wirklich für einen sinnvollen Prämienflug nutzt. Wenn du keinen Flug planst, kann der einfache PAYBACK-Gegenwert manchmal entspannter sein.</p></details>
+          <details><summary>Sollte man auf eine PAYBACK-Meilen-Aktion warten?</summary><p>Wenn du nicht sofort buchen musst, kann Warten sinnvoll sein. Transferbonus-Aktionen erhöhen die Meilenmenge, ändern aber nichts daran, dass Verfügbarkeit, Steuern und Gebühren vorher geprüft werden sollten.</p></details>
+          <details><summary>Was bedeutet PAYBACK Punkte umrechnen?</summary><p>Beim Umrechnen geht es meistens um zwei Fragen: Wie viel Euro-Gegenwert haben die Punkte? Und wie viele Miles-&amp;-More-Meilen entstehen daraus? Für Prämienflüge ist die zweite Frage nur dann wertvoll, wenn der spätere Flug einen guten Gegenwert liefert.</p></details>
+          <details><summary>Ist Wunschgutschein mit PAYBACK sinnvoll?</summary><p>Ja, wenn du den Gutschein ohnehin bei einem passenden Händler nutzt. Nicht sinnvoll ist es, Gutscheine nur wegen Punkten zu kaufen und später keinen klaren Einsatz dafür zu haben.</p></details>
+          <details><summary>Kann ich mit PAYBACK eine Familienreise finanzieren?</summary><p>PAYBACK kann ein Baustein sein, ersetzt aber selten die komplette Reiseplanung. Für Familien zählen vor allem mehrere Sitzplätze, lange Vorlaufzeit, realistische Reiseklasse und ein gutes Verhältnis aus Meilen und Zuzahlungen.</p></details>
+        </div>
+        <div class="internal-link-grid three">
+          ${card(links.paybackTransfer)}
+          ${card(links.wunschgutschein)}
+          ${card(links.rechner)}
+        </div>
+      </div>`;
+    target.insertAdjacentHTML('beforebegin', html);
+  }
+
   function enhanceHome() {
     if (document.querySelector('[data-internal-link-boost="home-topics"]')) return;
     const target = document.querySelector('#so-funktioniert-es');
@@ -128,7 +156,10 @@
   function mount() {
     addStyle();
     if (currentPath === `${BASE}/`) enhanceHome();
-    if (currentPath === `${BASE}/meilen-sammeln/payback/`) enhancePaybackHub();
+    if (currentPath === `${BASE}/meilen-sammeln/payback/`) {
+      enhancePaybackHub();
+      enhancePaybackSearchDemand();
+    }
     enhanceContextLinks();
     enhanceSidebars();
   }
