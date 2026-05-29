@@ -6,7 +6,8 @@
   Important:
   - navigation-shell.js removes legacy page-level header/footer and injects the current central shell.
   - breadcrumb-schema.js adds sitewide BreadcrumbList structured data for Google Search Console.
+  - contextual-faq.js adds visible FAQ sections and FAQPage structured data on selected SEO pages.
   - internal-link-boost.js strengthens contextual internal links and adds small SEO helper sections.
   - No external analytics script is loaded here. Use GitHub repository Insights > Traffic for the free baseline traffic overview.
 {% endcomment %}
-{{ content | replace: '</body>', '<script src="/miles-planer/assets/js/breadcrumb-schema.js?v=20260529-1"></script><script src="/miles-planer/assets/js/navigation-shell.js?v=20260519-conversion-1"></script><script src="/miles-planer/assets/js/quickstart-nav-link.js?v=20260524-1"></script><script src="/miles-planer/assets/js/page-enhancements.js?v=20260508-1"></script><script src="/miles-planer/assets/js/internal-link-boost.js?v=20260526-1"></script></body>' }}
+{{ content | replace: '</body>', '<script src="/miles-planer/assets/js/breadcrumb-schema.js?v=20260529-1"></script><script src="/miles-planer/assets/js/contextual-faq.js?v=20260529-1"></script><script src="/miles-planer/assets/js/navigation-shell.js?v=20260519-conversion-1"></script><script src="/miles-planer/assets/js/quickstart-nav-link.js?v=20260524-1"></script><script src="/miles-planer/assets/js/page-enhancements.js?v=20260508-1"></script><script src="/miles-planer/assets/js/internal-link-boost.js?v=20260526-1"></script></body>' }}
