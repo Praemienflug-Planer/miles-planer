@@ -7,6 +7,7 @@
       { label: 'Übersicht', href: `${BASE}/meilen-sammeln/` },
       { label: 'Amex oder PAYBACK?', href: `${BASE}/amex-oder-payback/` },
       { label: 'PAYBACK Punkte sammeln', href: `${BASE}/meilen-sammeln/payback/` },
+      { label: 'Mit PAYBACK nach Mallorca', href: `${BASE}/meilen-sammeln/payback-mallorca/` },
       { label: 'PAYBACK zu Miles & More', href: `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/` },
       { label: 'Amex Membership Rewards', href: `${BASE}/meilen-sammeln/amex/` },
       { label: 'Amex Kreditkarten', href: `${BASE}/meilen-sammeln/amex-kreditkarten/` },
@@ -18,6 +19,7 @@
       { label: 'Thailand mit Meilen', href: `${BASE}/meilen-thailand/` },
       { label: 'New York mit Meilen', href: `${BASE}/meilen-new-york/` },
       { label: 'Business Class mit Meilen', href: `${BASE}/meilen-business-class/` },
+      { label: 'Mit PAYBACK nach Mallorca', href: `${BASE}/meilen-sammeln/payback-mallorca/` },
       { label: '4 Prämienflug-Plätze finden', href: `${BASE}/vier-praemienflug-plaetze-finden/` },
       { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` }
     ] },
@@ -32,7 +34,7 @@
 
   const footerNav = [
     ['Rechner', `${BASE}/rechner/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`], ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`],
-    ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
+    ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['Mit PAYBACK nach Mallorca', `${BASE}/meilen-sammeln/payback-mallorca/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
     ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Amex Kreditkarten', `${BASE}/meilen-sammeln/amex-kreditkarten/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`],
     ['Thailand', `${BASE}/meilen-thailand/`], ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`],
     ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`], ['Tools', `${BASE}/tools/`],
