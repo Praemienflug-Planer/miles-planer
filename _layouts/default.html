@@ -1,7 +1,6 @@
 {% comment %}
   Transitional default layout for existing static HTML pages.
-  The repository still contains full HTML documents. This layout keeps their content intact,
-  rewrites legacy GitHub Pages URLs for the custom domain, and injects the central shell scripts.
+  Rewrites legacy GitHub Pages URLs for the custom domain and injects root-domain CSS/JS.
 {% endcomment %}
 {% assign cleaned_content = content
   | replace: 'https://praemienflug-planer.github.io/miles-planer/', 'https://praemienflug-planer.de/'
@@ -9,4 +8,6 @@
   | replace: '/miles-planer/assets/', '/assets/'
   | replace: '/miles-planer/', '/'
 %}
-{{ cleaned_content | replace: '</body>', '<script src="/assets/js/breadcrumb-schema.js?v=20260601-1"></script><script src="/assets/js/contextual-faq.js?v=20260601-1"></script><script src="/assets/js/navigation-shell.js?v=20260601-1"></script><script src="/assets/js/quickstart-nav-link.js?v=20260601-1"></script><script src="/assets/js/page-enhancements.js?v=20260601-1"></script><script src="/assets/js/internal-link-boost-root.js?v=20260601-1"></script></body>' }}
+{% assign injected_head = '<link rel="stylesheet" href="/assets/css/site.css?v=20260601-rootfix-1"><link rel="stylesheet" href="/assets/css/hero-background.css?v=20260601-rootfix-1"><link rel="stylesheet" href="/assets/css/home.css?v=20260601-rootfix-1"></head>' %}
+{% assign injected_body = '<script src="/assets/js/breadcrumb-schema.js?v=20260601-rootfix-1"></script><script src="/assets/js/contextual-faq.js?v=20260601-rootfix-1"></script><script src="/assets/js/navigation-shell.js?v=20260601-rootfix-1"></script><script src="/assets/js/quickstart-nav-link.js?v=20260601-rootfix-1"></script><script src="/assets/js/page-enhancements.js?v=20260601-rootfix-1"></script><script src="/assets/js/internal-link-boost-root.js?v=20260601-rootfix-1"></script></body>' %}
+{{ cleaned_content | replace: '</head>', injected_head | replace: '</body>', injected_body }}
