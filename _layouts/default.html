@@ -1,13 +1,12 @@
 {% comment %}
   Transitional default layout for existing static HTML pages.
-  The repository still contains full HTML documents. This layout keeps their content intact
-  and injects the central navigation/footer shell before </body>.
-
-  Important:
-  - navigation-shell.js removes legacy page-level header/footer and injects the current central shell.
-  - breadcrumb-schema.js adds sitewide BreadcrumbList structured data for Google Search Console.
-  - contextual-faq.js adds visible FAQ sections and FAQPage structured data on selected SEO pages.
-  - internal-link-boost.js strengthens contextual internal links and adds small SEO helper sections.
-  - No external analytics script is loaded here. Use GitHub repository Insights > Traffic for the free baseline traffic overview.
+  The repository still contains full HTML documents. This layout keeps their content intact,
+  rewrites legacy GitHub Pages URLs for the custom domain, and injects the central shell scripts.
 {% endcomment %}
-{{ content | replace: '</body>', '<script src="/assets/js/breadcrumb-schema.js?v=20260601-1"></script><script src="/assets/js/contextual-faq.js?v=20260601-1"></script><script src="/assets/js/navigation-shell.js?v=20260601-1"></script><script src="/assets/js/quickstart-nav-link.js?v=20260601-1"></script><script src="/assets/js/page-enhancements.js?v=20260601-1"></script><script src="/assets/js/internal-link-boost.js?v=20260601-1"></script></body>' }}
+{% assign cleaned_content = content
+  | replace: 'https://praemienflug-planer.github.io/miles-planer/', 'https://praemienflug-planer.de/'
+  | replace: 'https://praemienflug-planer.github.io/miles-planer', 'https://praemienflug-planer.de'
+  | replace: '/miles-planer/assets/', '/assets/'
+  | replace: '/miles-planer/', '/'
+%}
+{{ cleaned_content | replace: '</body>', '<script src="/assets/js/breadcrumb-schema.js?v=20260601-1"></script><script src="/assets/js/contextual-faq.js?v=20260601-1"></script><script src="/assets/js/navigation-shell.js?v=20260601-1"></script><script src="/assets/js/quickstart-nav-link.js?v=20260601-1"></script><script src="/assets/js/page-enhancements.js?v=20260601-1"></script><script src="/assets/js/internal-link-boost.js?v=20260601-1"></script></body>' }}
