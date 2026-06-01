@@ -28,63 +28,63 @@
 .hero-home {
   background-image:
     linear-gradient(90deg, rgba(7, 17, 31, 0.96) 0%, rgba(7, 17, 31, 0.86) 38%, rgba(7, 17, 31, 0.54) 68%, rgba(7, 17, 31, 0.32) 100%),
-    url('/miles-planer/assets/hero/home.webp');
+    url('/assets/hero/home.webp');
 }
 
 .hero-rechner,
 .rechner-hero-bg {
   background-image:
     linear-gradient(90deg, rgba(7, 17, 31, 0.96) 0%, rgba(7, 17, 31, 0.88) 42%, rgba(7, 17, 31, 0.64) 68%, rgba(7, 17, 31, 0.42) 100%),
-    url('/miles-planer/assets/hero/rechner.webp');
+    url('/assets/hero/rechner.webp');
 }
 
 .hero-business {
   background-position: center right;
   background-image:
     linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.88) 36%, rgba(7, 17, 31, 0.54) 62%, rgba(7, 17, 31, 0.28) 100%),
-    url('/miles-planer/assets/hero/business.webp');
+    url('/assets/hero/business.webp');
 }
 
 .hero-thailand {
   background-position: center right;
   background-image:
     linear-gradient(90deg, rgba(7, 17, 31, 0.96) 0%, rgba(7, 17, 31, 0.84) 34%, rgba(7, 17, 31, 0.48) 62%, rgba(7, 17, 31, 0.24) 100%),
-    url('/miles-planer/assets/hero/thailand.webp');
+    url('/assets/hero/thailand.webp');
 }
 
 .hero-new-york {
   background-position: center right;
   background-image:
     linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.86) 35%, rgba(7, 17, 31, 0.52) 63%, rgba(7, 17, 31, 0.26) 100%),
-    url('/miles-planer/assets/hero/new-york.webp');
+    url('/assets/hero/new-york.webp');
 }
 
 .hero-amex {
   background-position: center right;
   background-image:
     linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.88) 38%, rgba(7, 17, 31, 0.58) 66%, rgba(7, 17, 31, 0.34) 100%),
-    url('/miles-planer/assets/hero/amex.webp');
+    url('/assets/hero/amex.webp');
 }
 
 .hero-sammeln {
   background-position: center right;
   background-image:
     linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.88) 36%, rgba(7, 17, 31, 0.56) 64%, rgba(7, 17, 31, 0.30) 100%),
-    url('/miles-planer/assets/hero/sammeln.webp');
+    url('/assets/hero/sammeln.webp');
 }
 
 .hero-contact {
   background-position: center right;
   background-image:
     linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.88) 38%, rgba(7, 17, 31, 0.60) 66%, rgba(7, 17, 31, 0.36) 100%),
-    url('/miles-planer/assets/hero/kontakt.webp');
+    url('/assets/hero/kontakt.webp');
 }
 
 .hero-legal {
   background-position: center right;
   background-image:
     linear-gradient(90deg, rgba(7, 17, 31, 0.97) 0%, rgba(7, 17, 31, 0.90) 40%, rgba(7, 17, 31, 0.68) 70%, rgba(7, 17, 31, 0.48) 100%),
-    url('/miles-planer/assets/hero/legal.webp');
+    url('/assets/hero/legal.webp');
 }
 
 .hero::after,
@@ -129,16 +129,16 @@
     background-position: center top;
   }
 
-  .hero-home { --hero-mobile-image: url('/miles-planer/assets/hero/home.webp'); }
+  .hero-home { --hero-mobile-image: url('/assets/hero/home.webp'); }
   .hero-rechner,
-  .rechner-hero-bg { --hero-mobile-image: url('/miles-planer/assets/hero/rechner.webp'); }
-  .hero-business { --hero-mobile-image: url('/miles-planer/assets/hero/business.webp'); }
-  .hero-thailand { --hero-mobile-image: url('/miles-planer/assets/hero/thailand.webp'); }
-  .hero-new-york { --hero-mobile-image: url('/miles-planer/assets/hero/new-york.webp'); }
-  .hero-amex { --hero-mobile-image: url('/miles-planer/assets/hero/amex.webp'); }
-  .hero-sammeln { --hero-mobile-image: url('/miles-planer/assets/hero/sammeln.webp'); }
-  .hero-contact { --hero-mobile-image: url('/miles-planer/assets/hero/kontakt.webp'); }
-  .hero-legal { --hero-mobile-image: url('/miles-planer/assets/hero/legal.webp'); }
+  .rechner-hero-bg { --hero-mobile-image: url('/assets/hero/rechner.webp'); }
+  .hero-business { --hero-mobile-image: url('/assets/hero/business.webp'); }
+  .hero-thailand { --hero-mobile-image: url('/assets/hero/thailand.webp'); }
+  .hero-new-york { --hero-mobile-image: url('/assets/hero/new-york.webp'); }
+  .hero-amex { --hero-mobile-image: url('/assets/hero/amex.webp'); }
+  .hero-sammeln { --hero-mobile-image: url('/assets/hero/sammeln.webp'); }
+  .hero-contact { --hero-mobile-image: url('/assets/hero/kontakt.webp'); }
+  .hero-legal { --hero-mobile-image: url('/assets/hero/legal.webp'); }
 
   .hero { padding: 64px 0 48px; }
   .hero-small { padding: 52px 0 40px; }
