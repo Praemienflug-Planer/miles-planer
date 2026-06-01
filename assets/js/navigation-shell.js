@@ -1,5 +1,5 @@
 (() => {
-  const BASE = '/miles-planer';
+  const BASE = '';
 
   const mainNav = [
     { label: 'Rechner', href: `${BASE}/rechner/` },
