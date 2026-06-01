@@ -1,6 +1,6 @@
 (() => {
-  const BASE_PATH = '/miles-planer';
-  const SITE_ORIGIN = 'https://praemienflug-planer.github.io';
+  const BASE_PATH = '';
+  const SITE_ORIGIN = 'https://praemienflug-planer.de';
   const HOME_NAME = 'Prämienflug-Planer';
 
   const explicitLabels = new Map([
@@ -20,6 +20,7 @@
     ['/amex-meilen-umrechnen/', 'Amex Punkte in Meilen umrechnen'],
     ['/meilen-thailand/', 'Thailand mit Meilen'],
     ['/meilen-new-york/', 'New York mit Meilen'],
+    ['/florida-mit-meilen/', 'Florida mit Meilen'],
     ['/meilen-business-class/', 'Business Class mit Meilen'],
     ['/vier-praemienflug-plaetze-finden/', '4 Prämienflug-Plätze finden'],
     ['/praemienflug-steuern-gebuehren/', 'Prämienflug Steuern & Gebühren'],
@@ -43,6 +44,7 @@
     { prefix: '/tools/', name: 'Tools', path: '/tools/' },
     { prefix: '/meilen-thailand/', name: 'Beispiele', path: '/meilen-thailand/' },
     { prefix: '/meilen-new-york/', name: 'Beispiele', path: '/meilen-thailand/' },
+    { prefix: '/florida-mit-meilen/', name: 'Beispiele', path: '/meilen-thailand/' },
     { prefix: '/meilen-business-class/', name: 'Beispiele', path: '/meilen-thailand/' },
     { prefix: '/vier-praemienflug-plaetze-finden/', name: 'Beispiele', path: '/meilen-thailand/' },
     { prefix: '/praemienflug-steuern-gebuehren/', name: 'Beispiele', path: '/meilen-thailand/' },
@@ -55,15 +57,15 @@
 
   function stripBase(pathname) {
     let path = pathname || '/';
-    if (path.startsWith(BASE_PATH)) path = path.slice(BASE_PATH.length) || '/';
+    if (BASE_PATH && path.startsWith(BASE_PATH)) path = path.slice(BASE_PATH.length) || '/';
     path = path.replace(/\/index\.html$/, '/');
     if (!path.endsWith('/') && !path.endsWith('.html')) path += '/';
     return path;
   }
 
   function absoluteUrl(path) {
-    if (path === '/') return `${SITE_ORIGIN}${BASE_PATH}/`;
-    return `${SITE_ORIGIN}${BASE_PATH}${path}`;
+    if (path === '/') return `${SITE_ORIGIN}/`;
+    return `${SITE_ORIGIN}${path}`;
   }
 
   function humanize(path) {
@@ -76,15 +78,7 @@
       .filter(Boolean)
       .map(part => {
         const lower = part.toLowerCase();
-        const special = {
-          amex: 'Amex',
-          payback: 'PAYBACK',
-          miles: 'Miles',
-          more: 'More',
-          faq: 'FAQ',
-          new: 'New',
-          york: 'York'
-        };
+        const special = { amex: 'Amex', payback: 'PAYBACK', miles: 'Miles', more: 'More', faq: 'FAQ', new: 'New', york: 'York' };
         return special[lower] || part.charAt(0).toUpperCase() + part.slice(1);
       })
       .join(' ');
