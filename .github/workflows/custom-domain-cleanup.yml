@@ -2,8 +2,6 @@ name: One-time custom domain cleanup
 
 on:
   push:
-    paths:
-      - '.github/workflows/custom-domain-cleanup.yml'
   workflow_dispatch:
 
 permissions:
@@ -11,6 +9,7 @@ permissions:
 
 jobs:
   cleanup:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
