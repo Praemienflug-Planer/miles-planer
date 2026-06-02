@@ -49,7 +49,15 @@
           <a href="/faq/">FAQ</a>
         </div>
       </div>
-      <div class="nav-item"><a class="nav-link" href="/tools/"{% if page.url == '/tools/' %} aria-current="page"{% endif %}>Tools</a></div>
+      <div class="nav-item has-dropdown">
+        <a class="nav-link" href="/tools/"{% if page.url == '/tools/' or page.url == '/amex-meilen-umrechnen/' or page.url == '/meilen-sammeln/zeitschriftenabo/' %} aria-current="page"{% endif %}>Tools</a>
+        <div class="nav-dropdown">
+          <a href="/tools/">Alle Tools</a>
+          <a href="/rechner/">Prämienflug-Rechner</a>
+          <a href="/amex-meilen-umrechnen/#mr-rechner">Amex Punkte umrechnen</a>
+          <a href="/meilen-sammeln/zeitschriftenabo/#abo-rechner">Zeitschriftenabo-Meilenrechner</a>
+        </div>
+      </div>
       <div class="nav-item"><a class="nav-link" href="/ueber-das-projekt/"{% if page.url == '/ueber-das-projekt/' %} aria-current="page"{% endif %}>Warum diese Seite?</a></div>
       <div class="nav-item"><a class="nav-link" href="/kontakt.html"{% if page.url == '/kontakt.html' %} aria-current="page"{% endif %}>Kontakt</a></div>
     </nav>
