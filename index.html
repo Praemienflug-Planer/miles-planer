@@ -1,228 +1,70 @@
 ---
-layout: default
----
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Familien-Prämienflüge realistisch planen | Prämienflug-Planer</title>
-  <meta name="description" content="Reichen deine Meilen wirklich für eine Familienreise? Der kostenlose Prämienflug-Planer berechnet Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für 2 bis 8 Personen." />
-
-  <link rel="canonical" href="https://praemienflug-planer.github.io/miles-planer/" />
-  <link rel="alternate" hreflang="de" href="https://praemienflug-planer.github.io/miles-planer/" />
-  <meta name="robots" content="index,follow" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="de_DE" />
-  <meta property="og:site_name" content="Prämienflug-Planer" />
-  <meta property="og:title" content="Familien-Prämienflüge realistisch planen | Prämienflug-Planer" />
-  <meta property="og:description" content="Prüfe, ob deine Meilen wirklich für 2 bis 8 Personen reichen – mit Meilenbedarf, Sammellücke, Sammelzeit und Dealwert." />
-  <meta property="og:url" content="https://praemienflug-planer.github.io/miles-planer/" />
-  <meta property="og:image" content="https://praemienflug-planer.github.io/miles-planer/assets/og/og-home.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Illustration einer Familienreise mit Flugzeug und Fernreiseziel" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Familien-Prämienflüge realistisch planen" />
-  <meta name="twitter:description" content="Prüfe kostenlos, ob deine Meilen für eine Familienreise realistisch reichen." />
-  <meta name="twitter:image" content="https://praemienflug-planer.github.io/miles-planer/assets/og/og-home.jpg" />
-  <meta name="twitter:image:alt" content="Illustration einer Familienreise mit Flugzeug und Fernreiseziel" />
-
-  <script type="application/ld+json">
+layout: page
+title: Familien-Prämienflüge realistisch planen | Prämienflug-Planer
+description: Reichen deine Meilen wirklich für eine Familienreise? Der kostenlose Prämienflug-Planer berechnet Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für 2 bis 8 Personen.
+canonical: https://praemienflug-planer.de/
+og_type: website
+og_title: Familien-Prämienflüge realistisch planen | Prämienflug-Planer
+og_description: Prüfe, ob deine Meilen wirklich für 2 bis 8 Personen reichen – mit Meilenbedarf, Sammellücke, Sammelzeit und Dealwert.
+twitter_title: Familien-Prämienflüge realistisch planen
+twitter_description: Prüfe kostenlos, ob deine Meilen für eine Familienreise realistisch reichen.
+og_image: /assets/og/og-home.jpg
+extra_css:
+  - /assets/css/home.css?v=20260602-central-layout-3
+schema_json: |
   {
     "@context": "https://schema.org",
     "@graph": [
-      {"@type": "WebSite", "@id": "https://praemienflug-planer.github.io/miles-planer/#website", "url": "https://praemienflug-planer.github.io/miles-planer/", "name": "Prämienflug-Planer", "inLanguage": "de-DE"},
-      {"@type": "Organization", "@id": "https://praemienflug-planer.github.io/miles-planer/#organization", "name": "Prämienflug-Planer", "url": "https://praemienflug-planer.github.io/miles-planer/"},
-      {"@type": "SoftwareApplication", "name": "Prämienflug-Planer", "url": "https://praemienflug-planer.github.io/miles-planer/", "applicationCategory": "TravelApplication", "operatingSystem": "Web", "inLanguage": "de-DE"}
+      {"@type": "WebSite", "@id": "https://praemienflug-planer.de/#website", "url": "https://praemienflug-planer.de/", "name": "Prämienflug-Planer", "inLanguage": "de-DE"},
+      {"@type": "Organization", "@id": "https://praemienflug-planer.de/#organization", "name": "Prämienflug-Planer", "url": "https://praemienflug-planer.de/"},
+      {"@type": "SoftwareApplication", "name": "Prämienflug-Planer", "url": "https://praemienflug-planer.de/", "applicationCategory": "TravelApplication", "operatingSystem": "Web", "inLanguage": "de-DE"}
     ]
   }
-  </script>
-
-  <link rel="preload" href="/miles-planer/assets/css/site.css?v=20260507-1" as="style" />
-  <link rel="stylesheet" href="/miles-planer/assets/css/site.css?v=20260507-1" />
-  <link rel="stylesheet" href="/miles-planer/assets/css/hero-background.css?v=20260511-2" />
-  <link rel="stylesheet" href="/miles-planer/assets/css/home.css?v=20260519-conversion-1" />
-  <script src="/miles-planer/assets/js/navigation-shell.js?v=20260518-1" defer></script>
-  <script src="/miles-planer/assets/js/conversion-events.js?v=20260518-1" defer></script>
-</head>
-<body>
-  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
-
-  <header class="site-header">
-    <div class="container nav">
-      <a class="brand" href="/miles-planer/" aria-label="Startseite Prämienflug-Planer">Prämienflug-Planer</a>
-      <nav class="main-nav" aria-label="Hauptnavigation">
-        <a href="/miles-planer/rechner/">Rechner</a>
-        <a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a>
-        <a href="/miles-planer/tools/">Tools</a>
-        <a href="/miles-planer/faq/">FAQ</a>
-        <a href="/miles-planer/ueber-das-projekt/">Warum diese Seite?</a>
-        <a class="btn btn-primary nav-cta" href="/miles-planer/rechner/" data-event="nav_start_calculator">Kostenlos prüfen</a>
-      </nav>
+---
+<section class="hero hero-home">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Prämienflug-Planer für Familien</p>
+      <h1>Reichen deine Meilen wirklich für die Familienreise?</h1>
+      <p class="hero-text">Bei einem einzelnen Prämienflug klingt vieles machbar. Bei vier Personen, Schulferien und Premium Economy sieht es schnell anders aus. Genau dafür ist dieser Rechner gedacht: erst grob prüfen, dann gezielt sammeln.</p>
+      <p class="hero-subtext">Du siehst Meilenbedarf, Sammellücke, Zielmonat, Zuzahlungen und einen groben Dealwert – nicht als Buchungsgarantie, sondern als ehrlichen Realitätscheck für 2 bis 8 Personen.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/rechner/" data-event="start_calculator">Jetzt kostenlos prüfen</a>
+        <a class="text-link" href="/ueber-das-projekt/">Warum gibt es diese Seite?</a>
+      </div>
+      <div class="hero-mini-proof" aria-label="Vertrauenshinweise"><span>Für Schulferien & mehrere Sitze gedacht</span><span>Keine Anmeldung</span><span>Transparente Annahmen</span></div>
     </div>
-  </header>
-
-  <main id="main-content">
-    <section class="hero hero-home">
-      <div class="container hero-grid">
-        <div>
-          <p class="eyebrow">Prämienflug-Planer für Familien</p>
-          <h1>Reichen deine Meilen wirklich für die Familienreise?</h1>
-          <p class="hero-text">
-            Bei einem einzelnen Prämienflug klingt vieles machbar. Bei vier Personen, Schulferien und Premium Economy sieht es schnell anders aus. Genau dafür ist dieser Rechner gedacht: erst grob prüfen, dann gezielt sammeln.
-          </p>
-          <p class="hero-subtext">
-            Du siehst Meilenbedarf, Sammellücke, Zielmonat, Zuzahlungen und einen groben Dealwert – nicht als Buchungsgarantie, sondern als ehrlichen Realitätscheck für 2 bis 8 Personen.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="/miles-planer/rechner/" data-event="start_calculator">Jetzt kostenlos prüfen</a>
-            <a class="text-link" href="/miles-planer/ueber-das-projekt/">Warum gibt es diese Seite?</a>
-          </div>
-          <div class="hero-mini-proof" aria-label="Vertrauenshinweise">
-            <span>Für Schulferien & mehrere Sitze gedacht</span>
-            <span>Keine Anmeldung</span>
-            <span>Transparente Annahmen</span>
-          </div>
-        </div>
-        <div class="hero-card card-primary">
-          <p class="eyebrow">Dein Realitätscheck</p>
-          <h2>Erst prüfen, dann sammeln</h2>
-          <ul>
-            <li><strong>1. Reise skizzieren:</strong> Ziel, Personen, Reiseklasse und Reisezeit auswählen.</li>
-            <li><strong>2. Punkte eintragen:</strong> Bestand, mögliche Boni und monatliche Sammelrate ergänzen.</li>
-            <li><strong>3. Ergebnis einordnen:</strong> Reicht es ungefähr – oder ist der Plan noch zu dünn?</li>
-          </ul>
-          <div class="hero-card-note">Der Rechner ersetzt keine Award-Suche. Er zeigt dir aber, ob du grundsätzlich in der richtigen Größenordnung unterwegs bist.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="trust-bar-section" aria-label="Vertrauenshinweise">
-      <div class="container">
-        <div class="trust-bar">
-          <span>✓ Kostenlos nutzbar</span>
-          <span>✓ Keine Anmeldung nötig</span>
-          <span>✓ Für 2–8 Personen</span>
-          <span>✓ Familien- und Ferienfokus</span>
-          <span>✓ Keine Garantieversprechen</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="so-funktioniert-es">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Der schnellste Weg</p>
-          <h2>Nicht zuerst die Karte suchen. Erst das Ziel rechnen.</h2>
-          <p>Der häufigste Fehler beim Meilensammeln ist nicht, zu wenig Punkte zu sammeln. Der Fehler ist, ohne Ziel zu sammeln. Erst wenn klar ist, wie groß die Lücke ungefähr ist, lohnt sich die Frage nach PAYBACK, Amex, Miles &amp; More oder Avios wirklich.</p>
-        </div>
-        <div class="feature-grid">
-          <article class="feature-card card-question"><h3>1. Familienreise prüfen</h3><p>Der Rechner zeigt dir nicht nur einen Meilenwert, sondern die Größenordnung für die ganze Familie.</p></article>
-          <article class="feature-card card-question"><h3>2. Ergebnis einordnen</h3><p>Die Ampel ist bewusst vorsichtig. Gerade Ferienzeiten und mehrere Sitze sind selten ein Selbstläufer.</p></article>
-          <article class="feature-card card-question"><h3>3. Nächsten Schritt wählen</h3><p>Danach kannst du gezielter entscheiden, ob eher PAYBACK, Amex, Miles &amp; More, Avios oder Flying Blue zu deinem Plan passt.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section proof-section alt">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Warum du hier keine Hochglanz-Versprechen findest</p>
-          <h2>Aus echter Familienplanung entstanden</h2>
-          <p>Ich wollte selbst wissen, ob eine größere Familienreise mit Meilen realistisch ist – nicht theoretisch, sondern mit Schulferien, vier Sitzplätzen, Zuzahlungen und genug Vorlauf. Aus dieser Planung ist der Prämienflug-Planer entstanden.</p>
-        </div>
-        <div class="proof-grid">
-          <article class="proof-card card-primary">
-            <p class="eyebrow">Persönlicher Hintergrund</p>
-            <h3>Kein anonymer Meilenrechner</h3>
-            <p>Ich bin Dominik, Familienvater mit zwei Kindern. Unsere größere Thailand-Reise ist langfristig geplant – und genau solche realen Fragen stecken hinter den Annahmen im Rechner.</p>
-            <a class="text-link" href="/miles-planer/ueber-das-projekt/">Mehr über das Projekt lesen</a>
-          </article>
-          <article class="proof-card card-secondary">
-            <p class="eyebrow">Echte Nutzung</p>
-            <h3>Meilen schon praktisch eingesetzt</h3>
-            <p>Wir haben Miles &amp; More Meilen bereits für Familienreisen in Europa genutzt. Das ist kein perfekter Fernreise-Sweet-Spot, aber genau diese Alltagssicht hilft bei einer ehrlichen Einordnung.</p>
-          </article>
-          <article class="proof-card card-secondary">
-            <p class="eyebrow">Realistische Haltung</p>
-            <h3>Meilen sind nicht automatisch kostenloses Fliegen</h3>
-            <p>Steuern, Zuschläge, Verfügbarkeit und Timing können den Unterschied machen. Deshalb geht es hier nicht um schöne Versprechen, sondern um machbare Planung.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section cta-section mid-cta">
-      <div class="container">
-        <div class="cta-box cta-primary">
-          <div>
-            <p class="eyebrow">Nicht blind Punkte sammeln</p>
-            <h2>Mach zuerst den Realitätscheck</h2>
-            <p class="footer-text">Wähle Ziel, Familiengröße, Reiseklasse und Programm. Danach siehst du sofort, ob dein Plan eher grün, knapp oder noch unrealistisch wirkt.</p>
-          </div>
-          <a class="btn btn-primary" href="/miles-planer/rechner/">Reise jetzt prüfen</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="fuer-wen">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow">Für wen ist das sinnvoll?</p>
-          <h2>Für Familien, die nicht einfach ins Blaue sammeln wollen</h2>
-          <p>Der Planer ist vor allem dann hilfreich, wenn mehrere Plätze, Schulferien, Premium Economy oder Business Class und verschiedene Punkteprogramme zusammenkommen.</p>
-        </div>
-        <div class="audience-grid">
-          <article class="audience-card card-primary"><h3>Familien mit 2–8 Personen</h3><p>Bei mehreren Sitzplätzen wird aus „ein paar Meilen sammeln“ schnell ein echtes Planungsprojekt.</p></article>
-          <article class="audience-card card-secondary"><h3>PAYBACK, Miles &amp; More, Amex, Avios &amp; Flying Blue</h3><p>Du bekommst eine erste Orientierung, welcher Sammelweg zu deinem Ziel passen könnte – ohne jeden Transfer selbst durchzurechnen.</p></article>
-          <article class="audience-card card-secondary"><h3>Langfristige Fernreiseplanung</h3><p>Ob Thailand, New York oder Business Class: Der Rechner zeigt, ob dein Ziel mit deiner Sammelrate grob erreichbar wirkt.</p></article>
-          <article class="audience-card card-secondary"><h3>Meilen oder Cash?</h3><p>Der Dealwert hilft dir einzuschätzen, ob eine Einlösung sinnvoll ist oder ob ein normales Ticket am Ende entspannter wäre.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section alt">
-      <div class="container">
-        <div class="section-head"><p class="eyebrow">Schnelleinstiege</p><h2>Die wichtigsten nächsten Schritte</h2><p>Starte mit dem Rechner oder lies dort weiter, wo dein Ergebnis dich hinführt.</p></div>
-        <div class="article-grid">
-          <a class="article-card card-link-primary" href="/miles-planer/rechner/"><h3>Prämienflug-Rechner für Familien</h3><p>Prüfe Meilenbedarf, Lücke, Sammelzeit und Dealwert für deine eigene Reiseidee.</p></a>
-          <a class="article-card" href="/miles-planer/meilen-sammeln/"><h3>Meilen sammeln</h3><p>Die zentrale Übersicht zu PAYBACK, Amex, Miles &amp; More und alltagstauglichen Sammelwegen.</p></a>
-          <a class="article-card" href="/miles-planer/amex-oder-payback/"><h3>Amex oder PAYBACK?</h3><p>Ordne ein, welcher Punkteweg besser zu deinem Ziel, deinem Alltag und deiner Familie passt.</p></a>
-          <a class="article-card" href="/miles-planer/meilen-thailand/"><h3>Beispiel: Thailand mit Meilen</h3><p>Ein Praxisbeispiel für Familien, Premium Economy und lange Vorlaufzeit.</p></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section cta-section">
-      <div class="container">
-        <div class="cta-box cta-primary">
-          <div>
-            <p class="eyebrow">Bereit für den Realitätscheck?</p>
-            <h2>Prüfe jetzt, ob deine Familienreise mit Meilen realistisch ist</h2>
-            <p class="footer-text">Wähle Ziel, Familiengröße, Reiseklasse und Programm – der Rechner zeigt dir Meilenbedarf, Sammellücke, Sammelzeit und Dealwert.</p>
-          </div>
-          <a class="btn btn-primary" href="/miles-planer/rechner/">Zum Prämienflug-Rechner</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section legal-note-section">
-      <div class="container legal-note">
-        <strong>Hinweis:</strong> Ich nutze selbst verschiedene Karten- und Punkteprogramme und gebe hier ausschließlich meine persönliche Einordnung wieder. Affiliate-Links werden transparent gekennzeichnet. Kreditkarten sollten nur genutzt werden, wenn die Abrechnung vollständig und pünktlich bezahlt wird. Ich gebe keine Finanz-, Steuer- oder Rechtsberatung und mache keine individuellen Produktempfehlungen.
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div><div class="brand footer-brand">Prämienflug-Planer</div><p class="footer-text">Planungstool für Prämienflüge mit Fokus auf Familien, Sammellücke und realistische Umsetzbarkeit.</p></div>
-      <div><h4>Navigation</h4><ul class="footer-links"><li><a href="/miles-planer/rechner/">Rechner</a></li><li><a href="/miles-planer/tools/">Tools</a></li><li><a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a></li><li><a href="/miles-planer/amex-oder-payback/">Amex oder PAYBACK?</a></li><li><a href="/miles-planer/meilen-thailand/">Thailand</a></li><li><a href="/miles-planer/meilen-business-class/">Business Class</a></li><li><a href="/miles-planer/ueber-das-projekt/">Warum diese Seite?</a></li><li><a href="/miles-planer/faq/">FAQ</a></li></ul></div>
-      <div><h4>Rechtliches</h4><ul class="footer-links"><li><a href="/miles-planer/impressum.html">Impressum</a></li><li><a href="/miles-planer/datenschutz.html">Datenschutz</a></li><li><a href="/miles-planer/transparenz.html">Transparenz</a></li><li><a href="/miles-planer/kontakt.html">Kontakt</a></li></ul></div>
+    <div class="hero-card card-primary">
+      <p class="eyebrow">Dein Realitätscheck</p>
+      <h2>Erst prüfen, dann sammeln</h2>
+      <ul><li><strong>1. Reise skizzieren:</strong> Ziel, Personen, Reiseklasse und Reisezeit auswählen.</li><li><strong>2. Punkte eintragen:</strong> Bestand, mögliche Boni und monatliche Sammelrate ergänzen.</li><li><strong>3. Ergebnis einordnen:</strong> Reicht es ungefähr – oder ist der Plan noch zu dünn?</li></ul>
+      <div class="hero-card-note">Der Rechner ersetzt keine Award-Suche. Er zeigt dir aber, ob du grundsätzlich in der richtigen Größenordnung unterwegs bist.</div>
     </div>
-  </footer>
-</body>
-</html>
+  </div>
+</section>
+
+<section class="trust-bar-section" aria-label="Vertrauenshinweise"><div class="container"><div class="trust-bar"><span>✓ Kostenlos nutzbar</span><span>✓ Keine Anmeldung nötig</span><span>✓ Für 2–8 Personen</span><span>✓ Familien- und Ferienfokus</span><span>✓ Keine Garantieversprechen</span></div></div></section>
+
+<section class="section" id="so-funktioniert-es">
+  <div class="container">
+    <div class="section-head"><p class="eyebrow">Der schnellste Weg</p><h2>Nicht zuerst die Karte suchen. Erst das Ziel rechnen.</h2><p>Der häufigste Fehler beim Meilensammeln ist nicht, zu wenig Punkte zu sammeln. Der Fehler ist, ohne Ziel zu sammeln. Erst wenn klar ist, wie groß die Lücke ungefähr ist, lohnt sich die Frage nach PAYBACK, Amex, Miles &amp; More oder Avios wirklich.</p></div>
+    <div class="feature-grid"><article class="feature-card card-question"><h3>1. Familienreise prüfen</h3><p>Der Rechner zeigt dir nicht nur einen Meilenwert, sondern die Größenordnung für die ganze Familie.</p></article><article class="feature-card card-question"><h3>2. Ergebnis einordnen</h3><p>Die Ampel ist bewusst vorsichtig. Gerade Ferienzeiten und mehrere Sitze sind selten ein Selbstläufer.</p></article><article class="feature-card card-question"><h3>3. Nächsten Schritt wählen</h3><p>Danach kannst du gezielter entscheiden, ob eher PAYBACK, Amex, Miles &amp; More, Avios oder Flying Blue zu deinem Plan passt.</p></article></div>
+  </div>
+</section>
+
+<section class="section proof-section alt">
+  <div class="container">
+    <div class="section-head"><p class="eyebrow">Warum du hier keine Hochglanz-Versprechen findest</p><h2>Aus echter Familienplanung entstanden</h2><p>Ich wollte selbst wissen, ob eine größere Familienreise mit Meilen realistisch ist – nicht theoretisch, sondern mit Schulferien, vier Sitzplätzen, Zuzahlungen und genug Vorlauf. Aus dieser Planung ist der Prämienflug-Planer entstanden.</p></div>
+    <div class="proof-grid"><article class="proof-card card-primary"><p class="eyebrow">Persönlicher Hintergrund</p><h3>Kein anonymer Meilenrechner</h3><p>Ich bin Dominik, Familienvater mit zwei Kindern. Unsere größere Thailand-Reise ist langfristig geplant – und genau solche realen Fragen stecken hinter den Annahmen im Rechner.</p><a class="text-link" href="/ueber-das-projekt/">Mehr über das Projekt lesen</a></article><article class="proof-card card-secondary"><p class="eyebrow">Echte Nutzung</p><h3>Meilen schon praktisch eingesetzt</h3><p>Wir haben Miles &amp; More Meilen bereits für Familienreisen in Europa genutzt. Das ist kein perfekter Fernreise-Sweet-Spot, aber genau diese Alltagssicht hilft bei einer ehrlichen Einordnung.</p></article><article class="proof-card card-secondary"><p class="eyebrow">Realistische Haltung</p><h3>Meilen sind nicht automatisch kostenloses Fliegen</h3><p>Steuern, Zuschläge, Verfügbarkeit und Timing können den Unterschied machen. Deshalb geht es hier nicht um schöne Versprechen, sondern um machbare Planung.</p></article></div>
+  </div>
+</section>
+
+<section class="section cta-section mid-cta"><div class="container"><div class="cta-box cta-primary"><div><p class="eyebrow">Nicht blind Punkte sammeln</p><h2>Mach zuerst den Realitätscheck</h2><p class="footer-text">Wähle Ziel, Familiengröße, Reiseklasse und Programm. Danach siehst du sofort, ob dein Plan eher grün, knapp oder noch unrealistisch wirkt.</p></div><a class="btn btn-primary" href="/rechner/">Reise jetzt prüfen</a></div></div></section>
+
+<section class="section" id="fuer-wen"><div class="container"><div class="section-head"><p class="eyebrow">Für wen ist das sinnvoll?</p><h2>Für Familien, die nicht einfach ins Blaue sammeln wollen</h2><p>Der Planer ist vor allem dann hilfreich, wenn mehrere Plätze, Schulferien, Premium Economy oder Business Class und verschiedene Punkteprogramme zusammenkommen.</p></div><div class="audience-grid"><article class="audience-card card-primary"><h3>Familien mit 2–8 Personen</h3><p>Bei mehreren Sitzplätzen wird aus „ein paar Meilen sammeln“ schnell ein echtes Planungsprojekt.</p></article><article class="audience-card card-secondary"><h3>PAYBACK, Miles &amp; More, Amex, Avios &amp; Flying Blue</h3><p>Du bekommst eine erste Orientierung, welcher Sammelweg zu deinem Ziel passen könnte – ohne jeden Transfer selbst durchzurechnen.</p></article><article class="audience-card card-secondary"><h3>Langfristige Fernreiseplanung</h3><p>Ob Thailand, New York oder Business Class: Der Rechner zeigt, ob dein Ziel mit deiner Sammelrate grob erreichbar wirkt.</p></article><article class="audience-card card-secondary"><h3>Meilen oder Cash?</h3><p>Der Dealwert hilft dir einzuschätzen, ob eine Einlösung sinnvoll ist oder ob ein normales Ticket am Ende entspannter wäre.</p></article></div></div></section>
+
+<section class="section alt"><div class="container"><div class="section-head"><p class="eyebrow">Schnelleinstiege</p><h2>Die wichtigsten nächsten Schritte</h2><p>Starte mit dem Rechner oder lies dort weiter, wo dein Ergebnis dich hinführt.</p></div><div class="article-grid"><a class="article-card card-link-primary" href="/rechner/"><h3>Prämienflug-Rechner für Familien</h3><p>Prüfe Meilenbedarf, Lücke, Sammelzeit und Dealwert für deine eigene Reiseidee.</p></a><a class="article-card" href="/meilen-sammeln/"><h3>Meilen sammeln</h3><p>Die zentrale Übersicht zu PAYBACK, Amex, Miles &amp; More und alltagstauglichen Sammelwegen.</p></a><a class="article-card" href="/amex-oder-payback/"><h3>Amex oder PAYBACK?</h3><p>Ordne ein, welcher Punkteweg besser zu deinem Ziel, deinem Alltag und deiner Familie passt.</p></a><a class="article-card" href="/meilen-thailand/"><h3>Beispiel: Thailand mit Meilen</h3><p>Ein Praxisbeispiel für Familien, Premium Economy und lange Vorlaufzeit.</p></a></div></div></section>
+
+<section class="section cta-section"><div class="container"><div class="cta-box cta-primary"><div><p class="eyebrow">Bereit für den Realitätscheck?</p><h2>Prüfe jetzt, ob deine Familienreise mit Meilen realistisch ist</h2><p class="footer-text">Wähle Ziel, Familiengröße, Reiseklasse und Programm – der Rechner zeigt dir Meilenbedarf, Sammellücke, Sammelzeit und Dealwert.</p></div><a class="btn btn-primary" href="/rechner/">Zum Prämienflug-Rechner</a></div></div></section>
+
+<section class="section legal-note-section"><div class="container legal-note"><strong>Hinweis:</strong> Ich nutze selbst verschiedene Karten- und Punkteprogramme und gebe hier ausschließlich meine persönliche Einordnung wieder. Affiliate-Links werden transparent gekennzeichnet. Kreditkarten sollten nur genutzt werden, wenn die Abrechnung vollständig und pünktlich bezahlt wird. Ich gebe keine Finanz-, Steuer- oder Rechtsberatung und mache keine individuellen Produktempfehlungen.</div></section>
