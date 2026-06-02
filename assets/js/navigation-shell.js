@@ -1,5 +1,5 @@
 (() => {
-  const BASE = '/miles-planer';
+  const BASE = '';
 
   const mainNav = [
     { label: 'Rechner', href: `${BASE}/rechner/` },
@@ -7,6 +7,7 @@
       { label: 'Übersicht', href: `${BASE}/meilen-sammeln/` },
       { label: 'Amex oder PAYBACK?', href: `${BASE}/amex-oder-payback/` },
       { label: 'PAYBACK Punkte sammeln', href: `${BASE}/meilen-sammeln/payback/` },
+      { label: 'Meilen sammeln im Alltag', href: `${BASE}/meilen-sammeln/payback-alltag/` },
       { label: 'PAYBACK zu Miles & More', href: `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/` },
       { label: 'Amex Membership Rewards', href: `${BASE}/meilen-sammeln/amex/` },
       { label: 'Amex Kreditkarten', href: `${BASE}/meilen-sammeln/amex-kreditkarten/` },
@@ -33,7 +34,7 @@
 
   const footerNav = [
     ['Rechner', `${BASE}/rechner/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`], ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`],
-    ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
+    ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['Meilen sammeln im Alltag', `${BASE}/meilen-sammeln/payback-alltag/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
     ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Amex Kreditkarten', `${BASE}/meilen-sammeln/amex-kreditkarten/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`],
     ['Thailand', `${BASE}/meilen-thailand/`], ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`], ['Mit PAYBACK nach Mallorca', `${BASE}/meilen-sammeln/payback-mallorca/`],
     ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`], ['Tools', `${BASE}/tools/`],
@@ -107,6 +108,14 @@
     document.head.appendChild(style);
   }
 
+  function injectReadableInfoBoxStyles() {
+    if (document.getElementById('readable-info-box-style')) return;
+    const style = document.createElement('style');
+    style.id = 'readable-info-box-style';
+    style.textContent = `.fee-highlight,.fee-metric,.metric-card,.trust-box,.ny-note,.program-result,.upgrade-box,.cash-highlight,.formula-box,.verdict-card,.example-summary div{background:#fff!important;color:#0f172a!important}.trust-box,.ny-note,.program-result,.cash-highlight,.formula-box{background:#f8fafc!important}.fee-highlight *,.fee-metric *,.metric-card *,.trust-box *,.ny-note *,.program-result *,.upgrade-box *,.cash-highlight *,.formula-box *,.verdict-card *,.example-summary div *{color:#0f172a!important}.fee-warning,.decision-box{background:#fff7ed!important;color:#7c2d12!important}.fee-warning *,.decision-box *{color:#7c2d12!important}.fee-table-note,.small-note,.article-image figcaption{color:#475569!important}`;
+    document.head.appendChild(style);
+  }
+
   function setImage(selector, src, alt) {
     const img = document.querySelector(selector);
     if (!img) return null;
@@ -162,6 +171,7 @@
     if (skip && skip.parentNode === document.body) skip.insertAdjacentElement('afterend', header);
     else document.body.prepend(header);
     document.body.appendChild(footer);
+    injectReadableInfoBoxStyles();
     applyOfficialCardImages();
 
     const toggle = header.querySelector('.nav-toggle');
