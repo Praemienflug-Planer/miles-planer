@@ -1,5 +1,5 @@
 (() => {
-  const BASE = '/miles-planer';
+  const BASE = '';
 
   function getPayloadSafe() {
     if (typeof collectPayload === 'function') return collectPayload();
@@ -91,15 +91,8 @@
   function renderSammelwegeBox() {
     return `
       <h4>Warum diese Sammelwege angezeigt werden</h4>
-      <p>
-        Der Rechner zeigt zuerst, ob dein Ziel rechnerisch realistisch wirkt. Erst danach lohnt sich die Frage,
-        welcher Sammelweg die Lücke sinnvoll schließt: PAYBACK, American Express Membership Rewards,
-        Miles & More Kreditkarte, Wunschgutschein oder einzelne Meilenangebote.
-      </p>
-      <p>
-        Ich ordne diese Wege aus Planungssicht ein. Affiliate-Links werden transparent gekennzeichnet.
-        Bitte prüfe Konditionen, Gebühren und Kartenbedingungen immer selbst vor einem Abschluss.
-      </p>
+      <p>Der Rechner zeigt zuerst, ob dein Ziel rechnerisch realistisch wirkt. Erst danach lohnt sich die Frage, welcher Sammelweg die Lücke sinnvoll schließt: PAYBACK, American Express Membership Rewards, Miles & More Kreditkarte, Wunschgutschein oder einzelne Meilenangebote.</p>
+      <p>Ich ordne diese Wege aus Planungssicht ein. Affiliate-Links werden transparent gekennzeichnet. Bitte prüfe Konditionen, Gebühren und Kartenbedingungen immer selbst vor einem Abschluss.</p>
     `;
   }
 
@@ -110,15 +103,10 @@
 
     const payload = getPayloadSafe();
     const affiliateBox = result.querySelector('.affiliate-box');
-    const genericNextSteps = Array.from(result.querySelectorAll('.result-section')).find((section) =>
-      section.querySelector('h3')?.textContent?.trim() === 'Nächste Schritte'
-    );
+    const genericNextSteps = Array.from(result.querySelectorAll('.result-section')).find((section) => section.querySelector('h3')?.textContent?.trim() === 'Nächste Schritte');
 
-    if (genericNextSteps) {
-      genericNextSteps.insertAdjacentHTML('afterend', renderNextStepBox(payload.programm));
-    } else if (affiliateBox) {
-      affiliateBox.insertAdjacentHTML('beforebegin', renderNextStepBox(payload.programm));
-    }
+    if (genericNextSteps) genericNextSteps.insertAdjacentHTML('afterend', renderNextStepBox(payload.programm));
+    else if (affiliateBox) affiliateBox.insertAdjacentHTML('beforebegin', renderNextStepBox(payload.programm));
 
     if (affiliateBox && !affiliateBox.classList.contains('result-sammelwege-box')) {
       affiliateBox.classList.add('result-sammelwege-box');
@@ -129,18 +117,11 @@
   function startResultObserver() {
     const result = document.getElementById('result');
     if (!result) return;
-
-    const observer = new MutationObserver(() => {
-      enhanceResultNextSteps();
-    });
-
+    const observer = new MutationObserver(() => enhanceResultNextSteps());
     observer.observe(result, { childList: true, subtree: true });
     enhanceResultNextSteps();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', startResultObserver);
-  } else {
-    startResultObserver();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startResultObserver);
+  else startResultObserver();
 })();
