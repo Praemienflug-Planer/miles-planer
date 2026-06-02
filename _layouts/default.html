@@ -1,13 +1,12 @@
 {% comment %}
   Transitional default layout for existing static HTML pages.
-  Rewrites legacy GitHub Pages URLs for the custom domain and injects root-domain CSS/JS.
+  Normalizes legacy GitHub Pages URLs and /miles-planer paths to the custom root domain.
 {% endcomment %}
 {% assign cleaned_content = content
   | replace: 'https://praemienflug-planer.github.io/miles-planer/', 'https://praemienflug-planer.de/'
   | replace: 'https://praemienflug-planer.github.io/miles-planer', 'https://praemienflug-planer.de'
   | replace: '/miles-planer/assets/', '/assets/'
+  | replace: '/miles-planer/images/', '/images/'
   | replace: '/miles-planer/', '/'
 %}
-{% assign injected_head = '<link rel="stylesheet" href="/assets/css/site.css?v=20260601-rootfix-1"><link rel="stylesheet" href="/assets/css/hero-background.css?v=20260601-rootfix-1"><link rel="stylesheet" href="/assets/css/home.css?v=20260601-rootfix-1"></head>' %}
-{% assign injected_body = '<script src="/assets/js/breadcrumb-schema.js?v=20260601-rootfix-1"></script><script src="/assets/js/contextual-faq.js?v=20260601-rootfix-1"></script><script src="/assets/js/navigation-shell.js?v=20260601-rootfix-1"></script><script src="/assets/js/quickstart-nav-link.js?v=20260601-rootfix-1"></script><script src="/assets/js/page-enhancements.js?v=20260601-rootfix-1"></script><script src="/assets/js/internal-link-boost-root.js?v=20260601-rootfix-1"></script></body>' %}
-{{ cleaned_content | replace: '</head>', injected_head | replace: '</body>', injected_body }}
+{{ cleaned_content }}
