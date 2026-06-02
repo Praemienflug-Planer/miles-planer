@@ -8,7 +8,7 @@ layout: default
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eurowings Kreditkarte & Miles & More Meilen sammeln | Prämienflug-Planer</title>
   <meta name="description" content="Eurowings Kreditkarte als Miles-&-More-Sammelkarte: Meilen sammeln, Eurowings-Vorteile einordnen, Kosten prüfen und entscheiden, ob die Karte zur eigenen Reiseplanung passt." />
-  <link rel="stylesheet" href="/miles-planer/assets/css/site.css?v=20260521-mm-kk-text-1" />
+  <link rel="stylesheet" href="/miles-planer/assets/css/site.css?v=20260602-mm-kk-decision-card" />
   <link rel="stylesheet" href="/miles-planer/assets/css/hero-background.css?v=20260511-2" />
   <link rel="canonical" href="https://praemienflug-planer.github.io/miles-planer/meilen-sammeln/miles-and-more-kreditkarte/" />
   <meta name="robots" content="index,follow" />
@@ -20,7 +20,7 @@ layout: default
   <script src="/miles-planer/assets/js/navigation-shell.js?v=20260518-6" defer></script>
   <script src="/miles-planer/assets/js/conversion-events.js?v=20260518-1" defer></script>
   <style>
-    .decision-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}.decision-mini{border:1px solid rgba(245,158,11,.28);border-radius:16px;padding:16px;background:rgba(255,255,255,.05)}.decision-mini strong{display:block;color:#fbbf24;margin-bottom:6px}.decision-mini span{display:block;color:var(--muted);line-height:1.45}.trust-cta-note{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.55}.affiliate-soft-box{border:1px solid rgba(245,158,11,.36);background:rgba(245,158,11,.07);border-radius:18px;padding:18px;margin-top:18px}.benefit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.benefit-card{border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;background:rgba(255,255,255,.04)}.benefit-card h3{margin-top:0}.benefit-card p{margin-bottom:0;color:var(--muted)}@media(max-width:850px){.decision-strip,.benefit-grid{grid-template-columns:1fr}}
+    .decision-card-clean{overflow:hidden;position:relative}.decision-card-clean:before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,rgba(59,130,246,.10),rgba(14,165,233,.03));pointer-events:none}.decision-card-clean>*{position:relative}.decision-summary{max-width:760px}.decision-summary p{font-size:1.03rem;line-height:1.75}.decision-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0}.decision-mini{border:1px solid rgba(148,163,184,.20);border-radius:18px;padding:18px;background:rgba(15,23,42,.42);box-shadow:0 10px 24px rgba(15,23,42,.14)}.decision-mini strong{display:flex;align-items:center;gap:8px;color:#fff;margin-bottom:8px;font-size:1rem}.decision-mini strong:before{content:"";width:9px;height:9px;border-radius:999px;background:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.14)}.decision-mini:nth-child(2) strong:before{background:#fbbf24;box-shadow:0 0 0 4px rgba(251,191,36,.14)}.decision-mini:nth-child(3) strong:before{background:#fb7185;box-shadow:0 0 0 4px rgba(251,113,133,.14)}.decision-mini span{display:block;color:var(--muted);line-height:1.55}.decision-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px}.trust-cta-note{margin-top:16px;color:var(--muted);font-size:14px;line-height:1.65;border-top:1px solid rgba(148,163,184,.18);padding-top:14px}.affiliate-soft-box{border:1px solid rgba(245,158,11,.36);background:rgba(245,158,11,.07);border-radius:18px;padding:18px;margin-top:18px}.benefit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.benefit-card{border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:16px;background:rgba(255,255,255,.04)}.benefit-card h3{margin-top:0}.benefit-card p{margin-bottom:0;color:var(--muted)}@media(max-width:850px){.decision-strip,.benefit-grid{grid-template-columns:1fr}.decision-actions{align-items:stretch}.decision-actions .btn{width:100%;text-align:center}}
   </style>
 </head>
 <body>
@@ -56,16 +56,27 @@ layout: default
 <section class="section" id="entscheidung">
   <div class="container seo-layout">
     <article class="seo-content">
-      <div class="article-card seo-card card-primary">
+      <div class="article-card seo-card card-primary decision-card-clean">
         <p class="eyebrow">Schnellentscheidung</p>
-        <h2>Würde ich die Karte prüfen?</h2>
-        <p>Ja, aber nicht für jeden. Für Familien kann die Karte interessant sein, wenn Eurowings wirklich genutzt wird und die Kartenleistungen konkrete Zusatzkosten ersetzen. Wenn es nur um möglichst flexible Punkte geht, ist Amex oft der bessere erste Blick.</p>
-        <div class="decision-strip">
-          <div class="decision-mini"><strong>Kann gut passen</strong><span>Du fliegst häufiger Eurowings, brauchst Gepäck oder Sitzplätze und baust Miles &amp; More gezielt auf.</span></div>
-          <div class="decision-mini"><strong>Vorher rechnen</strong><span>Die Jahresgebühr muss durch echte Vorteile, Meilen oder Willkommensbonus sinnvoll erklärbar sein.</span></div>
-          <div class="decision-mini"><strong>Eher nicht</strong><span>Du fliegst kaum Eurowings, willst maximale Flexibilität oder würdest nur wegen Bonusmeilen beantragen.</span></div>
+        <div class="decision-summary">
+          <h2>Würde ich die Karte prüfen?</h2>
+          <p>Ja, aber nicht für jeden. Für Familien kann die Karte interessant sein, wenn Eurowings wirklich genutzt wird und die Kartenleistungen konkrete Zusatzkosten ersetzen. Wenn es nur um möglichst flexible Punkte geht, ist Amex oft der bessere erste Blick.</p>
         </div>
-        <div class="hero-actions" style="margin-top:20px;">
+        <div class="decision-strip" aria-label="Schnelle Einordnung der Eurowings Kreditkarte">
+          <div class="decision-mini">
+            <strong>Kann gut passen</strong>
+            <span>Du fliegst häufiger Eurowings, brauchst Gepäck oder Sitzplätze und baust Miles &amp; More gezielt auf.</span>
+          </div>
+          <div class="decision-mini">
+            <strong>Vorher rechnen</strong>
+            <span>Die Jahresgebühr muss durch echte Vorteile, Meilen oder Willkommensbonus sinnvoll erklärbar sein.</span>
+          </div>
+          <div class="decision-mini">
+            <strong>Eher nicht</strong>
+            <span>Du fliegst kaum Eurowings, willst maximale Flexibilität oder würdest nur wegen Bonusmeilen beantragen.</span>
+          </div>
+        </div>
+        <div class="decision-actions">
           <a class="btn btn-primary" href="/miles-planer/kontakt.html" data-event="ew_kk_contact_top">Empfehlungslink anfragen</a>
           <a class="btn btn-secondary" href="/miles-planer/rechner/">Meilenbedarf zuerst prüfen</a>
         </div>
