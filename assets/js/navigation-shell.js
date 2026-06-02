@@ -7,6 +7,7 @@
       { label: 'Übersicht', href: `${BASE}/meilen-sammeln/` },
       { label: 'Amex oder PAYBACK?', href: `${BASE}/amex-oder-payback/` },
       { label: 'PAYBACK Punkte sammeln', href: `${BASE}/meilen-sammeln/payback/` },
+      { label: 'Meilen sammeln im Alltag', href: `${BASE}/meilen-sammeln/payback-alltag/` },
       { label: 'PAYBACK zu Miles & More', href: `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/` },
       { label: 'Amex Membership Rewards', href: `${BASE}/meilen-sammeln/amex/` },
       { label: 'Amex Kreditkarten', href: `${BASE}/meilen-sammeln/amex-kreditkarten/` },
@@ -33,7 +34,7 @@
 
   const footerNav = [
     ['Rechner', `${BASE}/rechner/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`], ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`],
-    ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
+    ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['Meilen sammeln im Alltag', `${BASE}/meilen-sammeln/payback-alltag/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
     ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Amex Kreditkarten', `${BASE}/meilen-sammeln/amex-kreditkarten/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`],
     ['Thailand', `${BASE}/meilen-thailand/`], ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`], ['Mit PAYBACK nach Mallorca', `${BASE}/meilen-sammeln/payback-mallorca/`],
     ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`], ['Tools', `${BASE}/tools/`],
