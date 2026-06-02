@@ -31,7 +31,7 @@
   <link rel="stylesheet" href="/assets/css/site.css?v=20260601-1" />
   <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260601-1" />
   {% if page.extra_css %}
-    {% for css in page.extra_css %}<link rel="stylesheet" href="{{ css | replace: '/miles-planer/assets/', '/assets/' | replace: '/miles-planer/', '/' }}" />{% endfor %}
+    {% for css in page.extra_css %}<link rel="stylesheet" href="{{ css | replace: '/miles-planer/assets/', '/assets/' | replace: '/miles-planer/images/', '/images/' | replace: '/miles-planer/', '/' }}" />{% endfor %}
   {% endif %}
 </head>
 <body>
@@ -43,6 +43,7 @@
       | replace: 'https://praemienflug-planer.github.io/miles-planer/', 'https://praemienflug-planer.de/'
       | replace: 'https://praemienflug-planer.github.io/miles-planer', 'https://praemienflug-planer.de'
       | replace: '/miles-planer/assets/', '/assets/'
+      | replace: '/miles-planer/images/', '/images/'
       | replace: '/miles-planer/', '/'
     }}
   </main>
@@ -53,7 +54,7 @@
   <script src="/assets/js/nav-toggle.js?v=20260601-1"></script>
   <script src="/assets/js/page-enhancements.js?v=20260601-1"></script>
   {% if page.extra_js %}
-    {% for js in page.extra_js %}<script src="{{ js | replace: '/miles-planer/assets/', '/assets/' | replace: '/miles-planer/', '/' }}"></script>{% endfor %}
+    {% for js in page.extra_js %}<script src="{{ js | replace: '/miles-planer/assets/', '/assets/' | replace: '/miles-planer/images/', '/images/' | replace: '/miles-planer/', '/' }}"></script>{% endfor %}
   {% endif %}
 </body>
 </html>
