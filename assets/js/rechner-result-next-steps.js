@@ -50,10 +50,29 @@
     return { decisionKey, monthsUntilTravel, monthsToGoal, gapMonths, gapLabel: formatGap(gapMonths) };
   }
 
-  function getGapConfig(context) {
+  function isMilesAndMore(programm) {
+    const normalized = String(programm || '').toLowerCase();
+    return normalized.includes('miles') || normalized.includes('more');
+  }
+
+  function getGapConfig(context, programm) {
     if (context.decisionKey !== 'bad' || !Number.isFinite(context.gapMonths) || context.gapMonths <= 3) return null;
     const severe = context.gapMonths >= 18;
     const gapText = context.gapLabel ? `Der aktuelle Plan verfehlt den Reisezeitraum um ${context.gapLabel}. ` : '';
+
+    if (isMilesAndMore(programm)) {
+      return {
+        title: severe ? 'Ehrliches Fazit: Mit der aktuellen Rate reicht es nicht' : 'Der Miles-&-More-Plan ist zu knapp',
+        text: `${gapText}Das ist keine reine Transferfrage, sondern eine echte Sammellücke. Bei Miles & More solltest du zuerst prüfen, ob PAYBACK, PAYBACK Amex, eine Eurowings-/Miles-&-More-Kreditkarte oder ein späteres Reisejahr die Lücke realistisch schließen können. Wenn nicht, muss Ziel, Reiseklasse oder Sammelrate angepasst werden.`,
+        links: [
+          ['PAYBACK Amex einordnen', `${BASE}/meilen-sammeln/payback/`],
+          ['Eurowings / M&M Karte prüfen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`],
+          ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`]
+        ],
+        note: 'Wichtig: Karten- oder Punkteaktionen können helfen, aber nur wenn Bedingungen, Kosten, Mindestumsatz und dein normales Ausgabeverhalten passen. Nicht wegen Meilen mehr ausgeben.'
+      };
+    }
+
     return {
       title: severe ? 'Ehrliches Fazit: Mit der aktuellen Rate reicht es nicht' : 'Der Plan ist zu knapp: Rate oder Ziel anpassen',
       text: `${gapText}Das ist kein kleines Transferproblem, sondern eine echte Sammellücke. Prüfe zuerst, ob Reiseklasse, Reiseziel, Reisejahr oder monatliche Sammelrate angepasst werden müssen. Ein einmaliger Punkte-Boost kann helfen, ersetzt aber keine dauerhaft zu niedrige Sammelrate.`,
@@ -67,7 +86,7 @@
   }
 
   function getNextStepConfig(programm, context) {
-    const gapConfig = getGapConfig(context);
+    const gapConfig = getGapConfig(context, programm);
     if (gapConfig) return gapConfig;
 
     const normalized = String(programm || '').toLowerCase();
