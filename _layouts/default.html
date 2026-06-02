@@ -1,6 +1,7 @@
 {% comment %}
   Central layout for legacy static HTML pages.
-  It extracts the existing page title, description and main content, normalizes old GitHub Pages paths,
+  It extracts the existing page title, description, robots, canonical, refresh tags,
+  structured data and main content, normalizes old GitHub Pages paths,
   and renders the shared header, footer and core assets in one place.
 {% endcomment %}
 {% assign normalized_content = content
@@ -26,6 +27,21 @@
   {% assign extracted_canonical = normalized_content | split: 'rel="canonical" href="' | last | split: '"' | first | strip %}
 {% endif %}
 
+{% assign extracted_robots = page.robots | default: 'index,follow' %}
+{% if normalized_content contains 'name="robots" content="' %}
+  {% assign extracted_robots = normalized_content | split: 'name="robots" content="' | last | split: '"' | first | strip %}
+{% endif %}
+
+{% assign extracted_refresh = '' %}
+{% if normalized_content contains 'http-equiv="refresh" content="' %}
+  {% assign extracted_refresh = normalized_content | split: 'http-equiv="refresh" content="' | last | split: '"' | first | strip %}
+{% endif %}
+
+{% assign extracted_schema = '' %}
+{% if normalized_content contains 'type="application/ld+json"' %}
+  {% assign extracted_schema = normalized_content | split: '<script type="application/ld+json">' | last | split: '</script>' | first | strip %}
+{% endif %}
+
 {% assign main_content = normalized_content %}
 {% if normalized_content contains '<main id="main-content">' %}
   {% assign main_content = normalized_content | split: '<main id="main-content">' | last | split: '</main>' | first %}
@@ -41,7 +57,8 @@
   <title>{{ extracted_title }}</title>
   {% if extracted_description != '' %}<meta name="description" content="{{ extracted_description }}" />{% endif %}
   <link rel="canonical" href="{{ extracted_canonical }}" />
-  <meta name="robots" content="{{ page.robots | default: 'index,follow' }}" />
+  <meta name="robots" content="{{ extracted_robots }}" />
+  {% if extracted_refresh != '' %}<meta http-equiv="refresh" content="{{ extracted_refresh }}" />{% endif %}
   <meta property="og:type" content="{{ page.og_type | default: 'website' }}" />
   <meta property="og:locale" content="de_DE" />
   <meta property="og:site_name" content="Prämienflug-Planer" />
@@ -53,9 +70,12 @@
   <meta name="twitter:title" content="{{ page.twitter_title | default: page.og_title | default: extracted_title }}" />
   {% if extracted_description != '' %}<meta name="twitter:description" content="{{ page.twitter_description | default: page.og_description | default: extracted_description }}" />{% endif %}
   <meta name="twitter:image" content="{{ page.og_image | default: '/assets/og/og-home.jpg' | absolute_url }}" />
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260602-central-layout-1" />
-  <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260602-central-layout-1" />
-  <link rel="stylesheet" href="/assets/css/home.css?v=20260602-central-layout-1" />
+  {% if extracted_schema != '' %}<script type="application/ld+json">
+{{ extracted_schema }}
+  </script>{% endif %}
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260602-central-layout-2" />
+  <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260602-central-layout-2" />
+  <link rel="stylesheet" href="/assets/css/home.css?v=20260602-central-layout-2" />
 </head>
 <body>
   <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
@@ -64,9 +84,9 @@
     {{ main_content }}
   </main>
   {% include footer.html %}
-  <script src="/assets/js/breadcrumb-schema.js?v=20260602-central-layout-1"></script>
-  <script src="/assets/js/contextual-faq.js?v=20260602-central-layout-1"></script>
-  <script src="/assets/js/nav-toggle.js?v=20260602-central-layout-1"></script>
-  <script src="/assets/js/page-enhancements.js?v=20260602-central-layout-1"></script>
+  <script src="/assets/js/breadcrumb-schema.js?v=20260602-central-layout-2"></script>
+  <script src="/assets/js/contextual-faq.js?v=20260602-central-layout-2"></script>
+  <script src="/assets/js/nav-toggle.js?v=20260602-central-layout-2"></script>
+  <script src="/assets/js/page-enhancements.js?v=20260602-central-layout-2"></script>
 </body>
 </html>
