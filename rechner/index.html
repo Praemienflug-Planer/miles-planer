@@ -1,141 +1,103 @@
 ---
-layout: default
----
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Prämienflug-Rechner für Familien | Meilenbedarf & Sammellücke berechnen</title>
-  <meta name="description" content="Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Prämienflüge mit der Familie. Kostenloser Meilenrechner für Familienreisen von 2 bis 8 Personen." />
-  <link rel="canonical" href="https://praemienflug-planer.github.io/miles-planer/rechner/" />
-  <meta name="robots" content="index,follow" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="de_DE" />
-  <meta property="og:site_name" content="Prämienflug-Planer" />
-  <meta property="og:title" content="Prämienflug-Rechner für Familien" />
-  <meta property="og:description" content="Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Familien-Prämienflüge von 2 bis 8 Personen." />
-  <meta property="og:url" content="https://praemienflug-planer.github.io/miles-planer/rechner/" />
-  <meta property="og:image" content="https://praemienflug-planer.github.io/miles-planer/assets/og/og-home.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Prämienflug-Rechner für Familienreisen" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Prämienflug-Rechner für Familien" />
-  <meta name="twitter:description" content="Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Familien-Prämienflüge berechnen." />
-  <meta name="twitter:image" content="https://praemienflug-planer.github.io/miles-planer/assets/og/og-home.jpg" />
-
-  <script type="application/ld+json">
+layout: page
+title: Prämienflug-Rechner für Familien | Meilenbedarf & Sammellücke berechnen
+description: Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Prämienflüge mit der Familie. Kostenloser Meilenrechner für Familienreisen von 2 bis 8 Personen.
+canonical: https://praemienflug-planer.de/rechner/
+og_type: website
+og_title: Prämienflug-Rechner für Familien
+og_description: Berechne Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Familien-Prämienflüge von 2 bis 8 Personen.
+twitter_title: Prämienflug-Rechner für Familien
+twitter_description: Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Familien-Prämienflüge berechnen.
+og_image: /assets/og/og-home.jpg
+extra_css:
+  - /rechner/rechner-layout-fix.css?v=20260519-conversion-1
+extra_js:
+  - /assets/data/rechner-lists.js?v=20260520-emirates-1
+  - /assets/data/rechner-programs.js?v=20260520-emirates-1
+  - /assets/data/rechner-award-rates.js?v=20260510-2
+  - /assets/data/rechner-award-extra-destinations.js?v=20260510-1
+  - /assets/data/rechner-award-overrides.js?v=20260510-1
+  - /assets/data/rechner-award-emirates.js?v=20260520-emirates-1
+  - /script.js?v=20260510-3
+  - /assets/js/rechner-result-optimizer.js?v=20260518-1
+  - /assets/js/rechner-github-data-loader.js?v=20260510-6
+  - /assets/js/rechner-result-next-steps.js?v=20260519-conversion-1
+schema_json: |
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Prämienflug-Rechner für Familien",
-    "url": "https://praemienflug-planer.github.io/miles-planer/rechner/",
+    "url": "https://praemienflug-planer.de/rechner/",
     "applicationCategory": "TravelApplication",
     "operatingSystem": "Web",
     "inLanguage": "de-DE",
     "description": "Kostenloser Rechner für Meilenbedarf, Sammellücke, Sammelzeit und Dealwert von Familien-Prämienflügen."
   }
-  </script>
-
-  <link rel="stylesheet" href="/miles-planer/assets/css/site.css?v=20260511-1" />
-  <link rel="stylesheet" href="/miles-planer/assets/css/hero-background.css?v=20260511-2" />
-  <link rel="stylesheet" href="/miles-planer/rechner/rechner-layout-fix.css?v=20260519-conversion-1" />
-  <script src="/miles-planer/assets/js/navigation-shell.js?v=20260519-conversion-1" defer></script>
-  <script src="/miles-planer/assets/js/conversion-events.js?v=20260518-1" defer></script>
-</head>
-<body>
-  <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
-
-  <main id="main-content">
-    <section class="section rechner-hero-bg">
-      <div class="container">
-        <div id="inputView" class="tool-view active">
-          <div class="tool-layout">
-            <form id="milesForm">
-              <div class="tool-main">
-                <div class="tool-card calculator-intro-card">
-                  <div class="section-head compact-head">
-                    <p class="eyebrow">Prämienflug-Rechner für Familien</p>
-                    <h1>Familien-Prämienflug realistisch prüfen</h1>
-                    <p>Starte mit Ziel, Familiengröße und Reiseklasse. Danach ergänzt du Reisezeit, Programm und deinen Punktestand – der Rechner zeigt dir, ob dein Familienziel realistisch wirkt und welcher Sammelweg als nächstes sinnvoll ist.</p>
-                  </div>
-
-                  <div class="calculator-start-hint">
-                    <strong>So startest du:</strong>
-                    <p>Wähle die Felder der Reihe nach aus. Nach dem Ergebnis bekommst du passende nächste Schritte zu PAYBACK, Amex, Miles & More, Avios oder Flying Blue.</p>
-                  </div>
-
-                  <div class="calculator-progress" aria-label="Rechner-Ablauf">
-                    <div class="progress-phase active"><span>1</span><strong>Reise definieren</strong><small>Ziel, Personen, Klasse</small></div>
-                    <div class="progress-phase"><span>2</span><strong>Zeitraum & Programm</strong><small>Monat, Jahr, Meilenprogramm</small></div>
-                    <div class="progress-phase"><span>3</span><strong>Punkte eintragen</strong><small>Bestand, Bonus, Sammelrate</small></div>
-                  </div>
-
-                  <div class="step-grid">
-                    <section id="step-ziel" class="step-card active"><div class="step-number">1</div><div class="step-content"><h3>Ziel</h3><p class="step-help">Wohin soll die Familienreise gehen?</p><select id="ziel"></select></div></section>
-                    <section id="step-personen" class="step-card"><div class="step-number">2</div><div class="step-content"><h3>Familiengröße</h3><p class="step-help">Wie viele Plätze sollen insgesamt geplant werden?</p><select id="personen"><option value="">Bitte wählen</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div></section>
-                    <section id="step-reiseklasse" class="step-card"><div class="step-number">3</div><div class="step-content"><h3>Reiseklasse</h3><p class="step-help">Premium Economy oder Business Class.</p><select id="reiseklasse"></select></div></section>
-                    <section id="step-reisezeit" class="step-card"><div class="step-number">4</div><div class="step-content"><h3>Reisezeit</h3><p class="step-help">Ferienzeiten brauchen meist mehr Puffer.</p><select id="reisezeit"></select></div></section>
-                    <section id="step-reisemonat" class="step-card"><div class="step-number">5</div><div class="step-content"><h3>Reisemonat</h3><p class="step-help">Wähle den geplanten Reisemonat.</p><select id="reisemonat"></select></div></section>
-                    <section id="step-reisejahr" class="step-card"><div class="step-number">6</div><div class="step-content"><h3>Reisejahr</h3><p class="step-help">Damit die Sammelzeit eingeordnet werden kann.</p><select id="reisejahr"><option value="">Bitte Reisejahr wählen</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option></select></div></section>
-                    <section id="step-programm" class="step-card"><div class="step-number">7</div><div class="step-content"><h3>Programm</h3><p class="step-help">Wähle das Meilenprogramm oder den Punkteweg.</p><select id="programm"></select></div></section>
-                  </div>
-                </div>
-                <div class="points-row">
-                  <div id="step-punkte" class="tool-card points-main-card">
-                    <div class="section-head compact-head">
-                      <p class="eyebrow">Punktestand</p>
-                      <h2>Bestand und Sammelrate</h2>
-                      <p>Trage grob ein, was bereits vorhanden ist und was realistisch monatlich dazukommt. Es geht um eine Planungsgröße, nicht um eine exakte Garantie.</p>
-                    </div>
-                    <div class="form-grid two-col">
-                      <div class="field-group"><label id="labelBestandAktuell">Aktueller Bestand</label><input id="bestandAktuell" type="number" placeholder="z. B. 120000" /></div>
-                      <div class="field-group"><label id="labelTransferBestand">Transferfähiger Bestand</label><input id="transferBestand" type="number" placeholder="z. B. 40000" /></div>
-                      <div class="field-group"><label id="labelGeplanterBonus">Geplanter Bonus</label><input id="geplanterBonus" type="number" placeholder="z. B. 50000" /></div>
-                      <div class="field-group"><label id="labelMonatlicheSammelrate">Monatliche Sammelrate</label><input id="monatlicheSammelrate" type="number" placeholder="z. B. 5000" /></div>
-                    </div>
-                    <div class="scenario-switch-wrap"><label class="scenario-label" for="szenario">Szenario</label><select id="szenario"><option value="best">Best Case</option><option value="realistisch" selected>Realistisch</option><option value="konservativ">Konservativ</option></select></div>
-                    <div id="formErrors" class="form-status error" style="display:none;"></div>
-                    <div class="tool-actions"><button id="calcButton" type="submit" class="btn btn-primary">Jetzt berechnen</button></div>
-                  </div>
-                </div>
+---
+<section class="section rechner-hero-bg">
+  <div class="container">
+    <div id="inputView" class="tool-view active">
+      <div class="tool-layout">
+        <form id="milesForm">
+          <div class="tool-main">
+            <div class="tool-card calculator-intro-card">
+              <div class="section-head compact-head">
+                <p class="eyebrow">Prämienflug-Rechner für Familien</p>
+                <h1>Familien-Prämienflug realistisch prüfen</h1>
+                <p>Starte mit Ziel, Familiengröße und Reiseklasse. Danach ergänzt du Reisezeit, Programm und deinen Punktestand – der Rechner zeigt dir, ob dein Familienziel realistisch wirkt und welcher Sammelweg als nächstes sinnvoll ist.</p>
               </div>
-            </form>
-            <aside class="tool-sidebar">
-              <div class="tool-card sticky-card calculator-benefit-card">
-                <p class="eyebrow">Was du am Ende bekommst</p>
-                <h3>Deine Familienplanung auf einen Blick</h3>
-                <ul class="plain-list benefit-list">
-                  <li>Meilenbedarf für die ganze Familie</li>
-                  <li>fehlende Punkte oder Meilen</li>
-                  <li>voraussichtlicher Zielmonat</li>
-                  <li>Dealwert gegenüber Cashpreis</li>
-                  <li>Ampel-Einschätzung zur Machbarkeit</li>
-                  <li>passende nächste Sammelwege</li>
-                </ul>
-                <div class="sidebar-transfer-hint"><div class="result-info-card"><div class="info-content" id="pointsHelper"><strong>Transferhinweis</strong><p>Wähle zuerst ein Programm aus, damit der passende Transferhinweis angezeigt wird.</p></div></div></div>
+
+              <div class="calculator-start-hint">
+                <strong>So startest du:</strong>
+                <p>Wähle die Felder der Reihe nach aus. Nach dem Ergebnis bekommst du passende nächste Schritte zu PAYBACK, Amex, Miles & More, Avios oder Flying Blue.</p>
               </div>
-            </aside>
+
+              <div class="calculator-progress" aria-label="Rechner-Ablauf">
+                <div class="progress-phase active"><span>1</span><strong>Reise definieren</strong><small>Ziel, Personen, Klasse</small></div>
+                <div class="progress-phase"><span>2</span><strong>Zeitraum & Programm</strong><small>Monat, Jahr, Meilenprogramm</small></div>
+                <div class="progress-phase"><span>3</span><strong>Punkte eintragen</strong><small>Bestand, Bonus, Sammelrate</small></div>
+              </div>
+
+              <div class="step-grid">
+                <section id="step-ziel" class="step-card active"><div class="step-number">1</div><div class="step-content"><h3>Ziel</h3><p class="step-help">Wohin soll die Familienreise gehen?</p><select id="ziel"></select></div></section>
+                <section id="step-personen" class="step-card"><div class="step-number">2</div><div class="step-content"><h3>Familiengröße</h3><p class="step-help">Wie viele Plätze sollen insgesamt geplant werden?</p><select id="personen"><option value="">Bitte wählen</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div></section>
+                <section id="step-reiseklasse" class="step-card"><div class="step-number">3</div><div class="step-content"><h3>Reiseklasse</h3><p class="step-help">Premium Economy oder Business Class.</p><select id="reiseklasse"></select></div></section>
+                <section id="step-reisezeit" class="step-card"><div class="step-number">4</div><div class="step-content"><h3>Reisezeit</h3><p class="step-help">Ferienzeiten brauchen meist mehr Puffer.</p><select id="reisezeit"></select></div></section>
+                <section id="step-reisemonat" class="step-card"><div class="step-number">5</div><div class="step-content"><h3>Reisemonat</h3><p class="step-help">Wähle den geplanten Reisemonat.</p><select id="reisemonat"></select></div></section>
+                <section id="step-reisejahr" class="step-card"><div class="step-number">6</div><div class="step-content"><h3>Reisejahr</h3><p class="step-help">Damit die Sammelzeit eingeordnet werden kann.</p><select id="reisejahr"><option value="">Bitte Reisejahr wählen</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option></select></div></section>
+                <section id="step-programm" class="step-card"><div class="step-number">7</div><div class="step-content"><h3>Programm</h3><p class="step-help">Wähle das Meilenprogramm oder den Punkteweg.</p><select id="programm"></select></div></section>
+              </div>
+            </div>
+            <div class="points-row">
+              <div id="step-punkte" class="tool-card points-main-card">
+                <div class="section-head compact-head">
+                  <p class="eyebrow">Punktestand</p>
+                  <h2>Bestand und Sammelrate</h2>
+                  <p>Trage grob ein, was bereits vorhanden ist und was realistisch monatlich dazukommt. Es geht um eine Planungsgröße, nicht um eine exakte Garantie.</p>
+                </div>
+                <div class="form-grid two-col">
+                  <div class="field-group"><label id="labelBestandAktuell">Aktueller Bestand</label><input id="bestandAktuell" type="number" placeholder="z. B. 120000" /></div>
+                  <div class="field-group"><label id="labelTransferBestand">Transferfähiger Bestand</label><input id="transferBestand" type="number" placeholder="z. B. 40000" /></div>
+                  <div class="field-group"><label id="labelGeplanterBonus">Geplanter Bonus</label><input id="geplanterBonus" type="number" placeholder="z. B. 50000" /></div>
+                  <div class="field-group"><label id="labelMonatlicheSammelrate">Monatliche Sammelrate</label><input id="monatlicheSammelrate" type="number" placeholder="z. B. 5000" /></div>
+                </div>
+                <div class="scenario-switch-wrap"><label class="scenario-label" for="szenario">Szenario</label><select id="szenario"><option value="best">Best Case</option><option value="realistisch" selected>Realistisch</option><option value="konservativ">Konservativ</option></select></div>
+                <div id="formErrors" class="form-status error" style="display:none;"></div>
+                <div class="tool-actions"><button id="calcButton" type="submit" class="btn btn-primary">Jetzt berechnen</button></div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div id="resultView" class="tool-view"><div class="tool-layout"><div class="tool-main"><div class="tool-card result-wrapper"><div id="result"></div></div></div><aside class="tool-sidebar"><div class="tool-card sticky-card"><p class="eyebrow">Ergebnis</p><h3>Deine Familienplanung</h3><p class="footer-text">Hier siehst du Sammellücke, Zeit bis zum Ziel und die Bewertung der Einlösung. Danach zeigt dir der Planer, welcher Sammelweg als nächstes logisch ist.</p><div id="resultTransferHint" class="result-info-card"><strong>Transferhinweis</strong><p>Die Transferdetails werden nach der Berechnung hier angezeigt.</p></div><div class="tool-actions"><button class="btn btn-secondary" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button></div></div></aside></div></div>
+        </form>
+        <aside class="tool-sidebar">
+          <div class="tool-card sticky-card calculator-benefit-card">
+            <p class="eyebrow">Was du am Ende bekommst</p>
+            <h3>Deine Familienplanung auf einen Blick</h3>
+            <ul class="plain-list benefit-list"><li>Meilenbedarf für die ganze Familie</li><li>fehlende Punkte oder Meilen</li><li>voraussichtlicher Zielmonat</li><li>Dealwert gegenüber Cashpreis</li><li>Ampel-Einschätzung zur Machbarkeit</li><li>passende nächste Sammelwege</li></ul>
+            <div class="sidebar-transfer-hint"><div class="result-info-card"><div class="info-content" id="pointsHelper"><strong>Transferhinweis</strong><p>Wähle zuerst ein Programm aus, damit der passende Transferhinweis angezeigt wird.</p></div></div></div>
+          </div>
+        </aside>
       </div>
-    </section>
-  </main>
-
-  <script src="/miles-planer/assets/data/rechner-lists.js?v=20260520-emirates-1"></script>
-  <script src="/miles-planer/assets/data/rechner-programs.js?v=20260520-emirates-1"></script>
-  <script src="/miles-planer/assets/data/rechner-award-rates.js?v=20260510-2"></script>
-  <script src="/miles-planer/assets/data/rechner-award-extra-destinations.js?v=20260510-1"></script>
-  <script src="/miles-planer/assets/data/rechner-award-overrides.js?v=20260510-1"></script>
-  <script src="/miles-planer/assets/data/rechner-award-emirates.js?v=20260520-emirates-1"></script>
-  <script src="/miles-planer/script.js?v=20260510-3"></script>
-  <script src="/miles-planer/assets/js/rechner-result-optimizer.js?v=20260518-1"></script>
-  <script src="/miles-planer/assets/js/rechner-github-data-loader.js?v=20260510-6"></script>
-  <script src="/miles-planer/assets/js/rechner-result-next-steps.js?v=20260519-conversion-1"></script>
-</body>
-</html>
+    </div>
+    <div id="resultView" class="tool-view"><div class="tool-layout"><div class="tool-main"><div class="tool-card result-wrapper"><div id="result"></div></div></div><aside class="tool-sidebar"><div class="tool-card sticky-card"><p class="eyebrow">Ergebnis</p><h3>Deine Familienplanung</h3><p class="footer-text">Hier siehst du Sammellücke, Zeit bis zum Ziel und die Bewertung der Einlösung. Danach zeigt dir der Planer, welcher Sammelweg als nächstes logisch ist.</p><div id="resultTransferHint" class="result-info-card"><strong>Transferhinweis</strong><p>Die Transferdetails werden nach der Berechnung hier angezeigt.</p></div><div class="tool-actions"><button class="btn btn-secondary" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button></div></div></aside></div></div>
+  </div>
+</section>
