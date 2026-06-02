@@ -8,6 +8,7 @@
   {% if page.description %}<meta name="description" content="{{ page.description }}" />{% endif %}
   <link rel="canonical" href="{{ page.canonical | default: page.url | absolute_url }}" />
   <meta name="robots" content="{{ page.robots | default: 'index,follow' }}" />
+  {% if page.refresh %}<meta http-equiv="refresh" content="{{ page.refresh }}" />{% endif %}
 
   <meta property="og:type" content="{{ page.og_type | default: 'website' }}" />
   <meta property="og:locale" content="de_DE" />
@@ -28,8 +29,8 @@
   </script>
   {% endif %}
 
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260602-central-layout-1" />
-  <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260602-central-layout-1" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260602-central-layout-3" />
+  <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260602-central-layout-3" />
   {% if page.extra_css %}
     {% for css in page.extra_css %}<link rel="stylesheet" href="{{ css | replace: '/miles-planer/assets/', '/assets/' | replace: '/miles-planer/images/', '/images/' | replace: '/miles-planer/', '/' }}" />{% endfor %}
   {% endif %}
@@ -49,10 +50,10 @@
   </main>
 
   {% include footer.html %}
-  <script src="/assets/js/breadcrumb-schema.js?v=20260602-central-layout-1"></script>
-  <script src="/assets/js/contextual-faq.js?v=20260602-central-layout-1"></script>
-  <script src="/assets/js/nav-toggle.js?v=20260602-central-layout-1"></script>
-  <script src="/assets/js/page-enhancements.js?v=20260602-central-layout-1"></script>
+  <script src="/assets/js/breadcrumb-schema.js?v=20260602-central-layout-3"></script>
+  <script src="/assets/js/contextual-faq.js?v=20260602-central-layout-3"></script>
+  <script src="/assets/js/nav-toggle.js?v=20260602-central-layout-3"></script>
+  <script src="/assets/js/page-enhancements.js?v=20260602-central-layout-3"></script>
   {% if page.extra_js %}
     {% for js in page.extra_js %}<script src="{{ js | replace: '/miles-planer/assets/', '/assets/' | replace: '/miles-planer/images/', '/images/' | replace: '/miles-planer/', '/' }}"></script>{% endfor %}
   {% endif %}
