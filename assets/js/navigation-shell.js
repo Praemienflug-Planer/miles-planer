@@ -107,6 +107,14 @@
     document.head.appendChild(style);
   }
 
+  function injectReadableInfoBoxStyles() {
+    if (document.getElementById('readable-info-box-style')) return;
+    const style = document.createElement('style');
+    style.id = 'readable-info-box-style';
+    style.textContent = `.fee-highlight,.fee-metric,.metric-card,.trust-box,.ny-note,.program-result,.upgrade-box,.cash-highlight,.formula-box,.verdict-card,.example-summary div{background:#fff!important;color:#0f172a!important}.trust-box,.ny-note,.program-result,.cash-highlight,.formula-box{background:#f8fafc!important}.fee-highlight *,.fee-metric *,.metric-card *,.trust-box *,.ny-note *,.program-result *,.upgrade-box *,.cash-highlight *,.formula-box *,.verdict-card *,.example-summary div *{color:#0f172a!important}.fee-warning,.decision-box{background:#fff7ed!important;color:#7c2d12!important}.fee-warning *,.decision-box *{color:#7c2d12!important}.fee-table-note,.small-note,.article-image figcaption{color:#475569!important}`;
+    document.head.appendChild(style);
+  }
+
   function setImage(selector, src, alt) {
     const img = document.querySelector(selector);
     if (!img) return null;
@@ -162,6 +170,7 @@
     if (skip && skip.parentNode === document.body) skip.insertAdjacentElement('afterend', header);
     else document.body.prepend(header);
     document.body.appendChild(footer);
+    injectReadableInfoBoxStyles();
     applyOfficialCardImages();
 
     const toggle = header.querySelector('.nav-toggle');
