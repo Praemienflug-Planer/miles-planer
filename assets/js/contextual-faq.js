@@ -1,5 +1,5 @@
 (() => {
-  const BASE_PATH = '/miles-planer';
+  const BASE_PATH = '';
 
   const faqSets = {
     calculator: [
@@ -60,36 +60,18 @@
   };
 
   const pathToSet = new Map([
-    ['/rechner/', 'calculator'],
-    ['/tools/', 'tools'],
-    ['/meilen-sammeln/', 'collect'],
-    ['/meilen-sammeln/anfaenger/', 'collect'],
-    ['/meilen-sammeln/payback/', 'payback'],
-    ['/meilen-sammeln/payback-punkte-miles-and-more/', 'payback'],
-    ['/payback-punkte-sammeln-familie/', 'payback'],
-    ['/meilen-sammeln/wunschgutschein/', 'payback'],
-    ['/meilen-sammeln/zeitschriftenabo/', 'payback'],
-    ['/meilen-sammeln/amex/', 'amex'],
-    ['/meilen-sammeln/amex-kreditkarten/', 'amex'],
-    ['/amex-oder-payback/', 'amex'],
-    ['/amex-meilen-umrechnen/', 'amex'],
-    ['/meilen-sammeln/miles-and-more/', 'milesMore'],
-    ['/meilen-sammeln/miles-and-more-kreditkarte/', 'milesMore'],
-    ['/meilen-thailand/', 'thailand'],
-    ['/meilen-new-york/', 'examples'],
-    ['/meilen-business-class/', 'business'],
-    ['/vier-praemienflug-plaetze-finden/', 'family'],
-    ['/praemienflug-steuern-gebuehren/', 'fees'],
-    ['/meilen-sammeln-familie/', 'family'],
-    ['/business-class-mit-kindern/', 'business'],
-    ['/premium-economy-mit-kindern/', 'business'],
-    ['/business-class-familie-meilen/', 'business'],
-    ['/premium-economy-oder-business-class/', 'business']
+    ['/rechner/', 'calculator'], ['/tools/', 'tools'], ['/meilen-sammeln/', 'collect'], ['/meilen-sammeln/anfaenger/', 'collect'],
+    ['/meilen-sammeln/payback/', 'payback'], ['/meilen-sammeln/payback-punkte-miles-and-more/', 'payback'], ['/payback-punkte-sammeln-familie/', 'payback'], ['/meilen-sammeln/wunschgutschein/', 'payback'], ['/meilen-sammeln/zeitschriftenabo/', 'payback'],
+    ['/meilen-sammeln/amex/', 'amex'], ['/meilen-sammeln/amex-kreditkarten/', 'amex'], ['/amex-oder-payback/', 'amex'], ['/amex-meilen-umrechnen/', 'amex'],
+    ['/meilen-sammeln/miles-and-more/', 'milesMore'], ['/meilen-sammeln/miles-and-more-kreditkarte/', 'milesMore'],
+    ['/meilen-thailand/', 'thailand'], ['/meilen-new-york/', 'examples'], ['/florida-mit-meilen/', 'examples'], ['/meilen-business-class/', 'business'],
+    ['/vier-praemienflug-plaetze-finden/', 'family'], ['/praemienflug-steuern-gebuehren/', 'fees'], ['/meilen-sammeln-familie/', 'family'],
+    ['/business-class-mit-kindern/', 'business'], ['/premium-economy-mit-kindern/', 'business'], ['/business-class-familie-meilen/', 'business'], ['/premium-economy-oder-business-class/', 'business']
   ]);
 
   function stripBase(pathname) {
     let path = pathname || '/';
-    if (path.startsWith(BASE_PATH)) path = path.slice(BASE_PATH.length) || '/';
+    if (BASE_PATH && path.startsWith(BASE_PATH)) path = path.slice(BASE_PATH.length) || '/';
     path = path.replace(/\/index\.html$/, '/');
     if (!path.endsWith('/') && !path.endsWith('.html')) path += '/';
     return path;
@@ -113,22 +95,7 @@
     const section = document.createElement('section');
     section.className = 'contextual-faq section';
     section.dataset.contextualFaq = 'true';
-    section.innerHTML = `
-      <div class="container">
-        <div class="section-heading">
-          <span class="eyebrow">Kurz erklärt</span>
-          <h2>Häufige Fragen</h2>
-        </div>
-        <div class="faq-mini-grid">
-          ${faqs.map(([question, answer]) => `
-            <details class="faq-mini-item">
-              <summary>${escapeHtml(question)}</summary>
-              <p>${escapeHtml(answer)}</p>
-            </details>
-          `).join('')}
-        </div>
-      </div>`;
-
+    section.innerHTML = `<div class="container"><div class="section-heading"><span class="eyebrow">Kurz erklärt</span><h2>Häufige Fragen</h2></div><div class="faq-mini-grid">${faqs.map(([question, answer]) => `<details class="faq-mini-item"><summary>${escapeHtml(question)}</summary><p>${escapeHtml(answer)}</p></details>`).join('')}</div></div>`;
     const lastSection = main.querySelector('.section:last-of-type, article:last-of-type, .container:last-of-type');
     if (lastSection && lastSection.parentElement === main) lastSection.insertAdjacentElement('afterend', section);
     else main.appendChild(section);
@@ -136,8 +103,7 @@
 
   function mount() {
     const path = stripBase(window.location.pathname);
-    const setName = pathToSet.get(path);
-    const faqs = faqSets[setName];
+    const faqs = faqSets[pathToSet.get(path)];
     if (!faqs || faqs.length === 0) return;
     injectStyles();
     injectFaqSection(faqs);
