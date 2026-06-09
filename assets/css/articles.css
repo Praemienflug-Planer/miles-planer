@@ -9,6 +9,8 @@
 .seo-table th, .seo-table td { border: 1px solid var(--line); padding: 12px 14px; text-align: left; vertical-align: top; overflow-wrap: anywhere; word-break: normal; hyphens: auto; }
 .seo-table th { background: var(--card-strong); color: var(--text); }
 .seo-table td { color: var(--muted); }
+.snippet-lead { background: #07111f; border-bottom: 1px solid rgba(56, 189, 248, 0.18); }
+.snippet-lead-inner { padding-top: 13px; padding-bottom: 13px; font-size: 15px; line-height: 1.55; color: #dbeafe; font-weight: 650; }
 .freshness-bar { background: rgba(15, 23, 42, 0.96); border-bottom: 1px solid var(--line); }
 .freshness-inner { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; padding-top: 12px; padding-bottom: 12px; font-size: 14px; line-height: 1.45; color: var(--muted); }
 .freshness-badge { display: inline-flex; align-items: center; border-radius: 999px; padding: 4px 10px; background: rgba(56, 189, 248, 0.13); color: var(--primary); border: 1px solid rgba(56, 189, 248, 0.32); font-weight: 800; }
