@@ -4,6 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HX9T5TXN7G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-HX9T5TXN7G');
+  </script>
+
   <title>{{ page.title | default: 'Prämienflug-Planer' }}</title>
   {% if page.description %}<meta name="description" content="{{ page.description }}" />{% endif %}
   <link rel="canonical" href="{{ page.canonical | default: page.url | absolute_url }}" />
@@ -50,7 +58,7 @@
   </main>
 
   {% include footer.html %}
-  <script src="/assets/js/conversion-events.js?v=20260609-events-1"></script>
+  <script src="/assets/js/conversion-events.js?v=20260609-events-2"></script>
   <script src="/assets/js/breadcrumb-schema.js?v=20260602-central-layout-3"></script>
   <script src="/assets/js/contextual-faq.js?v=20260602-central-layout-3"></script>
   <script src="/assets/js/nav-toggle.js?v=20260602-central-layout-3"></script>
