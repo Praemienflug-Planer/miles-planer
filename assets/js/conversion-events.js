@@ -174,6 +174,10 @@
 
   function init() {
     sendEvent('page_view', { referrer: document.referrer || '' });
+    sendEvent('tracking_ready', { tracking_version: '20260609-events-3' });
+    if (window.location.pathname.includes('/rechner/')) {
+      sendEvent('calculator_start', { trigger: 'calculator_page_loaded' });
+    }
     watchCalculatorResult();
   }
 
