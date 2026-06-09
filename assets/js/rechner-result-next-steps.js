@@ -175,9 +175,11 @@
           <input type="hidden" name="segment" value="${recommendation.label}" />
           <input type="hidden" name="empfehlung" value="${recommendation.choice}" />
           <input type="hidden" name="rechner_zusammenfassung" value="${summary.replace(/"/g, '&quot;')}" />
+          <label for="leadName">Name</label>
+          <input id="leadName" name="name" type="text" placeholder="Dein Name" autocomplete="name" required />
           <label for="leadEmail">E-Mail</label>
           <div class="lead-form-row">
-            <input id="leadEmail" name="email" type="email" placeholder="deine@email.de" required />
+            <input id="leadEmail" name="email" type="email" placeholder="deine@email.de" autocomplete="email" required />
             <button type="submit" class="btn btn-primary">${recommendation.choice}</button>
           </div>
           <label for="leadChoice">Was möchtest du erhalten?</label>
@@ -189,7 +191,7 @@
             <option>Nur Ergebnis-Zusammenfassung senden</option>
           </select>
           <div class="hp-field" aria-hidden="true"><label>Bitte leer lassen</label><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
-          <p class="lead-privacy-note">Du sendest nur deine E-Mail und die Rechner-Zusammenfassung. Kein automatischer Kartenabschluss, keine harte Empfehlung. Bedingungen und Kosten werden vorab eingeordnet.</p>
+          <p class="lead-privacy-note">Du sendest deinen Namen, deine E-Mail und die Rechner-Zusammenfassung. Kein automatischer Kartenabschluss, keine harte Empfehlung. Bedingungen und Kosten werden vorab eingeordnet.</p>
           <div class="lead-form-status" aria-live="polite"></div>
         </form>
       </div>
