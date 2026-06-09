@@ -48,33 +48,91 @@
 
 {% assign review_date = page.last_reviewed | default: '' %}
 {% assign review_note = page.review_note | default: 'Hinweise, Meilenwerte, Bonusaktionen, Gebühren und Kreditkartenangebote können sich ändern. Prüfe vor einer Entscheidung immer die aktuellen Anbieterbedingungen.' %}
+
+{% assign serp_title = extracted_title %}
+{% assign serp_description = extracted_description %}
 {% assign snippet_lead = page.snippet_lead | default: extracted_description %}
+
+{% case page.url %}
+  {% when '/' %}
+    {% assign serp_title = 'Prämienflug-Planer: Meilenbedarf für Familien berechnen' %}
+    {% assign serp_description = 'Kostenlos prüfen, ob eure Meilen, PAYBACK Punkte und Kreditkartenboni für Prämienflüge mit Familie reichen – inklusive Sammellücke, Zielmonat und Risiko-Ampel.' %}
+    {% assign snippet_lead = 'Kostenlos prüfen, ob eure Meilen, PAYBACK Punkte und Kreditkartenboni für Prämienflüge mit Familie reichen – inklusive Sammellücke, Zielmonat und Risiko-Ampel.' %}
+  {% when '/rechner/' %}
+    {% assign serp_title = 'Prämienflug-Rechner: Meilenbedarf und Sammellücke prüfen' %}
+    {% assign serp_description = 'Berechne, ob deine vorhandenen Meilen und Punkte für den Wunschflug reichen. Der Rechner zeigt Sammellücke, Zielmonat, Risiko und realistische nächste Schritte.' %}
+    {% assign snippet_lead = 'Berechne, ob deine vorhandenen Meilen und Punkte für den Wunschflug reichen. Der Rechner zeigt Sammellücke, Zielmonat, Risiko und realistische nächste Schritte.' %}
+  {% when '/amex-meilen-umrechnen/' %}
+    {% assign serp_title = 'Amex Punkte umrechnen: Membership Rewards in Meilen' %}
+    {% assign serp_description = 'Rechne Amex Membership Rewards schnell in Airline-Meilen um und sieh, was PAYBACK, Miles & More, Flying Blue oder Avios für deine Reiseplanung bedeuten.' %}
+    {% assign snippet_lead = 'Rechne Amex Membership Rewards schnell in Airline-Meilen um und sieh, was PAYBACK, Miles & More, Flying Blue oder Avios für deine Reiseplanung bedeuten.' %}
+  {% when '/meilen-sammeln/payback-transferbonus/' %}
+    {% assign serp_title = 'PAYBACK Transferbonus zu Miles & More: Lohnt sich warten?' %}
+    {% assign serp_description = 'PAYBACK Punkte zu Miles & More übertragen oder auf den Transferbonus warten? Diese Seite erklärt Nutzen, Risiken, Timing und typische Fehler beim Meilentransfer.' %}
+    {% assign snippet_lead = 'PAYBACK Punkte zu Miles & More übertragen oder auf den Transferbonus warten? Diese Seite erklärt Nutzen, Risiken, Timing und typische Fehler beim Meilentransfer.' %}
+  {% when '/meilen-sammeln-familie/' %}
+    {% assign serp_title = 'Meilen sammeln als Familie: PAYBACK, Amex und Alltag' %}
+    {% assign serp_description = 'So sammeln Familien realistisch Meilen: Alltagseinkäufe, PAYBACK Coupons, Amex Membership Rewards, Wunschgutschein und klare Zielrechnung ohne Mehrkonsum.' %}
+    {% assign snippet_lead = 'So sammeln Familien realistisch Meilen: Alltagseinkäufe, PAYBACK Coupons, Amex Membership Rewards, Wunschgutschein und klare Zielrechnung ohne Mehrkonsum.' %}
+  {% when '/praemienfluege-familie/' %}
+    {% assign serp_title = 'Prämienflüge für Familien: 2 Erwachsene und Kinder planen' %}
+    {% assign serp_description = 'Prämienflüge für Familien realistisch planen: Meilenbedarf, mehrere Award-Plätze, Kinderregeln, Meilenpooling, PAYBACK, Amex und Kreditkartenstrategie.' %}
+    {% assign snippet_lead = 'Prämienflüge für Familien realistisch planen: Meilenbedarf, mehrere Award-Plätze, Kinderregeln, Meilenpooling, PAYBACK, Amex und Kreditkartenstrategie.' %}
+  {% when '/miles-and-more-meilenpooling-familie/' %}
+    {% assign serp_title = 'Miles & More Meilenpooling für Familien einfach erklärt' %}
+    {% assign serp_description = 'Miles & More Meilenpooling aus Familiensicht: Wann gemeinsame Meilenplanung hilft, wo die Grenzen liegen und warum Verfügbarkeit trotzdem entscheidend bleibt.' %}
+    {% assign snippet_lead = 'Miles & More Meilenpooling aus Familiensicht: Wann gemeinsame Meilenplanung hilft, wo die Grenzen liegen und warum Verfügbarkeit trotzdem entscheidend bleibt.' %}
+  {% when '/childs-award-flight-kinder-meilen/' %}
+    {% assign serp_title = 'Child’s Award Flight: weniger Meilen für Kinder planen' %}
+    {% assign serp_description = 'Child’s Award Flight bei Miles & More erklärt: Warum Kinder-Meilenrabatte Familien helfen können und worauf Eltern bei Alter, Zuzahlungen und Verfügbarkeit achten sollten.' %}
+    {% assign snippet_lead = 'Child’s Award Flight bei Miles & More erklärt: Warum Kinder-Meilenrabatte Familien helfen können und worauf Eltern bei Alter, Zuzahlungen und Verfügbarkeit achten sollten.' %}
+  {% when '/meilen-fuer-familienmitglieder-einloesen/' %}
+    {% assign serp_title = 'Meilen für Familienmitglieder einlösen: Kinder und Partner' %}
+    {% assign serp_description = 'Kann man Meilen für Kinder, Partner oder Familie einlösen? Diese Seite erklärt die Familienlogik hinter Prämienflugbuchungen und Meilenpooling.' %}
+    {% assign snippet_lead = 'Kann man Meilen für Kinder, Partner oder Familie einlösen? Diese Seite erklärt die Familienlogik hinter Prämienflugbuchungen und Meilenpooling.' %}
+  {% when '/meilen-sammeln/miles-and-more-kreditkarte/' %}
+    {% assign serp_title = 'Miles & More Kreditkarte: lohnt sie sich zum Meilensammeln?' %}
+    {% assign serp_description = 'Miles & More Kreditkarte realistisch einordnen: Meilensammeln, Aktionen, Meilenschutz, Kosten und Rolle in einer Familien- oder Reiseplanung.' %}
+    {% assign snippet_lead = 'Miles & More Kreditkarte realistisch einordnen: Meilensammeln, Aktionen, Meilenschutz, Kosten und Rolle in einer Familien- oder Reiseplanung.' %}
+  {% when '/meilen-sammeln/amex-kreditkarten/' %}
+    {% assign serp_title = 'Amex Kreditkarten zum Meilensammeln: welche passt?' %}
+    {% assign serp_description = 'Amex Kreditkarten für Meilensammler vergleichen: Membership Rewards, Willkommensbonus, Turbo, Kosten und sinnvolle Rolle neben PAYBACK und Miles & More.' %}
+    {% assign snippet_lead = 'Amex Kreditkarten für Meilensammler vergleichen: Membership Rewards, Willkommensbonus, Turbo, Kosten und sinnvolle Rolle neben PAYBACK und Miles & More.' %}
+  {% when '/meilen-thailand/' %}
+    {% assign serp_title = 'Thailand mit Meilen: Prämienflüge realistisch planen' %}
+    {% assign serp_description = 'Thailand mit Meilen planen: Beispielwerte, Programme, Premium Economy oder Business Class, Zuzahlungen und Familienlogik für Bangkok, Phuket oder Koh Samui.' %}
+    {% assign snippet_lead = 'Thailand mit Meilen planen: Beispielwerte, Programme, Premium Economy oder Business Class, Zuzahlungen und Familienlogik für Bangkok, Phuket oder Koh Samui.' %}
+  {% when '/vier-praemienflug-plaetze-finden/' %}
+    {% assign serp_title = '4 Prämienflug-Plätze finden: Strategie für Familien' %}
+    {% assign serp_description = 'Vier Award Seats auf einem Flug finden: Warum Familien anders suchen müssen, welche Programme helfen und wann Flexibilität wichtiger ist als der niedrigste Meilenpreis.' %}
+    {% assign snippet_lead = 'Vier Award Seats auf einem Flug finden: Warum Familien anders suchen müssen, welche Programme helfen und wann Flexibilität wichtiger ist als der niedrigste Meilenpreis.' %}
+{% endcase %}
 
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ extracted_title }}</title>
-  {% if extracted_description != '' %}<meta name="description" content="{{ extracted_description }}" />{% endif %}
+  <title>{{ serp_title }}</title>
+  {% if serp_description != '' %}<meta name="description" content="{{ serp_description }}" />{% endif %}
   <link rel="canonical" href="{{ extracted_canonical }}" />
   <meta name="robots" content="{{ extracted_robots }}" />
   {% if extracted_refresh != '' %}<meta http-equiv="refresh" content="{{ extracted_refresh }}" />{% endif %}
   <meta property="og:type" content="{{ page.og_type | default: 'website' }}" />
   <meta property="og:locale" content="de_DE" />
   <meta property="og:site_name" content="Prämienflug-Planer" />
-  <meta property="og:title" content="{{ page.og_title | default: extracted_title }}" />
-  {% if extracted_description != '' %}<meta property="og:description" content="{{ page.og_description | default: extracted_description }}" />{% endif %}
+  <meta property="og:title" content="{{ page.og_title | default: serp_title }}" />
+  {% if serp_description != '' %}<meta property="og:description" content="{{ page.og_description | default: serp_description }}" />{% endif %}
   <meta property="og:url" content="{{ extracted_canonical }}" />
   <meta property="og:image" content="{{ page.og_image | default: '/assets/og/og-home.jpg' | absolute_url }}" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="{{ page.twitter_title | default: page.og_title | default: extracted_title }}" />
-  {% if extracted_description != '' %}<meta name="twitter:description" content="{{ page.twitter_description | default: page.og_description | default: extracted_description }}" />{% endif %}
+  <meta name="twitter:title" content="{{ page.twitter_title | default: page.og_title | default: serp_title }}" />
+  {% if serp_description != '' %}<meta name="twitter:description" content="{{ page.twitter_description | default: page.og_description | default: serp_description }}" />{% endif %}
   <meta name="twitter:image" content="{{ page.og_image | default: '/assets/og/og-home.jpg' | absolute_url }}" />
   {% if extracted_schema != '' %}<script type="application/ld+json">
 {{ extracted_schema }}
   </script>{% endif %}
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260609-serp-snippets" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260609-serp-overrides" />
   <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260609-canonical" />
   <link rel="stylesheet" href="/assets/css/home.css?v=20260609-canonical" />
 </head>
