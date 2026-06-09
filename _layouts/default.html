@@ -22,10 +22,7 @@
   {% assign extracted_description = normalized_content | split: 'name="description" content="' | last | split: '"' | first | strip %}
 {% endif %}
 
-{% assign extracted_canonical = page.canonical | default: page.url | absolute_url %}
-{% if normalized_content contains 'rel="canonical" href="' %}
-  {% assign extracted_canonical = normalized_content | split: 'rel="canonical" href="' | last | split: '"' | first | strip %}
-{% endif %}
+{% assign extracted_canonical = 'https://praemienflug-planer.de' | append: page.url %}
 
 {% assign extracted_robots = page.robots | default: 'index,follow' %}
 {% if normalized_content contains 'name="robots" content="' %}
@@ -73,9 +70,9 @@
   {% if extracted_schema != '' %}<script type="application/ld+json">
 {{ extracted_schema }}
   </script>{% endif %}
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260602-central-layout-2" />
-  <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260602-central-layout-2" />
-  <link rel="stylesheet" href="/assets/css/home.css?v=20260602-central-layout-2" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260609-canonical" />
+  <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260609-canonical" />
+  <link rel="stylesheet" href="/assets/css/home.css?v=20260609-canonical" />
 </head>
 <body>
   <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
@@ -84,9 +81,9 @@
     {{ main_content }}
   </main>
   {% include footer.html %}
-  <script src="/assets/js/breadcrumb-schema.js?v=20260602-central-layout-2"></script>
-  <script src="/assets/js/contextual-faq.js?v=20260602-central-layout-2"></script>
-  <script src="/assets/js/nav-toggle.js?v=20260602-central-layout-2"></script>
-  <script src="/assets/js/page-enhancements.js?v=20260602-central-layout-2"></script>
+  <script src="/assets/js/breadcrumb-schema.js?v=20260609-canonical"></script>
+  <script src="/assets/js/contextual-faq.js?v=20260609-canonical"></script>
+  <script src="/assets/js/nav-toggle.js?v=20260609-canonical"></script>
+  <script src="/assets/js/page-enhancements.js?v=20260609-canonical"></script>
 </body>
 </html>
