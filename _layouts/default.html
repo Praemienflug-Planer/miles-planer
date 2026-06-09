@@ -46,6 +46,9 @@
   {% assign main_content = normalized_content | split: '<main>' | last | split: '</main>' | first %}
 {% endif %}
 
+{% assign review_date = page.last_reviewed | default: '' %}
+{% assign review_note = page.review_note | default: 'Hinweise, Meilenwerte, Bonusaktionen, Gebühren und Kreditkartenangebote können sich ändern. Prüfe vor einer Entscheidung immer die aktuellen Anbieterbedingungen.' %}
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -70,7 +73,7 @@
   {% if extracted_schema != '' %}<script type="application/ld+json">
 {{ extracted_schema }}
   </script>{% endif %}
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260609-canonical" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260609-freshness" />
   <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260609-canonical" />
   <link rel="stylesheet" href="/assets/css/home.css?v=20260609-canonical" />
 </head>
@@ -78,6 +81,17 @@
   <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
   {% include header.html %}
   <main id="main-content">
+    <section class="freshness-bar" aria-label="Aktualität der Seite">
+      <div class="container freshness-inner">
+        <span class="freshness-badge">Aktualität</span>
+        {% if review_date != '' %}
+          <span><strong>Zuletzt redaktionell geprüft:</strong> {{ review_date }}</span>
+        {% else %}
+          <span><strong>Aktualitätshinweis:</strong> Diese Seite wird regelmäßig redaktionell geprüft.</span>
+        {% endif %}
+        <span class="freshness-note">{{ review_note }}</span>
+      </div>
+    </section>
     {{ main_content }}
   </main>
   {% include footer.html %}
