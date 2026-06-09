@@ -48,6 +48,7 @@
 
 {% assign review_date = page.last_reviewed | default: '' %}
 {% assign review_note = page.review_note | default: 'Hinweise, Meilenwerte, Bonusaktionen, Gebühren und Kreditkartenangebote können sich ändern. Prüfe vor einer Entscheidung immer die aktuellen Anbieterbedingungen.' %}
+{% assign snippet_lead = page.snippet_lead | default: extracted_description %}
 
 <!DOCTYPE html>
 <html lang="de">
@@ -73,7 +74,7 @@
   {% if extracted_schema != '' %}<script type="application/ld+json">
 {{ extracted_schema }}
   </script>{% endif %}
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260609-freshness" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260609-serp-snippets" />
   <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260609-canonical" />
   <link rel="stylesheet" href="/assets/css/home.css?v=20260609-canonical" />
 </head>
@@ -81,6 +82,11 @@
   <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
   {% include header.html %}
   <main id="main-content">
+    {% if snippet_lead != '' %}
+    <section class="snippet-lead" aria-label="Kurzbeschreibung der Seite">
+      <div class="container snippet-lead-inner">{{ snippet_lead }}</div>
+    </section>
+    {% endif %}
     <section class="freshness-bar" aria-label="Aktualität der Seite">
       <div class="container freshness-inner">
         <span class="freshness-badge">Aktualität</span>
