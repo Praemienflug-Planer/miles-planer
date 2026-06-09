@@ -112,6 +112,84 @@
   line-height: 1.6;
 }
 
+.lead-request-box {
+  border: 1px solid rgba(52, 211, 153, 0.34);
+  border-radius: 18px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(52, 211, 153, 0.14), transparent 34%),
+    rgba(6, 78, 59, 0.18),
+    rgba(16, 28, 47, 0.92);
+}
+
+.lead-segment-badge {
+  display: inline-flex;
+  margin: 4px 0 10px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(52, 211, 153, 0.15);
+  border: 1px solid rgba(52, 211, 153, 0.35);
+  color: #bbf7d0;
+  font-weight: 850;
+  font-size: 13px;
+}
+
+.lead-request-form {
+  margin-top: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.lead-request-form label {
+  color: var(--text);
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.lead-form-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.lead-request-form input,
+.lead-request-form select {
+  width: 100%;
+  min-height: 46px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(7, 17, 31, 0.74);
+  color: var(--text);
+  padding: 0 13px;
+}
+
+.lead-request-form input::placeholder {
+  color: rgba(203, 213, 225, 0.72);
+}
+
+.lead-privacy-note {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.lead-form-status {
+  min-height: 20px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.lead-form-status.success {
+  color: #bbf7d0;
+}
+
+.lead-form-status.error {
+  color: #fecaca;
+}
+
 .result-sammelwege-box {
   border-color: rgba(52, 211, 153, 0.28);
 }
@@ -349,18 +427,24 @@
   .result-main-number {
     text-align: left;
   }
+
+  .lead-form-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 560px) {
   .next-step-actions,
   .next-step-actions .btn,
   .result-action-buttons,
-  .result-action-buttons .btn {
+  .result-action-buttons .btn,
+  .lead-form-row .btn {
     width: 100%;
   }
 
   .next-step-actions .btn,
-  .result-action-buttons .btn {
+  .result-action-buttons .btn,
+  .lead-form-row .btn {
     text-align: center;
   }
 
@@ -369,7 +453,8 @@
   }
 
   .result-hero-summary,
-  .result-action-box {
+  .result-action-box,
+  .lead-request-box {
     padding: 18px;
   }
 }
