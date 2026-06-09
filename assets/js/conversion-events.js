@@ -71,6 +71,10 @@
     window.dataLayer.push(eventObject);
     window.ppEvents.push({ ...eventObject, ts: new Date().toISOString() });
 
+    if (typeof window.gtag === 'function' && eventName !== 'page_view') {
+      window.gtag('event', eventName, payload);
+    }
+
     if (typeof window.plausible === 'function') {
       window.plausible(eventName, { props: payload });
     }
