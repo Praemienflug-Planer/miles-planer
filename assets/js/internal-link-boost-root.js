@@ -4,7 +4,8 @@
   const links = {
     rechner: { label: 'Prämienflug-Rechner starten', href: '/rechner/', text: 'Prüfe Meilenbedarf, Sammellücke und Zielmonat für deine Reiseidee.' },
     sammeln: { label: 'Meilen sammeln', href: '/meilen-sammeln/', text: 'Die zentrale Übersicht zu PAYBACK, Amex, Miles & More und alltagstauglichen Sammelwegen.' },
-    payback: { label: 'PAYBACK Punkte sammeln', href: '/meilen-sammeln/payback/', text: 'Alltagspunkte, Coupons, Transferbonus und Miles-&-More-Strategie.' },
+    payback: { label: 'PAYBACK Punkte sammeln', href: '/meilen-sammeln/payback/', text: 'Alltagspunkte, Coupons und Miles-&-More-Strategie.' },
+    paybackBonus: { label: 'PAYBACK Transferbonus', href: '/meilen-sammeln/payback-transferbonus/', text: 'Wann sich Warten lohnt und wie Bonusaktionen die Meilengutschrift verbessern.' },
     paybackTransfer: { label: 'PAYBACK zu Miles & More', href: '/meilen-sammeln/payback-punkte-miles-and-more/', text: 'Schritt-für-Schritt-Einordnung zur Umwandlung von PAYBACK Punkten.' },
     mallorca: { label: 'Mit PAYBACK nach Mallorca', href: '/meilen-sammeln/payback-mallorca/', text: 'Praxisbeispiel mit Meilenbedarf, Zuzahlung, Cashpreis und Gegenwert.' },
     wunschgutschein: { label: 'Wunschgutschein Strategie', href: '/meilen-sammeln/wunschgutschein/', text: 'Gutscheinaktionen sinnvoll nutzen, ohne unnötige Ausgaben zu erzeugen.' },
@@ -55,7 +56,7 @@
   function insertHome() {
     if (document.querySelector('[data-internal-link-boost="home-topics"]')) return;
     const target = document.querySelector('#so-funktioniert-es');
-    const html = `<section class="section" data-internal-link-boost="home-topics"><div class="container"><div class="section-head"><p class="eyebrow">Beliebte Themen</p><h2>Direkt zu den wichtigsten Meilen-Themen</h2><p>Viele Besucher starten mit PAYBACK oder dem Rechner. Diese Einstiege führen dich schnell zu den passenden nächsten Schritten.</p></div><div class="internal-link-grid three">${[links.rechner, links.payback, links.mallorca, links.sammeln, links.amex, links.business].map(card).join('')}</div></div></section>`;
+    const html = `<section class="section" data-internal-link-boost="home-topics"><div class="container"><div class="section-head"><p class="eyebrow">Beliebte Themen</p><h2>Direkt zu den wichtigsten Meilen-Themen</h2><p>Viele Besucher starten mit PAYBACK oder dem Rechner. Diese Einstiege führen dich schnell zu den passenden nächsten Schritten.</p></div><div class="internal-link-grid three">${[links.rechner, links.payback, links.paybackBonus, links.mallorca, links.sammeln, links.amex].map(card).join('')}</div></div></section>`;
     if (target) target.insertAdjacentHTML('beforebegin', html);
   }
 
@@ -63,7 +64,7 @@
     if (document.querySelector('[data-internal-link-boost="payback-faq"]')) return;
     const target = document.querySelector('#historische-transferboni') || document.querySelector('.seo-content .article-card:last-of-type');
     if (!target) return;
-    const html = `<div class="article-card seo-card" data-internal-link-boost="payback-faq"><p class="eyebrow">Häufig gesucht</p><h2>Häufige Fragen zu PAYBACK, Meilen und Miles & More</h2><p>Viele Besucher suchen zuerst nach konkreten PAYBACK-Fragen. Deshalb sind die wichtigsten Einstiege hier kurz gebündelt.</p><div class="keyword-list"><span class="keyword-pill">mit payback nach mallorca</span><span class="keyword-pill">payback punkte in meilen umwandeln</span><span class="keyword-pill">payback zu miles and more</span><span class="keyword-pill">payback punkte umrechnen</span></div><div class="keyword-faq"><details open><summary>Wie wandle ich PAYBACK Punkte in Meilen um?</summary><p>PAYBACK Punkte können zu Miles-&-More-Meilen übertragen werden. Vor dem Transfer sollte aber klar sein, ob eine konkrete Einlösung oder eine Bonusaktion ansteht.</p></details><details><summary>Kann ich mit PAYBACK nach Mallorca fliegen?</summary><p>Indirekt ja: PAYBACK Punkte können zu Miles-&-More-Meilen werden. Ob sich das lohnt, hängt von Cashpreis, Zuzahlung, Meilenbedarf und Verfügbarkeit ab.</p></details><details><summary>Ist Wunschgutschein mit PAYBACK sinnvoll?</summary><p>Ja, wenn du den Gutschein ohnehin bei einem passenden Händler nutzt. Nicht sinnvoll ist es, Gutscheine nur wegen Punkten zu kaufen.</p></details></div><div class="internal-link-grid three">${[links.mallorca, links.paybackTransfer, links.rechner].map(card).join('')}</div></div>`;
+    const html = `<div class="article-card seo-card" data-internal-link-boost="payback-faq"><p class="eyebrow">Häufig gesucht</p><h2>Häufige Fragen zu PAYBACK, Meilen und Miles & More</h2><p>Viele Besucher suchen zuerst nach konkreten PAYBACK-Fragen. Deshalb sind die wichtigsten Einstiege hier kurz gebündelt.</p><div class="keyword-list"><span class="keyword-pill">mit payback nach mallorca</span><span class="keyword-pill">payback punkte in meilen umwandeln</span><span class="keyword-pill">payback transferbonus</span><span class="keyword-pill">payback zu miles and more</span><span class="keyword-pill">payback punkte umrechnen</span></div><div class="keyword-faq"><details open><summary>Wie wandle ich PAYBACK Punkte in Meilen um?</summary><p>PAYBACK Punkte können zu Miles-&-More-Meilen übertragen werden. Vor dem Transfer sollte aber klar sein, ob eine konkrete Einlösung oder eine Bonusaktion ansteht.</p></details><details><summary>Wann lohnt sich ein PAYBACK Transferbonus?</summary><p>Wenn keine konkrete Buchung ansteht, kann Warten auf eine Aktion sinnvoll sein. Bei verfügbaren Award-Plätzen kann ein Soforttransfer trotzdem besser sein.</p></details><details><summary>Kann ich mit PAYBACK nach Mallorca fliegen?</summary><p>Indirekt ja: PAYBACK Punkte können zu Miles-&-More-Meilen werden. Ob sich das lohnt, hängt von Cashpreis, Zuzahlung, Meilenbedarf und Verfügbarkeit ab.</p></details><details><summary>Ist Wunschgutschein mit PAYBACK sinnvoll?</summary><p>Ja, wenn du den Gutschein ohnehin bei einem passenden Händler nutzt. Nicht sinnvoll ist es, Gutscheine nur wegen Punkten zu kaufen.</p></details></div><div class="internal-link-grid three">${[links.mallorca, links.paybackBonus, links.paybackTransfer, links.rechner].map(card).join('')}</div></div>`;
     target.insertAdjacentHTML('beforebegin', html);
   }
 
@@ -72,7 +73,7 @@
     if (!sidebar || sidebar.dataset.internalLinksEnhanced) return;
     sidebar.dataset.internalLinksEnhanced = 'true';
     const existing = Array.from(sidebar.querySelectorAll('a')).map(a => a.getAttribute('href'));
-    [links.rechner, links.payback, links.mallorca, links.sammeln].forEach(item => {
+    [links.rechner, links.payback, links.paybackBonus, links.paybackTransfer, links.mallorca, links.sammeln].forEach(item => {
       if (!existing.includes(item.href)) {
         const a = document.createElement('a');
         a.href = item.href;
@@ -88,10 +89,12 @@
     if (path === '/meilen-sammeln/payback/') insertPaybackFaq();
     if (path === '/meilen-business-class/') insertBeforeEnd(block([links.rechner, links.payback, links.amex, links.thailand], 'Business Class weiterplanen', 'Business Class ist meist kein einzelner Trick, sondern eine Kombination aus Meilenbedarf, Sammelweg, Zuzahlung und Verfügbarkeit.'));
     if (path === '/meilen-thailand/') insertBeforeEnd(block([links.rechner, links.payback, links.amex, links.seats], 'Thailand-Reise weiterplanen', 'Für Thailand mit Familie sind mehrere Programme, mehrere Sitzplätze und ein sauberer Punkteaufbau wichtiger als ein einzelner Beispielpreis.'));
-    if (path === '/meilen-sammeln/') insertBeforeEnd(block([links.payback, links.mallorca, links.paybackTransfer, links.amex], 'Sammelwege vertiefen', 'Starte nicht mit allem gleichzeitig. Wähle erst den naheliegendsten Sammelweg und ergänze später gezielt weitere Bausteine.'));
-    if (path === '/amex-oder-payback/') insertBeforeEnd(block([links.payback, links.mallorca, links.amex, links.rechner], 'PAYBACK und Amex konkret einordnen', 'Die Entscheidung wird leichter, wenn du sie mit deinem Ziel, deiner Personenzahl und deinem Sammeltempo verbindest.'));
+    if (path === '/meilen-sammeln/') insertBeforeEnd(block([links.payback, links.paybackBonus, links.mallorca, links.paybackTransfer, links.amex], 'Sammelwege vertiefen', 'Starte nicht mit allem gleichzeitig. Wähle erst den naheliegendsten Sammelweg und ergänze später gezielt weitere Bausteine.'));
+    if (path === '/amex-oder-payback/') insertBeforeEnd(block([links.payback, links.paybackBonus, links.mallorca, links.amex], 'PAYBACK und Amex konkret einordnen', 'Die Entscheidung wird leichter, wenn du sie mit deinem Ziel, deiner Personenzahl und deinem Sammeltempo verbindest.'));
     if (path === '/meilen-new-york/') insertBeforeEnd(block([links.rechner, links.payback, links.amexCalc, links.business], 'New York weiterplanen', 'New York ist ein gutes Testziel, um Programme, Zuzahlungen und flexible Punkte praktisch zu vergleichen.'));
-    if (path === '/meilen-sammeln/payback-punkte-miles-and-more/') insertBeforeEnd(block([links.payback, links.mallorca, links.fees, links.rechner], 'PAYBACK-Transfer praktisch bewerten', 'Vor dem Transfer sollte klar sein, ob der spätere Flug wirklich einen guten Gegenwert bringt.'));
+    if (path === '/meilen-sammeln/payback-punkte-miles-and-more/') insertBeforeEnd(block([links.payback, links.paybackBonus, links.mallorca, links.fees, links.rechner], 'PAYBACK-Transfer praktisch bewerten', 'Vor dem Transfer sollte klar sein, ob der spätere Flug wirklich einen guten Gegenwert bringt.'));
+    if (path === '/meilen-sammeln/payback-transferbonus/') insertBeforeEnd(block([links.payback, links.paybackTransfer, links.mallorca, links.rechner], 'PAYBACK-Strategie weiterdenken', 'Ein Transferbonus ist nur ein Baustein. Entscheidend bleibt, ob Punkte, Meilenbedarf, Verfügbarkeit und Reiseplan zusammenpassen.'));
+    if (path === '/meilen-sammeln/payback-mallorca/') insertBeforeEnd(block([links.payback, links.paybackBonus, links.paybackTransfer, links.rechner], 'PAYBACK-Einlösung weiter einordnen', 'Das Mallorca-Beispiel zeigt die Praxis. Für die eigene Planung zählen zusätzlich Transferzeitpunkt, Bonusaktionen und Gesamtmeilenbedarf.'));
     addSidebarLinks();
   }
 
