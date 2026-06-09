@@ -1,5 +1,6 @@
 (() => {
   const BASE = '';
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xaqpjkgd';
 
   function getPayloadSafe() {
     if (typeof collectPayload === 'function') return collectPayload();
@@ -110,6 +111,125 @@
     return { title: 'Dein nächster Schritt: Sammelweg passend zum Ziel prüfen', text: 'Nach dem Ergebnis solltest du zuerst klären, welcher Sammelweg zu deinem Programm, deiner Familie und deinem Reisezeitraum passt. Entscheidend ist, ob er deine konkrete Lücke sinnvoll schließt.', links: [['Meilen sammeln als Familie', `${BASE}/meilen-sammeln-familie/`], ['Amex oder PAYBACK vergleichen', `${BASE}/amex-oder-payback/`], ['Tools & Rechner ansehen', `${BASE}/tools/`]], note: 'Entscheidend ist nicht nur die Punktzahl, sondern auch Verfügbarkeit, Gebühren und realistische Sammelrate.' };
   }
 
+  function getLeadSegment(context) {
+    if (context.decisionKey === 'good' || (Number.isFinite(context.gapMonths) && context.gapMonths <= 3)) return 'small';
+    if (context.decisionKey === 'medium' || (Number.isFinite(context.gapMonths) && context.gapMonths <= 12)) return 'medium';
+    return 'large';
+  }
+
+  function getRecommendation(payload, context) {
+    const segment = getLeadSegment(context);
+    const programm = String(payload.programm || '').toLowerCase();
+    const gap = context.gapLabel ? `Lücke: ${context.gapLabel}` : 'Lücke nicht eindeutig berechnet';
+
+    if (segment === 'small') {
+      if (isMilesAndMore(payload.programm)) return { segment, label: 'Kleine Lücke', title: 'Passenden Karten- oder Transferbaustein anfordern', text: `Dein Ergebnis wirkt nah am Ziel. ${gap}. Sinnvoll ist jetzt eine konkrete Prüfung: PAYBACK-Transfer, Miles-&-More-Karte, PAYBACK Amex oder ein gezielter Punktebonus.`, choice: 'Passenden Link / Kartenbaustein anfragen' };
+      return { segment, label: 'Kleine Lücke', title: 'Konkreten Amex- oder Transferbaustein anfordern', text: `Dein Ergebnis wirkt nah am Ziel. ${gap}. Sinnvoll ist jetzt eine konkrete Prüfung, welcher flexible Punkte- oder Kartenbaustein die Restlücke sauber schließt.`, choice: 'Passenden Link / Kartenbaustein anfragen' };
+    }
+
+    if (segment === 'medium') {
+      return { segment, label: 'Mittlere Lücke', title: '30-Tage-Sammelplan per E-Mail anfordern', text: `Dein Ergebnis ist noch nicht ganz entspannt. ${gap}. Statt sofort irgendeine Karte abzuschließen, ist ein kurzer Sammelplan sinnvoll: Alltag, PAYBACK, Amex, Transferlogik und nächste Aktionen.`, choice: '30-Tage-Sammelplan anfragen' };
+    }
+
+    if (programm.includes('flying') || programm.includes('avios') || programm.includes('kris')) {
+      return { segment, label: 'Große Lücke', title: 'Roadmap statt Schnellschuss anfordern', text: `Dein Ergebnis zeigt eher eine strukturelle Sammellücke. ${gap}. Hier passt eher eine Roadmap: Ziel, Reiseklasse, Zeitraum und Punkteprogramm neu sortieren, bevor Geld in Karten oder Transfers fließt.`, choice: 'Roadmap / Strategie anfragen' };
+    }
+
+    return { segment, label: 'Große Lücke', title: 'Roadmap statt Schnellschuss anfordern', text: `Dein Ergebnis zeigt eher eine strukturelle Sammellücke. ${gap}. Hier passt eher eine Roadmap: Ziel, Reiseklasse, Zeitraum, PAYBACK und Miles & More sauber neu sortieren.`, choice: 'Roadmap / Strategie anfragen' };
+  }
+
+  function buildSummary(payload, context, recommendation) {
+    const fields = [
+      ['Segment', recommendation.label],
+      ['Ziel', payload.ziel],
+      ['Personen', payload.personen],
+      ['Reiseklasse', payload.reiseklasse],
+      ['Reisezeit', payload.reisezeit],
+      ['Reisemonat', payload.reisemonat],
+      ['Reisejahr', payload.reisejahr],
+      ['Programm', payload.programm],
+      ['Aktueller Bestand', payload.bestandAktuell],
+      ['Transferfähiger Bestand', payload.transferBestand],
+      ['Geplanter Bonus', payload.geplanterBonus],
+      ['Monatliche Sammelrate', payload.monatlicheSammelrate],
+      ['Szenario', payload.szenario],
+      ['Sammelzeit laut Rechner', getResultValue('Sammelzeit')],
+      ['Zeitlücke', context.gapLabel || 'nicht eindeutig'],
+      ['Empfehlung', recommendation.choice]
+    ];
+    return fields.filter(([, value]) => value !== undefined && value !== null && String(value).trim() !== '').map(([label, value]) => `${label}: ${value}`).join('\n');
+  }
+
+  function renderLeadBox(payload, context) {
+    const recommendation = getRecommendation(payload, context);
+    const summary = buildSummary(payload, context, recommendation);
+    return `
+      <div class="result-section lead-request-box" data-enhanced-result="true">
+        <p class="eyebrow">Persönlicher nächster Schritt</p>
+        <span class="lead-segment-badge">${recommendation.label}</span>
+        <h3>${recommendation.title}</h3>
+        <p>${recommendation.text}</p>
+        <form class="lead-request-form" action="${FORMSPREE_ENDPOINT}" method="POST">
+          <input type="hidden" name="_subject" value="Rechner-Lead: ${recommendation.choice}" />
+          <input type="hidden" name="_language" value="de" />
+          <input type="hidden" name="segment" value="${recommendation.label}" />
+          <input type="hidden" name="empfehlung" value="${recommendation.choice}" />
+          <input type="hidden" name="rechner_zusammenfassung" value="${summary.replace(/"/g, '&quot;')}" />
+          <label for="leadEmail">E-Mail</label>
+          <div class="lead-form-row">
+            <input id="leadEmail" name="email" type="email" placeholder="deine@email.de" required />
+            <button type="submit" class="btn btn-primary">${recommendation.choice}</button>
+          </div>
+          <label for="leadChoice">Was möchtest du erhalten?</label>
+          <select id="leadChoice" name="wunsch">
+            <option>${recommendation.choice}</option>
+            <option>Passenden Karten- oder Referral-Link anfragen</option>
+            <option>30-Tage-Sammelplan anfragen</option>
+            <option>Roadmap / Strategie anfragen</option>
+            <option>Nur Ergebnis-Zusammenfassung senden</option>
+          </select>
+          <div class="hp-field" aria-hidden="true"><label>Bitte leer lassen</label><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
+          <p class="lead-privacy-note">Du sendest nur deine E-Mail und die Rechner-Zusammenfassung. Kein automatischer Kartenabschluss, keine harte Empfehlung. Bedingungen und Kosten werden vorab eingeordnet.</p>
+          <div class="lead-form-status" aria-live="polite"></div>
+        </form>
+      </div>
+    `;
+  }
+
+  function bindLeadForms() {
+    document.querySelectorAll('.lead-request-form:not([data-bound="true"])').forEach((form) => {
+      form.dataset.bound = 'true';
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const status = form.querySelector('.lead-form-status');
+        if (status) {
+          status.className = 'lead-form-status';
+          status.textContent = 'Anfrage wird gesendet...';
+        }
+        try {
+          const response = await fetch(form.action, { method: form.method, body: new FormData(form), headers: { Accept: 'application/json' } });
+          if (response.ok) {
+            form.reset();
+            if (status) {
+              status.className = 'lead-form-status success';
+              status.textContent = 'Danke! Deine Anfrage wurde gesendet. Ich melde mich mit einer passenden Einordnung.';
+            }
+          } else {
+            if (status) {
+              status.className = 'lead-form-status error';
+              status.textContent = 'Beim Senden ist ein Fehler aufgetreten. Bitte versuche es später erneut.';
+            }
+          }
+        } catch (error) {
+          if (status) {
+            status.className = 'lead-form-status error';
+            status.textContent = 'Technischer Fehler beim Senden. Bitte versuche es später erneut.';
+          }
+        }
+      });
+    });
+  }
+
   function renderNextStepBox(programm) {
     const payload = getPayloadSafe();
     const context = getResultContext(payload);
@@ -138,19 +258,32 @@
   function enhanceResultNextSteps() {
     const result = document.getElementById('result');
     if (!result || !result.querySelector('.result-card')) return;
-    if (result.querySelector('.next-step-box')) return;
+    if (result.querySelector('.next-step-box')) {
+      bindLeadForms();
+      return;
+    }
 
     const payload = getPayloadSafe();
+    const context = getResultContext(payload);
     const affiliateBox = result.querySelector('.affiliate-box');
     const genericNextSteps = Array.from(result.querySelectorAll('.result-section')).find((section) => section.querySelector('h3')?.textContent?.trim() === 'Nächste Schritte');
 
-    if (genericNextSteps) genericNextSteps.insertAdjacentHTML('afterend', renderNextStepBox(payload.programm));
-    else if (affiliateBox) affiliateBox.insertAdjacentHTML('beforebegin', renderNextStepBox(payload.programm));
+    if (genericNextSteps) {
+      genericNextSteps.insertAdjacentHTML('afterend', renderNextStepBox(payload.programm));
+      const nextStepBox = result.querySelector('.next-step-box');
+      nextStepBox?.insertAdjacentHTML('afterend', renderLeadBox(payload, context));
+    } else if (affiliateBox) {
+      affiliateBox.insertAdjacentHTML('beforebegin', renderNextStepBox(payload.programm));
+      const nextStepBox = result.querySelector('.next-step-box');
+      nextStepBox?.insertAdjacentHTML('afterend', renderLeadBox(payload, context));
+    }
 
     if (affiliateBox && !affiliateBox.classList.contains('result-sammelwege-box')) {
       affiliateBox.classList.add('result-sammelwege-box');
       affiliateBox.innerHTML = renderSammelwegeBox();
     }
+
+    bindLeadForms();
   }
 
   function startResultObserver() {
