@@ -10,7 +10,7 @@ twitter_title: "Prämienflug-Rechner für Familien"
 twitter_description: "Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für Familien-Prämienflüge berechnen."
 og_image: "/assets/og/og-home.jpg"
 extra_css:
-  - "/rechner/rechner-layout-fix.css?v=20260609-lead-flow-1"
+  - "/rechner/rechner-layout-fix.css?v=20260611-family-1"
 extra_js:
   - "/assets/data/rechner-lists.js?v=20260520-emirates-1"
   - "/assets/data/rechner-programs.js?v=20260520-emirates-1"
@@ -20,7 +20,7 @@ extra_js:
   - "/assets/data/rechner-award-emirates.js?v=20260520-emirates-1"
   - "/script.js?v=20260510-3"
   - "/assets/js/rechner-result-optimizer.js?v=20260518-1"
-  - "/assets/js/rechner-github-data-loader.js?v=20260510-6"
+  - "/assets/js/rechner-github-data-loader.js?v=20260611-family-1"
   - "/assets/js/rechner-result-next-steps.js?v=20260609-lead-flow-1"
 schema_json: |
   {
@@ -60,7 +60,7 @@ schema_json: |
 
               <div class="step-grid">
                 <section id="step-ziel" class="step-card active"><div class="step-number">1</div><div class="step-content"><h3>Ziel</h3><p class="step-help">Wohin soll die Familienreise gehen?</p><select id="ziel"></select></div></section>
-                <section id="step-personen" class="step-card"><div class="step-number">2</div><div class="step-content"><h3>Familiengröße</h3><p class="step-help">Wie viele Plätze sollen insgesamt geplant werden?</p><select id="personen"><option value="">Bitte wählen</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div></section>
+                <section id="step-personen" class="step-card"><div class="step-number">2</div><div class="step-content"><h3>Familiengröße</h3><p class="step-help">Wie viele Plätze sollen insgesamt geplant werden?</p><select id="personen"><option value="">Bitte wählen</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select><div class="family-module" aria-label="Familienmodul"><p class="family-module-title">Optional: Altersgruppen erfassen</p><div class="family-module-grid"><div class="field-group"><label for="kinder2_11">Kinder 2–11 Jahre</label><select id="kinder2_11"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select></div><div class="field-group"><label for="infants0_1">Babys unter 2 Jahre</label><select id="infants0_1"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div></div><p class="family-module-note">Bei Miles & More, Flying Blue und KrisFlyer berücksichtigt der Rechner für Kinder von 2–11 Jahren einen 25-%-Meilenabschlag als Planungswert. Babys werden aktuell nur für die Plausibilitätsprüfung erfasst.</p></div></div></section>
                 <section id="step-reiseklasse" class="step-card"><div class="step-number">3</div><div class="step-content"><h3>Reiseklasse</h3><p class="step-help">Premium Economy oder Business Class.</p><select id="reiseklasse"></select></div></section>
                 <section id="step-reisezeit" class="step-card"><div class="step-number">4</div><div class="step-content"><h3>Reisezeit</h3><p class="step-help">Ferienzeiten brauchen meist mehr Puffer.</p><select id="reisezeit"></select></div></section>
                 <section id="step-reisemonat" class="step-card"><div class="step-number">5</div><div class="step-content"><h3>Reisemonat</h3><p class="step-help">Wähle den geplanten Reisemonat.</p><select id="reisemonat"></select></div></section>
