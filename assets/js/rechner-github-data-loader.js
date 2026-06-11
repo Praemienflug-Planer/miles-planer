@@ -44,6 +44,26 @@
     return Number(rate.faktorNebensaison || 1);
   }
 
+  function getChildDiscount(programm) {
+    const key = normalize(programm);
+    if (key === "miles & more" || key === "flying blue") return 0.25;
+    return 0;
+  }
+
+  function getFamilyAwardMath(payload, persons) {
+    const kinder = Math.min(extractNumber(payload.kinder2_11), Math.max(0, persons - 1));
+    const discount = getChildDiscount(payload.programm);
+    const adults = Math.max(1, persons - kinder);
+    const billablePersons = adults + kinder * (1 - discount);
+    const savedChildShare = kinder * discount;
+    const note = kinder > 0
+      ? discount > 0
+        ? `${payload.programm}: ${kinder} Kind${kinder === 1 ? "" : "er"} von 2–11 Jahren mit 25 % Meilenabschlag als Planungswert berücksichtigt.`
+        : `${payload.programm}: Für Kinder von 2–11 Jahren ist im Rechner kein allgemeiner Meilenrabatt hinterlegt. Der volle Meilenbedarf bleibt als Planungswert bestehen.`
+      : "";
+    return { kinder, adults, discount, billablePersons, savedChildShare, note };
+  }
+
   function addMonths(date, months) {
     const result = new Date(date.getTime());
     result.setMonth(result.getMonth() + months);
@@ -81,11 +101,14 @@
   function buildGithubResult(payload, rate) {
     const prefix = getScenarioPrefix(payload.szenario);
     const persons = extractNumber(payload.personen);
+    const family = getFamilyAwardMath(payload, persons);
     const cfg = getProgramConfig(payload.programm);
     const seasonFactor = getSeasonFactor(rate, payload.reisezeit);
     const milesPp = Number(rate[`${prefix}MilesRtPp`] || 0) * seasonFactor;
     const taxesPp = Number(rate[`${prefix}TaxesRtPp`] || 0) * seasonFactor;
-    const targetMiles = Math.round(milesPp * persons);
+    const targetMiles = Math.round(milesPp * family.billablePersons);
+    const milesWithoutChildDiscount = Math.round(milesPp * persons);
+    const childDiscountMiles = Math.max(0, milesWithoutChildDiscount - targetMiles);
     const awardTotal = Math.round(taxesPp * persons);
     const cashTotal = Math.round(Number(rate.cashPp || 0) * persons * seasonFactor);
     const currentBalance = extractNumber(payload.bestandAktuell);
@@ -113,6 +136,8 @@
       cpm,
       cpmClass: classifyCpmValue(cpm),
       deal: buildDealRecommendation(cpm, payload),
+      family,
+      childDiscountMiles,
       rate
     };
   }
@@ -137,6 +162,7 @@
       const data = buildGithubResult(payload, rate);
       const cfg = getProgramConfig(payload.programm);
       const chart = classifyAmpel(data.monate, payload);
+      const familyNoteHtml = data.family?.note ? `<div class="result-info-card"><strong>Familienvorteil</strong><p>${escapeHtml(data.family.note)}</p>${data.childDiscountMiles > 0 ? `<p>Planerischer Meilenvorteil: ${escapeHtml(formatPoints(data.childDiscountMiles))} ${escapeHtml(cfg.kurzlabel || "Punkte")} gegenüber voller Erwachsenenberechnung.</p>` : ""}<p>Hinweis: Der Rechner bildet nur den Meilenbedarf als Planungswert ab. Steuern, Gebühren, Verfügbarkeit, Airline-Regeln und konkrete Buchungsbedingungen können abweichen.</p></div>` : "";
       resultBox.innerHTML = `
         <div class="result-card">
           <div class="decision-card decision-card-${escapeHtml(chart.key)}">
@@ -144,6 +170,7 @@
             <h3 class="decision-title">${escapeHtml(chart.text)}</h3>
             <p class="decision-text">Ziel: <strong>${escapeHtml(payload.ziel)}</strong> · Klasse: <strong>${escapeHtml(payload.reiseklasse)}</strong> · Reisende: <strong>${escapeHtml(payload.personen)}</strong></p>
           </div>
+          ${familyNoteHtml}
           <div class="result-section">
             <h3>Deine Kennzahlen</h3>
             <div class="result-grid">
