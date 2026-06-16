@@ -11,6 +11,7 @@ twitter_description: "Meilenbedarf, Sammellücke, Sammelzeit und Dealwert für F
 og_image: "/assets/og/og-home.jpg"
 extra_css:
   - "/rechner/rechner-layout-fix.css?v=20260611-family-1"
+  - "/rechner/rechner-wizard.css?v=20260616-wizard-1"
 extra_js:
   - "/assets/data/rechner-lists.js?v=20260520-emirates-1"
   - "/assets/data/rechner-programs.js?v=20260520-emirates-1"
@@ -18,10 +19,11 @@ extra_js:
   - "/assets/data/rechner-award-extra-destinations.js?v=20260510-1"
   - "/assets/data/rechner-award-overrides.js?v=20260510-1"
   - "/assets/data/rechner-award-emirates.js?v=20260520-emirates-1"
-  - "/script.js?v=20260510-3"
+  - "/script.js?v=20260616-wizard-1"
   - "/assets/js/rechner-result-optimizer.js?v=20260518-1"
   - "/assets/js/rechner-github-data-loader.js?v=20260611-family-1"
   - "/assets/js/rechner-result-next-steps.js?v=20260609-lead-flow-1"
+  - "/assets/js/rechner-wizard.js?v=20260616-wizard-1"
 schema_json: |
   {
     "@context": "https://schema.org",
@@ -40,54 +42,165 @@ schema_json: |
       <div class="tool-layout">
         <form id="milesForm">
           <div class="tool-main">
-            <div class="tool-card calculator-intro-card">
+            <div class="tool-card calculator-intro-card wizard-card">
               <div class="section-head compact-head">
                 <p class="eyebrow">Prämienflug-Rechner für Familien</p>
-                <h1>Familien-Prämienflug realistisch prüfen</h1>
-                <p>Starte mit Ziel, Familiengröße und Reiseklasse. Danach ergänzt du Reisezeit, Programm und deinen Punktestand – der Rechner zeigt dir, ob dein Familienziel realistisch wirkt und welcher Sammelweg als nächstes sinnvoll ist.</p>
+                <h1>Familien-Prämienflug Schritt für Schritt prüfen</h1>
+                <p>Gib nicht alles auf einmal ein: Der Rechner führt dich wie ein kleiner Assistent durch Ziel, Reisegruppe, Reisezeit, Programm, Reiseklasse und Punktebestand.</p>
               </div>
 
               <div class="calculator-start-hint">
-                <strong>So startest du:</strong>
-                <p>Wähle die Felder der Reihe nach aus. Nach dem Ergebnis bekommst du passende nächste Schritte zu PAYBACK, Amex, Miles & More, Avios oder Flying Blue.</p>
+                <strong>So funktioniert es:</strong>
+                <p>Jeden Schritt kurz ausfüllen und bestätigen. Danach öffnet sich automatisch der nächste Bereich. Am Ende berechnest du Meilenbedarf, Sammellücke, Sammelzeit und Dealwert.</p>
               </div>
 
-              <div class="calculator-progress" aria-label="Rechner-Ablauf">
-                <div class="progress-phase active"><span>1</span><strong>Reise definieren</strong><small>Ziel, Personen, Klasse</small></div>
-                <div class="progress-phase"><span>2</span><strong>Zeitraum & Programm</strong><small>Monat, Jahr, Meilenprogramm</small></div>
-                <div class="progress-phase"><span>3</span><strong>Punkte eintragen</strong><small>Bestand, Bonus, Sammelrate</small></div>
+              <div class="wizard-progress" aria-label="Rechner-Fortschritt">
+                <div class="wizard-progress-bar"><span id="wizardProgressFill"></span></div>
+                <div class="wizard-progress-meta">
+                  <span id="wizardProgressLabel">Schritt 1 von 6</span>
+                  <span id="wizardProgressSummary">Reiseziel auswählen</span>
+                </div>
               </div>
 
-              <div class="step-grid">
-                <section id="step-ziel" class="step-card active"><div class="step-number">1</div><div class="step-content"><h3>Ziel</h3><p class="step-help">Wohin soll die Familienreise gehen?</p><select id="ziel"></select></div></section>
-                <section id="step-personen" class="step-card"><div class="step-number">2</div><div class="step-content"><h3>Familiengröße</h3><p class="step-help">Wie viele Plätze sollen insgesamt geplant werden?</p><select id="personen"><option value="">Bitte wählen</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select><div class="family-module" aria-label="Familienmodul"><p class="family-module-title">Optional: Altersgruppen erfassen</p><div class="family-module-grid"><div class="field-group"><label for="kinder2_11">Kinder 2–11 Jahre</label><select id="kinder2_11"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option></select></div><div class="field-group"><label for="infants0_1">Babys unter 2 Jahre</label><select id="infants0_1"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select></div></div><p class="family-module-note">Bei Miles & More, Flying Blue und KrisFlyer berücksichtigt der Rechner für Kinder von 2–11 Jahren einen 25-%-Meilenabschlag als Planungswert. Babys werden aktuell nur für die Plausibilitätsprüfung erfasst.</p></div></div></section>
-                <section id="step-reiseklasse" class="step-card"><div class="step-number">3</div><div class="step-content"><h3>Reiseklasse</h3><p class="step-help">Premium Economy oder Business Class.</p><select id="reiseklasse"></select></div></section>
-                <section id="step-reisezeit" class="step-card"><div class="step-number">4</div><div class="step-content"><h3>Reisezeit</h3><p class="step-help">Ferienzeiten brauchen meist mehr Puffer.</p><select id="reisezeit"></select></div></section>
-                <section id="step-reisemonat" class="step-card"><div class="step-number">5</div><div class="step-content"><h3>Reisemonat</h3><p class="step-help">Wähle den geplanten Reisemonat.</p><select id="reisemonat"></select></div></section>
-                <section id="step-reisejahr" class="step-card"><div class="step-number">6</div><div class="step-content"><h3>Reisejahr</h3><p class="step-help">Damit die Sammelzeit eingeordnet werden kann.</p><select id="reisejahr"><option value="">Bitte Reisejahr wählen</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option></select></div></section>
-                <section id="step-programm" class="step-card"><div class="step-number">7</div><div class="step-content"><h3>Programm</h3><p class="step-help">Wähle das Meilenprogramm oder den Punkteweg.</p><select id="programm"></select></div></section>
+              <div class="wizard-tabs" aria-label="Eingabeschritte">
+                <button type="button" class="wizard-tab is-current" data-wizard-jump="1">1. Ziel</button>
+                <button type="button" class="wizard-tab" data-wizard-jump="2">2. Reisegruppe</button>
+                <button type="button" class="wizard-tab" data-wizard-jump="3">3. Wann?</button>
+                <button type="button" class="wizard-tab" data-wizard-jump="4">4. Programm</button>
+                <button type="button" class="wizard-tab" data-wizard-jump="5">5. Klasse</button>
+                <button type="button" class="wizard-tab" data-wizard-jump="6">6. Punkte</button>
               </div>
-            </div>
-            <div class="points-row">
-              <div id="step-punkte" class="tool-card points-main-card">
-                <div class="section-head compact-head">
-                  <p class="eyebrow">Punktestand</p>
-                  <h2>Bestand und Sammelrate</h2>
-                  <p>Trage grob ein, was bereits vorhanden ist und was realistisch monatlich dazukommt. Es geht um eine Planungsgröße, nicht um eine exakte Garantie.</p>
-                </div>
-                <div class="form-grid two-col">
-                  <div class="field-group"><label id="labelBestandAktuell">Aktueller Bestand</label><input id="bestandAktuell" type="number" placeholder="z. B. 120000" /></div>
-                  <div class="field-group"><label id="labelTransferBestand">Transferfähiger Bestand</label><input id="transferBestand" type="number" placeholder="z. B. 40000" /></div>
-                  <div class="field-group"><label id="labelGeplanterBonus">Geplanter Bonus</label><input id="geplanterBonus" type="number" placeholder="z. B. 50000" /></div>
-                  <div class="field-group"><label id="labelMonatlicheSammelrate">Monatliche Sammelrate</label><input id="monatlicheSammelrate" type="number" placeholder="z. B. 5000" /></div>
-                </div>
-                <div class="scenario-switch-wrap"><label class="scenario-label" for="szenario">Szenario</label><select id="szenario"><option value="best">Best Case</option><option value="realistisch" selected>Realistisch</option><option value="konservativ">Konservativ</option></select></div>
-                <div id="formErrors" class="form-status error" style="display:none;"></div>
-                <div class="tool-actions"><button id="calcButton" type="submit" class="btn btn-primary">Jetzt berechnen</button></div>
+
+              <div class="step-grid wizard-step-grid">
+                <section id="step-ziel" class="step-card wizard-step active" data-step="1">
+                  <div class="step-number">1</div>
+                  <div class="step-content">
+                    <p class="eyebrow">Reiseziel</p>
+                    <h3>Wo geht die Reise hin?</h3>
+                    <p class="step-help">Wähle zuerst das Ziel. Danach kann der Rechner später die passende Meilentabelle nutzen.</p>
+                    <select id="ziel"></select>
+                    <div class="wizard-actions">
+                      <button type="button" class="btn btn-primary wizard-next" data-next-step="2">Ziel bestätigen</button>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="step-personen" class="step-card wizard-step" data-step="2">
+                  <div class="step-number">2</div>
+                  <div class="step-content">
+                    <p class="eyebrow">Reisegruppe</p>
+                    <h3>Wer reist mit?</h3>
+                    <p class="step-help">Trage Erwachsene und Kinder getrennt ein. Die Gesamtzahl wird im Hintergrund für die Berechnung gesetzt.</p>
+
+                    <input id="personen" type="hidden" value="" />
+
+                    <div class="family-counter-grid">
+                      <div class="field-group">
+                        <label for="erwachsene">Erwachsene</label>
+                        <input id="erwachsene" type="number" min="1" max="8" step="1" value="2" inputmode="numeric" />
+                      </div>
+                      <div class="field-group">
+                        <label for="kinder2_11">Kinder 2–11 Jahre</label>
+                        <input id="kinder2_11" type="number" min="0" max="7" step="1" value="0" inputmode="numeric" />
+                      </div>
+                      <input id="infants0_1" type="hidden" value="0" />
+                    </div>
+
+                    <p class="family-module-note">Hinweis: Bei Miles & More und Flying Blue berücksichtigt der Rechner für Kinder von 2–11 Jahren einen 25-%-Meilenabschlag als Planungswert. Kinder unter 2 Jahren werden in dieser MVP-Version nicht gesondert abgefragt.</p>
+
+                    <div class="wizard-actions">
+                      <button type="button" class="btn btn-secondary wizard-back" data-prev-step="1">Zurück</button>
+                      <button type="button" class="btn btn-primary wizard-next" data-next-step="3">Reisegruppe bestätigen</button>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="step-reisezeit" class="step-card wizard-step" data-step="3">
+                  <div class="step-number">3</div>
+                  <div class="step-content">
+                    <p class="eyebrow">Reisezeit</p>
+                    <h3>Wann wollt ihr reisen?</h3>
+                    <p class="step-help">Ferien und Hauptreisezeiten brauchen meist mehr Puffer bei Meilenbedarf und Verfügbarkeit.</p>
+
+                    <div class="form-grid two-col wizard-date-grid">
+                      <div class="field-group">
+                        <label for="reisezeit">Zeitraum</label>
+                        <select id="reisezeit"></select>
+                      </div>
+                      <div class="field-group">
+                        <label for="reisemonat">Reisemonat</label>
+                        <select id="reisemonat"></select>
+                      </div>
+                      <div class="field-group">
+                        <label for="reisejahr">Reisejahr</label>
+                        <input id="reisejahr" type="number" min="2026" max="2035" step="1" placeholder="z. B. 2029" inputmode="numeric" />
+                      </div>
+                    </div>
+
+                    <div class="wizard-actions">
+                      <button type="button" class="btn btn-secondary wizard-back" data-prev-step="2">Zurück</button>
+                      <button type="button" class="btn btn-primary wizard-next" data-next-step="4">Reisezeit bestätigen</button>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="step-programm" class="step-card wizard-step" data-step="4">
+                  <div class="step-number">4</div>
+                  <div class="step-content">
+                    <p class="eyebrow">Meilenprogramm</p>
+                    <h3>Welches Programm?</h3>
+                    <p class="step-help">Wähle das Programm oder den Punkteweg, mit dem du die Reise planen möchtest.</p>
+                    <select id="programm"></select>
+                    <div class="wizard-inline-hint" id="wizardProgramHint">Nach der Auswahl passen sich die Punktefelder automatisch an.</div>
+                    <div class="wizard-actions">
+                      <button type="button" class="btn btn-secondary wizard-back" data-prev-step="3">Zurück</button>
+                      <button type="button" class="btn btn-primary wizard-next" data-next-step="5">Programm bestätigen</button>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="step-reiseklasse" class="step-card wizard-step" data-step="5">
+                  <div class="step-number">5</div>
+                  <div class="step-content">
+                    <p class="eyebrow">Reiseklasse</p>
+                    <h3>Premium Economy oder Business Class?</h3>
+                    <p class="step-help">Für Familien ist Premium Economy oft realistischer; Business Class kannst du trotzdem prüfen.</p>
+                    <select id="reiseklasse"></select>
+                    <div class="wizard-actions">
+                      <button type="button" class="btn btn-secondary wizard-back" data-prev-step="4">Zurück</button>
+                      <button type="button" class="btn btn-primary wizard-next" data-next-step="6">Reiseklasse bestätigen</button>
+                    </div>
+                  </div>
+                </section>
+
+                <section id="step-punkte" class="step-card wizard-step points-main-card" data-step="6">
+                  <div class="step-number">6</div>
+                  <div class="step-content">
+                    <p class="eyebrow">Punkte & Meilen</p>
+                    <h3>Was ist schon vorhanden?</h3>
+                    <p class="step-help">Trage Bestand, geplante Boni und realistische monatliche Sammelrate ein. Die Labels passen sich an dein gewähltes Programm an.</p>
+
+                    <div class="form-grid two-col">
+                      <div class="field-group"><label id="labelBestandAktuell" for="bestandAktuell">Aktueller Bestand</label><input id="bestandAktuell" type="number" min="0" step="1" placeholder="z. B. 120000" inputmode="numeric" /></div>
+                      <div class="field-group"><label id="labelTransferBestand" for="transferBestand">Transferfähiger Bestand</label><input id="transferBestand" type="number" min="0" step="1" placeholder="z. B. 40000" inputmode="numeric" /></div>
+                      <div class="field-group"><label id="labelGeplanterBonus" for="geplanterBonus">Geplanter Bonus</label><input id="geplanterBonus" type="number" min="0" step="1" placeholder="z. B. 50000" inputmode="numeric" /></div>
+                      <div class="field-group"><label id="labelMonatlicheSammelrate" for="monatlicheSammelrate">Monatliche Sammelrate</label><input id="monatlicheSammelrate" type="number" min="0" step="1" placeholder="z. B. 5000" inputmode="numeric" /></div>
+                    </div>
+
+                    <div class="scenario-switch-wrap"><label class="scenario-label" for="szenario">Szenario</label><select id="szenario"><option value="best">Best Case</option><option value="realistisch" selected>Realistisch</option><option value="konservativ">Konservativ</option></select></div>
+                    <div id="formErrors" class="form-status error" style="display:none;"></div>
+
+                    <div class="wizard-actions tool-actions">
+                      <button type="button" class="btn btn-secondary wizard-back" data-prev-step="5">Zurück</button>
+                      <button id="calcButton" type="submit" class="btn btn-primary">Jetzt berechnen</button>
+                    </div>
+                  </div>
+                </section>
               </div>
             </div>
           </div>
         </form>
+
         <aside class="tool-sidebar">
           <div class="tool-card sticky-card calculator-benefit-card">
             <p class="eyebrow">Was du am Ende bekommst</p>
@@ -98,6 +211,7 @@ schema_json: |
         </aside>
       </div>
     </div>
+
     <div id="resultView" class="tool-view"><div class="tool-layout"><div class="tool-main"><div class="tool-card result-wrapper"><div id="result"></div></div></div><aside class="tool-sidebar"><div class="tool-card sticky-card"><p class="eyebrow">Ergebnis</p><h3>Deine Familienplanung</h3><p class="footer-text">Hier siehst du Sammellücke, Zeit bis zum Ziel und die Bewertung der Einlösung. Danach zeigt dir der Planer, welcher Sammelweg als nächstes logisch ist.</p><div id="resultTransferHint" class="result-info-card"><strong>Transferhinweis</strong><p>Die Transferdetails werden nach der Berechnung hier angezeigt.</p></div><div class="tool-actions"><button class="btn btn-secondary" onclick="zurueckZuEingaben()">Zurück zu den Eingaben</button></div></div></aside></div></div>
   </div>
 </section>
