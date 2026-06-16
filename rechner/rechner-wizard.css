@@ -198,6 +198,12 @@
   }
 }
 
+@media (max-width: 900px) {
+  #resultView .tool-sidebar {
+    display: none;
+  }
+}
+
 @media (max-width: 560px) {
   .wizard-progress-meta {
     display: grid;
