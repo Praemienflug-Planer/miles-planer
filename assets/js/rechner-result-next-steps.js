@@ -1,10 +1,20 @@
 (() => {
   const BASE = '';
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xaqpjkgd';
+  const LEAD_CHOICES = [
+    'Nur Ergebnis-Zusammenfassung senden',
+    '30-Tage-Sammelplan anfragen',
+    'Roadmap / Strategie anfragen',
+    'Passenden Karten- oder Referral-Link anfragen'
+  ];
 
   function getPayloadSafe() {
     if (typeof collectPayload === 'function') return collectPayload();
     return { programm: document.getElementById('programm')?.value || '' };
+  }
+
+  function escapeAttr(value) {
+    return String(value ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
   function parseGermanMonth(monthName) {
@@ -66,9 +76,9 @@
         title: severe ? 'Ehrliches Fazit: Mit der aktuellen Rate reicht es nicht' : 'Der Miles-&-More-Plan ist zu knapp',
         text: `${gapText}Das ist keine reine Transferfrage, sondern eine echte Sammellücke. Bei Miles & More solltest du zuerst prüfen, ob PAYBACK, PAYBACK Amex, eine Eurowings-/Miles-&-More-Kreditkarte oder ein späteres Reisejahr die Lücke realistisch schließen können. Wenn nicht, muss Ziel, Reiseklasse oder Sammelrate angepasst werden.`,
         links: [
-          ['PAYBACK Amex einordnen', `${BASE}/meilen-sammeln/payback/`],
-          ['Eurowings / M&M Karte prüfen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`],
-          ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`]
+          ['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`],
+          ['Transfer zu Miles & More prüfen', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
+          ['Kartenbaustein einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]
         ],
         note: 'Wichtig: Karten- oder Punkteaktionen können helfen, aber nur wenn Bedingungen, Kosten, Mindestumsatz und dein normales Ausgabeverhalten passen. Nicht wegen Meilen mehr ausgeben.'
       };
@@ -82,7 +92,7 @@
         ['Amex Punkte sammeln', `${BASE}/meilen-sammeln/amex/`],
         ['Ziel neu berechnen', `${BASE}/rechner/`]
       ],
-      note: 'Hinweis: Aktionen ändern sich. Je nach Angebot kann ein hoher Membership-Rewards-Startbonus helfen, teils bis zu 85.000 MR Punkte. Bedingungen, Kosten und erforderlichen Umsatz immer vorher prüfen.'
+      note: 'Hinweis: Aktionen ändern sich. Je nach Angebot kann ein hoher Membership-Rewards-Startbonus helfen. Bedingungen, Kosten und erforderlichen Umsatz immer vorher prüfen.'
     };
   }
 
@@ -123,8 +133,8 @@
     const gap = context.gapLabel ? `Lücke: ${context.gapLabel}` : 'Lücke nicht eindeutig berechnet';
 
     if (segment === 'small') {
-      if (isMilesAndMore(payload.programm)) return { segment, label: 'Kleine Lücke', title: 'Passenden Karten- oder Transferbaustein anfordern', text: `Dein Ergebnis wirkt nah am Ziel. ${gap}. Sinnvoll ist jetzt eine konkrete Prüfung: PAYBACK-Transfer, Miles-&-More-Karte, PAYBACK Amex oder ein gezielter Punktebonus.`, choice: 'Passenden Link / Kartenbaustein anfragen' };
-      return { segment, label: 'Kleine Lücke', title: 'Konkreten Amex- oder Transferbaustein anfordern', text: `Dein Ergebnis wirkt nah am Ziel. ${gap}. Sinnvoll ist jetzt eine konkrete Prüfung, welcher flexible Punkte- oder Kartenbaustein die Restlücke sauber schließt.`, choice: 'Passenden Link / Kartenbaustein anfragen' };
+      if (isMilesAndMore(payload.programm)) return { segment, label: 'Kleine Lücke', title: 'Passenden Karten- oder Transferbaustein anfordern', text: `Dein Ergebnis wirkt nah am Ziel. ${gap}. Sinnvoll ist jetzt eine konkrete Prüfung: PAYBACK-Transfer, Miles-&-More-Karte, PAYBACK Amex oder ein gezielter Punktebonus.`, choice: 'Passenden Karten- oder Referral-Link anfragen' };
+      return { segment, label: 'Kleine Lücke', title: 'Konkreten Amex- oder Transferbaustein anfordern', text: `Dein Ergebnis wirkt nah am Ziel. ${gap}. Sinnvoll ist jetzt eine konkrete Prüfung, welcher flexible Punkte- oder Kartenbaustein die Restlücke sauber schließt.`, choice: 'Passenden Karten- oder Referral-Link anfragen' };
     }
 
     if (segment === 'medium') {
@@ -136,6 +146,15 @@
     }
 
     return { segment, label: 'Große Lücke', title: 'Roadmap statt Schnellschuss anfordern', text: `Dein Ergebnis zeigt eher eine strukturelle Sammellücke. ${gap}. Hier passt eher eine Roadmap: Ziel, Reiseklasse, Zeitraum, PAYBACK und Miles & More sauber neu sortieren.`, choice: 'Roadmap / Strategie anfragen' };
+  }
+
+  function getLeadChoices(recommendedChoice) {
+    const unique = [];
+    [recommendedChoice, ...LEAD_CHOICES].forEach((choice) => {
+      if (!choice || unique.includes(choice)) return;
+      unique.push(choice);
+    });
+    return unique;
   }
 
   function buildSummary(payload, context, recommendation) {
@@ -155,7 +174,7 @@
       ['Szenario', payload.szenario],
       ['Sammelzeit laut Rechner', getResultValue('Sammelzeit')],
       ['Zeitlücke', context.gapLabel || 'nicht eindeutig'],
-      ['Empfehlung', recommendation.choice]
+      ['Automatische Empfehlung', recommendation.choice]
     ];
     return fields.filter(([, value]) => value !== undefined && value !== null && String(value).trim() !== '').map(([label, value]) => `${label}: ${value}`).join('\n');
   }
@@ -163,6 +182,7 @@
   function renderLeadBox(payload, context) {
     const recommendation = getRecommendation(payload, context);
     const summary = buildSummary(payload, context, recommendation);
+    const choices = getLeadChoices(recommendation.choice);
     return `
       <div class="result-section lead-request-box" data-enhanced-result="true">
         <p class="eyebrow">Persönlicher nächster Schritt</p>
@@ -170,11 +190,11 @@
         <h3>${recommendation.title}</h3>
         <p>${recommendation.text}</p>
         <form class="lead-request-form" action="${FORMSPREE_ENDPOINT}" method="POST">
-          <input type="hidden" name="_subject" value="Rechner-Lead: ${recommendation.choice}" />
+          <input type="hidden" name="_subject" value="Rechner-Lead: ${escapeAttr(recommendation.choice)}" />
           <input type="hidden" name="_language" value="de" />
-          <input type="hidden" name="segment" value="${recommendation.label}" />
-          <input type="hidden" name="empfehlung" value="${recommendation.choice}" />
-          <input type="hidden" name="rechner_zusammenfassung" value="${summary.replace(/"/g, '&quot;')}" />
+          <input type="hidden" name="segment" value="${escapeAttr(recommendation.label)}" />
+          <input type="hidden" name="automatische_empfehlung" value="${escapeAttr(recommendation.choice)}" />
+          <input type="hidden" name="rechner_zusammenfassung" value="${escapeAttr(summary)}" />
           <label for="leadName">Name</label>
           <input id="leadName" name="name" type="text" placeholder="Dein Name" autocomplete="name" required />
           <label for="leadEmail">E-Mail</label>
@@ -184,11 +204,7 @@
           </div>
           <label for="leadChoice">Was möchtest du erhalten?</label>
           <select id="leadChoice" name="wunsch">
-            <option>${recommendation.choice}</option>
-            <option>Passenden Karten- oder Referral-Link anfragen</option>
-            <option>30-Tage-Sammelplan anfragen</option>
-            <option>Roadmap / Strategie anfragen</option>
-            <option>Nur Ergebnis-Zusammenfassung senden</option>
+            ${choices.map((choice) => `<option value="${escapeAttr(choice)}">${choice}</option>`).join('')}
           </select>
           <div class="hp-field" aria-hidden="true"><label>Bitte leer lassen</label><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
           <p class="lead-privacy-note">Du sendest deinen Namen, deine E-Mail und die Rechner-Zusammenfassung. Kein automatischer Kartenabschluss, keine harte Empfehlung. Bedingungen und Kosten werden vorab eingeordnet.</p>
@@ -201,8 +217,22 @@
   function bindLeadForms() {
     document.querySelectorAll('.lead-request-form:not([data-bound="true"])').forEach((form) => {
       form.dataset.bound = 'true';
+      const choiceSelect = form.querySelector('select[name="wunsch"]');
+      const submitButton = form.querySelector('button[type="submit"]');
+      const subjectInput = form.querySelector('input[name="_subject"]');
+
+      function syncChoiceUi() {
+        const choice = choiceSelect?.value || submitButton?.textContent || 'Anfrage senden';
+        if (submitButton) submitButton.textContent = choice;
+        if (subjectInput) subjectInput.value = `Rechner-Lead: ${choice}`;
+      }
+
+      choiceSelect?.addEventListener('change', syncChoiceUi);
+      syncChoiceUi();
+
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        syncChoiceUi();
         const status = form.querySelector('.lead-form-status');
         if (status) {
           status.className = 'lead-form-status';
@@ -212,6 +242,7 @@
           const response = await fetch(form.action, { method: form.method, body: new FormData(form), headers: { Accept: 'application/json' } });
           if (response.ok) {
             form.reset();
+            syncChoiceUi();
             if (status) {
               status.className = 'lead-form-status success';
               status.textContent = 'Danke! Deine Anfrage wurde gesendet. Ich melde mich mit einer passenden Einordnung.';
