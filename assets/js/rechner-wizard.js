@@ -134,6 +134,24 @@
     hint.textContent = buildTransferInfo(cfg);
   }
 
+  function limitReiseklasseOptions() {
+    const select = byId("reiseklasse");
+    if (!select) return;
+
+    Array.from(select.options).forEach((option) => {
+      if (!option.value) return;
+
+      const value = String(option.value).toLowerCase();
+      const allowed = value.includes("premium") || value.includes("business");
+      option.hidden = !allowed;
+      option.disabled = !allowed;
+    });
+
+    if (select.selectedOptions?.[0]?.disabled) {
+      select.value = "";
+    }
+  }
+
   function refreshProgressUi() {
     const progressFill = byId("wizardProgressFill");
     const progressLabel = byId("wizardProgressLabel");
@@ -211,6 +229,7 @@
     }
 
     refreshProgramHint();
+    limitReiseklasseOptions();
     refreshProgressUi();
   }
 
