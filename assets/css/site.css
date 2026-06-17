@@ -1,7 +1,7 @@
 /* Central stylesheet hub.
    Keep this file small. Add page-specific rules to the modules below. */
 @import url('/assets/css/base.css?v=20260601-root-1');
-@import url('/assets/css/layout.css?v=20260601-root-1');
+@import url('/assets/css/layout.css?v=20260617-header-logo');
 @import url('/assets/css/articles.css?v=20260601-root-1');
 @import url('/assets/css/tools.css?v=20260601-root-1');
 @import url('/assets/css/cta-system.css?v=20260601-root-1');
