@@ -56,18 +56,54 @@
 }
 
 .wizard-tab {
-  min-height: 42px;
+  min-height: 58px;
   padding: 8px 10px;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.20);
   background: rgba(7, 17, 31, 0.42);
   color: var(--muted);
   font: inherit;
-  font-size: 13px;
+  font-size: 0;
   font-weight: 850;
+  line-height: 1.1;
   cursor: pointer;
+  display: grid;
+  grid-template-rows: auto auto;
+  align-content: center;
+  justify-items: center;
+  gap: 4px;
+  text-align: center;
+  white-space: normal;
   transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease, transform 0.16s ease;
 }
+
+.wizard-tab::before {
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.wizard-tab::after {
+  display: block;
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1.05;
+  max-width: 100%;
+}
+
+.wizard-tab:nth-child(1)::before { content: "1."; }
+.wizard-tab:nth-child(1)::after { content: "Ziel"; }
+.wizard-tab:nth-child(2)::before { content: "2."; }
+.wizard-tab:nth-child(2)::after { content: "Reisegruppe"; }
+.wizard-tab:nth-child(3)::before { content: "3."; }
+.wizard-tab:nth-child(3)::after { content: "Wann?"; }
+.wizard-tab:nth-child(4)::before { content: "4."; }
+.wizard-tab:nth-child(4)::after { content: "Programm"; }
+.wizard-tab:nth-child(5)::before { content: "5."; }
+.wizard-tab:nth-child(5)::after { content: "Klasse"; }
+.wizard-tab:nth-child(6)::before { content: "6."; }
+.wizard-tab:nth-child(6)::after { content: "Punkte"; }
 
 .wizard-tab:hover {
   transform: translateY(-1px);
@@ -215,7 +251,7 @@
 
   .wizard-tab {
     border-radius: 14px;
-    text-align: left;
+    text-align: center;
   }
 
   .family-counter-grid,
