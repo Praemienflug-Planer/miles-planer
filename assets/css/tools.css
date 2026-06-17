@@ -20,7 +20,7 @@
   background: #07111f;
   color: var(--text);
   font-size: 15px;
-  font-family: Arial, sans-serif;
+  font-family: inherit;
 }
 .step-content select:focus, .field-group input:focus, .scenario-switch-wrap select:focus { outline: 2px solid rgba(96, 165, 250, 0.45); border-color: var(--primary); }
 .form-grid { display: grid; gap: 16px; min-width: 0; }
