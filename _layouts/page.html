@@ -17,6 +17,37 @@
   <link rel="canonical" href="{{ page.canonical | default: page.url | absolute_url }}" />
   <meta name="robots" content="{{ page.robots | default: 'index,follow' }}" />
   {% if page.refresh %}<meta http-equiv="refresh" content="{{ page.refresh }}" />{% endif %}
+  <script>
+    (function () {
+      var legacyHost = 'praemienflug-planer.github.io';
+      var legacyPrefix = '/miles-planer';
+      var targetOrigin = 'https://praemienflug-planer.de';
+      var currentPath = window.location.pathname;
+
+      if (window.location.hostname !== legacyHost || currentPath.indexOf(legacyPrefix) !== 0) {
+        return;
+      }
+
+      var robotsMeta = document.querySelector('meta[name="robots"]');
+      if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        document.head.appendChild(robotsMeta);
+      }
+      robotsMeta.setAttribute('content', 'noindex, follow');
+
+      var targetPath = currentPath.slice(legacyPrefix.length) || '/';
+      if (targetPath.charAt(0) !== '/') {
+        targetPath = '/' + targetPath;
+      }
+      targetPath = targetPath.replace(/\/index\.html$/, '/');
+
+      var targetUrl = targetOrigin + targetPath + window.location.search + window.location.hash;
+      if (window.location.href !== targetUrl) {
+        window.location.replace(targetUrl);
+      }
+    }());
+  </script>
 
   <meta property="og:type" content="{{ page.og_type | default: 'website' }}" />
   <meta property="og:locale" content="de_DE" />
