@@ -1,0 +1,34 @@
+<script>
+  (function () {
+    var legacyHost = 'praemienflug-planer.github.io';
+    var legacyPrefix = '/miles-planer';
+    var targetOrigin = 'https://praemienflug-planer.de';
+    var currentPath = window.location.pathname;
+
+    if (window.location.hostname !== legacyHost || currentPath.indexOf(legacyPrefix) !== 0) {
+      return;
+    }
+
+    var targetPath = currentPath.slice(legacyPrefix.length) || '/';
+    if (targetPath.charAt(0) !== '/') {
+      targetPath = '/' + targetPath;
+    }
+    targetPath = targetPath.replace(/\/index\.html$/, '/');
+
+    var targetUrl = targetOrigin + targetPath + window.location.search + window.location.hash;
+    var safeTargetUrl = targetUrl.replace(/"/g, '&quot;');
+
+    document.write('<meta name="robots" content="noindex, follow">');
+    document.write('<link rel="canonical" href="' + safeTargetUrl + '">');
+    document.write('<meta http-equiv="refresh" content="0; url=' + safeTargetUrl + '">');
+
+    window.__legacyRedirectTarget = targetUrl;
+  }());
+</script>
+<script>
+  (function () {
+    if (window.__legacyRedirectTarget && window.location.href !== window.__legacyRedirectTarget) {
+      window.location.replace(window.__legacyRedirectTarget);
+    }
+  }());
+</script>
