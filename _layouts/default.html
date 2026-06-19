@@ -97,7 +97,7 @@
   {% when '/meilen-sammeln/amex-kreditkarten/' %}
     {% assign serp_title = 'Amex Kreditkarten zum Meilensammeln: welche passt?' %}
     {% assign serp_description = 'Amex Kreditkarten für Meilensammler vergleichen: Membership Rewards, Willkommensbonus, Turbo, Kosten und sinnvolle Rolle neben PAYBACK und Miles & More.' %}
-    {% assign snippet_lead = 'Amex Kreditkarten für Meilensammler vergleichen: Membership Rewards, Willkommensbonus, Turbo, Kosten und sinnvolle Rolle neben PAYBACK und Miles & More.' %}
+    {% assign snippet_lead = 'Amex Kreditkarten für Meilensammler vergleichen: Membership Rewards, Willkommensbonus, Kosten und sinnvolle Rolle neben PAYBACK und Miles & More.' %}
   {% when '/meilen-thailand/' %}
     {% assign serp_title = 'Thailand mit Meilen: Prämienflüge realistisch planen' %}
     {% assign serp_description = 'Thailand mit Meilen planen: Beispielwerte, Programme, Premium Economy oder Business Class, Zuzahlungen und Familienlogik für Bangkok, Phuket oder Koh Samui.' %}
@@ -113,6 +113,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {% include legacy-github-redirect.html %}
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-HX9T5TXN7G"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -125,37 +126,6 @@
   <link rel="canonical" href="{{ extracted_canonical }}" />
   <meta name="robots" content="{{ extracted_robots }}" />
   {% if extracted_refresh != '' %}<meta http-equiv="refresh" content="{{ extracted_refresh }}" />{% endif %}
-  <script>
-    (function () {
-      var legacyHost = 'praemienflug-planer.github.io';
-      var legacyPrefix = '/miles-planer';
-      var targetOrigin = 'https://praemienflug-planer.de';
-      var currentPath = window.location.pathname;
-
-      if (window.location.hostname !== legacyHost || currentPath.indexOf(legacyPrefix) !== 0) {
-        return;
-      }
-
-      var robotsMeta = document.querySelector('meta[name="robots"]');
-      if (!robotsMeta) {
-        robotsMeta = document.createElement('meta');
-        robotsMeta.setAttribute('name', 'robots');
-        document.head.appendChild(robotsMeta);
-      }
-      robotsMeta.setAttribute('content', 'noindex, follow');
-
-      var targetPath = currentPath.slice(legacyPrefix.length) || '/';
-      if (targetPath.charAt(0) !== '/') {
-        targetPath = '/' + targetPath;
-      }
-      targetPath = targetPath.replace(/\/index\.html$/, '/');
-
-      var targetUrl = targetOrigin + targetPath + window.location.search + window.location.hash;
-      if (window.location.href !== targetUrl) {
-        window.location.replace(targetUrl);
-      }
-    }());
-  </script>
   <meta property="og:type" content="{{ page.og_type | default: 'website' }}" />
   <meta property="og:locale" content="de_DE" />
   <meta property="og:site_name" content="Prämienflug-Planer" />
