@@ -3,52 +3,82 @@
 
   const mainNav = [
     { label: 'Rechner', href: `${BASE}/rechner/` },
-    { label: 'Meilen sammeln', href: `${BASE}/meilen-sammeln/`, children: [
-      { label: 'Übersicht', href: `${BASE}/meilen-sammeln/` },
-      { label: 'Fixkosten & Alltagsausgaben', href: `${BASE}/meilen-sammeln/fixkosten-meilen/` },
-      { label: 'Amex oder PAYBACK?', href: `${BASE}/amex-oder-payback/` },
-      { label: 'PAYBACK Punkte sammeln', href: `${BASE}/meilen-sammeln/payback/` },
-      { label: 'Meilen sammeln im Alltag', href: `${BASE}/meilen-sammeln/payback-alltag/` },
-      { label: 'PAYBACK zu Miles & More', href: `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/` },
-      { label: 'Amex Membership Rewards', href: `${BASE}/meilen-sammeln/amex/` },
-      { label: 'Amex Kreditkarten', href: `${BASE}/meilen-sammeln/amex-kreditkarten/` },
-      { label: 'Miles & More Kreditkarte', href: `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/` },
-      { label: 'Eurowings Kreditkarte', href: `${BASE}/meilen-sammeln/eurowings-kreditkarte/` },
-      { label: 'Revolut & RevPoints', href: `${BASE}/meilen-sammeln/revolut-revpoints/` },
-      { label: 'Wunschgutschein', href: `${BASE}/meilen-sammeln/wunschgutschein/` },
-      { label: 'Zeitschriftenabo-Meilen', href: `${BASE}/meilen-sammeln/zeitschriftenabo/` }
+    { label: 'Meilen sammeln', href: `${BASE}/meilen-sammeln/`, groups: [
+      { label: 'Start & Strategie', children: [
+        { label: 'Übersicht', href: `${BASE}/meilen-sammeln/` },
+        { label: 'Kostenlos starten', href: `${BASE}/meilen-sammeln/anfaenger/` },
+        { label: 'Fixkosten & Alltagsausgaben', href: `${BASE}/meilen-sammeln/fixkosten-meilen/` },
+        { label: 'Amex oder PAYBACK?', href: `${BASE}/amex-oder-payback/` }
+      ] },
+      { label: 'Programme', children: [
+        { label: 'PAYBACK', href: `${BASE}/meilen-sammeln/payback/` },
+        { label: 'Amex Membership Rewards', href: `${BASE}/meilen-sammeln/amex/` },
+        { label: 'Miles & More', href: `${BASE}/meilen-sammeln/miles-and-more/` },
+        { label: 'Revolut & RevPoints', href: `${BASE}/meilen-sammeln/revolut-revpoints/` }
+      ] },
+      { label: 'Kreditkarten', children: [
+        { label: 'Amex Kreditkarten', href: `${BASE}/meilen-sammeln/amex-kreditkarten/` },
+        { label: 'Miles & More Kreditkarte', href: `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/` },
+        { label: 'Eurowings Kreditkarte', href: `${BASE}/meilen-sammeln/eurowings-kreditkarte/` }
+      ] },
+      { label: 'Booster & Transfer', children: [
+        { label: 'PAYBACK → Miles & More', href: `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/` },
+        { label: 'PAYBACK Transferbonus', href: `${BASE}/meilen-sammeln/payback-transferbonus/` },
+        { label: 'Wunschgutschein', href: `${BASE}/meilen-sammeln/wunschgutschein/` },
+        { label: 'Zeitschriftenabo-Meilen', href: `${BASE}/meilen-sammeln/zeitschriftenabo/` }
+      ] }
     ] },
-    { label: 'Beispiele', href: `${BASE}/meilen-thailand/`, children: [
+    { label: 'Familien', href: `${BASE}/praemienfluege-familie/`, children: [
+      { label: 'Prämienflüge für Familien', href: `${BASE}/praemienfluege-familie/` },
+      { label: 'Meilen sammeln als Familie', href: `${BASE}/meilen-sammeln-familie/` },
+      { label: 'Miles & More Meilenpooling', href: `${BASE}/miles-and-more-meilenpooling-familie/` },
+      { label: 'Child’s Award Flight', href: `${BASE}/childs-award-flight-kinder-meilen/` },
+      { label: 'Meilen für Familie einlösen', href: `${BASE}/meilen-fuer-familienmitglieder-einloesen/` },
+      { label: 'Business Class als Familie', href: `${BASE}/business-class-familie-meilen/` },
+      { label: 'Business Class mit Kindern', href: `${BASE}/business-class-mit-kindern/` },
+      { label: 'Premium Economy mit Kindern', href: `${BASE}/premium-economy-mit-kindern/` }
+    ] },
+    { label: 'Reiseziele', href: `${BASE}/meilen-thailand/`, children: [
       { label: 'Thailand mit Meilen', href: `${BASE}/meilen-thailand/` },
+      { label: 'Mallorca mit PAYBACK', href: `${BASE}/meilen-sammeln/payback-mallorca/` },
       { label: 'New York mit Meilen', href: `${BASE}/meilen-new-york/` },
+      { label: 'Florida mit Meilen', href: `${BASE}/florida-mit-meilen/` }
+    ] },
+    { label: 'Ratgeber', href: `${BASE}/meilen-business-class/`, children: [
       { label: 'Business Class mit Meilen', href: `${BASE}/meilen-business-class/` },
-      { label: 'Mit PAYBACK nach Mallorca', href: `${BASE}/meilen-sammeln/payback-mallorca/` },
+      { label: 'Premium Economy oder Business?', href: `${BASE}/premium-economy-oder-business-class/` },
       { label: '4 Prämienflug-Plätze finden', href: `${BASE}/vier-praemienflug-plaetze-finden/` },
-      { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` }
+      { label: 'Steuern & Gebühren', href: `${BASE}/praemienflug-steuern-gebuehren/` },
+      { label: 'FAQ', href: `${BASE}/faq/` }
     ] },
     { label: 'Tools', href: `${BASE}/tools/`, children: [
       { label: 'Alle Tools', href: `${BASE}/tools/` },
+      { label: 'Prämienflug-Rechner', href: `${BASE}/rechner/` },
       { label: 'Fixkosten-Meilenrechner', href: `${BASE}/meilen-sammeln/fixkosten-meilen/#rechner` },
+      { label: 'RevPoints-Rechner', href: `${BASE}/meilen-sammeln/revolut-revpoints/#rechner` },
       { label: 'Amex Punkte umrechnen', href: `${BASE}/amex-meilen-umrechnen/#mr-rechner` },
       { label: 'Zeitschriftenabo-Meilenrechner', href: `${BASE}/meilen-sammeln/zeitschriftenabo/#abo-rechner` }
-    ] },
-    { label: 'FAQ', href: `${BASE}/faq/` },
-    { label: 'Warum diese Seite?', href: `${BASE}/ueber-das-projekt/` }
+    ] }
   ];
 
   const footerNav = [
-    ['Rechner', `${BASE}/rechner/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`], ['Fixkosten & Alltagsausgaben', `${BASE}/meilen-sammeln/fixkosten-meilen/`], ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`],
-    ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['Meilen sammeln im Alltag', `${BASE}/meilen-sammeln/payback-alltag/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
-    ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Amex Kreditkarten', `${BASE}/meilen-sammeln/amex-kreditkarten/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`], ['Eurowings Kreditkarte', `${BASE}/meilen-sammeln/eurowings-kreditkarte/`], ['Revolut & RevPoints', `${BASE}/meilen-sammeln/revolut-revpoints/`],
-    ['Thailand', `${BASE}/meilen-thailand/`], ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`], ['Mit PAYBACK nach Mallorca', `${BASE}/meilen-sammeln/payback-mallorca/`],
-    ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`], ['Tools', `${BASE}/tools/`],
-    ['Fixkosten-Meilenrechner', `${BASE}/meilen-sammeln/fixkosten-meilen/#rechner`], ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Zeitschriftenabo-Meilenrechner', `${BASE}/meilen-sammeln/zeitschriftenabo/#abo-rechner`],
-    ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`], ['FAQ', `${BASE}/faq/`]
+    ['Prämienflug-Rechner', `${BASE}/rechner/`],
+    ['Meilen sammeln', `${BASE}/meilen-sammeln/`],
+    ['Familien', `${BASE}/praemienfluege-familie/`],
+    ['Reiseziele', `${BASE}/meilen-thailand/`],
+    ['Ratgeber', `${BASE}/meilen-business-class/`],
+    ['Tools & Rechner', `${BASE}/tools/`],
+    ['Kostenlos starten', `${BASE}/meilen-sammeln/anfaenger/`],
+    ['Fixkosten & Alltagsausgaben', `${BASE}/meilen-sammeln/fixkosten-meilen/`]
   ];
 
-  const legalNav = [
-    ['Impressum', `${BASE}/impressum.html`], ['Datenschutz', `${BASE}/datenschutz.html`],
-    ['Transparenz', `${BASE}/transparenz.html`], ['Kontakt', `${BASE}/kontakt.html`]
+  const projectNav = [
+    ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`],
+    ['Kontakt', `${BASE}/kontakt.html`],
+    ['FAQ', `${BASE}/faq/`],
+    ['Transparenz', `${BASE}/transparenz.html`],
+    ['Impressum', `${BASE}/impressum.html`],
+    ['Datenschutz', `${BASE}/datenschutz.html`]
   ];
 
   const officialCardImages = {
@@ -63,26 +93,39 @@
     return (!path.endsWith('/') && !path.endsWith('.html')) ? `${path}/` : path;
   }
 
+  function itemLinks(item) {
+    if (item.groups) return item.groups.flatMap(group => group.children || []);
+    return item.children || [];
+  }
+
   function activeFor(item) {
     const current = normalize(window.location.pathname);
-    const paths = [item.href, ...(item.children || []).map(child => child.href)]
+    const paths = [item.href, ...itemLinks(item).map(child => child.href)]
       .map(href => normalize(new URL(href, window.location.origin).pathname));
     return paths.some(path => current === path || (path !== `${BASE}/` && current.startsWith(path)));
   }
 
-  function renderDropdown(children) {
-    if (!children) return '';
-    return `<div class="nav-dropdown">${children.map(child => `<a href="${child.href}">${child.label}</a>`).join('')}</div>`;
+  function renderDropdown(item) {
+    if (item.groups) {
+      const groups = item.groups.map(group => `
+        <div class="nav-group">
+          <span class="nav-group-title">${group.label}</span>
+          ${(group.children || []).map(child => `<a href="${child.href}">${child.label}</a>`).join('')}
+        </div>`).join('');
+      return `<div class="nav-dropdown nav-mega">${groups}</div>`;
+    }
+    if (!item.children) return '';
+    return `<div class="nav-dropdown">${item.children.map(child => `<a href="${child.href}">${child.label}</a>`).join('')}</div>`;
   }
 
   function renderMainNav() {
-    const items = mainNav.map(item => {
+    return mainNav.map(item => {
       const active = activeFor(item) ? ' aria-current="page"' : '';
-      const dropdown = item.children ? ' has-dropdown' : '';
-      return `<div class="nav-item${dropdown}"><a class="nav-link" href="${item.href}"${active}>${item.label}</a>${renderDropdown(item.children)}</div>`;
-    });
-    items.push(`<div class="nav-item nav-item-cta"><a class="btn btn-primary nav-cta" href="${BASE}/rechner/" data-event="nav_start_calculator">Kostenlos prüfen</a></div>`);
-    return items.join('');
+      const hasDropdown = Boolean(item.children || item.groups);
+      const dropdown = hasDropdown ? ' has-dropdown' : '';
+      const toggle = hasDropdown ? `<button class="submenu-toggle" type="button" aria-label="Untermenü ${item.label} öffnen" aria-expanded="false">⌄</button>` : '';
+      return `<div class="nav-item${dropdown}"><a class="nav-link" href="${item.href}"${active}>${item.label}</a>${toggle}${renderDropdown(item)}</div>`;
+    }).join('');
   }
 
   function createHeader() {
@@ -90,7 +133,10 @@
     header.className = 'site-header';
     header.innerHTML = `
       <div class="container nav">
-        <a class="brand" href="${BASE}/" aria-label="Startseite Prämienflug-Planer">Prämienflug-Planer</a>
+        <a class="brand" href="${BASE}/" aria-label="Startseite Prämienflug-Planer">
+          <img class="brand-logo" src="${BASE}/assets/brand/praemienflug-planer-logo.svg" alt="" aria-hidden="true" width="40" height="40" loading="eager" decoding="async">
+          <span class="brand-name">Prämienflug-Planer</span>
+        </a>
         <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="site-navigation"><span></span><span></span><span></span></button>
         <nav id="site-navigation" class="main-nav" aria-label="Hauptnavigation">${renderMainNav()}</nav>
       </div>`;
@@ -100,7 +146,11 @@
   function createFooter() {
     const footer = document.createElement('footer');
     footer.className = 'site-footer';
-    footer.innerHTML = `<div class="container footer-grid"><div><div class="brand footer-brand">Prämienflug-Planer</div><p class="footer-text">Planungstool für Prämienflüge mit Fokus auf Familien, Sammellücke und realistische Umsetzbarkeit.</p></div><div><h4>Navigation</h4><ul class="footer-links">${footerNav.map(([label, href]) => `<li><a href="${href}">${label}</a></li>`).join('')}</ul></div><div><h4>Rechtliches</h4><ul class="footer-links">${legalNav.map(([label, href]) => `<li><a href="${href}">${label}</a></li>`).join('')}</ul></div></div>`;
+    footer.innerHTML = `<div class="container footer-grid">
+      <div><div class="brand footer-brand">Prämienflug-Planer</div><p class="footer-text">Planungstool für Prämienflüge mit Fokus auf Familien, Sammellücke und realistische Umsetzbarkeit.</p></div>
+      <div><h4>Bereiche</h4><ul class="footer-links">${footerNav.map(([label, href]) => `<li><a href="${href}">${label}</a></li>`).join('')}</ul></div>
+      <div><h4>Projekt & Service</h4><ul class="footer-links">${projectNav.map(([label, href]) => `<li><a href="${href}">${label}</a></li>`).join('')}</ul></div>
+    </div>`;
     return footer;
   }
 
@@ -166,6 +216,11 @@
     if (path.includes('/meilen-sammeln/payback/') || path.includes('/amex-oder-payback/')) insertPaybackCardFigure();
   }
 
+  function closeSubmenus(header) {
+    header.querySelectorAll('.submenu-open').forEach(item => item.classList.remove('submenu-open'));
+    header.querySelectorAll('.submenu-toggle[aria-expanded="true"]').forEach(button => button.setAttribute('aria-expanded', 'false'));
+  }
+
   function mount() {
     document.querySelector('header.site-header')?.remove();
     document.querySelector('footer.site-footer')?.remove();
@@ -185,12 +240,37 @@
       header.classList.toggle('nav-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+      if (!open) closeSubmenus(header);
     });
+
+    header.querySelectorAll('.submenu-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.nav-item');
+        const wasOpen = item?.classList.contains('submenu-open');
+        closeSubmenus(header);
+        if (item && !wasOpen) {
+          item.classList.add('submenu-open');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
     nav?.addEventListener('click', event => {
-      if (event.target instanceof HTMLAnchorElement) header.classList.remove('nav-open');
+      if (event.target instanceof HTMLAnchorElement && window.matchMedia('(max-width: 900px)').matches) {
+        header.classList.remove('nav-open');
+        toggle?.setAttribute('aria-expanded', 'false');
+        toggle?.setAttribute('aria-label', 'Menü öffnen');
+        closeSubmenus(header);
+      }
     });
+
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') header.classList.remove('nav-open');
+      if (event.key === 'Escape') {
+        header.classList.remove('nav-open');
+        toggle?.setAttribute('aria-expanded', 'false');
+        toggle?.setAttribute('aria-label', 'Menü öffnen');
+        closeSubmenus(header);
+      }
     });
   }
 
