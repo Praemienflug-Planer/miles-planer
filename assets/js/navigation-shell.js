@@ -5,6 +5,7 @@
     { label: 'Rechner', href: `${BASE}/rechner/` },
     { label: 'Meilen sammeln', href: `${BASE}/meilen-sammeln/`, children: [
       { label: 'Übersicht', href: `${BASE}/meilen-sammeln/` },
+      { label: 'Fixkosten & Alltagsausgaben', href: `${BASE}/meilen-sammeln/fixkosten-meilen/` },
       { label: 'Amex oder PAYBACK?', href: `${BASE}/amex-oder-payback/` },
       { label: 'PAYBACK Punkte sammeln', href: `${BASE}/meilen-sammeln/payback/` },
       { label: 'Meilen sammeln im Alltag', href: `${BASE}/meilen-sammeln/payback-alltag/` },
@@ -13,6 +14,7 @@
       { label: 'Amex Kreditkarten', href: `${BASE}/meilen-sammeln/amex-kreditkarten/` },
       { label: 'Miles & More Kreditkarte', href: `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/` },
       { label: 'Eurowings Kreditkarte', href: `${BASE}/meilen-sammeln/eurowings-kreditkarte/` },
+      { label: 'Revolut & RevPoints', href: `${BASE}/meilen-sammeln/revolut-revpoints/` },
       { label: 'Wunschgutschein', href: `${BASE}/meilen-sammeln/wunschgutschein/` },
       { label: 'Zeitschriftenabo-Meilen', href: `${BASE}/meilen-sammeln/zeitschriftenabo/` }
     ] },
@@ -26,6 +28,7 @@
     ] },
     { label: 'Tools', href: `${BASE}/tools/`, children: [
       { label: 'Alle Tools', href: `${BASE}/tools/` },
+      { label: 'Fixkosten-Meilenrechner', href: `${BASE}/meilen-sammeln/fixkosten-meilen/#rechner` },
       { label: 'Amex Punkte umrechnen', href: `${BASE}/amex-meilen-umrechnen/#mr-rechner` },
       { label: 'Zeitschriftenabo-Meilenrechner', href: `${BASE}/meilen-sammeln/zeitschriftenabo/#abo-rechner` }
     ] },
@@ -34,12 +37,12 @@
   ];
 
   const footerNav = [
-    ['Rechner', `${BASE}/rechner/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`], ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`],
+    ['Rechner', `${BASE}/rechner/`], ['Meilen sammeln', `${BASE}/meilen-sammeln/`], ['Fixkosten & Alltagsausgaben', `${BASE}/meilen-sammeln/fixkosten-meilen/`], ['Amex oder PAYBACK?', `${BASE}/amex-oder-payback/`],
     ['PAYBACK', `${BASE}/meilen-sammeln/payback/`], ['Meilen sammeln im Alltag', `${BASE}/meilen-sammeln/payback-alltag/`], ['PAYBACK zu Miles & More', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
-    ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Amex Kreditkarten', `${BASE}/meilen-sammeln/amex-kreditkarten/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`], ['Eurowings Kreditkarte', `${BASE}/meilen-sammeln/eurowings-kreditkarte/`],
+    ['Amex Membership Rewards', `${BASE}/meilen-sammeln/amex/`], ['Amex Kreditkarten', `${BASE}/meilen-sammeln/amex-kreditkarten/`], ['Miles & More Kreditkarte', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`], ['Eurowings Kreditkarte', `${BASE}/meilen-sammeln/eurowings-kreditkarte/`], ['Revolut & RevPoints', `${BASE}/meilen-sammeln/revolut-revpoints/`],
     ['Thailand', `${BASE}/meilen-thailand/`], ['New York', `${BASE}/meilen-new-york/`], ['Business Class', `${BASE}/meilen-business-class/`], ['Mit PAYBACK nach Mallorca', `${BASE}/meilen-sammeln/payback-mallorca/`],
     ['4 Prämienflug-Plätze finden', `${BASE}/vier-praemienflug-plaetze-finden/`], ['Steuern & Gebühren', `${BASE}/praemienflug-steuern-gebuehren/`], ['Tools', `${BASE}/tools/`],
-    ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Zeitschriftenabo-Meilenrechner', `${BASE}/meilen-sammeln/zeitschriftenabo/#abo-rechner`],
+    ['Fixkosten-Meilenrechner', `${BASE}/meilen-sammeln/fixkosten-meilen/#rechner`], ['Amex umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Zeitschriftenabo-Meilenrechner', `${BASE}/meilen-sammeln/zeitschriftenabo/#abo-rechner`],
     ['Warum diese Seite?', `${BASE}/ueber-das-projekt/`], ['FAQ', `${BASE}/faq/`]
   ];
 
