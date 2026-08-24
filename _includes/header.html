@@ -5,45 +5,48 @@
       <span class="brand-name">Prämienflug-Planer</span>
     </a>
     <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="site-navigation">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
     <nav id="site-navigation" class="main-nav" aria-label="Hauptnavigation">
       <div class="nav-item"><a class="nav-link" href="/rechner/"{% if page.url == '/rechner/' %} aria-current="page"{% endif %}>Rechner</a></div>
+
       <div class="nav-item has-dropdown">
-        <a class="nav-link" href="/meilen-sammeln/"{% if page.url contains '/meilen-sammeln/' or page.url == '/meilen-sammeln-familie/' or page.url == '/amex-oder-payback/' %} aria-current="page"{% endif %}>Meilen sammeln</a>
-        <div class="nav-dropdown">
-          <a href="/meilen-sammeln/">Übersicht</a>
-          <a href="/meilen-sammeln/anfaenger/">Kostenlos starten</a>
-          <a href="/meilen-sammeln/fixkosten-meilen/">Fixkosten &amp; Alltagsausgaben</a>
-          <a href="/meilen-sammeln-familie/">Meilen sammeln als Familie</a>
-          <a href="/amex-oder-payback/">Amex oder PAYBACK?</a>
-          <a href="/meilen-sammeln/payback/">PAYBACK Punkte sammeln</a>
-          <a href="/meilen-sammeln/payback-transferbonus/">PAYBACK Transferbonus</a>
-          <a href="/meilen-sammeln/payback-punkte-miles-and-more/">PAYBACK zu Miles &amp; More</a>
-          <a href="/meilen-sammeln/payback-mallorca/">Mit PAYBACK nach Mallorca</a>
-          <a href="/meilen-sammeln/amex/">Amex Membership Rewards</a>
-          <a href="/meilen-sammeln/amex-kreditkarten/">Amex Kreditkarten</a>
-          <a href="/meilen-sammeln/miles-and-more/">Miles &amp; More</a>
-          <a href="/meilen-sammeln/miles-and-more-kreditkarte/">Miles &amp; More Kreditkarte</a>
-          <a href="/meilen-sammeln/eurowings-kreditkarte/">Eurowings Kreditkarte</a>
-          <a href="/meilen-sammeln/revolut-revpoints/">Revolut &amp; RevPoints</a>
-          <a href="/meilen-sammeln/wunschgutschein/">Wunschgutschein</a>
-          <a href="/meilen-sammeln/zeitschriftenabo/">Zeitschriftenabo-Meilen</a>
+        <a class="nav-link" href="/meilen-sammeln/"{% if page.url contains '/meilen-sammeln/' or page.url == '/amex-oder-payback/' %} aria-current="page"{% endif %}>Meilen sammeln</a>
+        <button class="submenu-toggle" type="button" aria-label="Untermenü Meilen sammeln öffnen" aria-expanded="false">⌄</button>
+        <div class="nav-dropdown nav-mega">
+          <div class="nav-group">
+            <span class="nav-group-title">Start &amp; Strategie</span>
+            <a href="/meilen-sammeln/">Übersicht</a>
+            <a href="/meilen-sammeln/anfaenger/">Kostenlos starten</a>
+            <a href="/meilen-sammeln/fixkosten-meilen/">Fixkosten &amp; Alltagsausgaben</a>
+            <a href="/amex-oder-payback/">Amex oder PAYBACK?</a>
+          </div>
+          <div class="nav-group">
+            <span class="nav-group-title">Programme</span>
+            <a href="/meilen-sammeln/payback/">PAYBACK</a>
+            <a href="/meilen-sammeln/amex/">Amex Membership Rewards</a>
+            <a href="/meilen-sammeln/miles-and-more/">Miles &amp; More</a>
+            <a href="/meilen-sammeln/revolut-revpoints/">Revolut &amp; RevPoints</a>
+          </div>
+          <div class="nav-group">
+            <span class="nav-group-title">Kreditkarten</span>
+            <a href="/meilen-sammeln/amex-kreditkarten/">Amex Kreditkarten</a>
+            <a href="/meilen-sammeln/miles-and-more-kreditkarte/">Miles &amp; More Kreditkarte</a>
+            <a href="/meilen-sammeln/eurowings-kreditkarte/">Eurowings Kreditkarte</a>
+          </div>
+          <div class="nav-group">
+            <span class="nav-group-title">Booster &amp; Transfer</span>
+            <a href="/meilen-sammeln/payback-punkte-miles-and-more/">PAYBACK → Miles &amp; More</a>
+            <a href="/meilen-sammeln/payback-transferbonus/">PAYBACK Transferbonus</a>
+            <a href="/meilen-sammeln/wunschgutschein/">Wunschgutschein</a>
+            <a href="/meilen-sammeln/zeitschriftenabo/">Zeitschriftenabo-Meilen</a>
+          </div>
         </div>
       </div>
+
       <div class="nav-item has-dropdown">
-        <a class="nav-link" href="/meilen-thailand/"{% if page.url == '/meilen-thailand/' or page.url == '/meilen-new-york/' or page.url == '/florida-mit-meilen/' or page.url == '/meilen-sammeln/payback-mallorca/' %} aria-current="page"{% endif %}>Reiseziele</a>
-        <div class="nav-dropdown">
-          <a href="/meilen-thailand/">Thailand mit Meilen</a>
-          <a href="/meilen-sammeln/payback-mallorca/">Mallorca mit PAYBACK</a>
-          <a href="/meilen-new-york/">New York mit Meilen</a>
-          <a href="/florida-mit-meilen/">Florida mit Meilen</a>
-        </div>
-      </div>
-      <div class="nav-item has-dropdown">
-        <a class="nav-link" href="/praemienfluege-familie/"{% if page.url == '/praemienfluege-familie/' or page.url == '/miles-and-more-meilenpooling-familie/' or page.url == '/childs-award-flight-kinder-meilen/' or page.url == '/meilen-fuer-familienmitglieder-einloesen/' or page.url == '/business-class-familie-meilen/' or page.url == '/business-class-mit-kindern/' or page.url == '/premium-economy-mit-kindern/' %} aria-current="page"{% endif %}>Familien</a>
+        <a class="nav-link" href="/praemienfluege-familie/"{% if page.url == '/praemienfluege-familie/' or page.url == '/meilen-sammeln-familie/' or page.url == '/miles-and-more-meilenpooling-familie/' or page.url == '/childs-award-flight-kinder-meilen/' or page.url == '/meilen-fuer-familienmitglieder-einloesen/' or page.url == '/business-class-familie-meilen/' or page.url == '/business-class-mit-kindern/' or page.url == '/premium-economy-mit-kindern/' %} aria-current="page"{% endif %}>Familien</a>
+        <button class="submenu-toggle" type="button" aria-label="Untermenü Familien öffnen" aria-expanded="false">⌄</button>
         <div class="nav-dropdown">
           <a href="/praemienfluege-familie/">Prämienflüge für Familien</a>
           <a href="/meilen-sammeln-familie/">Meilen sammeln als Familie</a>
@@ -55,8 +58,21 @@
           <a href="/premium-economy-mit-kindern/">Premium Economy mit Kindern</a>
         </div>
       </div>
+
+      <div class="nav-item has-dropdown">
+        <a class="nav-link" href="/meilen-thailand/"{% if page.url == '/meilen-thailand/' or page.url == '/meilen-new-york/' or page.url == '/florida-mit-meilen/' or page.url == '/meilen-sammeln/payback-mallorca/' %} aria-current="page"{% endif %}>Reiseziele</a>
+        <button class="submenu-toggle" type="button" aria-label="Untermenü Reiseziele öffnen" aria-expanded="false">⌄</button>
+        <div class="nav-dropdown">
+          <a href="/meilen-thailand/">Thailand mit Meilen</a>
+          <a href="/meilen-sammeln/payback-mallorca/">Mallorca mit PAYBACK</a>
+          <a href="/meilen-new-york/">New York mit Meilen</a>
+          <a href="/florida-mit-meilen/">Florida mit Meilen</a>
+        </div>
+      </div>
+
       <div class="nav-item has-dropdown">
         <a class="nav-link" href="/meilen-business-class/"{% if page.url == '/meilen-business-class/' or page.url == '/premium-economy-oder-business-class/' or page.url == '/vier-praemienflug-plaetze-finden/' or page.url == '/praemienflug-steuern-gebuehren/' or page.url == '/faq/' %} aria-current="page"{% endif %}>Ratgeber</a>
+        <button class="submenu-toggle" type="button" aria-label="Untermenü Ratgeber öffnen" aria-expanded="false">⌄</button>
         <div class="nav-dropdown">
           <a href="/meilen-business-class/">Business Class mit Meilen</a>
           <a href="/premium-economy-oder-business-class/">Premium Economy oder Business?</a>
@@ -65,18 +81,19 @@
           <a href="/faq/">FAQ</a>
         </div>
       </div>
+
       <div class="nav-item has-dropdown">
-        <a class="nav-link" href="/tools/"{% if page.url == '/tools/' or page.url == '/amex-meilen-umrechnen/' or page.url == '/meilen-sammeln/zeitschriftenabo/' or page.url == '/meilen-sammeln/fixkosten-meilen/' %} aria-current="page"{% endif %}>Tools</a>
+        <a class="nav-link" href="/tools/"{% if page.url == '/tools/' or page.url == '/amex-meilen-umrechnen/' or page.url == '/meilen-sammeln/zeitschriftenabo/' or page.url == '/meilen-sammeln/fixkosten-meilen/' or page.url == '/meilen-sammeln/revolut-revpoints/' %} aria-current="page"{% endif %}>Tools</a>
+        <button class="submenu-toggle" type="button" aria-label="Untermenü Tools öffnen" aria-expanded="false">⌄</button>
         <div class="nav-dropdown">
           <a href="/tools/">Alle Tools</a>
           <a href="/rechner/">Prämienflug-Rechner</a>
           <a href="/meilen-sammeln/fixkosten-meilen/#rechner">Fixkosten-Meilenrechner</a>
+          <a href="/meilen-sammeln/revolut-revpoints/#rechner">RevPoints-Rechner</a>
           <a href="/amex-meilen-umrechnen/#mr-rechner">Amex Punkte umrechnen</a>
           <a href="/meilen-sammeln/zeitschriftenabo/#abo-rechner">Zeitschriftenabo-Meilenrechner</a>
         </div>
       </div>
-      <div class="nav-item"><a class="nav-link" href="/ueber-das-projekt/"{% if page.url == '/ueber-das-projekt/' %} aria-current="page"{% endif %}>Warum diese Seite?</a></div>
-      <div class="nav-item"><a class="nav-link" href="/kontakt.html"{% if page.url == '/kontakt.html' %} aria-current="page"{% endif %}>Kontakt</a></div>
     </nav>
   </div>
 </header>
