@@ -1,11 +1,11 @@
 ---
 layout: page
 title: "Tools & Rechner für Familien-Prämienflüge | Prämienflug-Planer"
-description: "Alle Tools des Prämienflug-Planers auf einen Blick: Prämienflug-Rechner, Fixkosten-Meilenrechner, Amex Membership Rewards Umrechner und Zeitschriftenabo-Meilenrechner."
+description: "Alle Tools des Prämienflug-Planers auf einen Blick: Prämienflug-Rechner, Fixkosten-Meilenrechner, Revolut RevPoints-Rechner, Amex Umrechner und Zeitschriftenabo-Meilenrechner."
 canonical: "https://praemienflug-planer.de/tools/"
 og_type: website
 og_title: "Tools & Rechner für Familien-Prämienflüge"
-og_description: "Prämienflug-Rechner, Fixkosten-Meilenrechner, Amex Punkte-Umrechner und Zeitschriftenabo-Meilenrechner auf einer Übersichtsseite."
+og_description: "Prämienflug-Rechner, Fixkosten-Meilenrechner, RevPoints-Rechner, Amex Punkte-Umrechner und Zeitschriftenabo-Meilenrechner auf einer Übersichtsseite."
 schema_json: |
   {
     "@context": "https://schema.org",
@@ -13,7 +13,7 @@ schema_json: |
     "name": "Tools & Rechner für Familien-Prämienflüge",
     "url": "https://praemienflug-planer.de/tools/",
     "inLanguage": "de-DE",
-    "description": "Übersicht über die Tools des Prämienflug-Planers für Meilenbedarf, laufende Ausgaben, Punkteumrechnung und Meilenangebote."
+    "description": "Übersicht über die Tools des Prämienflug-Planers für Meilenbedarf, laufende Ausgaben, RevPoints, Punkteumrechnung und Meilenangebote."
   }
 ---
 <section class="hero hero-small hero-rechner">
@@ -22,7 +22,7 @@ schema_json: |
       <p class="eyebrow">Tools & Rechner</p>
       <h1>Familien-Prämienflüge besser planen</h1>
       <p class="hero-text">
-        Hier findest du die wichtigsten Rechner des Prämienflug-Planers: vom Familien-Prämienflug-Rechner über den neuen Fixkosten-Meilenrechner bis zur Umrechnung von American Express Membership Rewards Punkten und der Bewertung von Zeitschriftenabo-Angeboten.
+        Hier findest du die wichtigsten Rechner des Prämienflug-Planers: vom Familien-Prämienflug-Rechner über Fixkosten und Revolut RevPoints bis zur Umrechnung von American Express Membership Rewards Punkten und der Bewertung von Zeitschriftenabo-Angeboten.
       </p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/rechner/">Familien-Prämienflug berechnen</a>
@@ -34,9 +34,9 @@ schema_json: |
       <ul>
         <li>Meilenbedarf und Sammellücke für Familienreisen berechnen</li>
         <li>Fixkosten und Alltagsausgaben auf Punktewege verteilen</li>
+        <li>MoneySend und RevPoints getrennt durchrechnen</li>
         <li>Amex Punkte in Partnerprogramme umrechnen</li>
         <li>Kosten pro Meile bei Abo-Angeboten prüfen</li>
-        <li>nächsten Planungsschritt direkt auswählen</li>
       </ul>
     </div>
   </div>
@@ -63,6 +63,12 @@ schema_json: |
         <p>Berechnet die mögliche Jahresausbeute aus Amex Membership Rewards, Miles & More, Revolut MoneySend/RevPoints und PAYBACK – auf Basis ohnehin anfallender Ausgaben.</p>
       </a>
 
+      <a class="article-card" href="/meilen-sammeln/revolut-revpoints/#rechner">
+        <p class="eyebrow">Revolut</p>
+        <h3>RevPoints- &amp; MoneySend-Rechner</h3>
+        <p>Rechnet Miles-&amp;-More-Meilen aus MoneySend und zusätzliche RevPoints aus berechtigten Revolut-Kartenausgaben inklusive Abo-Kosten und Jahreswert.</p>
+      </a>
+
       <a class="article-card" href="/amex-meilen-umrechnen/#mr-rechner">
         <p class="eyebrow">Membership Rewards</p>
         <h3>Amex Punkte umrechnen</h3>
@@ -87,10 +93,7 @@ schema_json: |
         <div class="seo-table-wrap">
           <table class="seo-table">
             <thead>
-              <tr>
-                <th>Frage</th>
-                <th>Passendes Tool</th>
-              </tr>
+              <tr><th>Frage</th><th>Passendes Tool</th></tr>
             </thead>
             <tbody>
               <tr>
@@ -100,6 +103,10 @@ schema_json: |
               <tr>
                 <td>Wie viele Punkte und Meilen können meine normalen monatlichen Ausgaben erzeugen?</td>
                 <td><a href="/meilen-sammeln/fixkosten-meilen/#rechner">Fixkosten-Meilenrechner</a></td>
+              </tr>
+              <tr>
+                <td>Wie viele M&amp;M-Meilen und RevPoints bringt mein Revolut-Setup?</td>
+                <td><a href="/meilen-sammeln/revolut-revpoints/#rechner">RevPoints- &amp; MoneySend-Rechner</a></td>
               </tr>
               <tr>
                 <td>Wie viele Avios oder Meilen bekomme ich aus meinen Amex Punkten?</td>
@@ -119,7 +126,7 @@ schema_json: |
       <div class="article-card seo-card sticky-card">
         <p class="eyebrow">Empfohlener Start</p>
         <h3>Erst Familienziel prüfen</h3>
-        <p>Wenn du noch nicht weißt, wie viele Meilen du brauchst, starte mit dem Prämienflug-Rechner. Danach zeigt der Fixkosten-Rechner, was deine normalen Ausgaben realistisch zur Sammelrate beitragen können.</p>
+        <p>Wenn du noch nicht weißt, wie viele Meilen du brauchst, starte mit dem Prämienflug-Rechner. Danach zeigen Fixkosten- und RevPoints-Rechner, was deine normalen Ausgaben zur Sammelrate beitragen können.</p>
         <a class="btn btn-primary" href="/rechner/">Zum Rechner</a>
         <a class="btn btn-secondary" href="/meilen-sammeln/fixkosten-meilen/#rechner">Fixkosten prüfen</a>
       </div>
@@ -133,7 +140,7 @@ schema_json: |
       <div>
         <p class="eyebrow">Vom Ziel zur Sammelrate</p>
         <h2>Erst Bedarf, dann Zahlungswege optimieren</h2>
-        <p class="footer-text">Der Prämienflug-Rechner zeigt den benötigten Meilenrahmen. Der Fixkosten-Meilenrechner zeigt anschließend, wie viel davon aus ohnehin anfallenden Ausgaben entstehen kann.</p>
+        <p class="footer-text">Der Prämienflug-Rechner zeigt den benötigten Meilenrahmen. Die Sammelrechner zeigen anschließend, wie viel davon aus ohnehin anfallenden Ausgaben entstehen kann.</p>
       </div>
       <a class="btn btn-primary" href="/meilen-sammeln/fixkosten-meilen/#rechner">Fixkosten-Meilenrechner öffnen</a>
     </div>
