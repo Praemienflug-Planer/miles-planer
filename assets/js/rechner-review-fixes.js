@@ -71,7 +71,7 @@
     if (!result) return;
     result.querySelectorAll('.result-info-card p').forEach((paragraph) => {
       const text = paragraph.textContent || '';
-      const match = text.match(/^Award-, Gebühren- und Cash-Planungswerte der Grundmatrix: Stand ([^.]+)\. Programm- und Transferregeln: geprüft am (.+)\.$/);
+      const match = text.match(/^Award-, Gebühren- und Cash-Planungswerte der Grundmatrix: Stand (.+?)\. Programm- und Transferregeln: geprüft am (.+)\.$/);
       if (!match) return;
       paragraph.textContent = `Datenpaket der Award-, Gebühren- und Cash-Planungswerte: zuletzt zusammengeführt am ${match[1]}. Einzelne Programmzeilen können einen älteren Grundstand oder einen separat ausgewiesenen Kalibrierungsstand haben. Programm- und Transferregeln: geprüft am ${match[2]}.`;
     });
