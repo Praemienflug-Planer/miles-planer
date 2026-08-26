@@ -1,16 +1,10 @@
 {% comment %}
   Central layout for legacy static HTML pages.
   It extracts the existing page title, description, robots, canonical, refresh tags,
-  structured data and main content, normalizes old GitHub Pages paths,
-  and renders the shared header, footer and core assets in one place.
+  structured data and main content, then renders the shared header, footer and core assets.
+  Source pages are expected to use canonical root paths directly.
 {% endcomment %}
-{% assign normalized_content = content
-  | replace: 'https://praemienflug-planer.github.io/miles-planer/', 'https://praemienflug-planer.de/'
-  | replace: 'https://praemienflug-planer.github.io/miles-planer', 'https://praemienflug-planer.de'
-  | replace: '/miles-planer/assets/', '/assets/'
-  | replace: '/miles-planer/images/', '/images/'
-  | replace: '/miles-planer/', '/'
-%}
+{% assign normalized_content = content %}
 
 {% assign extracted_title = page.title | default: 'Prämienflug-Planer' %}
 {% if normalized_content contains '<title>' %}
