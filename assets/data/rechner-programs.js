@@ -1,6 +1,6 @@
 window.MILES_PLANNER_PROGRAMS = {
-  dataStand: "20.05.2026",
-  source: "GitHub Stammdaten-Spiegel für den Prämienflug-Rechner. Bestehende Live-Berechnung läuft vorerst weiter über Google Apps Script / Google Sheets.",
+  dataStand: "26.08.2026",
+  source: "Programm- und Transferregeln für den Prämienflug-Rechner. Verifiziert am 26.08.2026 anhand offizieller Angaben von PAYBACK, American Express, Flying Blue und Miles & More.",
   programs: {
     "Miles & More": {
       punktelabel: "Miles & More Meilen",
@@ -9,20 +9,20 @@ window.MILES_PLANNER_PROGRAMS = {
       faktor: 1,
       transferRatioLabel: "PAYBACK Punkte → Miles & More (1:1)",
       transferMinimum: 200,
-      transferDuration: "sofort bis wenige Tage",
+      transferDuration: "bis zu 5 Werktage",
       transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 },
-      hinweis: "PAYBACK ist als indirekter Sammelweg für Miles & More hinterlegt. Transferbonus-Aktionen separat prüfen."
+      hinweis: "PAYBACK kann ab 200 Punkten im Verhältnis 1:1 zu Miles & More übertragen werden. Maximal 999.999 Punkte je Transaktion; ein Rücktransfer ist nicht möglich. Transferbonus-Aktionen separat prüfen."
     },
     "Avios": {
       punktelabel: "Avios",
       kurzlabel: "Avios",
       transferquelle: "Membership Rewards",
       faktor: 0.8,
-      transferRatioLabel: "Membership Rewards → Avios (5:4)",
+      transferRatioLabel: "Membership Rewards → Avios über British Airways/Iberia (5:4)",
       transferMinimum: 1000,
       transferDuration: "bis zu 1 Werktag",
       transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 },
-      hinweis: "Avios steht im Rechner als Sammelbegriff für relevante Avios-Programme. Konkrete Partnerprogramme separat prüfen."
+      hinweis: "Der Rechner nutzt für den generischen Avios-Eintrag den 5:4-Transferweg über British Airways oder Iberia. Ein direkter Transfer zu Qatar Privilege Club ist bei deutscher Amex mit 3:2 schwächer und dauert laut Amex ca. 7 Werktage."
     },
     "Flying Blue": {
       punktelabel: "Flying Blue Meilen",
@@ -44,7 +44,7 @@ window.MILES_PLANNER_PROGRAMS = {
       transferMinimum: 1500,
       transferDuration: "bis zu 15 Werktage",
       transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 },
-      hinweis: "KrisFlyer-Transfers können länger dauern. Verfügbarkeit vor Transfer besonders sorgfältig prüfen."
+      hinweis: "KrisFlyer-Transfers können bis zu 15 Werktage dauern. Verfügbarkeit vor Transfer besonders sorgfältig prüfen."
     },
     "Emirates Skywards": {
       punktelabel: "Emirates Skywards Meilen",
@@ -53,9 +53,9 @@ window.MILES_PLANNER_PROGRAMS = {
       faktor: 0.5,
       transferRatioLabel: "Membership Rewards → Emirates Skywards (2:1)",
       transferMinimum: 1000,
-      transferDuration: "meist wenige Werktage",
+      transferDuration: "bis zu 1 Werktag",
       transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 },
-      hinweis: "Emirates Skywards ist weiterhin als Amex-Transferpartner gelistet, aber für deutsche Amex-Karten gilt nach Emirates-Angabe ein Verhältnis von 2:1. Zusätzlich wurden Skywards-Classic-Rewards ab 20.05.2026 teurer."
+      hinweis: "Für deutsche Amex-Karten gilt aktuell 2:1 zu Emirates Skywards. Awardpreise können sich dynamisch ändern; maßgeblich ist immer die konkrete Emirates-Buchungsmaske."
     }
   }
 };
