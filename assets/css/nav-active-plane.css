@@ -1,0 +1,45 @@
+/* Active top-level navigation marker.
+   Loaded after layout.css so these rules intentionally override the older marker placement. */
+.main-nav > .nav-item > .nav-link[aria-current="page"] {
+  position: relative;
+  isolation: isolate;
+  color: #f8fbff;
+  font-weight: 900;
+  padding: 20px 8px 2px;
+  margin: -14px -8px -2px;
+  text-shadow: 0 2px 4px rgba(7, 17, 31, 0.98);
+}
+
+.main-nav > .nav-item > .nav-link[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -10px;
+  width: 48px;
+  height: 32px;
+  transform: translateX(-50%) rotate(3deg);
+  background: url("/assets/brand/nav-active-plane.svg") center / contain no-repeat;
+  opacity: 0.98;
+  filter:
+    drop-shadow(0 2px 3px rgba(7, 17, 31, 0.8))
+    drop-shadow(0 3px 7px rgba(96, 165, 250, 0.42));
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .main-nav > .nav-item > .nav-link[aria-current="page"] {
+    margin: 0;
+    padding: 30px 12px 9px;
+    border-color: rgba(96, 165, 250, 0.58);
+    background: linear-gradient(180deg, rgba(37, 99, 235, 0.2), rgba(16, 28, 47, 0.94));
+  }
+
+  .main-nav > .nav-item > .nav-link[aria-current="page"]::before {
+    left: 22px;
+    top: 3px;
+    width: 40px;
+    height: 25px;
+    transform: none;
+    opacity: 0.9;
+  }
+}
