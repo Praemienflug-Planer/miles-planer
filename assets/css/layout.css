@@ -35,19 +35,28 @@
 .main-nav > .nav-item > .nav-link[aria-current="page"] {
   position: relative;
   isolation: isolate;
-  text-shadow: 0 1px 8px rgba(7, 17, 31, 0.95);
+  color: #f8fbff;
+  font-weight: 900;
+  padding: 12px 9px;
+  margin: -12px -9px;
+  text-shadow:
+    0 2px 3px rgba(7, 17, 31, 1),
+    0 0 10px rgba(7, 17, 31, 0.95),
+    0 0 18px rgba(96, 165, 250, 0.35);
 }
 .main-nav > .nav-item > .nav-link[aria-current="page"]::before {
   content: "";
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 74px;
-  height: 48px;
-  transform: translate(-50%, -58%) rotate(-7deg);
+  width: clamp(96px, calc(100% + 38px), 150px);
+  height: 56px;
+  transform: translate(-50%, -50%) rotate(-5deg);
   background: url("/assets/brand/nav-active-plane.svg") center / contain no-repeat;
-  opacity: 0.24;
-  filter: drop-shadow(0 4px 10px rgba(96, 165, 250, 0.28));
+  opacity: 0.82;
+  filter:
+    drop-shadow(0 3px 4px rgba(7, 17, 31, 0.78))
+    drop-shadow(0 5px 12px rgba(96, 165, 250, 0.38));
   pointer-events: none;
 }
 .submenu-toggle { display: none; }
@@ -229,17 +238,20 @@ img, iframe, video {
     text-align: left;
   }
   .main-nav > .nav-item > .nav-link[aria-current="page"] {
-    border-color: rgba(96, 165, 250, 0.38);
-    background: linear-gradient(90deg, rgba(37, 99, 235, 0.16), rgba(16, 28, 47, 0.92));
+    color: #f8fbff;
+    margin: 0;
+    padding: 11px 92px 11px 12px;
+    border-color: rgba(96, 165, 250, 0.56);
+    background: linear-gradient(90deg, rgba(37, 99, 235, 0.22), rgba(16, 28, 47, 0.92));
   }
   .main-nav > .nav-item > .nav-link[aria-current="page"]::before {
     left: auto;
     right: 12px;
     top: 50%;
-    width: 58px;
-    height: 36px;
-    transform: translateY(-50%) rotate(-7deg);
-    opacity: 0.13;
+    width: 76px;
+    height: 42px;
+    transform: translateY(-50%) rotate(-5deg);
+    opacity: 0.58;
   }
   .submenu-toggle {
     display: inline-flex;
