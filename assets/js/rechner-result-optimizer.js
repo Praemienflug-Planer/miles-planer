@@ -1,8 +1,4 @@
 (() => {
-  function fixInternalPath(path) {
-    return String(path || '').replace('/miles-planer/', '/');
-  }
-
   function getBookingWindowNote(payload) {
     const zeit = String(payload.reisezeit || '').toLowerCase();
     const personen = Number(payload.personen || 0);
@@ -47,7 +43,7 @@
     if (klasse.includes('premium')) links.unshift(['Premium Economy mit Kindern', '/premium-economy-mit-kindern/']);
     if (ziel.includes('thailand')) links.unshift(['Thailand mit Meilen planen', '/meilen-thailand/']);
     if (ziel.includes('florida') || ziel.includes('miami')) links.unshift(['Florida mit Meilen planen', '/florida-mit-meilen/']);
-    return `<div class="result-section result-links-section"><h3>Passende nächste Inhalte</h3><div class="result-link-grid">${links.slice(0, 5).map(([label, href]) => `<a href="${fixInternalPath(href)}">${label}</a>`).join('')}</div></div>`;
+    return `<div class="result-section result-links-section"><h3>Passende nächste Inhalte</h3><div class="result-link-grid">${links.slice(0, 5).map(([label, href]) => `<a href="${href}">${label}</a>`).join('')}</div></div>`;
   }
 
   window.buildAffiliateBox = function buildAffiliateBoxOverride() {

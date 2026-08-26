@@ -3,6 +3,16 @@
 ## Ziel
 Die Website soll schlank, wartbar und konsistent bleiben. Neue Features sollen nicht wieder zu einer großen unübersichtlichen CSS-Datei, uneinheitlichen Headern/Footerern oder ungenutzten Bildbeständen führen.
 
+## URL-Standard
+Öffentliche Seiten, Assets und interne Links verwenden ausschließlich die aktuelle Domain und Root-Pfade:
+
+- Domain: `https://praemienflug-planer.de`
+- interne Links: z. B. `/rechner/`, `/meilen-sammeln/`, `/assets/css/site.css`
+- keine neuen `/miles-planer/`-Pfade
+- keine neuen Canonicals oder OG-URLs auf `praemienflug-planer.github.io`
+
+Die Datei `_includes/legacy-github-redirect.html` bleibt ausschließlich als Kompatibilitäts-Redirect für alte GitHub-Pages-Aufrufe bestehen. Die Layouts sollen alte Pfade nicht mehr nachträglich im Seiteninhalt umschreiben.
+
 ## CSS-Struktur
 Die zentrale Datei `/assets/css/site.css` bleibt ein kleiner Import-Hub.
 
@@ -17,72 +27,48 @@ Aktuelle Struktur:
 Regel: Keine neuen großen Blöcke mehr direkt in `site.css` einfügen.
 
 ## Header-Standard
-Neue und überarbeitete Seiten sollen diese Hauptnavigation verwenden:
+Header und Hauptnavigation werden zentral über `_includes/header.html` gepflegt. Neue Seiten sollen keinen eigenen statischen Header mehr kopieren.
 
-```html
-<header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="/miles-planer/">Prämienflug-Planer</a>
-    <nav class="main-nav" aria-label="Hauptnavigation">
-      <a href="/miles-planer/rechner/">Rechner</a>
-      <a href="/miles-planer/meilen-business-class/">Business Class</a>
-      <a href="/miles-planer/meilen-thailand/">Thailand</a>
-      <a href="/miles-planer/meilen-new-york/">New York</a>
-      <a href="/miles-planer/amex-meilen-umrechnen/">Amex umrechnen</a>
-      <a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a>
-      <a href="/miles-planer/faq/">FAQ</a>
-      <a href="/miles-planer/kontakt.html">Kontakt</a>
-    </nav>
-  </div>
-</header>
+Aktuelle Top-Level-Navigation:
+
+- Rechner
+- Meilen sammeln
+- Familien
+- Reiseziele
+- Ratgeber
+- Tools
+
+Unterpunkte werden ebenfalls zentral im Header gepflegt. Änderungen an der Informationsarchitektur deshalb immer dort und – falls noch relevant – im Legacy-Navigations-Shell synchron nachvollziehen.
+
+In Layouts wird der Header so eingebunden:
+
+```liquid
+{% include header.html %}
 ```
 
 ## Footer-Standard
-Neue und überarbeitete Seiten sollen diesen Footer verwenden:
+Der Footer wird zentral über `_includes/footer.html` gepflegt. Neue Seiten sollen keinen eigenen Footer duplizieren.
 
-```html
-<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <div class="brand footer-brand">Prämienflug-Planer</div>
-      <p class="footer-text">Planungstool für Prämienflüge mit Fokus auf Familien, Sammellücke und realistische Umsetzbarkeit.</p>
-    </div>
-    <div>
-      <h4>Navigation</h4>
-      <ul class="footer-links">
-        <li><a href="/miles-planer/rechner/">Rechner</a></li>
-        <li><a href="/miles-planer/meilen-business-class/">Business Class</a></li>
-        <li><a href="/miles-planer/meilen-thailand/">Thailand</a></li>
-        <li><a href="/miles-planer/meilen-new-york/">New York</a></li>
-        <li><a href="/miles-planer/amex-meilen-umrechnen/">Amex umrechnen</a></li>
-        <li><a href="/miles-planer/meilen-sammeln/">Meilen sammeln</a></li>
-        <li><a href="/miles-planer/faq/">FAQ</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Rechtliches</h4>
-      <ul class="footer-links">
-        <li><a href="/miles-planer/impressum.html">Impressum</a></li>
-        <li><a href="/miles-planer/datenschutz.html">Datenschutz</a></li>
-        <li><a href="/miles-planer/transparenz.html">Transparenz</a></li>
-        <li><a href="/miles-planer/kontakt.html">Kontakt</a></li>
-      </ul>
-    </div>
-  </div>
-</footer>
+```liquid
+{% include footer.html %}
 ```
+
+Kontakt, Transparenz, Datenschutz und Impressum gehören in den zentralen Footer und nicht als zusätzliche Top-Level-Hauptnavigation in einzelne Seiten.
 
 ## Seitenstandard
 Jede öffentliche Seite sollte enthalten:
 
 - individuellen `<title>`
 - individuelle Meta-Description
-- Canonical-Link
+- Canonical-Link auf `https://praemienflug-planer.de/...`
 - `meta name="robots" content="index,follow"`
 - ein Haupt-`h1`
-- einheitliche Hauptnavigation inkl. FAQ und Kontakt
-- einheitlichen Footer
+- zentrale Hauptnavigation über das Layout
+- zentralen Footer über das Layout
+- Root-Pfade für interne Links und Assets
 - `site.css` und bei Bedarf `hero-background.css`
+
+Neue strukturierte Seiten sollten nach Möglichkeit `layout: page` verwenden. Ältere statische HTML-Seiten können vorerst über `layout: default` laufen, sollen bei Überarbeitung aber ebenfalls direkte Root-Pfade verwenden.
 
 ## SEO-Artikelstandard
 Neue Ratgeberseiten sollen nach Möglichkeit zusätzlich enthalten:

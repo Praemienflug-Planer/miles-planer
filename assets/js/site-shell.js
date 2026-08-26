@@ -24,7 +24,7 @@
   }
 
   function isActive(href) {
-    const current = normalizePath(window.location.pathname.replace('/miles-planer', ''));
+    const current = normalizePath(window.location.pathname);
     const target = normalizePath(new URL(href, window.location.origin).pathname);
     if (target === '/meilen-sammeln/') return current === target || current.startsWith('/meilen-sammeln/');
     return current === target;
@@ -63,10 +63,6 @@
   }
 
   function mountShell() {
-    document.querySelectorAll('a[href^="/miles-planer/"]').forEach((link) => {
-      link.setAttribute('href', link.getAttribute('href').replace('/miles-planer/', '/'));
-    });
-
     const existingHeader = document.querySelector('header.site-header');
     const existingFooter = document.querySelector('footer.site-footer');
     if (!existingHeader) {
