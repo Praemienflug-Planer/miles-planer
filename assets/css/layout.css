@@ -254,6 +254,8 @@ img, iframe, video {
     opacity: 0.58;
   }
   .submenu-toggle {
+    position: relative;
+    z-index: 2;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -265,6 +267,7 @@ img, iframe, video {
     color: var(--muted);
     font-size: 20px;
     cursor: pointer;
+    touch-action: manipulation;
     transition: .15s ease;
   }
   .submenu-open .submenu-toggle { color: var(--primary); transform: rotate(180deg); }
@@ -285,12 +288,19 @@ img, iframe, video {
     box-shadow: none;
     background: rgba(5, 10, 19, 0.42);
   }
-  .submenu-open .nav-dropdown { display: grid; }
+  .submenu-open > .nav-dropdown { display: grid; }
   .nav-dropdown a { padding: 9px 10px 9px 18px; white-space: normal; font-size: 14px; border: 0; background: transparent; }
   .nav-group { padding: 4px 0 8px; }
   .nav-group + .nav-group { border-top: 1px solid rgba(148, 163, 184, 0.14); padding-top: 10px; }
   .nav-group-title { margin: 2px 10px 4px; }
-  .has-dropdown:hover .nav-dropdown, .has-dropdown:focus-within .nav-dropdown { transform: none; }
+  .has-dropdown:hover:not(.submenu-open) > .nav-dropdown,
+  .has-dropdown:focus-within:not(.submenu-open) > .nav-dropdown {
+    display: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
   .hero-grid, .contact-layout, .footer-grid { grid-template-columns: 1fr; }
   .hero { padding: 48px 0 40px; }
   .hero-small { padding: 42px 0 30px; }
