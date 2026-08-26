@@ -100,6 +100,43 @@
 
   function activeFor(item) {
     const current = normalize(window.location.pathname);
+    const exactOwners = {
+      Rechner: [`${BASE}/rechner/`],
+      Familien: [
+        `${BASE}/praemienfluege-familie/`,
+        `${BASE}/meilen-sammeln-familie/`,
+        `${BASE}/miles-and-more-meilenpooling-familie/`,
+        `${BASE}/childs-award-flight-kinder-meilen/`,
+        `${BASE}/meilen-fuer-familienmitglieder-einloesen/`,
+        `${BASE}/business-class-familie-meilen/`,
+        `${BASE}/business-class-mit-kindern/`,
+        `${BASE}/premium-economy-mit-kindern/`
+      ],
+      Reiseziele: [
+        `${BASE}/meilen-thailand/`,
+        `${BASE}/meilen-sammeln/payback-mallorca/`,
+        `${BASE}/meilen-new-york/`,
+        `${BASE}/florida-mit-meilen/`
+      ],
+      Ratgeber: [
+        `${BASE}/meilen-business-class/`,
+        `${BASE}/premium-economy-oder-business-class/`,
+        `${BASE}/vier-praemienflug-plaetze-finden/`,
+        `${BASE}/praemienflug-steuern-gebuehren/`,
+        `${BASE}/faq/`
+      ],
+      Tools: [`${BASE}/tools/`, `${BASE}/amex-meilen-umrechnen/`]
+    };
+
+    if (item.label === 'Meilen sammeln') {
+      if (current === normalize(`${BASE}/amex-oder-payback/`)) return true;
+      if (current === normalize(`${BASE}/meilen-sammeln/payback-mallorca/`)) return false;
+      return current.startsWith(normalize(`${BASE}/meilen-sammeln/`));
+    }
+
+    const owned = exactOwners[item.label];
+    if (owned) return owned.some(path => current === normalize(path));
+
     const paths = [item.href, ...itemLinks(item).map(child => child.href)]
       .map(href => normalize(new URL(href, window.location.origin).pathname));
     return paths.some(path => current === path || (path !== `${BASE}/` && current.startsWith(path)));
