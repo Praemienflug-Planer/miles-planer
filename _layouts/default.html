@@ -4,7 +4,7 @@
   structured data and main content, then renders the shared header, footer and core assets.
   Source pages are expected to use canonical root paths directly.
 {% endcomment %}
-{% assign normalized_content = content %}
+{% capture normalized_content %}{% include apply-current-offers.html content=content %}{% endcapture %}
 
 {% assign extracted_title = page.title | default: 'Prämienflug-Planer' %}
 {% if normalized_content contains '<title>' %}
