@@ -99,7 +99,7 @@ function buildAffiliateBox() {
         <strong>Hinweis:</strong> Ich nutze selbst verschiedene Karten- und Punkteprogramme.
         Wenn du Fragen zu einer konkreten Karte oder einer möglichen Freundschaftswerbung hast,
         kannst du mich über das
-        <a href="/kontakt.html">Kontaktformular</a>
+        <a href="/miles-planer/kontakt.html">Kontaktformular</a>
         kontaktieren. Ich gebe keine Finanzberatung und empfehle nur Produkte,
         die ich selbst sinnvoll einordnen kann.
       </p>
