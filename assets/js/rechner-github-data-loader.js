@@ -7,8 +7,15 @@
   function getGithubRates() { return window.MILES_PLANNER_AWARD_RATES?.rates || []; }
   function normalize(value) { return String(value || "").trim().toLowerCase(); }
 
+  function updateFamilyUiCopy() {
+    const note = document.querySelector(".family-module-note");
+    if (!note) return;
+    note.textContent = "Hinweis: Flying Blue gewährt für Kinder von 2–11 Jahren unter den offiziellen Bedingungen 25 % Rabatt auf Reward Tickets; dieser Abschlag wird als Planungswert berücksichtigt. Bei Miles & More gilt der 25-%-Child’s-Award-Rabatt nur bei bestimmten ausführenden Airlines. Da der Rechner keine Airline abfragt, wird Miles & More konservativ mit dem vollen Meilenbedarf berechnet.";
+  }
+
   async function ladeDropdownsAusGithub() {
     fillFallbackDropdowns();
+    updateFamilyUiCopy();
     try {
       const lists = getGithubLists();
       const programs = getGithubPrograms();
@@ -46,7 +53,7 @@
 
   function getChildDiscount(programm) {
     const key = normalize(programm);
-    if (key === "miles & more" || key === "flying blue") return 0.25;
+    if (key === "flying blue") return 0.25;
     return 0;
   }
 
@@ -56,11 +63,17 @@
     const adults = Math.max(1, persons - kinder);
     const billablePersons = adults + kinder * (1 - discount);
     const savedChildShare = kinder * discount;
-    const note = kinder > 0
-      ? discount > 0
-        ? `${payload.programm}: ${kinder} Kind${kinder === 1 ? "" : "er"} von 2–11 Jahren mit 25 % Meilenabschlag als Planungswert berücksichtigt.`
-        : `${payload.programm}: Für Kinder von 2–11 Jahren ist im Rechner kein allgemeiner Meilenrabatt hinterlegt. Der volle Meilenbedarf bleibt als Planungswert bestehen.`
-      : "";
+    const programKey = normalize(payload.programm);
+
+    let note = "";
+    if (kinder > 0 && programKey === "flying blue") {
+      note = `Flying Blue: ${kinder} Kind${kinder === 1 ? "" : "er"} von 2–11 Jahren mit 25 % Meilenabschlag als Planungswert berücksichtigt. Laut Flying Blue gilt der Rabatt für Reward Tickets, wenn das Kind mit einem Erwachsenen reist; für den Rabatt soll über Air France oder KLM gebucht werden.`;
+    } else if (kinder > 0 && programKey === "miles & more") {
+      note = `Miles & More: Der Child’s Award Flight kann für Kinder von 2–11 Jahren 25 % weniger Meilen kosten, gilt aber nur bei bestimmten ausführenden Airlines. Da der Rechner keine Airline abfragt, wird hier bewusst mit dem vollen Meilenbedarf gerechnet.`;
+    } else if (kinder > 0) {
+      note = `${payload.programm}: Für Kinder von 2–11 Jahren ist im Rechner kein allgemeiner Meilenrabatt hinterlegt. Der volle Meilenbedarf bleibt als Planungswert bestehen.`;
+    }
+
     return { kinder, adults, discount, billablePersons, savedChildShare, note };
   }
 
@@ -96,6 +109,27 @@
     if (cpm >= 1.0) return `Solider Gegenwert: ${cpmText} pro Meile kann sich lohnen, ist aber kein Selbstläufer. Vergleiche unbedingt mit Cashpreisen und alternativen Programmen.`;
     if (cpm >= 0.6) return `Eher schwacher Gegenwert: ${cpmText} pro Meile ist nur dann interessant, wenn Cashpreise hoch sind oder du Meilen gezielt abbauen möchtest.`;
     return `Schwacher Gegenwert: ${cpmText} pro Meile spricht eher gegen diese Einlösung. Ein Cash-Ticket oder ein anderes Programm könnte sinnvoller sein.`;
+  }
+
+  function buildDataBasisHtml(payload) {
+    const awardDataStand = window.MILES_PLANNER_AWARD_RATES?.dataStand || "nicht angegeben";
+    const rulesDataStand = window.MILES_PLANNER_PROGRAMS?.dataStand || "nicht angegeben";
+    const programKey = normalize(payload.programm);
+
+    let programNote = "Die hinterlegten Meilen-, Gebühren- und Cashwerte sind Planungsbereiche und keine Livepreise.";
+    if (programKey === "miles & more") {
+      programNote = "Miles & More berechnet Awards mit Austrian Airlines, Air Dolomiti, Discover Airlines, Lufthansa, Lufthansa City Airlines und SWISS teilweise variabel nach aktuellem Online-Angebot. Die hier hinterlegte Zahl ist deshalb ausdrücklich nur ein Planungsbereich.";
+    } else if (programKey === "flying blue") {
+      programNote = "Flying Blue bepreist Reward Tickets dynamisch. Die hier hinterlegte Zahl ist ein Planungsbereich und kein garantierter Mindestpreis.";
+    } else if (programKey === "avios") {
+      programNote = "Avios-Awardpreise hängen stark von Airline, Routing und Peak-/Off-Peak-Logik ab. Der Rechner nutzt einen Planungsbereich statt eines garantierten Fixpreises.";
+    } else if (programKey === "krisflyer") {
+      programNote = "KrisFlyer-Werte hängen unter anderem von Saver/Advantage, Routing und Verfügbarkeit ab. Der Rechner nutzt hierfür Planungsbereiche.";
+    } else if (programKey === "emirates skywards") {
+      programNote = "Skywards-Awardpreise und Zuzahlungen können sich je nach Route und Verfügbarkeit ändern. Maßgeblich ist die konkrete Emirates-Buchungsmaske.";
+    }
+
+    return `<div class="result-info-card"><strong>Datenbasis des Rechners</strong><p>Award-, Gebühren- und Cash-Planungswerte: Stand ${escapeHtml(awardDataStand)}. Programm- und Transferregeln: geprüft am ${escapeHtml(rulesDataStand)}.</p><p>${escapeHtml(programNote)}</p><p>Vor Punktetransfer oder Buchung immer den tatsächlich verfügbaren Award und die reale Zuzahlung prüfen.</p></div>`;
   }
 
   function buildGithubResult(payload, rate) {
@@ -144,6 +178,7 @@
 
   async function berechneMilesPlanerMitGithubFallback() {
     clearValidationUI();
+    updateFamilyUiCopy();
     const resultBox = $("result");
     if (!resultBox) { alert("Ergebnisbereich nicht gefunden."); return; }
     const payload = collectPayload();
@@ -162,7 +197,8 @@
       const data = buildGithubResult(payload, rate);
       const cfg = getProgramConfig(payload.programm);
       const chart = classifyAmpel(data.monate, payload);
-      const familyNoteHtml = data.family?.note ? `<div class="result-info-card"><strong>Familienvorteil</strong><p>${escapeHtml(data.family.note)}</p>${data.childDiscountMiles > 0 ? `<p>Planerischer Meilenvorteil: ${escapeHtml(formatPoints(data.childDiscountMiles))} ${escapeHtml(cfg.kurzlabel || "Punkte")} gegenüber voller Erwachsenenberechnung.</p>` : ""}<p>Hinweis: Der Rechner bildet nur den Meilenbedarf als Planungswert ab. Steuern, Gebühren, Verfügbarkeit, Airline-Regeln und konkrete Buchungsbedingungen können abweichen.</p></div>` : "";
+      const familyNoteHtml = data.family?.note ? `<div class="result-info-card"><strong>Familienlogik</strong><p>${escapeHtml(data.family.note)}</p>${data.childDiscountMiles > 0 ? `<p>Planerischer Meilenvorteil: ${escapeHtml(formatPoints(data.childDiscountMiles))} ${escapeHtml(cfg.kurzlabel || "Punkte")} gegenüber voller Erwachsenenberechnung.</p>` : ""}<p>Hinweis: Der Rechner bildet nur den Meilenbedarf als Planungswert ab. Steuern, Gebühren, Verfügbarkeit, Airline-Regeln und konkrete Buchungsbedingungen können abweichen.</p></div>` : "";
+      const dataBasisHtml = buildDataBasisHtml(payload);
       resultBox.innerHTML = `
         <div class="result-card">
           <div class="decision-card decision-card-${escapeHtml(chart.key)}">
@@ -171,6 +207,7 @@
             <p class="decision-text">Ziel: <strong>${escapeHtml(payload.ziel)}</strong> · Klasse: <strong>${escapeHtml(payload.reiseklasse)}</strong> · Reisende: <strong>${escapeHtml(payload.personen)}</strong></p>
           </div>
           ${familyNoteHtml}
+          ${dataBasisHtml}
           <div class="result-section">
             <h3>Deine Kennzahlen</h3>
             <div class="result-grid">
@@ -191,7 +228,7 @@
               <div class="result-item cpm-tile cpm-${escapeHtml(data.cpmClass || "weak")}"><div class="label">Wert pro Meile</div><div class="value">${escapeHtml(data.cpm || "—")}</div><div class="value-note">${escapeHtml(data.deal || "")}</div></div>
             </div>
           </div>
-          <div class="result-section"><h3>Nächste Schritte</h3><ul><li>Prüfe, ob dein Reisezeitraum flexibel genug ist.</li><li>Vergleiche alternative Programme, falls der Meilenbedarf stark abweicht.</li><li>Nutze Aktionen und planbare Sammelwege, statt spontan Meilen zu kaufen.</li></ul></div>
+          <div class="result-section"><h3>Nächste Schritte</h3><ul><li>Prüfe den Awardpreis und die Verfügbarkeit direkt beim Programm.</li><li>Vergleiche alternative Programme, falls der Meilenbedarf stark abweicht.</li><li>Transferiere flexible Punkte erst, wenn die konkrete Buchungsmöglichkeit feststeht.</li></ul></div>
           ${buildAffiliateBox()}
         </div>`;
       updatePointsLabels();
@@ -212,6 +249,7 @@
 
   window.ladeDropdowns = ladeDropdownsAusGithub;
   window.berechneMilesPlaner = berechneMilesPlanerMitGithubFallback;
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", installSubmitOverride);
+  updateFamilyUiCopy();
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { updateFamilyUiCopy(); installSubmitOverride(); });
   else installSubmitOverride();
 })();
