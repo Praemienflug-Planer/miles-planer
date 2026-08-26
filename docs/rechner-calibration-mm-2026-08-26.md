@@ -1,97 +1,60 @@
 # Rechner-Kalibrierung Miles & More – 26.08.2026
 
-Diese Kalibrierung aktualisiert bewusst nur Miles-&-More-Kombinationen, für die eine belastbare aktuelle Praxis- oder Chart-Basis vorhanden ist. Der globale Award-Datenstand der übrigen Matrix wird deshalb nicht auf August 2026 angehoben.
+Diese Kalibrierung verwendet für Miles & More nur Werte, die am 26.08.2026 öffentlich und offiziell verifizierbar sind. Historische Suchbeispiele aus den Zielseiten werden nicht mehr als „aktuelle“ Rechnerwerte behandelt.
 
-## Grundprinzip
+## Was aktuell verifizierbar ist
 
-Miles & More nutzt seit Juni 2025 für Austrian Airlines, Air Dolomiti, Discover Airlines, Lufthansa, Lufthansa City Airlines und SWISS variable Awardpreise. Für andere Miles-&-More-Partner gilt weiterhin der Award Flight Chart. Deshalb darf eine einzige Zahl nicht als allgemeiner Fixpreis für ein Ziel dargestellt werden.
+Miles & More verlinkt am 26.08.2026 weiterhin die Award-Flight-Tabelle mit Stand 03.03.2026. Für Award Flights mit Miles-&-More-Partnerairlines nennt sie feste Return-Werte. Für interkontinentale Verbindungen, die ausschließlich mit Air Dolomiti, Austrian Airlines, Discover Airlines, Lufthansa, Lufthansa City oder SWISS durchgeführt werden, werden die Meilenwerte dagegen dynamisch im Buchungsprozess angezeigt.
 
-Für die kalibrierten Zeilen wird der Saisonfaktor nicht zusätzlich multipliziert. Die Best-/Realistisch-/Konservativ-Spanne soll dort bereits die beobachtete bzw. mögliche Preisvariation abbilden. So wird Nachfrage nicht doppelt eingerechnet.
+Die Buchungsmaske selbst ist interaktiv und kontogebunden. Ohne eine tatsächlich ausgeführte Live-Suche dürfen deshalb keine dynamischen Lufthansa-Group-Werte als „aktuell abgefragt“ bezeichnet werden.
 
-## Thailand – Premium Economy
+## Aktuelle offizielle Partnerchart-Werte
 
-Interne Praxisbasis: `/meilen-thailand/`
+Die aktuell verlinkte Tabelle nennt für Europa:
 
-Dokumentierte One-Way-Suche DUS–MUC–BKK am 17.01.2027:
+- Nordamerika Premium Economy: 85.000 Meilen Return
+- Nordamerika Business: 125.000 Meilen Return
+- Südostasien Premium Economy: 110.000 Meilen Return
+- Südostasien Business: 200.000 Meilen Return
 
-- 37.369 Meilen + 343,61 € pro Person
-- Cashpreis 937,61 € pro Person
-- als reines Return-Planungsäquivalent verdoppelt: 74.738 Meilen + 687,22 € und 1.875,22 € Cash
+Thailand und Singapur gehören laut Ländertabelle zu Südostasien. USA East gehört zu Nordamerika.
 
-Neue Planungswerte pro Person Return:
+Damit verwendet der Rechner jetzt folgende Meilenbasis pro Person Return:
 
-- Best Case: 74.738 Meilen + 687 €
-- Realistisch: 110.000 Meilen + 900 €
-- Konservativ: 150.000 Meilen + 1.250 €
-- Cash-Planungswert: 1.875 €
+| Ziel | Premium Economy | Business |
+| --- | ---: | ---: |
+| Thailand | 110.000 | 200.000 |
+| USA East | 85.000 | 125.000 |
+| Singapur | 110.000 | 200.000 |
 
-Wichtig: Die Verdopplung des One-Way-Funds ist kein echter Return-Preis, sondern nur ein Vergleichsanker.
+Für diese sechs Kombinationen werden keine zusätzlichen Saisonfaktoren auf den Meilenwert gerechnet. Der offizielle Chartwert ist ein fester Partner-Award-Wert; ein pauschaler Ferienaufschlag wäre hier sachlich falsch.
 
-## Thailand – Business Class
+## Wichtige Grenze
 
-Interne Praxisbasis: `/meilen-thailand/`
+Diese Werte sind kein Ersatz für eine aktuelle Lufthansa-/SWISS-/Austrian-/Discover-Live-Suche. Auf ausschließlich von diesen Airlines durchgeführten interkontinentalen Verbindungen kann der dynamisch angezeigte Meilenpreis niedriger oder höher sein.
 
-Dokumentierte One-Way-Suche DUS–ZRH–BKK am 03.05.2027:
+Der Rechner kennzeichnet deshalb ausdrücklich:
 
-- 68.099 Meilen + 480,80 € pro Person
-- Cashpreis 1.609,80 € pro Person
-- als Return-Planungsäquivalent verdoppelt: 136.198 Meilen + 961,60 € und 3.219,60 € Cash
+- Meilenbasis: aktuell gegen die offizielle Award-Flight-Tabelle geprüft
+- Gebühren/Zuschläge: nicht live neu abgefragt
+- Cashpreise: nicht live neu abgefragt
+- dynamische Lufthansa-Group-Preise: vor Buchung in der Award-Suche prüfen
 
-Offizieller Chart-Anker für Partner-Airlines Europa–Südostasien: 200.000 Meilen Return in Business Class.
+## Historische Suchbeispiele
 
-Neue Planungswerte pro Person Return:
+Die bisherigen dokumentierten Suchen auf `/meilen-thailand/` und `/meilen-new-york/` bleiben wertvolle Praxisbeispiele für die Artikel, werden aber nicht mehr als aktueller Datenstand des Rechners verwendet. Dazu gehörten unter anderem:
 
-- Best Case: 136.198 Meilen + 962 €
-- Realistisch: 200.000 Meilen + 1.250 €
-- Konservativ: 240.000 Meilen + 1.700 €
-- Cash-Planungswert: 3.220 €
+- DUS–MUC–BKK Premium Economy: 37.369 Meilen + 343,61 € One-Way
+- DUS–ZRH–BKK Business: 68.099 Meilen + 480,80 € One-Way
+- DUS–JFK Business: 501.688 Meilen + 8.247,72 € für vier Personen Return
 
-## USA East – Business Class
-
-Interne Praxisbasis: `/meilen-new-york/`
-
-Dokumentierte Familien-Suche DUS–JFK Return:
-
-- 501.688 Meilen + 8.247,72 € für 4 Personen
-- umgerechnet pro Person: 125.422 Meilen + 2.061,93 €
-- dokumentierter Business-Cashpreis: 15.480,32 € für 4 Personen = 3.870,08 € pro Person
-
-Offizieller Chart-Anker für Partner-Airlines Europa–Nordamerika: 125.000 Meilen Return in Business Class.
-
-Neue Planungswerte pro Person Return:
-
-- Best Case: 125.000 Meilen + 1.500 €
-- Realistisch: 125.422 Meilen + 2.062 €
-- Konservativ: 180.000 Meilen + 2.600 €
-- Cash-Planungswert: 3.870 €
-
-Die hohe Zuzahlung ist hier absichtlich Teil der realistischen Planung, weil sie in der dokumentierten Suche tatsächlich so auftrat.
-
-## Singapur – Business Class
-
-Offizielle Basis: Miles & More Award Flight Chart, Stand 03.03.2026.
-
-Singapur gehört zur Region Südostasien. Für Partner-Airlines nennt der Chart Europa–Südostasien mit 200.000 Meilen Return in Business Class. Für reine Lufthansa-Group-Verbindungen können die dynamischen Preise davon abweichen.
-
-Neue Planungswerte pro Person Return:
-
-- Best Case: 200.000 Meilen
-- Realistisch: 200.000 Meilen
-- Konservativ: 240.000 Meilen
-- bestehende Zuzahlungswerte bleiben vorerst 750 / 950 / 1.250 €
-- bestehender Cash-Planungswert bleibt 3.800 €
-
-Die Meilenbasis ist damit offiziell verankert. Zuzahlung und Cashpreis wurden für Singapur in diesem Kalibrierungsschritt nicht neu live erhoben und werden im Rechner entsprechend weiterhin nur als Planungswerte behandelt.
+Diese Werte zeigen die mögliche Dynamik, sind aber zeitpunktbezogene Suchergebnisse und keine aktuelle Live-Abfrage vom 26.08.2026.
 
 ## Offizielle Quellen
 
-- Miles & More – Award Flights / dynamische Preislogik: https://www.miles-and-more.com/row/en/spend/flights.html
-- Miles & More – Award Flight Chart: https://www.miles-and-more.com/content/dam/mmg/touchpoint/web/pdf/Flight_Awards_EN.pdf
+- Miles & More – Award-Flight-Buchung und Preislogik: https://www.miles-and-more.com/de/de/spend/flights.html
+- Miles & More – aktuell verlinkte Award-Flight-Tabelle: https://www.miles-and-more.com/content/dam/mmg/touchpoint/web/pdf/Flight_Awards_DE.pdf
 
-## Nicht geändert
+## Nächster Schritt für echte Live-Werte
 
-- Miles & More USA East Premium Economy: keine neue belastbare Praxis-Suche in den vorhandenen Daten
-- Miles & More Singapur Premium Economy: Partnerchart ist dafür nicht allgemein auf Singapore Airlines übertragbar
-- alle übrigen Ziele und Programme
-
-Diese Bereiche bleiben beim bisherigen Planungsstand und sollten in weiteren, getrennten Kalibrierungsschritten geprüft werden.
+Für dynamische Miles-&-More-Werte müssen konkrete Strecken, Daten und Reiseklassen direkt in der Award-Flight-Suche ausgeführt werden. Erst diese Ergebnisse dürfen als Live-Kalibrierung mit Datum, Routing, Reiseklasse, Meilen und Zuzahlung hinterlegt werden.
