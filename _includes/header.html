@@ -1,3 +1,8 @@
+{% assign nav_meilen_active = false %}
+{% if page.url contains '/meilen-sammeln/' and page.url != '/meilen-sammeln/payback-mallorca/' %}{% assign nav_meilen_active = true %}{% endif %}
+{% if page.url == '/amex-oder-payback/' %}{% assign nav_meilen_active = true %}{% endif %}
+{% assign nav_tools_active = false %}
+{% if page.url == '/tools/' or page.url == '/amex-meilen-umrechnen/' %}{% assign nav_tools_active = true %}{% endif %}
 <header class="site-header">
   <div class="container nav">
     <a class="brand" href="/" aria-label="Startseite Prämienflug-Planer">
@@ -11,7 +16,7 @@
       <div class="nav-item"><a class="nav-link" href="/rechner/"{% if page.url == '/rechner/' %} aria-current="page"{% endif %}>Rechner</a></div>
 
       <div class="nav-item has-dropdown">
-        <a class="nav-link" href="/meilen-sammeln/"{% if page.url contains '/meilen-sammeln/' or page.url == '/amex-oder-payback/' %} aria-current="page"{% endif %}>Meilen sammeln</a>
+        <a class="nav-link" href="/meilen-sammeln/"{% if nav_meilen_active %} aria-current="page"{% endif %}>Meilen sammeln</a>
         <button class="submenu-toggle" type="button" aria-label="Untermenü Meilen sammeln öffnen" aria-expanded="false">⌄</button>
         <div class="nav-dropdown nav-mega">
           <div class="nav-group">
@@ -83,7 +88,7 @@
       </div>
 
       <div class="nav-item has-dropdown">
-        <a class="nav-link" href="/tools/"{% if page.url == '/tools/' or page.url == '/amex-meilen-umrechnen/' or page.url == '/meilen-sammeln/zeitschriftenabo/' or page.url == '/meilen-sammeln/fixkosten-meilen/' or page.url == '/meilen-sammeln/revolut-revpoints/' %} aria-current="page"{% endif %}>Tools</a>
+        <a class="nav-link" href="/tools/"{% if nav_tools_active %} aria-current="page"{% endif %}>Tools</a>
         <button class="submenu-toggle" type="button" aria-label="Untermenü Tools öffnen" aria-expanded="false">⌄</button>
         <div class="nav-dropdown">
           <a href="/tools/">Alle Tools</a>
