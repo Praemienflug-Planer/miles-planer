@@ -2,6 +2,8 @@ last_checked: "2026-08-24"
 last_checked_display: "24.08.2026"
 
 amex:
+  last_checked: "2026-08-24"
+  last_checked_display: "24.08.2026"
   platinum:
     product: "American Express Platinum"
     bonus_value: 85000
@@ -46,6 +48,8 @@ amex:
     status: "current"
 
 miles_and_more_credit_card:
+  last_checked: "2026-08-24"
+  last_checked_display: "24.08.2026"
   common:
     earn_rate_display: "1 Meile je 2 € Kartenumsatz"
     moneysend_cap_miles: 2500
@@ -85,6 +89,8 @@ miles_and_more_credit_card:
     status: "current"
 
 eurowings_credit_card:
+  last_checked: "2026-08-24"
+  last_checked_display: "24.08.2026"
   classic:
     product: "Eurowings Kreditkarte Classic"
     welcome_miles: 500
@@ -107,6 +113,8 @@ eurowings_credit_card:
     status: "current"
 
 payback_transfer:
+  last_checked: "2026-08-24"
+  last_checked_display: "24.08.2026"
   minimum_points: 200
   minimum_points_display: "200 PAYBACK Punkten"
   ratio_display: "1:1"
