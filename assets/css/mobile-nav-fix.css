@@ -1,0 +1,43 @@
+/* Mobile accordion fix: desktop focus/hover rules translate dropdowns by -50%.
+   This rule has matching/higher specificity and is loaded after layout.css. */
+@media (max-width: 900px) {
+  .main-nav .has-dropdown.submenu-open > .nav-dropdown,
+  .main-nav .has-dropdown.submenu-open > .nav-mega {
+    position: static;
+    left: auto;
+    right: auto;
+    transform: none;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .main-nav .has-dropdown.submenu-open > .nav-dropdown a {
+    display: block;
+    width: auto;
+    min-height: 0;
+    padding: 10px 14px 10px 18px;
+    color: var(--muted);
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    white-space: normal;
+    line-height: 1.4;
+  }
+
+  .main-nav .has-dropdown.submenu-open > .nav-dropdown a:hover,
+  .main-nav .has-dropdown.submenu-open > .nav-dropdown a:focus {
+    color: var(--primary);
+    background: rgba(96, 165, 250, 0.1);
+  }
+
+  .main-nav .has-dropdown.submenu-open > .nav-mega .nav-group {
+    min-height: 0;
+    height: auto;
+  }
+}
