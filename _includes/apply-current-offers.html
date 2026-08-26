@@ -33,7 +33,16 @@
 {% capture amex_gold_fee_list %}<li>{{ site.data.offers.amex.gold.fee_monthly_display }} monatlich</li>{% endcapture %}
 {% capture amex_platinum_fee_list %}<li>{{ site.data.offers.amex.platinum.fee_monthly_display }} monatlich</li>{% endcapture %}
 {% capture amex_payback_fee_list %}<li>{{ site.data.offers.amex.payback.annual_fee_display }} Jahresgebühr</li>{% endcapture %}
-{% capture ew_welcome_row %}<tr><td>Willkommensmeilen</td><td>{{ site.data.offers.eurowings_credit_card.classic.welcome_miles_number_display }}</td><td>{{ site.data.offers.eurowings_credit_card.premium.welcome_miles_short_display }}<br><small>Aktion bis {{ site.data.offers.eurowings_credit_card.premium.valid_until_display }}</small></td></tr>{% endcapture %}
+{% capture ew_welcome_row %}<tr><td>Willkommensmeilen</td><td>{{ site.data.offers.eurowings_credit_card.classic.welcome_miles_number_display }}</td><td>{{ site.data.offers.eurowings_credit_card.premium.welcome_miles_number_display }}<br><small>Aktion bis {{ site.data.offers.eurowings_credit_card.premium.valid_until_display }}</small></td></tr>{% endcapture %}
+{% capture ew_premium_hero_offer %}Premium: {{ site.data.offers.eurowings_credit_card.premium.welcome_miles_number_display }} Willkommensmeilen bei Antrag bis {{ site.data.offers.eurowings_credit_card.premium.valid_until_display }}{% endcapture %}
+{% capture ew_classic_hero_offer %}Classic: {{ site.data.offers.eurowings_credit_card.classic.welcome_miles_display }}{% endcapture %}
+{% capture ew_premium_mm_bonus %}mit {{ site.data.offers.eurowings_credit_card.premium.welcome_miles_number_display }} Miles-&amp;-More-Willkommensmeilen{% endcapture %}
+{% capture rev_standard_plan %}<div class="rev-plan"><strong>Standard</strong><small>{{ site.data.offers.revolut.standard_fee_monthly_display }}/Monat</small><div class="rate">1 / {{ site.data.offers.revolut.standard_revpoints_divisor_eur }} €</div></div>{% endcapture %}
+{% capture rev_plus_plan %}<div class="rev-plan"><strong>Plus</strong><small>{{ site.data.offers.revolut.plus_fee_monthly_display }}/Monat</small><div class="rate">1 / {{ site.data.offers.revolut.plus_revpoints_divisor_eur }} €</div></div>{% endcapture %}
+{% capture rev_premium_plan %}<div class="rev-plan"><strong>Premium</strong><small>{{ site.data.offers.revolut.premium_fee_monthly_display }}/Monat</small><div class="rate">1 / {{ site.data.offers.revolut.premium_revpoints_divisor_eur }} €</div></div>{% endcapture %}
+{% capture rev_metal_plan %}<div class="rev-plan"><strong>Metal</strong><small>{{ site.data.offers.revolut.metal_fee_monthly_display }}/Monat</small><div class="rate">1 / {{ site.data.offers.revolut.metal_revpoints_divisor_eur }} €</div></div>{% endcapture %}
+{% capture rev_ultra_plan %}<div class="rev-plan"><strong>Ultra</strong><small>{{ site.data.offers.revolut.ultra_fee_monthly_display }}/Monat</small><div class="rate">1 / {{ site.data.offers.revolut.ultra_revpoints_divisor_eur }} €</div></div>{% endcapture %}
+{% capture rev_calc_root %}<div class="rev-calculator" data-rev-calculator data-mm-earn-divisor="{{ site.data.offers.miles_and_more_credit_card.common.earn_divisor_eur }}" data-mm-cap="{{ site.data.offers.miles_and_more_credit_card.common.moneysend_cap_miles }}" data-standard-divisor="{{ site.data.offers.revolut.standard_revpoints_divisor_eur }}" data-standard-fee="{{ site.data.offers.revolut.standard_fee_monthly_eur }}" data-plus-divisor="{{ site.data.offers.revolut.plus_revpoints_divisor_eur }}" data-plus-fee="{{ site.data.offers.revolut.plus_fee_monthly_eur }}" data-premium-divisor="{{ site.data.offers.revolut.premium_revpoints_divisor_eur }}" data-premium-fee="{{ site.data.offers.revolut.premium_fee_monthly_eur }}" data-metal-divisor="{{ site.data.offers.revolut.metal_revpoints_divisor_eur }}" data-metal-fee="{{ site.data.offers.revolut.metal_fee_monthly_eur }}" data-ultra-divisor="{{ site.data.offers.revolut.ultra_revpoints_divisor_eur }}" data-ultra-fee="{{ site.data.offers.revolut.ultra_fee_monthly_eur }}">{% endcapture %}
 
 {% comment %}PAYBACK Amex referral bonus is repeated across several pages.{% endcomment %}
 {% assign rendered = rendered | replace: '4.000 PAYBACK Punkte', site.data.offers.amex.payback.bonus_display %}
@@ -84,6 +93,10 @@
 
 {% if page.url == '/meilen-sammeln/eurowings-kreditkarte/' %}
   {% assign rendered = rendered | replace: '<tr><td>Willkommensmeilen</td><td>500</td><td>bis zu 10.000<br><small>Aktion bis 31.08.2026</small></td></tr>', ew_welcome_row %}
+  {% assign rendered = rendered | replace: '<tr><td>Willkommensmeilen</td><td>500</td><td>10.000<br><small>Aktion bis 31.08.2026</small></td></tr>', ew_welcome_row %}
+  {% assign rendered = rendered | replace: 'Premium: 10.000 Willkommensmeilen bei Antrag bis 31.08.2026', ew_premium_hero_offer %}
+  {% assign rendered = rendered | replace: 'Classic: 500 Willkommensmeilen', ew_classic_hero_offer %}
+  {% assign rendered = rendered | replace: 'mit 10.000 Miles-&amp;-More-Willkommensmeilen', ew_premium_mm_bonus %}
   {% assign rendered = rendered | replace: 'bis zu 10.000 Willkommensmeilen', site.data.offers.eurowings_credit_card.premium.welcome_miles_display %}
   {% assign rendered = rendered | replace: '500 Willkommensmeilen', site.data.offers.eurowings_credit_card.classic.welcome_miles_display %}
   {% assign rendered = rendered | replace: '31.08.2026', site.data.offers.eurowings_credit_card.premium.valid_until_display %}
@@ -98,8 +111,28 @@
 {% if page.url == '/meilen-sammeln/revolut-revpoints/' %}
   {% assign rendered = rendered | replace: 'Stand 24.08.2026', rev_checked %}
   {% assign rendered = rendered | replace: '<div class="warning-box"><strong>Wichtig:</strong><br><br>Die 5.000 € sind kein eigenes offizielles Money-Send-Euro-Limit, sondern die rechnerische Umsatzhöhe, bei der eine private Miles-&amp;-More-Karte mit 1 Meile je 2 € das offizielle Maximum von 2.500 Money-Send-Meilen erreicht.</div>', '<div class="warning-box"><strong>Wichtig:</strong><br><br>Die 5.000 € sind kein eigenes offizielles Money-Send-Euro-Limit, sondern die rechnerische Umsatzhöhe, bei der eine private Miles-&amp;-More-Karte mit 1 Meile je 2 € das offizielle Maximum von 2.500 Money-Send-Meilen erreicht. Revolut unterstützt Karteneinzahlungen mit Mastercard, Visa und Maestro; American Express nicht. Eine konkrete Karteneinzahlung kann dennoch abgelehnt werden, wenn die Karte bzw. der Aussteller die Transaktion nicht unterstützt – deshalb zuerst klein testen.</div>' %}
-  {% assign rendered = rendered | replace: 'Der Money-Send-Weg zu Miles & More funktioniert unabhängig davon, ob Standard oder ein kostenpflichtiges Revolut-Abo genutzt wird.', 'Die Höhe des Miles-&amp;-More-Money-Send-Limits hängt nicht vom gewählten Revolut-Abo ab. Ob eine konkrete Karteneinzahlung technisch angenommen wird, hängt jedoch von Revolut und dem Kartenaussteller ab.' %}
+  {% assign rendered = rendered | replace: 'Der Money-Send-Weg zu Miles &amp; More funktioniert unabhängig davon, ob Standard oder ein kostenpflichtiges Revolut-Abo genutzt wird.', 'Die Höhe des Miles-&amp;-More-Money-Send-Limits hängt nicht vom gewählten Revolut-Abo ab. Ob eine konkrete Karteneinzahlung technisch angenommen wird, hängt jedoch von Revolut und dem Kartenaussteller ab.' %}
+  {% assign rendered = rendered | replace: 'Der Money-Send-Weg zu Miles &amp; More funktioniert unabhängig davon, ob Standard oder ein kostenpflichtiges Revolut-Abo genutzt wird.', 'Die Höhe des Miles-&amp;-More-Money-Send-Limits hängt nicht vom gewählten Revolut-Abo ab. Ob eine konkrete Karteneinzahlung technisch angenommen wird, hängt jedoch von Revolut und dem Kartenaussteller ab.' %}
+  {% assign rendered = rendered | replace: '<div class="rev-plan"><strong>Standard</strong><small>0 €/Monat</small><div class="rate">1 / 10 €</div></div>', rev_standard_plan %}
+  {% assign rendered = rendered | replace: '<div class="rev-plan"><strong>Plus</strong><small>2,99 €/Monat</small><div class="rate">1 / 10 €</div></div>', rev_plus_plan %}
+  {% assign rendered = rendered | replace: '<div class="rev-plan"><strong>Premium</strong><small>8,99 €/Monat</small><div class="rate">1 / 4 €</div></div>', rev_premium_plan %}
+  {% assign rendered = rendered | replace: '<div class="rev-plan"><strong>Metal</strong><small>15,99 €/Monat</small><div class="rate">1 / 2 €</div></div>', rev_metal_plan %}
+  {% assign rendered = rendered | replace: '<div class="rev-plan"><strong>Ultra</strong><small>65 €/Monat</small><div class="rate">1 / 1 €</div></div>', rev_ultra_plan %}
+  {% assign rendered = rendered | replace: '<div class="rev-calculator" data-rev-calculator>', rev_calc_root %}
   {% assign rendered = rendered | replace: '<li><a href="https://www.revolut.com/de-DE/rev-points/" target="_blank" rel="noopener noreferrer">Revolut Deutschland: RevPoints</a></li>', '<li><a href="https://www.revolut.com/de-DE/rev-points/" target="_blank" rel="noopener noreferrer">Revolut Deutschland: RevPoints</a></li><li><a href="https://help.revolut.com/de-DE/help/adding-money/with-card/supported-card-deposits/" target="_blank" rel="noopener noreferrer">Revolut Hilfe: unterstützte Karten für Einzahlungen</a></li>' %}
+{% endif %}
+
+{% if page.url == '/meilen-thailand/' %}
+  {% assign rendered = rendered | replace: '<div class="article-card seo-card" id="entscheidung">', '<span id="typische-werte" aria-hidden="true"></span><div class="article-card seo-card" id="entscheidung">' %}
+  {% assign rendered = rendered | replace: '<th>Für 4 Personen One-Way</th>', '<th>Für 4 Personen One-Way<br><small>Hochrechnung mit Erwachsenenrate</small></th>' %}
+  {% assign rendered = rendered | replace: '<strong>149.476 Meilen + 1.374,44 €</strong>', '<strong>ca. 149.476 Meilen + 1.374,44 €</strong>' %}
+  {% assign rendered = rendered | replace: '<strong>272.396 Meilen + 1.923,20 €</strong>', '<strong>ca. 272.396 Meilen + 1.923,20 €</strong>' %}
+  {% assign rendered = rendered | replace: '<p>Die Kernaussage: Der Cent-pro-Meile-Wert liegt in beiden Momentaufnahmen relativ nah beieinander.', '<p><strong>Hinweis zur Familienhochrechnung:</strong> Die dokumentierten Screenshots weisen die genannten Werte pro Erwachsenem aus. Die 4-Personen-Summen sind deshalb eine Hochrechnung mit der Erwachsenenrate und keine behaupteten exakten Warenkorb-Gesamtpreise für 2 Erwachsene + 2 Kinder.</p><p>Die Kernaussage: Der Cent-pro-Meile-Wert liegt in beiden Momentaufnahmen relativ nah beieinander.' %}
+  {% assign rendered = rendered | replace: 'Für vier Personen bedeutet das: Economy kostet <strong>93.600 Meilen + 1.358,44 €</strong>, Premium Economy <strong>149.476 Meilen + 1.374,44 €</strong>.', 'Als reine Hochrechnung mit der Erwachsenenrate bedeutet das für vier Personen: Economy etwa <strong>93.600 Meilen + 1.358,44 €</strong>, Premium Economy etwa <strong>149.476 Meilen + 1.374,44 €</strong>. Die tatsächliche Familienbuchung kann bei Kinderpreisen, Meilen und Steuern abweichen.' %}
+{% endif %}
+
+{% if page.url == '/rechner/' %}
+  {% assign rendered = rendered | append: '<script src="/assets/js/rechner-review-fixes.js?v=20260826-review-1"></script>' %}
 {% endif %}
 
 {{ rendered }}
