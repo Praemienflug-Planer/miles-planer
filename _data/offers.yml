@@ -142,12 +142,40 @@ revolut:
   ultra_revpoints_divisor_eur: 1
   ultra_revpoints_rate_display: "1 RevPoint je 1 €"
 
+payback:
+  last_checked: "2026-08-26"
+  last_checked_display: "26.08.2026"
+  point_value_cent: 1
+  point_value_display: "1 PAYBACK Punkt = 1 Cent"
+  usual_base_rate_display: "häufig 1 Punkt je 2 € Umsatz beim Partner"
+  wunschgutschein_base_rate_display: "1 Punkt je 2 €"
+  wunschgutschein_points_unlock_display: "nach ca. 42 Tagen"
+  wunschgutschein_points_limit_eur: 500
+  wunschgutschein_points_limit_display: "bis 500 € Bestellwert"
+  amex:
+    annual_fee_eur: 0
+    annual_fee_display: "0 €"
+    earn_divisor_eur: 3
+    earn_rate_display: "1 Punkt je 3 € Kartenumsatz"
+    foreign_currency_fee_percent: 2
+    foreign_currency_fee_display: "2 % Fremdwährungsentgelt"
+  visa:
+    annual_fee_eur: 29
+    annual_fee_display: "29 €"
+    earn_divisor_eur: 5
+    earn_rate_display: "1 Punkt je 5 € Kartenumsatz"
+    foreign_currency_fee_percent: 0
+    foreign_currency_fee_display: "0 € Fremdwährungsgebühr"
+    foreign_cash_withdrawal_display: "0 € Kartenentgelt für Bargeldabhebung im Ausland"
+
 payback_transfer:
-  last_checked: "2026-08-24"
-  last_checked_display: "24.08.2026"
+  last_checked: "2026-08-26"
+  last_checked_display: "26.08.2026"
   minimum_points: 200
   minimum_points_display: "200 PAYBACK Punkten"
   ratio_display: "1:1"
+  transfer_duration_display: "bis zu 5 Werktage"
+  miles_subscription_months_display: "Anfang März und Anfang September"
   current_bonus_percent: 0
   current_bonus_display: "kein aktueller Transferbonus"
   last_bonus_percent: 10
