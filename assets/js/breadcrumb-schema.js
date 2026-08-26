@@ -103,8 +103,14 @@
     return items.filter((item, index, arr) => arr.findIndex(other => other.path === item.path) === index);
   }
 
+  function pageAlreadyHasBreadcrumbSchema() {
+    if (document.querySelector('script[data-schema="breadcrumb"]')) return true;
+    return Array.from(document.querySelectorAll('script[type="application/ld+json"]'))
+      .some((script) => script.textContent && script.textContent.includes('"BreadcrumbList"'));
+  }
+
   function injectBreadcrumbSchema() {
-    if (document.querySelector('script[data-schema="breadcrumb"]')) return;
+    if (pageAlreadyHasBreadcrumbSchema()) return;
     const path = stripBase(window.location.pathname);
     const breadcrumbs = buildBreadcrumbs(path);
     if (breadcrumbs.length < 2) return;
