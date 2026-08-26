@@ -68,6 +68,8 @@ Jede öffentliche Seite sollte enthalten:
 - Root-Pfade für interne Links und Assets
 - `site.css` und bei Bedarf `hero-background.css`
 
+SEO-Titel und Meta-Description werden auf der jeweiligen Seite gepflegt. Die Layouts sollen dafür keine URL-spezifischen Titel- oder Description-Overrides enthalten. Damit gibt es pro Seite nur eine redaktionelle Quelle und spätere SEO-Optimierungen können nicht unbemerkt durch einen alten Layout-Wert überschrieben werden. Ein abweichender sichtbarer Kurztext kann bei Bedarf über `page.snippet_lead` gesetzt werden.
+
 Neue strukturierte Seiten sollten nach Möglichkeit `layout: page` verwenden. Ältere statische HTML-Seiten können vorerst über `layout: default` laufen, sollen bei Überarbeitung aber ebenfalls direkte Root-Pfade verwenden.
 
 ## SEO-Artikelstandard
