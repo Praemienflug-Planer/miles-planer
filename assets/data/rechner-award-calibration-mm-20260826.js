@@ -1,58 +1,78 @@
 (() => {
   const rates = window.MILES_PLANNER_AWARD_RATES?.rates || [];
   const calibrationDate = "26.08.2026";
+  const chartStand = "03.03.2026";
 
-  // Selektive Kalibrierung: nur Kombinationen mit belastbarer Praxis- oder Chart-Basis.
-  // Die Werte gelten pro Person für Hin- und Rückflug als Planungsbereich.
-  // Bei aus One-Way-Suchen abgeleiteten Werten ist die Verdopplung ausdrücklich nur ein RT-Planungsäquivalent.
+  // Aktuell öffentlich verifizierbare Miles-&-More-Basis.
+  // Die am 26.08.2026 von Miles & More verlinkte Award-Flight-Tabelle trägt den Stand 03.03.2026.
+  // Ihre Werte gelten für Hin- und Rückflug. Für ausschließlich mit Air Dolomiti, Austrian,
+  // Discover, Lufthansa, Lufthansa City oder SWISS durchgeführte interkontinentale Verbindungen
+  // werden die Meilenwerte dagegen dynamisch in der Buchung angezeigt.
   const calibrations = [
     {
       ziel: "Thailand",
       programm: "Miles & More",
       klasse: "Premium Economy",
-      bestMilesRtPp: 74738,
+      bestMilesRtPp: 110000,
       realMilesRtPp: 110000,
-      consMilesRtPp: 150000,
-      bestTaxesRtPp: 687,
-      realTaxesRtPp: 900,
-      consTaxesRtPp: 1250,
-      cashPp: 1875,
+      consMilesRtPp: 110000,
       seasonFactorMode: "included",
       calibrationDate,
-      calibrationBasis: "Dokumentierte DUS–MUC–BKK-Suche vom 17.01.2027: 37.369 Meilen + 343,61 € One-Way in Premium Economy; als RT-Planungsäquivalent verdoppelt.",
-      calibrationNote: "Der Best-Case basiert auf einer dokumentierten One-Way-Suche und ist kein garantierter Return-Preis. Saisonaufschläge werden für diese kalibrierte Zeile nicht zusätzlich multipliziert, damit Nachfrageeffekte nicht doppelt eingerechnet werden."
+      feesLiveChecked: false,
+      calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Südostasien Premium Economy 110.000 Meilen Return.`,
+      calibrationNote: "Der Meilenwert ist der aktuelle offizielle Partnerchart-Anker. Bei dynamisch bepreisten Lufthansa-Group-Verbindungen kann der tatsächlich angezeigte Wert abweichen. Gebühren und Cashpreis wurden nicht live neu abgefragt."
     },
     {
       ziel: "Thailand",
       programm: "Miles & More",
       klasse: "Business",
-      bestMilesRtPp: 136198,
+      bestMilesRtPp: 200000,
       realMilesRtPp: 200000,
-      consMilesRtPp: 240000,
-      bestTaxesRtPp: 962,
-      realTaxesRtPp: 1250,
-      consTaxesRtPp: 1700,
-      cashPp: 3220,
+      consMilesRtPp: 200000,
       seasonFactorMode: "included",
       calibrationDate,
-      calibrationBasis: "Dokumentierte DUS–ZRH–BKK-Suche vom 03.05.2027: 68.099 Meilen + 480,80 € One-Way in Business; zusätzlich offizieller Miles-&-More-Partnerchart-Anker Europa–Südostasien: 200.000 Meilen Return Business.",
-      calibrationNote: "Der Best-Case ist ein verdoppeltes One-Way-Praxisbeispiel; 200.000 Meilen dienen als stabiler Partnerchart-Anker. Lufthansa-Group-Awards können dynamisch darunter oder darüber liegen."
+      feesLiveChecked: false,
+      calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Südostasien Business 200.000 Meilen Return.`,
+      calibrationNote: "Der Meilenwert ist der aktuelle offizielle Partnerchart-Anker. Bei dynamisch bepreisten Lufthansa-Group-Verbindungen kann der tatsächlich angezeigte Wert abweichen. Gebühren und Cashpreis wurden nicht live neu abgefragt."
+    },
+    {
+      ziel: "USA East",
+      programm: "Miles & More",
+      klasse: "Premium Economy",
+      bestMilesRtPp: 85000,
+      realMilesRtPp: 85000,
+      consMilesRtPp: 85000,
+      seasonFactorMode: "included",
+      calibrationDate,
+      feesLiveChecked: false,
+      calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Nordamerika Premium Economy 85.000 Meilen Return.`,
+      calibrationNote: "Der Meilenwert ist der aktuelle offizielle Partnerchart-Anker. Bei dynamisch bepreisten Lufthansa-Group-Verbindungen kann der tatsächlich angezeigte Wert abweichen. Gebühren und Cashpreis wurden nicht live neu abgefragt."
     },
     {
       ziel: "USA East",
       programm: "Miles & More",
       klasse: "Business",
       bestMilesRtPp: 125000,
-      realMilesRtPp: 125422,
-      consMilesRtPp: 180000,
-      bestTaxesRtPp: 1500,
-      realTaxesRtPp: 2062,
-      consTaxesRtPp: 2600,
-      cashPp: 3870,
+      realMilesRtPp: 125000,
+      consMilesRtPp: 125000,
       seasonFactorMode: "included",
       calibrationDate,
-      calibrationBasis: "Dokumentierte Familien-Suche DUS–JFK Return: 501.688 Meilen + 8.247,72 € für 4 Personen = 125.422 Meilen + 2.061,93 € p.P.; offizieller Partnerchart Europa–Nordamerika: 125.000 Meilen Return Business.",
-      calibrationNote: "Praxiswert und offizieller Partnerchart liegen beim Meilenbedarf nahezu gleichauf. Die sehr hohe dokumentierte Zuzahlung wird deshalb jetzt im realistischen Szenario berücksichtigt."
+      feesLiveChecked: false,
+      calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Nordamerika Business 125.000 Meilen Return.`,
+      calibrationNote: "Der Meilenwert ist der aktuelle offizielle Partnerchart-Anker. Bei dynamisch bepreisten Lufthansa-Group-Verbindungen kann der tatsächlich angezeigte Wert abweichen. Gebühren und Cashpreis wurden nicht live neu abgefragt."
+    },
+    {
+      ziel: "Singapur",
+      programm: "Miles & More",
+      klasse: "Premium Economy",
+      bestMilesRtPp: 110000,
+      realMilesRtPp: 110000,
+      consMilesRtPp: 110000,
+      seasonFactorMode: "included",
+      calibrationDate,
+      feesLiveChecked: false,
+      calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Südostasien Premium Economy 110.000 Meilen Return.`,
+      calibrationNote: "Der Meilenwert ist der aktuelle offizielle Partnerchart-Anker. Die tatsächliche Airline und Buchungslogik entscheiden darüber, ob dieser Chartwert anwendbar ist. Gebühren und Cashpreis wurden nicht live neu abgefragt."
     },
     {
       ziel: "Singapur",
@@ -60,15 +80,12 @@
       klasse: "Business",
       bestMilesRtPp: 200000,
       realMilesRtPp: 200000,
-      consMilesRtPp: 240000,
-      bestTaxesRtPp: 750,
-      realTaxesRtPp: 950,
-      consTaxesRtPp: 1250,
-      cashPp: 3800,
+      consMilesRtPp: 200000,
       seasonFactorMode: "included",
       calibrationDate,
-      calibrationBasis: "Offizieller Miles-&-More-Award-Flight-Chart, Stand 03.03.2026: Europa–Südostasien 200.000 Meilen Return in Business bei Partner-Airlines; Singapur gehört zur Region Südostasien.",
-      calibrationNote: "Der Meilenanker ist offiziell; Zuzahlungs- und Cashwerte wurden für Singapur in diesem Schritt nicht mit einer neuen Live-Suche erhoben und bleiben deshalb Planungswerte."
+      feesLiveChecked: false,
+      calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Südostasien Business 200.000 Meilen Return.`,
+      calibrationNote: "Der Meilenwert ist der aktuelle offizielle Partnerchart-Anker. Bei dynamisch bepreisten Lufthansa-Group-Verbindungen kann der tatsächlich angezeigte Wert abweichen. Gebühren und Cashpreis wurden nicht live neu abgefragt."
     }
   ];
 
@@ -86,11 +103,11 @@
     if (!rate) return;
 
     Object.assign(rate, calibration);
-    rate.quelle = `${rate.quelle || "Miles & More Planungswert"} | Selektiv kalibriert am ${calibrationDate}.`;
-    rate.hinweis = `${rate.hinweis || ""} ${calibration.calibrationNote}`.trim();
+    rate.quelle = `Miles & More Award-Flight-Tabelle, aktuell verlinkt am ${calibrationDate}, Tabellenstand ${chartStand}.`;
+    rate.hinweis = calibration.calibrationNote;
   });
 
   if (window.MILES_PLANNER_AWARD_RATES) {
-    window.MILES_PLANNER_AWARD_RATES.source = `${window.MILES_PLANNER_AWARD_RATES.source || "GitHub Planungswerte"} Selektive Miles-&-More-Kalibrierung für Thailand, USA East und Singapur vom ${calibrationDate}; globaler Datenstand bleibt unverändert, weil nicht die gesamte Matrix neu erhoben wurde.`;
+    window.MILES_PLANNER_AWARD_RATES.source = `${window.MILES_PLANNER_AWARD_RATES.source || "GitHub Planungswerte"} Miles-&-More-Meilenbasis für Thailand, USA East und Singapur am ${calibrationDate} gegen die aktuell verlinkte offizielle Award-Flight-Tabelle geprüft; Gebühren/Cashwerte nicht live verifiziert.`;
   }
 })();
