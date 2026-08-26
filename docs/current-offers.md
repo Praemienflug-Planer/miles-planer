@@ -17,7 +17,7 @@ Aktuell enthält die Datei unter anderem:
 
 1. Anbieterbedingungen bzw. das aktuelle Empfehlungsangebot prüfen.
 2. Nur die Werte in `_data/offers.yml` ändern.
-3. `last_checked` und `last_checked_display` aktualisieren.
+3. Das `last_checked` und `last_checked_display` der betroffenen Produktfamilie aktualisieren. Die globalen Felder oben in der Datei dienen nur als Gesamt-Datenstand.
 4. Prüfen, ob sich außer Zahlen auch Bedingungen oder redaktionelle Einordnungen geändert haben. Solche Textänderungen gehören weiterhin in die jeweilige Inhaltsseite.
 5. Website nach dem Deploy auf den zentralen Kreditkartenseiten kurz visuell prüfen.
 
