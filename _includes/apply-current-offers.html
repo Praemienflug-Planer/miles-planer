@@ -7,7 +7,12 @@
 {% assign has_payback_amex_offer = false %}
 {% if rendered contains '4.000 PAYBACK Punkte' or rendered contains '4.000 °P' %}{% assign has_payback_amex_offer = true %}{% endif %}
 
+{% assign amex_green_bonus_number = site.data.offers.amex.green.bonus_display | remove: ' MR' %}
+{% assign amex_gold_bonus_number = site.data.offers.amex.gold.bonus_display | remove: ' MR' %}
+{% assign amex_rose_bonus_number = site.data.offers.amex.rose_gold.bonus_display | remove: ' MR' %}
+{% assign amex_platinum_bonus_number = site.data.offers.amex.platinum.bonus_display | remove: ' MR' %}
 {% capture amex_checked %}Stand {{ site.data.offers.amex.last_checked_display }}{% endcapture %}
+{% capture amex_data_checked %}Datenstand {{ site.data.offers.amex.last_checked_display }}{% endcapture %}
 {% capture mm_checked %}Stand {{ site.data.offers.miles_and_more_credit_card.last_checked_display }}{% endcapture %}
 {% capture mm_data_checked %}Datenstand {{ site.data.offers.miles_and_more_credit_card.last_checked_display }}{% endcapture %}
 {% capture ew_checked %}Stand {{ site.data.offers.eurowings_credit_card.last_checked_display }}{% endcapture %}
@@ -19,6 +24,14 @@
 {% capture amex_platinum_fee_table %}{{ site.data.offers.amex.platinum.fee_monthly_display }}/Monat{% endcapture %}
 {% capture amex_gold_fee_table %}{{ site.data.offers.amex.gold.fee_monthly_display }}/Monat{% endcapture %}
 {% capture amex_green_fee_table %}{{ site.data.offers.amex.green.fee_monthly_display }}/Monat{% endcapture %}
+{% capture amex_green_bonus_card %}<div class="amex-bonus"><span>{{ amex_green_bonus_number }}</span> MR-Punkte als möglicher Startbonus</div>{% endcapture %}
+{% capture amex_gold_rose_bonus_card %}<div class="amex-bonus"><span>{{ amex_gold_bonus_number }}–{{ amex_rose_bonus_number }}</span> MR-Punkte als möglicher Bonus</div>{% endcapture %}
+{% capture amex_platinum_bonus_card %}<div class="amex-bonus">bis zu <span>{{ amex_platinum_bonus_number }}</span> MR-Punkte als möglicher Bonus</div>{% endcapture %}
+{% capture amex_payback_bonus_card %}<div class="amex-bonus"><span>{{ site.data.offers.amex.payback.bonus_number_display }}</span> PAYBACK Punkte über Empfehlungslink</div>{% endcapture %}
+{% capture amex_green_fee_list %}<li>{{ site.data.offers.amex.green.fee_monthly_display }} monatlich</li>{% endcapture %}
+{% capture amex_gold_fee_list %}<li>{{ site.data.offers.amex.gold.fee_monthly_display }} monatlich</li>{% endcapture %}
+{% capture amex_platinum_fee_list %}<li>{{ site.data.offers.amex.platinum.fee_monthly_display }} monatlich</li>{% endcapture %}
+{% capture amex_payback_fee_list %}<li>{{ site.data.offers.amex.payback.annual_fee_display }} Jahresgebühr</li>{% endcapture %}
 {% capture ew_welcome_row %}<tr><td>Willkommensmeilen</td><td>{{ site.data.offers.eurowings_credit_card.classic.welcome_miles_number_display }}</td><td>{{ site.data.offers.eurowings_credit_card.premium.welcome_miles_short_display }}<br><small>Aktion bis {{ site.data.offers.eurowings_credit_card.premium.valid_until_display }}</small></td></tr>{% endcapture %}
 
 {% comment %}PAYBACK Amex referral bonus is repeated across several pages.{% endcomment %}
@@ -34,6 +47,14 @@
   {% assign rendered = rendered | replace: '55.000 MR', site.data.offers.amex.rose_gold.bonus_display %}
   {% assign rendered = rendered | replace: '50.000 MR', site.data.offers.amex.gold.bonus_display %}
   {% assign rendered = rendered | replace: '10.000 MR', site.data.offers.amex.green.bonus_display %}
+  {% assign rendered = rendered | replace: '<div class="amex-bonus"><span>10.000</span> MR-Punkte als möglicher Startbonus</div>', amex_green_bonus_card %}
+  {% assign rendered = rendered | replace: '<div class="amex-bonus"><span>50.000–55.000</span> MR-Punkte als möglicher Bonus</div>', amex_gold_rose_bonus_card %}
+  {% assign rendered = rendered | replace: '<div class="amex-bonus">bis zu <span>85.000</span> MR-Punkte als möglicher Bonus</div>', amex_platinum_bonus_card %}
+  {% assign rendered = rendered | replace: '<div class="amex-bonus"><span>4.000</span> PAYBACK Punkte über Empfehlungslink</div>', amex_payback_bonus_card %}
+  {% assign rendered = rendered | replace: '<li>5 € monatlich</li>', amex_green_fee_list %}
+  {% assign rendered = rendered | replace: '<li>20 € monatlich</li>', amex_gold_fee_list %}
+  {% assign rendered = rendered | replace: '<li>60 € monatlich</li>', amex_platinum_fee_list %}
+  {% assign rendered = rendered | replace: '<li>0 € Jahresgebühr</li>', amex_payback_fee_list %}
   {% assign rendered = rendered | replace: 'aktuell 60 € pro Monat', amex_platinum_fee_text %}
   {% assign rendered = rendered | replace: 'aktuell 20 € pro Monat', amex_gold_fee_text %}
   {% assign rendered = rendered | replace: 'aktuell 5 € pro Monat', amex_green_fee_text %}
@@ -41,6 +62,7 @@
   {% assign rendered = rendered | replace: '20 €/Monat', amex_gold_fee_table %}
   {% assign rendered = rendered | replace: '5 €/Monat', amex_green_fee_table %}
   {% assign rendered = rendered | replace: 'Stand 24.08.2026', amex_checked %}
+  {% assign rendered = rendered | replace: 'Datenstand 24.08.2026', amex_data_checked %}
 {% endif %}
 
 {% if page.url == '/meilen-sammeln/miles-and-more-kreditkarte/' %}
