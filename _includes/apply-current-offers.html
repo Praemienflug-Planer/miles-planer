@@ -5,10 +5,20 @@
 {% endcomment %}
 {% assign rendered = include.content %}
 
+{% capture offer_checked %}Stand {{ site.data.offers.last_checked_display }}{% endcapture %}
+{% capture offer_data_checked %}Datenstand {{ site.data.offers.last_checked_display }}{% endcapture %}
+{% capture offer_data_checked_strong %}Datenstand:</strong> {{ site.data.offers.last_checked_display }}{% endcapture %}
+{% capture payback_points_button %}mit {{ site.data.offers.amex.payback.bonus_number_display }} Punkten anfragen{% endcapture %}
+{% capture amex_platinum_fee_text %}aktuell {{ site.data.offers.amex.platinum.fee_monthly_display }} pro Monat{% endcapture %}
+{% capture amex_gold_fee_text %}aktuell {{ site.data.offers.amex.gold.fee_monthly_display }} pro Monat{% endcapture %}
+{% capture amex_green_fee_text %}aktuell {{ site.data.offers.amex.green.fee_monthly_display }} pro Monat{% endcapture %}
+{% capture amex_platinum_fee_table %}{{ site.data.offers.amex.platinum.fee_monthly_display }}/Monat{% endcapture %}
+{% capture amex_gold_fee_table %}{{ site.data.offers.amex.gold.fee_monthly_display }}/Monat{% endcapture %}
+{% capture amex_green_fee_table %}{{ site.data.offers.amex.green.fee_monthly_display }}/Monat{% endcapture %}
+
 {% comment %}PAYBACK Amex referral bonus is repeated across several pages.{% endcomment %}
 {% assign rendered = rendered | replace: '4.000 PAYBACK Punkte', site.data.offers.amex.payback.bonus_display %}
 {% assign rendered = rendered | replace: '4.000 °P', site.data.offers.amex.payback.bonus_short_display %}
-{% capture payback_points_button %}mit {{ site.data.offers.amex.payback.bonus_number_display }} Punkten anfragen{% endcapture %}
 {% assign rendered = rendered | replace: 'mit 4.000 Punkten anfragen', payback_points_button %}
 
 {% if page.url == '/meilen-sammeln/amex-kreditkarten/' or page.url == '/meilen-sammeln/amex/' %}
@@ -16,13 +26,13 @@
   {% assign rendered = rendered | replace: '55.000 MR', site.data.offers.amex.rose_gold.bonus_display %}
   {% assign rendered = rendered | replace: '50.000 MR', site.data.offers.amex.gold.bonus_display %}
   {% assign rendered = rendered | replace: '10.000 MR', site.data.offers.amex.green.bonus_display %}
-  {% assign rendered = rendered | replace: 'aktuell 60 € pro Monat', site.data.offers.amex.platinum.fee_monthly_display | prepend: 'aktuell ' | append: ' pro Monat' %}
-  {% assign rendered = rendered | replace: 'aktuell 20 € pro Monat', site.data.offers.amex.gold.fee_monthly_display | prepend: 'aktuell ' | append: ' pro Monat' %}
-  {% assign rendered = rendered | replace: 'aktuell 5 € pro Monat', site.data.offers.amex.green.fee_monthly_display | prepend: 'aktuell ' | append: ' pro Monat' %}
-  {% assign rendered = rendered | replace: '60 €/Monat', site.data.offers.amex.platinum.fee_monthly_display | append: '/Monat' %}
-  {% assign rendered = rendered | replace: '20 €/Monat', site.data.offers.amex.gold.fee_monthly_display | append: '/Monat' %}
-  {% assign rendered = rendered | replace: '5 €/Monat', site.data.offers.amex.green.fee_monthly_display | append: '/Monat' %}
-  {% assign rendered = rendered | replace: 'Stand 24.08.2026', site.data.offers.last_checked_display | prepend: 'Stand ' %}
+  {% assign rendered = rendered | replace: 'aktuell 60 € pro Monat', amex_platinum_fee_text %}
+  {% assign rendered = rendered | replace: 'aktuell 20 € pro Monat', amex_gold_fee_text %}
+  {% assign rendered = rendered | replace: 'aktuell 5 € pro Monat', amex_green_fee_text %}
+  {% assign rendered = rendered | replace: '60 €/Monat', amex_platinum_fee_table %}
+  {% assign rendered = rendered | replace: '20 €/Monat', amex_gold_fee_table %}
+  {% assign rendered = rendered | replace: '5 €/Monat', amex_green_fee_table %}
+  {% assign rendered = rendered | replace: 'Stand 24.08.2026', offer_checked %}
 {% endif %}
 
 {% if page.url == '/meilen-sammeln/miles-and-more-kreditkarte/' %}
@@ -35,8 +45,8 @@
   {% assign rendered = rendered | replace: '31.12.2026', site.data.offers.miles_and_more_credit_card.blue.valid_until_display %}
   {% assign rendered = rendered | replace: '2.500 Meilen', site.data.offers.miles_and_more_credit_card.common.moneysend_cap_display %}
   {% assign rendered = rendered | replace: '1 Meile je 2 € Kartenumsatz', site.data.offers.miles_and_more_credit_card.common.earn_rate_display %}
-  {% assign rendered = rendered | replace: 'Stand 24.08.2026', site.data.offers.last_checked_display | prepend: 'Stand ' %}
-  {% assign rendered = rendered | replace: 'Datenstand 24.08.2026', site.data.offers.last_checked_display | prepend: 'Datenstand ' %}
+  {% assign rendered = rendered | replace: 'Stand 24.08.2026', offer_checked %}
+  {% assign rendered = rendered | replace: 'Datenstand 24.08.2026', offer_data_checked %}
 {% endif %}
 
 {% if page.url == '/meilen-sammeln/eurowings-kreditkarte/' %}
@@ -47,8 +57,8 @@
   {% assign rendered = rendered | replace: '49,50 €', site.data.offers.eurowings_credit_card.premium.first_year_fee_display %}
   {% assign rendered = rendered | replace: '29 €', site.data.offers.eurowings_credit_card.classic.annual_fee_display %}
   {% assign rendered = rendered | replace: '99 €', site.data.offers.eurowings_credit_card.premium.annual_fee_display %}
-  {% assign rendered = rendered | replace: 'Stand 24.08.2026', site.data.offers.last_checked_display | prepend: 'Stand ' %}
-  {% assign rendered = rendered | replace: 'Datenstand:</strong> 24.08.2026', site.data.offers.last_checked_display | prepend: 'Datenstand:</strong> ' %}
+  {% assign rendered = rendered | replace: 'Stand 24.08.2026', offer_checked %}
+  {% assign rendered = rendered | replace: 'Datenstand:</strong> 24.08.2026', offer_data_checked_strong %}
 {% endif %}
 
 {{ rendered }}
