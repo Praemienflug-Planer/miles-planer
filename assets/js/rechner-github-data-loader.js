@@ -46,6 +46,7 @@
   }
 
   function getSeasonFactor(rate, reisezeit) {
+    if (rate?.seasonFactorMode === "included") return 1;
     if (reisezeit === "Ferien") return Number(rate.faktorFerien || 1);
     if (reisezeit === "Hauptreisezeit") return Number(rate.faktorHauptsaison || 1);
     return Number(rate.faktorNebensaison || 1);
@@ -111,7 +112,7 @@
     return `Schwacher Gegenwert: ${cpmText} pro Meile spricht eher gegen diese Einlösung. Ein Cash-Ticket oder ein anderes Programm könnte sinnvoller sein.`;
   }
 
-  function buildDataBasisHtml(payload) {
+  function buildDataBasisHtml(payload, rate) {
     const awardDataStand = window.MILES_PLANNER_AWARD_RATES?.dataStand || "nicht angegeben";
     const rulesDataStand = window.MILES_PLANNER_PROGRAMS?.dataStand || "nicht angegeben";
     const programKey = normalize(payload.programm);
@@ -129,7 +130,11 @@
       programNote = "Skywards-Awardpreise und Zuzahlungen können sich je nach Route und Verfügbarkeit ändern. Maßgeblich ist die konkrete Emirates-Buchungsmaske.";
     }
 
-    return `<div class="result-info-card"><strong>Datenbasis des Rechners</strong><p>Award-, Gebühren- und Cash-Planungswerte: Stand ${escapeHtml(awardDataStand)}. Programm- und Transferregeln: geprüft am ${escapeHtml(rulesDataStand)}.</p><p>${escapeHtml(programNote)}</p><p>Vor Punktetransfer oder Buchung immer den tatsächlich verfügbaren Award und die reale Zuzahlung prüfen.</p></div>`;
+    const calibrationHtml = rate?.calibrationDate
+      ? `<p><strong>Diese Kombination wurde separat kalibriert am ${escapeHtml(rate.calibrationDate)}.</strong> ${escapeHtml(rate.calibrationNote || "Die ausgewählte Kombination nutzt aktuellere Einzelwerte als die restliche Matrix.")}</p>`
+      : "";
+
+    return `<div class="result-info-card"><strong>Datenbasis des Rechners</strong><p>Award-, Gebühren- und Cash-Planungswerte der Grundmatrix: Stand ${escapeHtml(awardDataStand)}. Programm- und Transferregeln: geprüft am ${escapeHtml(rulesDataStand)}.</p>${calibrationHtml}<p>${escapeHtml(programNote)}</p><p>Vor Punktetransfer oder Buchung immer den tatsächlich verfügbaren Award und die reale Zuzahlung prüfen.</p></div>`;
   }
 
   function buildGithubResult(payload, rate) {
@@ -198,7 +203,7 @@
       const cfg = getProgramConfig(payload.programm);
       const chart = classifyAmpel(data.monate, payload);
       const familyNoteHtml = data.family?.note ? `<div class="result-info-card"><strong>Familienlogik</strong><p>${escapeHtml(data.family.note)}</p>${data.childDiscountMiles > 0 ? `<p>Planerischer Meilenvorteil: ${escapeHtml(formatPoints(data.childDiscountMiles))} ${escapeHtml(cfg.kurzlabel || "Punkte")} gegenüber voller Erwachsenenberechnung.</p>` : ""}<p>Hinweis: Der Rechner bildet nur den Meilenbedarf als Planungswert ab. Steuern, Gebühren, Verfügbarkeit, Airline-Regeln und konkrete Buchungsbedingungen können abweichen.</p></div>` : "";
-      const dataBasisHtml = buildDataBasisHtml(payload);
+      const dataBasisHtml = buildDataBasisHtml(payload, rate);
       resultBox.innerHTML = `
         <div class="result-card">
           <div class="decision-card decision-card-${escapeHtml(chart.key)}">
