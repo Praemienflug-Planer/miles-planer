@@ -8,6 +8,9 @@
   // Ihre Werte gelten für Hin- und Rückflug. Für ausschließlich mit Air Dolomiti, Austrian,
   // Discover, Lufthansa, Lufthansa City oder SWISS durchgeführte interkontinentale Verbindungen
   // werden die Meilenwerte dagegen dynamisch in der Buchung angezeigt.
+  // "miles-only" bedeutet: Der Chart-Meilenwert bleibt fix, vorhandene Saisonfaktoren dürfen
+  // aber weiterhin Gebühren und Cash-Planungswerte skalieren. Die Laufzeitkorrektur dafür sitzt
+  // in assets/js/rechner-review-fixes.js.
   const calibrations = [
     {
       ziel: "Thailand",
@@ -16,7 +19,7 @@
       bestMilesRtPp: 110000,
       realMilesRtPp: 110000,
       consMilesRtPp: 110000,
-      seasonFactorMode: "included",
+      seasonFactorMode: "miles-only",
       calibrationDate,
       feesLiveChecked: false,
       calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Südostasien Premium Economy 110.000 Meilen Return.`,
@@ -29,7 +32,7 @@
       bestMilesRtPp: 200000,
       realMilesRtPp: 200000,
       consMilesRtPp: 200000,
-      seasonFactorMode: "included",
+      seasonFactorMode: "miles-only",
       calibrationDate,
       feesLiveChecked: false,
       calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Südostasien Business 200.000 Meilen Return.`,
@@ -42,7 +45,7 @@
       bestMilesRtPp: 85000,
       realMilesRtPp: 85000,
       consMilesRtPp: 85000,
-      seasonFactorMode: "included",
+      seasonFactorMode: "miles-only",
       calibrationDate,
       feesLiveChecked: false,
       calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Nordamerika Premium Economy 85.000 Meilen Return.`,
@@ -55,7 +58,7 @@
       bestMilesRtPp: 125000,
       realMilesRtPp: 125000,
       consMilesRtPp: 125000,
-      seasonFactorMode: "included",
+      seasonFactorMode: "miles-only",
       calibrationDate,
       feesLiveChecked: false,
       calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Nordamerika Business 125.000 Meilen Return.`,
@@ -68,7 +71,7 @@
       bestMilesRtPp: 110000,
       realMilesRtPp: 110000,
       consMilesRtPp: 110000,
-      seasonFactorMode: "included",
+      seasonFactorMode: "miles-only",
       calibrationDate,
       feesLiveChecked: false,
       calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Südostasien Premium Economy 110.000 Meilen Return.`,
@@ -81,7 +84,7 @@
       bestMilesRtPp: 200000,
       realMilesRtPp: 200000,
       consMilesRtPp: 200000,
-      seasonFactorMode: "included",
+      seasonFactorMode: "miles-only",
       calibrationDate,
       feesLiveChecked: false,
       calibrationBasis: `Aktuell von Miles & More verlinkte Award-Flight-Tabelle (Stand ${chartStand}): Europa–Südostasien Business 200.000 Meilen Return.`,
