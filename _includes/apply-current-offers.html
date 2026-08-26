@@ -4,10 +4,14 @@
   data file the single source of truth for current bonuses, fees and deadlines.
 {% endcomment %}
 {% assign rendered = include.content %}
+{% assign has_payback_amex_offer = false %}
+{% if rendered contains '4.000 PAYBACK Punkte' or rendered contains '4.000 °P' %}{% assign has_payback_amex_offer = true %}{% endif %}
 
-{% capture offer_checked %}Stand {{ site.data.offers.last_checked_display }}{% endcapture %}
-{% capture offer_data_checked %}Datenstand {{ site.data.offers.last_checked_display }}{% endcapture %}
-{% capture offer_data_checked_strong %}Datenstand:</strong> {{ site.data.offers.last_checked_display }}{% endcapture %}
+{% capture amex_checked %}Stand {{ site.data.offers.amex.last_checked_display }}{% endcapture %}
+{% capture mm_checked %}Stand {{ site.data.offers.miles_and_more_credit_card.last_checked_display }}{% endcapture %}
+{% capture mm_data_checked %}Datenstand {{ site.data.offers.miles_and_more_credit_card.last_checked_display }}{% endcapture %}
+{% capture ew_checked %}Stand {{ site.data.offers.eurowings_credit_card.last_checked_display }}{% endcapture %}
+{% capture ew_data_checked_strong %}Datenstand:</strong> {{ site.data.offers.eurowings_credit_card.last_checked_display }}{% endcapture %}
 {% capture payback_points_button %}mit {{ site.data.offers.amex.payback.bonus_number_display }} Punkten anfragen{% endcapture %}
 {% capture amex_platinum_fee_text %}aktuell {{ site.data.offers.amex.platinum.fee_monthly_display }} pro Monat{% endcapture %}
 {% capture amex_gold_fee_text %}aktuell {{ site.data.offers.amex.gold.fee_monthly_display }} pro Monat{% endcapture %}
@@ -15,11 +19,15 @@
 {% capture amex_platinum_fee_table %}{{ site.data.offers.amex.platinum.fee_monthly_display }}/Monat{% endcapture %}
 {% capture amex_gold_fee_table %}{{ site.data.offers.amex.gold.fee_monthly_display }}/Monat{% endcapture %}
 {% capture amex_green_fee_table %}{{ site.data.offers.amex.green.fee_monthly_display }}/Monat{% endcapture %}
+{% capture ew_welcome_row %}<tr><td>Willkommensmeilen</td><td>{{ site.data.offers.eurowings_credit_card.classic.welcome_miles_number_display }}</td><td>{{ site.data.offers.eurowings_credit_card.premium.welcome_miles_short_display }}<br><small>Aktion bis {{ site.data.offers.eurowings_credit_card.premium.valid_until_display }}</small></td></tr>{% endcapture %}
 
 {% comment %}PAYBACK Amex referral bonus is repeated across several pages.{% endcomment %}
 {% assign rendered = rendered | replace: '4.000 PAYBACK Punkte', site.data.offers.amex.payback.bonus_display %}
 {% assign rendered = rendered | replace: '4.000 °P', site.data.offers.amex.payback.bonus_short_display %}
 {% assign rendered = rendered | replace: 'mit 4.000 Punkten anfragen', payback_points_button %}
+{% if has_payback_amex_offer %}
+  {% assign rendered = rendered | replace: 'Stand 24.08.2026', amex_checked %}
+{% endif %}
 
 {% if page.url == '/meilen-sammeln/amex-kreditkarten/' or page.url == '/meilen-sammeln/amex/' %}
   {% assign rendered = rendered | replace: '85.000 MR', site.data.offers.amex.platinum.bonus_display %}
@@ -32,7 +40,7 @@
   {% assign rendered = rendered | replace: '60 €/Monat', amex_platinum_fee_table %}
   {% assign rendered = rendered | replace: '20 €/Monat', amex_gold_fee_table %}
   {% assign rendered = rendered | replace: '5 €/Monat', amex_green_fee_table %}
-  {% assign rendered = rendered | replace: 'Stand 24.08.2026', offer_checked %}
+  {% assign rendered = rendered | replace: 'Stand 24.08.2026', amex_checked %}
 {% endif %}
 
 {% if page.url == '/meilen-sammeln/miles-and-more-kreditkarte/' %}
@@ -45,11 +53,12 @@
   {% assign rendered = rendered | replace: '31.12.2026', site.data.offers.miles_and_more_credit_card.blue.valid_until_display %}
   {% assign rendered = rendered | replace: '2.500 Meilen', site.data.offers.miles_and_more_credit_card.common.moneysend_cap_display %}
   {% assign rendered = rendered | replace: '1 Meile je 2 € Kartenumsatz', site.data.offers.miles_and_more_credit_card.common.earn_rate_display %}
-  {% assign rendered = rendered | replace: 'Stand 24.08.2026', offer_checked %}
-  {% assign rendered = rendered | replace: 'Datenstand 24.08.2026', offer_data_checked %}
+  {% assign rendered = rendered | replace: 'Stand 24.08.2026', mm_checked %}
+  {% assign rendered = rendered | replace: 'Datenstand 24.08.2026', mm_data_checked %}
 {% endif %}
 
 {% if page.url == '/meilen-sammeln/eurowings-kreditkarte/' %}
+  {% assign rendered = rendered | replace: '<tr><td>Willkommensmeilen</td><td>500</td><td>bis zu 10.000<br><small>Aktion bis 31.08.2026</small></td></tr>', ew_welcome_row %}
   {% assign rendered = rendered | replace: 'bis zu 10.000 Willkommensmeilen', site.data.offers.eurowings_credit_card.premium.welcome_miles_display %}
   {% assign rendered = rendered | replace: '500 Willkommensmeilen', site.data.offers.eurowings_credit_card.classic.welcome_miles_display %}
   {% assign rendered = rendered | replace: '31.08.2026', site.data.offers.eurowings_credit_card.premium.valid_until_display %}
@@ -57,8 +66,8 @@
   {% assign rendered = rendered | replace: '49,50 €', site.data.offers.eurowings_credit_card.premium.first_year_fee_display %}
   {% assign rendered = rendered | replace: '29 €', site.data.offers.eurowings_credit_card.classic.annual_fee_display %}
   {% assign rendered = rendered | replace: '99 €', site.data.offers.eurowings_credit_card.premium.annual_fee_display %}
-  {% assign rendered = rendered | replace: 'Stand 24.08.2026', offer_checked %}
-  {% assign rendered = rendered | replace: 'Datenstand:</strong> 24.08.2026', offer_data_checked_strong %}
+  {% assign rendered = rendered | replace: 'Stand 24.08.2026', ew_checked %}
+  {% assign rendered = rendered | replace: 'Datenstand:</strong> 24.08.2026', ew_data_checked_strong %}
 {% endif %}
 
 {{ rendered }}
