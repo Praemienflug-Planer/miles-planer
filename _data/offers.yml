@@ -48,8 +48,8 @@ amex:
     status: "current"
 
 miles_and_more_credit_card:
-  last_checked: "2026-08-24"
-  last_checked_display: "24.08.2026"
+  last_checked: "2026-08-26"
+  last_checked_display: "26.08.2026"
   common:
     earn_rate_display: "1 Meile je 2 € Kartenumsatz"
     moneysend_cap_miles: 2500
@@ -89,8 +89,8 @@ miles_and_more_credit_card:
     status: "current"
 
 eurowings_credit_card:
-  last_checked: "2026-08-24"
-  last_checked_display: "24.08.2026"
+  last_checked: "2026-08-26"
+  last_checked_display: "26.08.2026"
   classic:
     product: "Eurowings Kreditkarte Classic"
     welcome_miles: 500
@@ -113,6 +113,22 @@ eurowings_credit_card:
     annual_fee_eur: 99
     annual_fee_display: "99 €"
     status: "current"
+
+revolut:
+  last_checked: "2026-08-26"
+  last_checked_display: "26.08.2026"
+  supported_topup_cards_display: "Mastercard, Visa und Maestro"
+  unsupported_topup_cards_display: "American Express"
+  standard_fee_monthly_display: "0 €"
+  plus_fee_monthly_display: "2,99 €"
+  premium_fee_monthly_display: "8,99 €"
+  metal_fee_monthly_display: "15,99 €"
+  ultra_fee_monthly_display: "65 €"
+  standard_revpoints_rate_display: "1 RevPoint je 10 €"
+  plus_revpoints_rate_display: "1 RevPoint je 10 €"
+  premium_revpoints_rate_display: "1 RevPoint je 4 €"
+  metal_revpoints_rate_display: "1 RevPoint je 2 €"
+  ultra_revpoints_rate_display: "1 RevPoint je 1 €"
 
 payback_transfer:
   last_checked: "2026-08-24"

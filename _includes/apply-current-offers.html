@@ -17,6 +17,7 @@
 {% capture mm_data_checked %}Datenstand {{ site.data.offers.miles_and_more_credit_card.last_checked_display }}{% endcapture %}
 {% capture ew_checked %}Stand {{ site.data.offers.eurowings_credit_card.last_checked_display }}{% endcapture %}
 {% capture ew_data_checked_strong %}Datenstand:</strong> {{ site.data.offers.eurowings_credit_card.last_checked_display }}{% endcapture %}
+{% capture rev_checked %}Stand {{ site.data.offers.revolut.last_checked_display }}{% endcapture %}
 {% capture payback_points_button %}mit {{ site.data.offers.amex.payback.bonus_number_display }} Punkten anfragen{% endcapture %}
 {% capture amex_platinum_fee_text %}aktuell {{ site.data.offers.amex.platinum.fee_monthly_display }} pro Monat{% endcapture %}
 {% capture amex_gold_fee_text %}aktuell {{ site.data.offers.amex.gold.fee_monthly_display }} pro Monat{% endcapture %}
@@ -77,6 +78,8 @@
   {% assign rendered = rendered | replace: '1 Meile je 2 € Kartenumsatz', site.data.offers.miles_and_more_credit_card.common.earn_rate_display %}
   {% assign rendered = rendered | replace: 'Stand 24.08.2026', mm_checked %}
   {% assign rendered = rendered | replace: 'Datenstand 24.08.2026', mm_data_checked %}
+  {% assign rendered = rendered | replace: 'Für Ausgaben, die nicht direkt per Kreditkarte bezahlt werden können, kann Revolut als Zahlungsdrehscheibe dienen: Das Revolut-Konto wird per Miles-&amp;-More-Kreditkarte aufgeladen. Diese Karteneinzahlung fällt in die Money-Send-Logik. Anschließend kann das Guthaben für echte laufende Ausgaben genutzt werden – etwa Kartenzahlungen, Überweisungen oder Lastschriften, sofern der jeweilige Zahlungsempfänger Revolut akzeptiert.', 'Für Ausgaben, die nicht direkt per Kreditkarte bezahlt werden können, kann Revolut als Zahlungsdrehscheibe dienen. Revolut unterstützt Karteneinzahlungen mit Mastercard; Miles &amp; More bestätigt zugleich, dass Money-Send-Services mit den privaten Deutsche-Bank-Karten wieder Meilen bringen können. Da die technische Annahme einer konkreten Karteneinzahlung von Revolut und dem Kartenaussteller abhängen kann, sollte der Zahlungsweg zuerst mit einem kleinen Betrag getestet werden. Anschließend kann das Guthaben für echte laufende Ausgaben genutzt werden – etwa Kartenzahlungen, Überweisungen oder Lastschriften.' %}
+  {% assign rendered = rendered | replace: '<li><strong>Revolut unterstützt:</strong> Einzahlungen mit Mastercard, Visa und Maestro; American Express wird für Karteneinzahlungen nicht unterstützt.</li>', '<li><strong>Revolut unterstützt:</strong> Einzahlungen mit Mastercard, Visa und Maestro; American Express wird für Karteneinzahlungen nicht unterstützt. Wenn eine konkrete Karte in der App nicht hinzugefügt werden kann oder eine Einzahlung abgelehnt wird, ist sie für diesen Weg nicht nutzbar.</li>' %}
 {% endif %}
 
 {% if page.url == '/meilen-sammeln/eurowings-kreditkarte/' %}
@@ -90,6 +93,13 @@
   {% assign rendered = rendered | replace: '99 €', site.data.offers.eurowings_credit_card.premium.annual_fee_display %}
   {% assign rendered = rendered | replace: 'Stand 24.08.2026', ew_checked %}
   {% assign rendered = rendered | replace: 'Datenstand:</strong> 24.08.2026', ew_data_checked_strong %}
+{% endif %}
+
+{% if page.url == '/meilen-sammeln/revolut-revpoints/' %}
+  {% assign rendered = rendered | replace: 'Stand 24.08.2026', rev_checked %}
+  {% assign rendered = rendered | replace: '<div class="warning-box"><strong>Wichtig:</strong><br><br>Die 5.000 € sind kein eigenes offizielles Money-Send-Euro-Limit, sondern die rechnerische Umsatzhöhe, bei der eine private Miles-&amp;-More-Karte mit 1 Meile je 2 € das offizielle Maximum von 2.500 Money-Send-Meilen erreicht.</div>', '<div class="warning-box"><strong>Wichtig:</strong><br><br>Die 5.000 € sind kein eigenes offizielles Money-Send-Euro-Limit, sondern die rechnerische Umsatzhöhe, bei der eine private Miles-&amp;-More-Karte mit 1 Meile je 2 € das offizielle Maximum von 2.500 Money-Send-Meilen erreicht. Revolut unterstützt Karteneinzahlungen mit Mastercard, Visa und Maestro; American Express nicht. Eine konkrete Karteneinzahlung kann dennoch abgelehnt werden, wenn die Karte bzw. der Aussteller die Transaktion nicht unterstützt – deshalb zuerst klein testen.</div>' %}
+  {% assign rendered = rendered | replace: 'Der Money-Send-Weg zu Miles & More funktioniert unabhängig davon, ob Standard oder ein kostenpflichtiges Revolut-Abo genutzt wird.', 'Die Höhe des Miles-&amp;-More-Money-Send-Limits hängt nicht vom gewählten Revolut-Abo ab. Ob eine konkrete Karteneinzahlung technisch angenommen wird, hängt jedoch von Revolut und dem Kartenaussteller ab.' %}
+  {% assign rendered = rendered | replace: '<li><a href="https://www.revolut.com/de-DE/rev-points/" target="_blank" rel="noopener noreferrer">Revolut Deutschland: RevPoints</a></li>', '<li><a href="https://www.revolut.com/de-DE/rev-points/" target="_blank" rel="noopener noreferrer">Revolut Deutschland: RevPoints</a></li><li><a href="https://help.revolut.com/de-DE/help/adding-money/with-card/supported-card-deposits/" target="_blank" rel="noopener noreferrer">Revolut Hilfe: unterstützte Karten für Einzahlungen</a></li>' %}
 {% endif %}
 
 {{ rendered }}
