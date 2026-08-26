@@ -51,6 +51,7 @@ miles_and_more_credit_card:
   last_checked: "2026-08-26"
   last_checked_display: "26.08.2026"
   common:
+    earn_divisor_eur: 2
     earn_rate_display: "1 Meile je 2 € Kartenumsatz"
     moneysend_cap_miles: 2500
     moneysend_cap_display: "2.500 Meilen"
@@ -104,6 +105,7 @@ eurowings_credit_card:
   premium:
     product: "Eurowings Kreditkarte Premium"
     welcome_miles: 10000
+    welcome_miles_number_display: "10.000"
     welcome_miles_short_display: "bis zu 10.000"
     welcome_miles_display: "bis zu 10.000 Willkommensmeilen"
     valid_until: "2026-08-31"
@@ -119,15 +121,25 @@ revolut:
   last_checked_display: "26.08.2026"
   supported_topup_cards_display: "Mastercard, Visa und Maestro"
   unsupported_topup_cards_display: "American Express"
+  standard_fee_monthly_eur: 0
   standard_fee_monthly_display: "0 €"
+  plus_fee_monthly_eur: 2.99
   plus_fee_monthly_display: "2,99 €"
+  premium_fee_monthly_eur: 8.99
   premium_fee_monthly_display: "8,99 €"
+  metal_fee_monthly_eur: 15.99
   metal_fee_monthly_display: "15,99 €"
+  ultra_fee_monthly_eur: 65
   ultra_fee_monthly_display: "65 €"
+  standard_revpoints_divisor_eur: 10
   standard_revpoints_rate_display: "1 RevPoint je 10 €"
+  plus_revpoints_divisor_eur: 10
   plus_revpoints_rate_display: "1 RevPoint je 10 €"
+  premium_revpoints_divisor_eur: 4
   premium_revpoints_rate_display: "1 RevPoint je 4 €"
+  metal_revpoints_divisor_eur: 2
   metal_revpoints_rate_display: "1 RevPoint je 2 €"
+  ultra_revpoints_divisor_eur: 1
   ultra_revpoints_rate_display: "1 RevPoint je 1 €"
 
 payback_transfer:
