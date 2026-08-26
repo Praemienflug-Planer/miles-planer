@@ -1,0 +1,126 @@
+last_checked: "2026-08-24"
+last_checked_display: "24.08.2026"
+
+amex:
+  last_checked: "2026-08-24"
+  last_checked_display: "24.08.2026"
+  platinum:
+    product: "American Express Platinum"
+    bonus_value: 85000
+    bonus_display: "85.000 MR"
+    fee_monthly_eur: 60
+    fee_monthly_display: "60 €"
+    offer_type: "referral"
+    status: "current"
+  rose_gold:
+    product: "American Express Rose Gold"
+    bonus_value: 55000
+    bonus_display: "55.000 MR"
+    fee_monthly_eur: 20
+    fee_monthly_display: "20 €"
+    offer_type: "referral"
+    status: "current"
+  gold:
+    product: "American Express Gold"
+    bonus_value: 50000
+    bonus_display: "50.000 MR"
+    fee_monthly_eur: 20
+    fee_monthly_display: "20 €"
+    offer_type: "referral"
+    status: "current"
+  green:
+    product: "American Express Green"
+    bonus_value: 10000
+    bonus_display: "10.000 MR"
+    fee_monthly_eur: 5
+    fee_monthly_display: "5 €"
+    offer_type: "referral"
+    status: "current"
+  payback:
+    product: "PAYBACK American Express"
+    bonus_value: 4000
+    bonus_number_display: "4.000"
+    bonus_display: "4.000 PAYBACK Punkte"
+    bonus_short_display: "4.000 °P"
+    annual_fee_eur: 0
+    annual_fee_display: "0 €"
+    offer_type: "referral"
+    status: "current"
+
+miles_and_more_credit_card:
+  last_checked: "2026-08-24"
+  last_checked_display: "24.08.2026"
+  common:
+    earn_rate_display: "1 Meile je 2 € Kartenumsatz"
+    moneysend_cap_miles: 2500
+    moneysend_cap_display: "2.500 Meilen"
+  gold:
+    product: "Miles & More Gold Credit Card"
+    fee_monthly_eur: 11.5
+    fee_monthly_display: "11,50 €"
+    welcome_miles: 4000
+    welcome_miles_display: "4.000 Meilen"
+    welcome_points: 40
+    welcome_points_display: "40 Points"
+    voucher_eur: 100
+    voucher_display: "100-€-Lufthansa-Gutschein"
+    offer_display: "4.000 Meilen + 40 Points + 100-€-Lufthansa-Gutschein"
+    offer_table_display: "4.000 Meilen + 40 Points + 100-€-LH-Gutschein"
+    valid_until: "2026-08-31"
+    valid_until_display: "31.08.2026"
+    status: "current"
+  blue:
+    product: "Miles & More Blue Credit Card"
+    fee_monthly_eur: 5.5
+    fee_monthly_display: "5,50 €"
+    welcome_miles: 500
+    welcome_miles_display: "500 Meilen"
+    welcome_points: 40
+    welcome_points_display: "40 Points"
+    offer_display: "500 Meilen + 40 Points"
+    valid_until: "2026-12-31"
+    valid_until_display: "31.12.2026"
+    status: "current"
+  myflex:
+    product: "Miles & More MyFlex Credit Card"
+    fee_monthly_eur: 0
+    fee_monthly_display: "0 €"
+    offer_display: "kein aktueller Willkommensbonus"
+    status: "current"
+
+eurowings_credit_card:
+  last_checked: "2026-08-24"
+  last_checked_display: "24.08.2026"
+  classic:
+    product: "Eurowings Kreditkarte Classic"
+    welcome_miles: 500
+    welcome_miles_number_display: "500"
+    welcome_miles_display: "500 Willkommensmeilen"
+    first_year_fee_eur: 14.5
+    first_year_fee_display: "14,50 €"
+    annual_fee_eur: 29
+    annual_fee_display: "29 €"
+    status: "current"
+  premium:
+    product: "Eurowings Kreditkarte Premium"
+    welcome_miles: 10000
+    welcome_miles_short_display: "bis zu 10.000"
+    welcome_miles_display: "bis zu 10.000 Willkommensmeilen"
+    valid_until: "2026-08-31"
+    valid_until_display: "31.08.2026"
+    first_year_fee_eur: 49.5
+    first_year_fee_display: "49,50 €"
+    annual_fee_eur: 99
+    annual_fee_display: "99 €"
+    status: "current"
+
+payback_transfer:
+  last_checked: "2026-08-24"
+  last_checked_display: "24.08.2026"
+  minimum_points: 200
+  minimum_points_display: "200 PAYBACK Punkten"
+  ratio_display: "1:1"
+  current_bonus_percent: 0
+  current_bonus_display: "kein aktueller Transferbonus"
+  last_bonus_percent: 10
+  last_bonus_period_display: "Juli 2026"
