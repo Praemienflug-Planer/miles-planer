@@ -37,6 +37,7 @@ amex:
   payback:
     product: "PAYBACK American Express"
     bonus_value: 4000
+    bonus_number_display: "4.000"
     bonus_display: "4.000 PAYBACK Punkte"
     bonus_short_display: "4.000 °P"
     annual_fee_eur: 0
