@@ -19,16 +19,46 @@
     routeAmex: root.querySelector('#fix-route-amex'),
     routeRevolut: root.querySelector('#fix-route-revolut'),
     routeMmDirect: root.querySelector('#fix-route-mm-direct'),
+    routeBankDirect: root.querySelector('#fix-route-bank-direct'),
     strategyBody: root.querySelector('#fix-strategy-body'),
     note: root.querySelector('#fix-calc-note')
   };
 
+  const parseValue = (value, fallback = 0) => {
+    const parsed = Number(String(value ?? '').replace(',', '.'));
+    return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
+  };
+
+  const mmEarnDivisor = parseValue(root.dataset.mmEarnDivisor, 2) || 2;
+  const mmMoneySendCapMiles = parseValue(root.dataset.mmMoneysendCapMiles, 2500) || 2500;
+  const moneySendEuroCap = mmEarnDivisor * mmMoneySendCapMiles;
+
   const plans = {
-    standard: { divisor: 10, monthlyFee: 0, label: 'Standard' },
-    plus: { divisor: 10, monthlyFee: 2.99, label: 'Plus' },
-    premium: { divisor: 4, monthlyFee: 8.99, label: 'Premium' },
-    metal: { divisor: 2, monthlyFee: 15.99, label: 'Metal' },
-    ultra: { divisor: 1, monthlyFee: 65, label: 'Ultra' }
+    standard: {
+      divisor: parseValue(root.dataset.revStandardDivisor, 10) || 10,
+      monthlyFee: parseValue(root.dataset.revStandardFee, 0),
+      label: 'Standard'
+    },
+    plus: {
+      divisor: parseValue(root.dataset.revPlusDivisor, 10) || 10,
+      monthlyFee: parseValue(root.dataset.revPlusFee, 2.99),
+      label: 'Plus'
+    },
+    premium: {
+      divisor: parseValue(root.dataset.revPremiumDivisor, 4) || 4,
+      monthlyFee: parseValue(root.dataset.revPremiumFee, 8.99),
+      label: 'Premium'
+    },
+    metal: {
+      divisor: parseValue(root.dataset.revMetalDivisor, 2) || 2,
+      monthlyFee: parseValue(root.dataset.revMetalFee, 15.99),
+      label: 'Metal'
+    },
+    ultra: {
+      divisor: parseValue(root.dataset.revUltraDivisor, 1) || 1,
+      monthlyFee: parseValue(root.dataset.revUltraFee, 65),
+      label: 'Ultra'
+    }
   };
 
   const number = (value) => {
@@ -52,7 +82,7 @@
         key: row.dataset.fixCategory || '',
         label: row.querySelector('.fix-category-name strong')?.textContent?.trim() || 'Ausgabe',
         amount: number(amountField?.value),
-        payment: paymentField?.value || 'bank',
+        payment: paymentField?.value || 'bank_direct',
         revEligible: row.dataset.revEligible === 'true'
       };
     });
@@ -75,13 +105,20 @@
       }
       return {
         tag: 'M&M Kreditkarte direkt',
-        points: 'M&M: 1 Meile je 2 €; kein regulärer RevPoints-Vorteil'
+        points: `M&M: 1 Meile je ${fmt(mmEarnDivisor)} €; kein regulärer RevPoints-Vorteil`
+      };
+    }
+
+    if (category.payment === 'bank_revolut') {
+      return {
+        tag: 'M&M → Revolut → Bankzahlung',
+        points: 'M&M via MoneySend bis zum Limit; Überweisung/Lastschrift selbst ohne RevPoints'
       };
     }
 
     return {
-      tag: 'M&M → Revolut → Bankzahlung',
-      points: 'M&M via MoneySend bis zum Limit; Überweisung/Lastschrift selbst ohne RevPoints'
+      tag: 'Normale Bankzahlung',
+      points: 'In diesem Rechner keine Punkte- oder Meilengutschrift angesetzt'
     };
   }
 
@@ -111,7 +148,8 @@
     let revEligibleCardMonth = 0;
     let mmDirectMonth = 0;
     let moneySendCandidateMonth = 0;
-    let bankMonth = 0;
+    let bankViaRevolutMonth = 0;
+    let bankDirectMonth = 0;
 
     categories.forEach((category) => {
       totalMonth += category.amount;
@@ -133,20 +171,25 @@
         return;
       }
 
-      bankMonth += category.amount;
-      revolutRoutedMonth += category.amount;
-      moneySendCandidateMonth += category.amount;
+      if (category.payment === 'bank_revolut') {
+        bankViaRevolutMonth += category.amount;
+        revolutRoutedMonth += category.amount;
+        moneySendCandidateMonth += category.amount;
+        return;
+      }
+
+      bankDirectMonth += category.amount;
     });
 
-    const recommendedMoneySendMonth = Math.min(moneySendCandidateMonth, 5000);
+    const recommendedMoneySendMonth = Math.min(moneySendCandidateMonth, moneySendEuroCap);
 
     const amexYearSpend = amexMonth * 12;
     const mrBaseYear = amexYearSpend;
     const mrTurboExtraYear = turboOn ? Math.min(amexYearSpend, 40000) / 2 : 0;
     const mrYear = mrBaseYear + mrTurboExtraYear;
 
-    const mmDirectYear = (mmDirectMonth / 2) * 12;
-    const mmMoneySendYear = (recommendedMoneySendMonth / 2) * 12;
+    const mmDirectYear = (mmDirectMonth / mmEarnDivisor) * 12;
+    const mmMoneySendYear = (recommendedMoneySendMonth / mmEarnDivisor) * 12;
     const mmYear = mmDirectYear + mmMoneySendYear;
 
     const revYear = (revEligibleCardMonth / plan.divisor) * 12;
@@ -165,6 +208,7 @@
     if (outputs.routeAmex) outputs.routeAmex.textContent = `${euro(amexMonth)} / Monat`;
     if (outputs.routeRevolut) outputs.routeRevolut.textContent = `${euro(revolutRoutedMonth)} / Monat`;
     if (outputs.routeMmDirect) outputs.routeMmDirect.textContent = `${euro(mmDirectMonth)} / Monat`;
+    if (outputs.routeBankDirect) outputs.routeBankDirect.textContent = `${euro(bankDirectMonth)} / Monat`;
 
     renderStrategy(categories, turboOn);
 
@@ -174,24 +218,32 @@
       messages.push('Trage zuerst deine echten monatlichen Ausgaben ein. Die Zahlungsarten sind nur Startwerte und sollten an die tatsächliche Akzeptanz deiner Anbieter angepasst werden.');
     }
 
-    if (moneySendCandidateMonth > 5000) {
-      messages.push(`Von ${euro(moneySendCandidateMonth)} grundsätzlich über Revolut finanzierbaren Ausgaben setzt der Rechner nur ${euro(5000)} als empfohlenes MoneySend an, weil damit das monatliche M&M-Limit bereits ausgeschöpft ist.`);
-    } else if (moneySendCandidateMonth > 0 && moneySendCandidateMonth < 5000 && amexMonth > 0) {
-      messages.push(`Das MoneySend-Potenzial liegt mit ${euro(recommendedMoneySendMonth)} unter 5.000 €. Zusätzliche Amex-fähige Umsätze nur zum Auffüllen auf Revolut zu verschieben kann mehr M&M bringen, kostet aber Membership Rewards und sollte deshalb nicht automatisch erfolgen.`);
+    if (moneySendCandidateMonth > moneySendEuroCap) {
+      messages.push(`Von ${euro(moneySendCandidateMonth)} grundsätzlich über Revolut finanzierbaren Ausgaben setzt der Rechner nur ${euro(moneySendEuroCap)} als MoneySend mit M&M-Meilengutschrift an, weil damit das offizielle Limit von ${fmt(mmMoneySendCapMiles)} Meilen bereits ausgeschöpft ist.`);
+      if (revEligibleCardMonth > 0) {
+        messages.push('RevPoints-fähige Kartenumsätze können im Szenario trotzdem weiter über Revolut laufen. Oberhalb des MoneySend-Limits vergleicht der Rechner aber nicht automatisch, ob direkte M&M-Zahlung oder zusätzliche RevPoints für dich wertvoller sind.');
+      }
+    } else if (moneySendCandidateMonth > 0 && moneySendCandidateMonth < moneySendEuroCap && amexMonth > 0) {
+      messages.push(`Das MoneySend-Potenzial liegt mit ${euro(recommendedMoneySendMonth)} unter ${euro(moneySendEuroCap)}. Zusätzliche Amex-fähige Umsätze nur zum Auffüllen auf Revolut zu verschieben kann mehr M&M bringen, kostet aber Membership Rewards und wird deshalb nicht automatisch empfohlen.`);
     }
 
     if (turboOn && amexYearSpend > 40000) {
       messages.push('Der Amex Turbo wird nur auf die ersten 40.000 € Amex-Jahresumsatz mit der erhöhten Rate gerechnet; darüber gilt im Rechner 1 MR je 1 €.');
     }
 
-    if (bankMonth > 0) {
-      messages.push('Bei Überweisungen und Lastschriften setzt die Empfehlung voraus, dass der Empfänger bzw. das Mandat praktisch über das Revolut-Konto abgewickelt werden kann. Die Bankzahlung selbst erzeugt keine RevPoints.');
+    if (bankViaRevolutMonth > 0) {
+      messages.push('Bei als „über Revolut möglich“ markierten Überweisungen und Lastschriften setzt das Szenario voraus, dass der Empfänger bzw. das Mandat praktisch über das Revolut-Konto abgewickelt werden kann. Die Bankzahlung selbst erzeugt keine RevPoints.');
+    }
+
+    if (bankDirectMonth > 0) {
+      messages.push(`${euro(bankDirectMonth)} monatliche Bankzahlungen sind als „Revolut nicht möglich“ markiert und werden deshalb bewusst ohne Punkte- oder Meilengutschrift gerechnet.`);
     }
 
     if (plan.monthlyFee > 0) {
       messages.push(`Für Revolut ${plan.label} berücksichtigt der Rechner ${euro(plan.monthlyFee * 12, 2)} Jahreskosten. Das bedeutet nicht automatisch, dass sich das Abo allein wegen der zusätzlichen RevPoints lohnt.`);
     }
 
+    messages.push('Der Rechner ist eine regelbasierte Zahlungsweg-Planung, kein Euro-Wert-Optimizer: Membership Rewards, Miles-&-More-Meilen und RevPoints werden nicht künstlich zu einer gemeinsamen Währung verrechnet.');
     messages.push('Die ausgewiesenen Zusatzkosten enthalten nur Rewards Turbo und das gewählte Revolut-Abo. Kartenpreise einer Amex oder Miles-&-More-Kreditkarte sind nicht enthalten.');
     messages.push('PAYBACK bleibt ein separater Punktetopf und wird hier nur optional mit dem regulären 1:1-Transfer zu Miles & More in das M&M-Potenzial eingerechnet.');
 
