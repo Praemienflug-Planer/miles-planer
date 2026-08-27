@@ -1,16 +1,145 @@
 ---
 layout: page
-title: "Amex Punkte in Meilen Rechner – Membership Rewards umrechnen"
-description: "Membership Rewards in Avios, Flying Blue, KrisFlyer, PAYBACK und weitere Partner umrechnen. Transferverhältnisse geprüft am 27.08.2026."
+title: "Amex Punkte Rechner: Membership Rewards in Meilen umrechnen"
+description: "Amex Punkte Rechner: Membership Rewards in Avios, Flying Blue, KrisFlyer, Qatar, PAYBACK und weitere Partner umrechnen – mit aktuellen Transferverhältnissen."
 canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
 ---
-<section class="hero hero-small hero-amex"><div class="container hero-grid seo-hero-grid"><div><p class="eyebrow">Membership Rewards Rechner</p><h1>Amex Punkte in Meilen umrechnen</h1><p class="hero-text">Der Rechner nutzt die aktuell geprüften deutschen Membership-Rewards-Transferverhältnisse. Für mich ist die Umrechnung aber nur der erste Schritt – übertragen würde ich erst nach gefundener Verfügbarkeit.</p><div class="hero-actions"><a class="btn btn-primary" href="#mr-rechner">Jetzt umrechnen</a><a class="btn btn-secondary" href="#transfer">Transferpartner ansehen</a></div><div class="trust-note">Datenstand 27.08.2026. Vor dem finalen Transfer prüfe ich die Rate noch einmal direkt im Amex-Konto.</div></div><div class="hero-card"><h2>Wichtige Raten</h2><ul><li>BA / Iberia / Flying Blue / SAS: 5:4</li><li>Qatar / KrisFlyer / Cathay / Delta: 3:2</li><li>Emirates: 2:1</li><li>PAYBACK: 3:1</li></ul></div></div></section>
-<section class="section"><div class="container seo-layout"><article class="seo-content">
-<div class="article-card seo-card" id="mr-rechner"><h2>Membership Rewards Rechner</h2><div class="form-grid two-col"><div class="field-group"><label for="mrPoints">Membership Rewards Punkte</label><input id="mrPoints" type="number" min="1" step="1" inputmode="numeric" placeholder="z. B. 100000"></div><div class="field-group"><label for="mrPartner">Partnerprogramm</label><select id="mrPartner"><option value="">Bitte Partner wählen</option></select></div></div><div class="tool-actions"><button class="btn btn-primary" type="button" id="mrCalcButton">Berechnen</button><button class="btn btn-secondary" type="button" id="mrResetButton">Zurücksetzen</button></div><div id="mrError" class="form-status error" aria-live="polite" hidden></div><div id="mrResult" class="decision-card decision-card-good" hidden><div class="decision-badge" id="mrBadge"></div><h3 class="decision-title" id="mrTitle"></h3><p id="mrText"></p><div class="result-grid"><div class="result-item"><div class="label">Du erhältst</div><div class="value" id="mrUnits">—</div></div><div class="result-item"><div class="label">Transferverhältnis</div><div class="value" id="mrRatio">—</div></div></div></div><div class="warning-box"><strong>Meine Regel:</strong><br><br>Ich übertrage MR nicht auf Vorrat. Erst Award-Plätze, Gebühren und benötigte Menge prüfen, dann transferieren.</div></div>
-<div class="article-card seo-card" id="transfer"><h2>Transferverhältnisse im Überblick</h2><div id="partnerTables"></div></div>
-<div class="article-card seo-card"><p class="eyebrow">Einordnung</p><h2>Direkttransfer schlägt oft den PAYBACK-Umweg</h2><p>Bei PAYBACK gilt aktuell 3 MR = 1 PAYBACK Punkt. Da PAYBACK regulär 1:1 zu Miles & More transferiert, werden aus 100.000 MR nur etwa 33.333 M&M-Meilen. Für andere Programme sind direkte MR-Transfers oft deutlich ergiebiger.</p></div>
-</article><aside class="seo-sidebar"><div class="article-card seo-card sticky-card"><p class="eyebrow">Weiterlesen</p><div class="sidebar-links"><a href="/meilen-sammeln/amex/">Amex Strategie</a><a href="/meilen-sammeln/amex-kreditkarten/">Kartenvergleich</a><a href="/amex-oder-payback/">Amex oder PAYBACK</a><a href="/rechner/">Prämienflug-Rechner</a></div></div></aside></div></section>
-<script src="/assets/js/amex-transfer-partners.js?v=20260827-1"></script>
+<style>
+.mr-preset-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}.mr-preset{appearance:none;border:1px solid rgba(148,163,184,.3);background:rgba(255,255,255,.05);color:inherit;border-radius:999px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}.mr-preset:hover,.mr-preset:focus-visible{border-color:rgba(96,165,250,.7);background:rgba(59,130,246,.12)}.mr-example-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0}.mr-example{border:1px solid rgba(148,163,184,.24);border-radius:16px;padding:16px;background:rgba(255,255,255,.04)}.mr-example strong{display:block;font-size:1.25rem;margin-bottom:5px}.mr-example span{color:var(--muted);line-height:1.55}.mr-source{font-size:.92rem;color:var(--muted);line-height:1.6}@media(max-width:800px){.mr-example-grid{grid-template-columns:1fr}}
+</style>
+
+<section class="hero hero-small hero-amex">
+  <div class="container hero-grid seo-hero-grid">
+    <div>
+      <p class="eyebrow">Membership Rewards Rechner · Stand 27.08.2026</p>
+      <h1>Amex Punkte Rechner: Membership Rewards in Meilen umrechnen</h1>
+      <p class="hero-text">Mit dem Rechner lassen sich American Express Membership Rewards direkt in Avios, Flying Blue Meilen, KrisFlyer Meilen, Qatar Avios, PAYBACK Punkte und weitere Transferpartner umrechnen.</p>
+      <p class="hero-text">Die Umrechnung zeigt, wie viele Punkte oder Meilen aus dem vorhandenen MR-Bestand entstehen. Erst wenn die gewünschte Prämienflug-Verfügbarkeit feststeht, sollte der tatsächliche Transfer erfolgen.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#mr-rechner">Amex Punkte berechnen</a><a class="btn btn-secondary" href="#transfer">Transferverhältnisse ansehen</a></div>
+      <div class="trust-note">Transferverhältnisse geprüft am 27.08.2026. Vor einer Übertragung die aktuelle Rate und mögliche Mindestmengen direkt im American-Express-Konto kontrollieren.</div>
+    </div>
+    <div class="hero-card">
+      <h2>100.000 MR ergeben aktuell</h2>
+      <ul>
+        <li><strong>80.000</strong> Avios / Flying Blue / SAS bei 5:4</li>
+        <li><strong>66.667</strong> Qatar Avios / KrisFlyer / Cathay / Delta bei 3:2</li>
+        <li><strong>50.000</strong> Emirates Skywards Meilen bei 2:1</li>
+        <li><strong>33.333</strong> PAYBACK Punkte bei 3:1</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container seo-layout">
+    <article class="seo-content">
+      <div class="article-card seo-card" id="mr-rechner">
+        <p class="eyebrow">Rechner</p>
+        <h2>Wie viele Meilen sind meine Amex Punkte wert?</h2>
+        <p>Membership-Rewards-Punkte eingeben, Transferpartner auswählen und die aktuelle Umrechnung sofort berechnen.</p>
+        <div class="form-grid two-col">
+          <div class="field-group"><label for="mrPoints">Membership Rewards Punkte</label><input id="mrPoints" type="number" min="1" step="1" inputmode="numeric" placeholder="z. B. 100000"></div>
+          <div class="field-group"><label for="mrPartner">Partnerprogramm</label><select id="mrPartner"><option value="">Bitte Partner wählen</option></select></div>
+        </div>
+        <div class="mr-preset-row" aria-label="Beispielwerte">
+          <button class="mr-preset" type="button" data-mr-preset="50000">50.000 MR</button>
+          <button class="mr-preset" type="button" data-mr-preset="100000">100.000 MR</button>
+          <button class="mr-preset" type="button" data-mr-preset="200000">200.000 MR</button>
+          <button class="mr-preset" type="button" data-mr-preset="300000">300.000 MR</button>
+        </div>
+        <div class="tool-actions"><button class="btn btn-primary" type="button" id="mrCalcButton">Berechnen</button><button class="btn btn-secondary" type="button" id="mrResetButton">Zurücksetzen</button></div>
+        <div id="mrError" class="form-status error" aria-live="polite" hidden></div>
+        <div id="mrResult" class="decision-card decision-card-good" hidden>
+          <div class="decision-badge" id="mrBadge"></div>
+          <h3 class="decision-title" id="mrTitle"></h3>
+          <p id="mrText"></p>
+          <div class="result-grid">
+            <div class="result-item"><div class="label">Du erhältst</div><div class="value" id="mrUnits">—</div></div>
+            <div class="result-item"><div class="label">Transferverhältnis</div><div class="value" id="mrRatio">—</div></div>
+          </div>
+        </div>
+        <div class="warning-box"><strong>Transfer-Regel:</strong><br><br>Membership Rewards nicht vorsorglich übertragen. Zuerst Award-Verfügbarkeit, benötigte Punktezahl, Steuern und Gebühren sowie die aktuelle Transferrate prüfen. Ein Transfer lässt sich in der Regel nicht einfach rückgängig machen.</div>
+      </div>
+
+      <div class="article-card seo-card" id="transfer">
+        <p class="eyebrow">Transferpartner</p>
+        <h2>Amex Membership Rewards: aktuelle Transferverhältnisse</h2>
+        <p>Die Tabelle trennt Airline-, Hotel- und weitere Transferpartner. Entscheidend ist nicht nur das Verhältnis, sondern auch, ob das jeweilige Programm für die gewünschte Strecke tatsächlich passende Prämienplätze bietet.</p>
+        <div id="partnerTables"></div>
+        <p class="mr-source">Datenstand 27.08.2026. Quelle: American Express Deutschland, Membership Rewards Transferpartner. Transferpartner und Verhältnisse können sich ändern.</p>
+      </div>
+
+      <div class="article-card seo-card">
+        <p class="eyebrow">Schnellvergleich</p>
+        <h2>Was werden aus 100.000 Membership Rewards?</h2>
+        <div class="mr-example-grid">
+          <div class="mr-example"><strong>80.000</strong><span>Avios bei British Airways oder Iberia sowie Flying Blue Meilen bzw. SAS EuroBonus Punkte bei 5:4.</span></div>
+          <div class="mr-example"><strong>66.667</strong><span>Qatar Avios, KrisFlyer Meilen, Cathay Miles oder Delta SkyMiles bei 3:2.</span></div>
+          <div class="mr-example"><strong>33.333</strong><span>PAYBACK Punkte bei 3:1 – und damit regulär ebenfalls 33.333 Miles-&amp;-More-Meilen nach anschließendem PAYBACK-Transfer.</span></div>
+        </div>
+      </div>
+
+      <div class="article-card seo-card" id="miles-and-more">
+        <p class="eyebrow">Miles &amp; More</p>
+        <h2>Kann man Amex Punkte direkt zu Miles &amp; More übertragen?</h2>
+        <p><strong>Nein, Miles &amp; More ist in Deutschland kein direkter Membership-Rewards-Transferpartner.</strong> Der übliche Weg führt über PAYBACK: 3 Membership Rewards ergeben 1 PAYBACK Punkt; PAYBACK kann regulär im Verhältnis 1:1 zu Miles &amp; More übertragen werden.</p>
+        <p>Dadurch werden aus 100.000 Membership Rewards rechnerisch rund 33.333 Miles-&amp;-More-Meilen. Im Vergleich dazu entstehen bei mehreren direkten Airlinepartnern 66.667 oder 80.000 Einheiten. Der PAYBACK-Weg ist deshalb vor allem dann sinnvoll, wenn Miles &amp; More für die konkrete Einlösung gezielt benötigt wird.</p>
+        <div class="hero-actions"><a class="btn btn-secondary" href="/meilen-sammeln/payback-punkte-miles-and-more/">PAYBACK → Miles &amp; More</a><a class="btn btn-secondary" href="/meilen-sammeln/payback-transferbonus/">Transferbonus prüfen</a></div>
+      </div>
+
+      <div class="article-card seo-card">
+        <p class="eyebrow">Einordnung</p>
+        <h2>Welcher Transferpartner ist der beste?</h2>
+        <p>Ein höheres Transferverhältnis ist nicht automatisch die beste Einlösung. Ein Programm mit 5:4 kann unattraktiv sein, wenn für die gewünschte Reise keine passenden Award-Plätze verfügbar sind oder hohe Zuschläge anfallen. Umgekehrt kann ein 3:2-Partner die bessere Wahl sein, wenn dort vier Plätze zu einem guten Gesamtpreis buchbar sind.</p>
+        <p>Für die Entscheidung sollten daher immer <strong>Verfügbarkeit, Meilenpreis, Zuzahlungen und benötigte Personenzahl</strong> zusammen betrachtet werden.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="/rechner/">Prämienflug-Bedarf berechnen</a><a class="btn btn-secondary" href="/vier-praemienflug-plaetze-finden/">4 Award-Plätze finden</a></div>
+      </div>
+
+      <div class="article-card seo-card faq-block" id="faq">
+        <p class="eyebrow">FAQ</p>
+        <h2>Häufige Fragen zum Amex Punkte Rechner</h2>
+        <details open><summary>Wie viele Meilen sind 100.000 Amex Punkte?</summary><p>Das hängt vom Transferpartner ab. Bei einem Verhältnis von 5:4 werden aus 100.000 Membership Rewards 80.000 Punkte oder Meilen, bei 3:2 rund 66.667 und bei 2:1 50.000.</p></details>
+        <details><summary>Kann ich Amex Membership Rewards zu Miles &amp; More übertragen?</summary><p>Nicht direkt. In Deutschland führt der übliche Weg über PAYBACK: 3 MR ergeben 1 PAYBACK Punkt, der anschließend regulär 1:1 zu Miles &amp; More übertragen werden kann.</p></details>
+        <details><summary>Welche Amex Transferpartner haben aktuell 5:4?</summary><p>British Airways, Iberia, Air France/KLM Flying Blue und SAS EuroBonus werden aktuell mit 5:4 geführt.</p></details>
+        <details><summary>Sollte ich Membership Rewards vor einer Flugbuchung übertragen?</summary><p>In der Regel erst, wenn die gewünschte Verfügbarkeit geprüft ist. Nach dem Transfer sind die Punkte an das jeweilige Programm gebunden und ein Rücktransfer ist üblicherweise nicht vorgesehen.</p></details>
+      </div>
+      <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Wie viele Meilen sind 100.000 Amex Punkte?","acceptedAnswer":{"@type":"Answer","text":"Das hängt vom Transferpartner ab. Bei 5:4 werden aus 100.000 Membership Rewards 80.000 Punkte oder Meilen, bei 3:2 rund 66.667 und bei 2:1 50.000."}},{"@type":"Question","name":"Kann ich Amex Membership Rewards zu Miles & More übertragen?","acceptedAnswer":{"@type":"Answer","text":"Nicht direkt. In Deutschland führt der übliche Weg über PAYBACK: 3 Membership Rewards ergeben 1 PAYBACK Punkt, der anschließend regulär 1:1 zu Miles & More übertragen werden kann."}},{"@type":"Question","name":"Welche Amex Transferpartner haben aktuell 5:4?","acceptedAnswer":{"@type":"Answer","text":"British Airways, Iberia, Air France/KLM Flying Blue und SAS EuroBonus werden aktuell mit 5:4 geführt."}},{"@type":"Question","name":"Sollte ich Membership Rewards vor einer Flugbuchung übertragen?","acceptedAnswer":{"@type":"Answer","text":"In der Regel erst nach Prüfung der gewünschten Prämienflug-Verfügbarkeit. Nach dem Transfer sind die Punkte an das jeweilige Programm gebunden."}}]}
+      </script>
+    </article>
+
+    <aside class="seo-sidebar">
+      <div class="article-card seo-card sticky-card"><p class="eyebrow">Amex Rechner</p><h3>Schnell zum Ergebnis</h3><p>Punktestand eingeben, Partner auswählen und die aktuelle Umrechnung berechnen.</p><a class="btn btn-primary" href="#mr-rechner">Zum Rechner</a></div>
+      <div class="article-card seo-card"><p class="eyebrow">Weiterlesen</p><div class="sidebar-links"><a href="/meilen-sammeln/amex/">Membership Rewards Strategie</a><a href="/meilen-sammeln/amex-kreditkarten/">Amex Kreditkarten vergleichen</a><a href="/amex-oder-payback/">Amex oder PAYBACK?</a><a href="/meilen-sammeln/payback-punkte-miles-and-more/">MR indirekt zu Miles &amp; More</a><a href="/vier-praemienflug-plaetze-finden/">4 Prämienflug-Plätze finden</a><a href="/rechner/">Prämienflug-Rechner</a></div></div>
+    </aside>
+  </div>
+</section>
+
+<script src="/assets/js/amex-transfer-partners.js?v=20260827-2"></script>
 <script>
-(function(){const partners=()=>window.AMEX_TRANSFER_PARTNERS||[];const fmt=n=>Math.round(n).toLocaleString('de-DE');const select=document.getElementById('mrPartner'),points=document.getElementById('mrPoints'),error=document.getElementById('mrError'),result=document.getElementById('mrResult');const groups={};partners().forEach((p,i)=>{(groups[p.group]??=[]).push({p,i});});Object.entries(groups).forEach(([g,items])=>{const og=document.createElement('optgroup');og.label=g;items.forEach(({p,i})=>{const o=document.createElement('option');o.value=i;o.textContent=p.name;og.appendChild(o);});select.appendChild(og);});document.getElementById('partnerTables').innerHTML=Object.entries(groups).map(([g,items])=>`<h3>${g}</h3><div class="seo-table-wrap"><table class="seo-table"><thead><tr><th>Partner</th><th>Verhältnis</th><th>100.000 MR ergeben</th></tr></thead><tbody>${items.map(({p})=>`<tr><td>${p.name}</td><td>${p.ratio}</td><td>${fmt(100000*p.factor)} ${p.unit}</td></tr>`).join('')}</tbody></table></div>`).join('');function calc(){const n=Number(points.value),idx=select.value;if(!Number.isFinite(n)||n<=0||idx===''){error.textContent='Bitte gültige Punktzahl und Partner wählen.';error.hidden=false;result.hidden=true;return;}error.hidden=true;const p=partners()[Number(idx)],out=n*p.factor;document.getElementById('mrBadge').textContent=p.name;document.getElementById('mrTitle').textContent=`${fmt(n)} MR → ${fmt(out)} ${p.unit}`;document.getElementById('mrText').textContent='Vor dem Transfer prüfe ich zusätzlich Verfügbarkeit, Mindesttransfer und mögliche Gebühren.';document.getElementById('mrUnits').textContent=`${fmt(out)} ${p.unit}`;document.getElementById('mrRatio').textContent=p.ratio;result.hidden=false;}document.getElementById('mrCalcButton').addEventListener('click',calc);document.getElementById('mrResetButton').addEventListener('click',()=>{points.value='';select.value='';error.hidden=true;result.hidden=true;});[points,select].forEach(el=>el.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();calc();}}));})();
+(function(){
+  const partners=()=>window.AMEX_TRANSFER_PARTNERS||[];
+  const fmt=n=>Math.round(n).toLocaleString('de-DE');
+  const select=document.getElementById('mrPartner'),points=document.getElementById('mrPoints'),error=document.getElementById('mrError'),result=document.getElementById('mrResult');
+  const groups={};
+  partners().forEach((p,i)=>{(groups[p.group]??=[]).push({p,i});});
+  Object.entries(groups).forEach(([g,items])=>{const og=document.createElement('optgroup');og.label=g;items.forEach(({p,i})=>{const o=document.createElement('option');o.value=i;o.textContent=p.name;og.appendChild(o);});select.appendChild(og);});
+  document.getElementById('partnerTables').innerHTML=Object.entries(groups).map(([g,items])=>`<h3>${g}</h3><div class="seo-table-wrap"><table class="seo-table"><thead><tr><th>Partner</th><th>Verhältnis</th><th>100.000 MR ergeben</th></tr></thead><tbody>${items.map(({p})=>`<tr><td>${p.name}</td><td>${p.ratio}</td><td>${fmt(100000*p.factor)} ${p.unit}</td></tr>`).join('')}</tbody></table></div>`).join('');
+  function calc(){
+    const n=Number(points.value),idx=select.value;
+    if(!Number.isFinite(n)||n<=0||idx===''){error.textContent='Bitte eine gültige Punktzahl und einen Transferpartner wählen.';error.hidden=false;result.hidden=true;return;}
+    error.hidden=true;
+    const p=partners()[Number(idx)],out=n*p.factor;
+    document.getElementById('mrBadge').textContent=p.name;
+    document.getElementById('mrTitle').textContent=`${fmt(n)} MR → ${fmt(out)} ${p.unit}`;
+    document.getElementById('mrText').textContent='Vor dem Transfer Verfügbarkeit, benötigte Menge, mögliche Mindesttransfers sowie Steuern und Gebühren prüfen.';
+    document.getElementById('mrUnits').textContent=`${fmt(out)} ${p.unit}`;
+    document.getElementById('mrRatio').textContent=p.ratio;
+    result.hidden=false;
+  }
+  document.getElementById('mrCalcButton').addEventListener('click',calc);
+  document.getElementById('mrResetButton').addEventListener('click',()=>{points.value='';select.value='';error.hidden=true;result.hidden=true;});
+  document.querySelectorAll('[data-mr-preset]').forEach(button=>button.addEventListener('click',()=>{points.value=button.dataset.mrPreset;points.focus();if(select.value!=='')calc();}));
+  [points,select].forEach(el=>el.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();calc();}}));
+})();
 </script>
