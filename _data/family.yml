@@ -1,0 +1,37 @@
+last_checked: "2026-08-27"
+last_checked_display: "27.08.2026"
+
+mileage_pooling:
+  max_adults: 2
+  max_children: 5
+  child_min_age: 2
+  child_max_age: 17
+  minimum_members: 2
+  minimum_adults: 1
+  combine_delay_days: 2
+  source_url: "https://www.miles-and-more.com/de/de/general-information/terms-and-conditions/mileage-pooling.html"
+
+child_award:
+  age_min: 2
+  age_max: 11
+  discount_percent: 25
+  adult_miles_percent: 75
+  source_url: "https://www.miles-and-more.com/de/de/program/flight-benefits/award-flights/childs-award-flight.html"
+  airlines_display: "Austrian Airlines, Air Dolomiti, Brussels Airlines, Croatia Airlines, Eurowings, Discover Airlines, LOT Polish Airlines, Lufthansa, Lufthansa City Airlines, Luxair und SWISS"
+
+infant_award:
+  max_age_exclusive: 2
+  adult_miles_percent_without_seat: 10
+  source_url: "https://www.miles-and-more.com/de/de/program/flight-benefits/award-flights/infants-award-flight.html"
+
+jetfriends:
+  min_age: 2
+  welcome_miles: 500
+  mileage_protection_until_age: 18
+  source_url: "https://www.miles-and-more.com/de/de/program/family-benefits.html"
+
+redeem_for_others:
+  allowed: true
+  self_travel_required: false
+  sale_exchange_auction_allowed: false
+  source_url: "https://www.miles-and-more.com/ch/de/general-information/help-and-contact/help/ordering-awards-for-other-people.html"
