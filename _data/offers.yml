@@ -92,6 +92,10 @@ miles_and_more_credit_card:
 eurowings_credit_card:
   last_checked: "2026-08-26"
   last_checked_display: "26.08.2026"
+  common:
+    earn_divisor_eur: 2
+    earn_rate_display: "1 Meile je 2 € Kartenumsatz"
+    foreign_cash_withdrawal_display: "0 € Kartenentgelt für Bargeldabhebung im Ausland*"
   classic:
     product: "Eurowings Kreditkarte Classic"
     welcome_miles: 500
@@ -101,6 +105,8 @@ eurowings_credit_card:
     first_year_fee_display: "14,50 €"
     annual_fee_eur: 29
     annual_fee_display: "29 €"
+    foreign_currency_fee_percent: 1.99
+    foreign_currency_fee_display: "1,99 % bei Nicht-Euro-Umsätzen"
     status: "current"
   premium:
     product: "Eurowings Kreditkarte Premium"
@@ -114,6 +120,8 @@ eurowings_credit_card:
     first_year_fee_display: "49,50 €"
     annual_fee_eur: 99
     annual_fee_display: "99 €"
+    foreign_currency_fee_percent: 0
+    foreign_currency_fee_display: "0 € weltweit"
     status: "current"
 
 revolut:
