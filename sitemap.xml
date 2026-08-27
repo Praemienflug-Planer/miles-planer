@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://praemienflug-planer.de/</loc><lastmod>2026-07-01</lastmod></url>
-  <url><loc>https://praemienflug-planer.de/rechner/</loc><lastmod>2026-06-09</lastmod></url>
-  <url><loc>https://praemienflug-planer.de/tools/</loc><lastmod>2026-06-09</lastmod></url>
-  <url><loc>https://praemienflug-planer.de/faq/</loc><lastmod>2026-06-09</lastmod></url>
+  <url><loc>https://praemienflug-planer.de/</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://praemienflug-planer.de/rechner/</loc><lastmod>2026-08-26</lastmod></url>
+  <url><loc>https://praemienflug-planer.de/tools/</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://praemienflug-planer.de/faq/</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://praemienflug-planer.de/ueber-das-projekt/</loc><lastmod>2026-06-02</lastmod></url>
   <url><loc>https://praemienflug-planer.de/transparenz.html</loc><lastmod>2026-06-02</lastmod></url>
-  <url><loc>https://praemienflug-planer.de/kontakt.html</loc><lastmod>2026-06-02</lastmod></url>
+  <url><loc>https://praemienflug-planer.de/kontakt.html</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://praemienflug-planer.de/impressum.html</loc><lastmod>2026-06-02</lastmod></url>
   <url><loc>https://praemienflug-planer.de/datenschutz.html</loc><lastmod>2026-06-02</lastmod></url>
   <url><loc>https://praemienflug-planer.de/meilen-sammeln/</loc><lastmod>2026-08-27</lastmod></url>
@@ -28,7 +28,10 @@
   <url><loc>https://praemienflug-planer.de/meilen-sammeln/punkte-meilen-verfall-kreditkarten/</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://praemienflug-planer.de/meilen-sammeln/wunschgutschein/</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://praemienflug-planer.de/meilen-sammeln/miles-and-more/</loc><lastmod>2026-08-27</lastmod></url>
-  <url><loc>https://praemienflug-planer.de/meilen-sammeln/miles-and-more-kreditkarte/</loc><lastmod>2026-07-01</lastmod></url>
+  <url><loc>https://praemienflug-planer.de/meilen-sammeln/miles-and-more-kreditkarte/</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://praemienflug-planer.de/meilen-sammeln/eurowings-kreditkarte/</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://praemienflug-planer.de/meilen-sammeln/revolut-revpoints/</loc><lastmod>2026-08-27</lastmod></url>
+  <url><loc>https://praemienflug-planer.de/meilen-sammeln/fixkosten-meilen/</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://praemienflug-planer.de/meilen-sammeln/zeitschriftenabo/</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://praemienflug-planer.de/meilen-business-class/</loc><lastmod>2026-08-27</lastmod></url>
   <url><loc>https://praemienflug-planer.de/business-class-familie-meilen/</loc><lastmod>2026-08-27</lastmod></url>
