@@ -1,0 +1,23 @@
+last_checked: "2026-08-27"
+last_checked_display: "27.08.2026"
+
+miles_and_more:
+  sz_plus:
+    product: "SZ Plus Jahresabo"
+    miles: 17500
+    miles_display: "17.500 Meilen"
+    price_eur: 449.90
+    price_display: "449,90 €"
+    duration_display: "12 Monate"
+    cpm_cent: 2.57
+    cpm_display: "2,57 Cent pro Meile"
+    status: "current"
+    source_url: "https://www.miles-and-more.com/de/de/earn/sz-plus/partner/entertainment/sz-plus/earn/basic-offer/suddeutsche-zeitung-plus_earn_basic_17500m.html"
+    notes: "Nur für Nichtabonnenten in Deutschland; Meilengutschrift spätestens vier Wochen nach Zahlungseingang; pro Haushalt und Miles-&-More-Teilnehmer innerhalb von sechs Monaten nur eine Bestellung mit Meilengutschrift."
+
+payback_burda:
+  base_rate_display: "1 PAYBACK Punkt je 2 € Umsatz"
+  max_points_display: "bis zu 31.500 PAYBACK Punkte"
+  unlock_display: "nach Zahlungseingang, frühestens 12 Wochen nach Erstbelieferung"
+  status: "current"
+  source_url: "https://www.payback.de/partner/burda"
