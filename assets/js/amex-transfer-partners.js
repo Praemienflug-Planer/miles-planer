@@ -1,3 +1,8 @@
+window.AMEX_TRANSFER_META = {
+  lastChecked: "2026-08-27",
+  lastCheckedDisplay: "27.08.2026",
+  sourceUrl: "https://www.americanexpress.com/de-de/rewards/membership-rewards/travel/all"
+};
 window.AMEX_TRANSFER_PARTNERS = [
   { group: "Airline-Programme", name: "The British Airways Club", unit: "Avios", ratio: "5 : 4", factor: 0.8, type: "Avios" },
   { group: "Airline-Programme", name: "Iberia Club", unit: "Avios", ratio: "5 : 4", factor: 0.8, type: "Avios" },
