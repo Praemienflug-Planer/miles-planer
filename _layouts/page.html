@@ -6,13 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   {% include legacy-github-redirect.html %}
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HX9T5TXN7G"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-HX9T5TXN7G');
-  </script>
+  <script src="/assets/js/consent-manager.js?v=20260829-consent-1"></script>
 
   <title>{{ page.title | default: 'Prämienflug-Planer' }}</title>
   {% if page.description %}<meta name="description" content="{{ page.description }}" />{% endif %}
@@ -39,7 +33,7 @@
   </script>
   {% endif %}
 
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260609-events" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260829-card-funnel-1" />
   <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260602-central-layout-3" />
   {% if page.extra_css %}
     {% for css in page.extra_css %}<link rel="stylesheet" href="{{ css }}" />{% endfor %}
@@ -54,7 +48,7 @@
   </main>
 
   {% include footer.html %}
-  <script src="/assets/js/conversion-events.js?v=20260609-events-3"></script>
+  <script src="/assets/js/conversion-events.js?v=20260829-consent-1"></script>
   <script src="/assets/js/breadcrumb-schema.js?v=20260602-central-layout-3"></script>
   <script src="/assets/js/contextual-faq.js?v=20260602-central-layout-3"></script>
   <script src="/assets/js/nav-toggle.js?v=20260602-central-layout-3"></script>

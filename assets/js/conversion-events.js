@@ -16,6 +16,11 @@
     form_submit: 'form_submit',
     lead_request_start: 'lead_request_start',
     lead_request_submit: 'lead_request_submit',
+    referral_link_request: 'referral_link_request',
+    referral_link_success: 'referral_link_success',
+    card_offer_view: 'card_offer_view',
+    card_offer_click: 'card_offer_click',
+    outbound_provider_click: 'outbound_provider_click',
     click_contact: 'contact_click',
     contact_referral_request: 'referral_request',
     click_next_step_payback: 'next_step_payback',
@@ -27,6 +32,7 @@
 
   const ROUTE_EVENTS = [
     { test: (href) => href.includes('/rechner/'), event: 'calculator_start' },
+    { test: (href) => href.includes('/kreditkarten-link/'), event: 'card_offer_click' },
     { test: (href) => href.includes('kontakt.html'), event: 'contact_click' },
     { test: (href) => href.includes('/meilen-sammeln/payback'), event: 'next_step_payback' },
     { test: (href) => href.includes('/meilen-sammeln/amex') || href.includes('/amex-meilen-umrechnen') || href.includes('/amex-oder-payback'), event: 'next_step_amex' },
@@ -36,12 +42,17 @@
   ];
 
   const seen = new Set();
+  let analyticsSessionInitialized = false;
+
+  function analyticsAllowed() {
+    return window.pfpAnalyticsConsent === 'granted';
+  }
 
   function cleanProps(props = {}) {
     const safe = {};
     Object.entries(props).forEach(([key, value]) => {
       if (value === undefined || value === null || value === '') return;
-      if (/email|mail|name|message|nachricht/i.test(key)) return;
+      if (key !== 'form_name' && /(^|_)(email|mail|name|message|nachricht)($|_)/i.test(key)) return;
       safe[key] = String(value).replace(/\s+/g, ' ').trim().slice(0, 160);
     });
     return safe;
@@ -51,11 +62,22 @@
     const path = window.location.pathname;
     if (path === '/') return 'home';
     if (path.includes('/rechner/')) return 'calculator';
+    if (path.includes('/kreditkarten-link/')) return 'card_referral';
     if (path.includes('/tools/')) return 'tools';
     if (path.includes('/meilen-sammeln/')) return 'collecting';
     if (path.includes('/praemienfluege-familie/') || path.includes('familie') || path.includes('kindern')) return 'family';
     if (path.includes('/meilen-thailand/') || path.includes('/meilen-new-york/') || path.includes('/florida-mit-meilen/')) return 'destination';
     return 'content';
+  }
+
+  function getSafeReferrer() {
+    if (!document.referrer) return '';
+    try {
+      const url = new URL(document.referrer);
+      return `${url.origin}${url.pathname}`.slice(0, 160);
+    } catch (error) {
+      return '';
+    }
   }
 
   function sendEvent(rawName, props = {}) {
@@ -68,14 +90,13 @@
     });
 
     const eventObject = { event: eventName, ...payload };
-    window.dataLayer.push(eventObject);
     window.ppEvents.push({ ...eventObject, ts: new Date().toISOString() });
 
-    if (typeof window.gtag === 'function' && eventName !== 'page_view') {
+    if (analyticsAllowed() && typeof window.gtag === 'function') {
       window.gtag('event', eventName, payload);
     }
 
-    if (typeof window.plausible === 'function') {
+    if (analyticsAllowed() && typeof window.plausible === 'function') {
       window.plausible(eventName, { props: payload });
     }
 
@@ -89,6 +110,7 @@
     if (explicit) return explicit;
 
     const href = target.getAttribute('href') || '';
+    if (/^https?:\/\//i.test(href) && !href.includes(window.location.hostname)) return 'outbound_provider_click';
     const match = ROUTE_EVENTS.find((rule) => rule.test(href));
     return match?.event || 'cta_click';
   }
@@ -97,6 +119,7 @@
     if (form.classList.contains('lead-request-form')) return 'calculator_lead_request';
     if (form.id === 'milesForm') return 'calculator';
     if (form.id === 'contactForm') return 'contact';
+    if (form.id === 'referralLinkForm') return 'referral_link_request';
     return form.getAttribute('name') || form.id || 'unknown_form';
   }
 
@@ -132,7 +155,8 @@
 
     sendEvent(eventName, {
       link_text: target.textContent.trim().replace(/\s+/g, ' ').slice(0, 80),
-      link_target: target.getAttribute('href') || ''
+      link_target: target.getAttribute('href') || '',
+      card_offer: target.getAttribute('data-card') || ''
     });
   });
 
@@ -156,6 +180,11 @@
       return;
     }
 
+    if (form.id === 'referralLinkForm') {
+      sendEvent('referral_link_request', getLeadMeta(form));
+      return;
+    }
+
     sendEvent('form_submit', { form_name: getFormName(form) });
   }, true);
 
@@ -172,14 +201,44 @@
     observer.observe(resultNode, { childList: true, subtree: true });
   }
 
-  function init() {
-    sendEvent('page_view', { referrer: document.referrer || '' });
-    sendEvent('tracking_ready', { tracking_version: '20260609-events-3' });
+  function watchOfferViews() {
+    const offers = document.querySelectorAll('[data-card-offer]');
+    if (!offers.length || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.45) return;
+        const offer = entry.target;
+        const offerName = offer.getAttribute('data-card-offer') || 'unknown';
+        const key = `card_offer_view:${offerName}:${window.location.pathname}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          sendEvent('card_offer_view', { card_offer: offerName });
+        }
+        observer.unobserve(offer);
+      });
+    }, { threshold: [0.45] });
+    offers.forEach((offer) => observer.observe(offer));
+  }
+
+  function initializeAnalyticsSession() {
+    if (analyticsSessionInitialized || !analyticsAllowed()) return;
+    analyticsSessionInitialized = true;
+    sendEvent('page_view', { referrer: getSafeReferrer() });
+    sendEvent('tracking_ready', { tracking_version: '20260829-consent-1' });
     if (window.location.pathname.includes('/rechner/')) {
       sendEvent('calculator_start', { trigger: 'calculator_page_loaded' });
     }
-    watchCalculatorResult();
   }
+
+  function init() {
+    initializeAnalyticsSession();
+    watchCalculatorResult();
+    watchOfferViews();
+  }
+
+  window.addEventListener('pfp:analytics-consent', (event) => {
+    if (event.detail?.choice === 'granted') initializeAnalyticsSession();
+  });
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();

@@ -53,13 +53,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   {% include legacy-github-redirect.html %}
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HX9T5TXN7G"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-HX9T5TXN7G');
-  </script>
+  <script src="/assets/js/consent-manager.js?v=20260829-consent-1"></script>
   <title>{{ serp_title }}</title>
   {% if serp_description != '' %}<meta name="description" content="{{ serp_description }}" />{% endif %}
   <link rel="canonical" href="{{ extracted_canonical }}" />
@@ -79,7 +73,7 @@
   {% if extracted_schema != '' %}<script type="application/ld+json">
 {{ extracted_schema }}
   </script>{% endif %}
-  <link rel="stylesheet" href="/assets/css/site.css?v=20260617-header-logo" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=20260829-card-funnel-1" />
   <link rel="stylesheet" href="/assets/css/hero-background.css?v=20260609-canonical" />
   <link rel="stylesheet" href="/assets/css/home.css?v=20260609-canonical" />
 </head>
@@ -106,7 +100,7 @@
     {{ main_content }}
   </main>
   {% include footer.html %}
-  <script src="/assets/js/conversion-events.js?v=20260609-events-2"></script>
+  <script src="/assets/js/conversion-events.js?v=20260829-consent-1"></script>
   <script src="/assets/js/breadcrumb-schema.js?v=20260609-canonical"></script>
   <script src="/assets/js/contextual-faq.js?v=20260609-canonical"></script>
   <script src="/assets/js/nav-toggle.js?v=20260609-canonical"></script>

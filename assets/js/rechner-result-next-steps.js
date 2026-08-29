@@ -72,26 +72,36 @@
     const gapText = context.gapLabel ? `Der aktuelle Plan verfehlt den Reisezeitraum um ${context.gapLabel}. ` : '';
 
     if (isMilesAndMore(programm)) {
+      const links = severe ? [
+        ['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`],
+        ['Ziel neu berechnen', `${BASE}/rechner/`],
+        ['Kartenbaustein einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]
+      ] : [
+        ['4.000-Punkte-Link für PAYBACK Amex', `${BASE}/kreditkarten-link/?karte=payback-amex&quelle=rechner-mm-luecke`],
+        ['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`],
+        ['Kartenbaustein einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]
+      ];
       return {
         title: severe ? 'Ehrliches Fazit: Mit der aktuellen Rate reicht es nicht' : 'Der Miles-&-More-Plan ist zu knapp',
         text: `${gapText}Das ist keine reine Transferfrage, sondern eine echte Sammellücke. Bei Miles & More solltest du zuerst prüfen, ob PAYBACK, PAYBACK Amex, eine Eurowings-/Miles-&-More-Kreditkarte oder ein späteres Reisejahr die Lücke realistisch schließen können. Wenn nicht, muss Ziel, Reiseklasse oder Sammelrate angepasst werden.`,
-        links: [
-          ['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`],
-          ['Transfer zu Miles & More prüfen', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`],
-          ['Kartenbaustein einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]
-        ],
+        links,
         note: 'Wichtig: Karten- oder Punkteaktionen können helfen, aber nur wenn Bedingungen, Kosten, Mindestumsatz und dein normales Ausgabeverhalten passen. Nicht wegen Meilen mehr ausgeben.'
       };
     }
 
+    const links = severe ? [
+      ['Ziel neu berechnen', `${BASE}/rechner/`],
+      ['Amex-Angebote einordnen', `${BASE}/meilen-sammeln/amex-kreditkarten/`],
+      ['Meilen sammeln als Familie', `${BASE}/meilen-sammeln-familie/`]
+    ] : [
+      ['Passenden Amex-Link anfragen', `${BASE}/kreditkarten-link/?karte=amex-flexibel&quelle=rechner-flex-luecke`],
+      ['Amex-Angebote einordnen', `${BASE}/meilen-sammeln/amex-kreditkarten/`],
+      ['Amex Punkte sammeln', `${BASE}/meilen-sammeln/amex/`]
+    ];
     return {
       title: severe ? 'Ehrliches Fazit: Mit der aktuellen Rate reicht es nicht' : 'Der Plan ist zu knapp: Rate oder Ziel anpassen',
       text: `${gapText}Das ist kein kleines Transferproblem, sondern eine echte Sammellücke. Prüfe zuerst, ob Reiseklasse, Reiseziel, Reisejahr oder monatliche Sammelrate angepasst werden müssen. Ein einmaliger Punkte-Boost kann helfen, ersetzt aber keine dauerhaft zu niedrige Sammelrate.`,
-      links: [
-        ['Amex-Punkteboost einordnen', `${BASE}/meilen-sammeln/amex-kreditkarten/`],
-        ['Amex Punkte sammeln', `${BASE}/meilen-sammeln/amex/`],
-        ['Ziel neu berechnen', `${BASE}/rechner/`]
-      ],
+      links,
       note: 'Hinweis: Aktionen ändern sich. Je nach Angebot kann ein hoher Membership-Rewards-Startbonus helfen. Bedingungen, Kosten und erforderlichen Umsatz immer vorher prüfen.'
     };
   }
@@ -103,19 +113,19 @@
     const normalized = String(programm || '').toLowerCase();
 
     if (normalized.includes('miles') || normalized.includes('more')) {
-      return { title: 'Dein Ergebnis passt zu Miles & More: Sammelweg gezielt verbessern', text: 'Wenn dein Plan auf Miles & More basiert, sind meistens drei Bausteine relevant: PAYBACK im Alltag, Transferbonus-Aktionen und ein passender Kartenbaustein. Prüfe diese Reihenfolge, bevor du Punkte überträgst.', links: [['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`], ['Transfer zu Miles & More prüfen', `${BASE}/meilen-sammeln/payback-punkte-miles-and-more/`], ['Kartenbaustein einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]], note: 'Zusätzliche Produkte nur nutzen, wenn sie zu deinem Alltag passen. Meilen sind kein Grund für unnötige Ausgaben.' };
+      return { title: 'Dein Ergebnis passt zu Miles & More: Sammelweg gezielt verbessern', text: 'Wenn dein Plan auf Miles & More basiert, sind meistens drei Bausteine relevant: PAYBACK im Alltag, Transferbonus-Aktionen und ein passender Kartenbaustein. Prüfe diese Reihenfolge, bevor du Punkte überträgst.', links: [['4.000-Punkte-Link für PAYBACK Amex', `${BASE}/kreditkarten-link/?karte=payback-amex&quelle=rechner-miles-and-more`], ['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`], ['Miles-&-More-Karte offiziell einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]], note: 'Zusätzliche Produkte nur nutzen, wenn sie zu deinem Alltag passen. Meilen sind kein Grund für unnötige Ausgaben. Für Miles & More werden keine kommerziellen Freundschaftswerbungslinks vermittelt.' };
     }
 
     if (normalized.includes('flying')) {
-      return { title: 'Dein Ergebnis passt zu Flying Blue: flexible Amex-Punkte prüfen', text: 'Für Flying Blue sind flexible Punkte wie American Express Membership Rewards besonders interessant, weil du sie erst später gezielt übertragen kannst. Das ist bei schwankenden Flying-Blue-Preisen oft wertvoller als ein zu früher Transfer.', links: [['Amex Membership Rewards verstehen', `${BASE}/meilen-sammeln/amex/`], ['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Amex oder PAYBACK vergleichen', `${BASE}/amex-oder-payback/`]], note: 'Flying-Blue-Preise können stark schwanken. Plane mit Puffer und übertrage Punkte erst, wenn Verfügbarkeit und Buchungslogik klar sind.' };
+      return { title: 'Dein Ergebnis passt zu Flying Blue: flexible Amex-Punkte prüfen', text: 'Für Flying Blue sind flexible Punkte wie American Express Membership Rewards besonders interessant, weil du sie erst später gezielt übertragen kannst. Das ist bei schwankenden Flying-Blue-Preisen oft wertvoller als ein zu früher Transfer.', links: [['Passenden Amex-Link anfragen', `${BASE}/kreditkarten-link/?karte=amex-flexibel&quelle=rechner-flying-blue`], ['Amex Membership Rewards verstehen', `${BASE}/meilen-sammeln/amex/`], ['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`]], note: 'Flying-Blue-Preise können stark schwanken. Plane mit Puffer und übertrage Punkte erst, wenn Verfügbarkeit und Buchungslogik klar sind.' };
     }
 
     if (normalized.includes('avios')) {
-      return { title: 'Dein Ergebnis passt zu Avios: Transferlogik und Sweet Spot prüfen', text: 'Bei Avios kommt es stark auf Strecke, Airline und Programm an. Flexible Punkte können sinnvoll sein, wenn du noch offen bleiben möchtest.', links: [['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Amex Membership Rewards sammeln', `${BASE}/meilen-sammeln/amex/`], ['Amex oder PAYBACK vergleichen', `${BASE}/amex-oder-payback/`]], note: 'Avios können sehr stark sein, aber nicht pauschal. Prüfe den konkreten Sweet Spot und mögliche Gebühren.' };
+      return { title: 'Dein Ergebnis passt zu Avios: Transferlogik und Sweet Spot prüfen', text: 'Bei Avios kommt es stark auf Strecke, Airline und Programm an. Flexible Punkte können sinnvoll sein, wenn du noch offen bleiben möchtest.', links: [['Passenden Amex-Link anfragen', `${BASE}/kreditkarten-link/?karte=amex-flexibel&quelle=rechner-avios`], ['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Amex Membership Rewards sammeln', `${BASE}/meilen-sammeln/amex/`]], note: 'Avios können sehr stark sein, aber nicht pauschal. Prüfe den konkreten Sweet Spot und mögliche Gebühren.' };
     }
 
     if (normalized.includes('kris')) {
-      return { title: 'Dein Ergebnis passt zu KrisFlyer: Transferzeit und Puffer prüfen', text: 'Bei KrisFlyer sind Transferzeiten, Ablaufdaten und Verfügbarkeiten wichtig. Das ist aber erst der zweite Schritt: Wenn die Sammellücke groß ist, muss zuerst der Punkteaufbau realistisch werden.', links: [['Amex Membership Rewards sammeln', `${BASE}/meilen-sammeln/amex/`], ['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`], ['Meilen sammeln als Familie', `${BASE}/meilen-sammeln-familie/`]], note: 'Transfers können länger dauern. Verfügbarkeit, Ablaufdaten und Programmregeln sollten vor einer Übertragung geprüft werden.' };
+      return { title: 'Dein Ergebnis passt zu KrisFlyer: Transferzeit und Puffer prüfen', text: 'Bei KrisFlyer sind Transferzeiten, Ablaufdaten und Verfügbarkeiten wichtig. Das ist aber erst der zweite Schritt: Wenn die Sammellücke groß ist, muss zuerst der Punkteaufbau realistisch werden.', links: [['Passenden Amex-Link anfragen', `${BASE}/kreditkarten-link/?karte=amex-flexibel&quelle=rechner-krisflyer`], ['Amex Membership Rewards sammeln', `${BASE}/meilen-sammeln/amex/`], ['Amex Punkte umrechnen', `${BASE}/amex-meilen-umrechnen/`]], note: 'Transfers können länger dauern. Verfügbarkeit, Ablaufdaten und Programmregeln sollten vor einer Übertragung geprüft werden.' };
     }
 
     return { title: 'Dein nächster Schritt: Sammelweg passend zum Ziel prüfen', text: 'Nach dem Ergebnis solltest du zuerst klären, welcher Sammelweg zu deinem Programm, deiner Familie und deinem Reisezeitraum passt. Entscheidend ist, ob er deine konkrete Lücke sinnvoll schließt.', links: [['Meilen sammeln als Familie', `${BASE}/meilen-sammeln-familie/`], ['Amex oder PAYBACK vergleichen', `${BASE}/amex-oder-payback/`], ['Tools & Rechner ansehen', `${BASE}/tools/`]], note: 'Entscheidend ist nicht nur die Punktzahl, sondern auch Verfügbarkeit, Gebühren und realistische Sammelrate.' };
