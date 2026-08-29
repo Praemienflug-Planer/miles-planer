@@ -1,4 +1,24 @@
 /* Conversion-focused refinements loaded after the base layout. */
+.hero-mini-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.hero-mini-proof span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.26);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.48);
+  color: rgba(226, 232, 240, 0.86);
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .nav-item-cta { margin-left: 2px; }
 
 .main-nav .nav-cta {
