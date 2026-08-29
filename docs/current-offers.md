@@ -8,6 +8,7 @@ Aktuell enthält die Datei unter anderem:
 
 - American Express Membership-Rewards-Boni und Monatsgebühren
 - PAYBACK American Express Empfehlungsbonus
+- Mindestumsatz, Angebotsart, offizieller Vergleichslink und Link-Anfragepfad
 - Miles & More Credit Card Gold/Blue/MyFlex: Gebühren, Willkommenspakete und Aktionsfristen
 - MoneySend-Sammelrate und monatliches Meilenmaximum
 - Eurowings Kreditkarte Classic/Premium: Willkommensmeilen und Gebühren
@@ -20,6 +21,16 @@ Aktuell enthält die Datei unter anderem:
 3. Das `last_checked` und `last_checked_display` der betroffenen Produktfamilie aktualisieren. Die globalen Felder oben in der Datei dienen nur als Gesamt-Datenstand.
 4. Prüfen, ob sich außer Zahlen auch Bedingungen oder redaktionelle Einordnungen geändert haben. Solche Textänderungen gehören weiterhin in die jeweilige Inhaltsseite.
 5. Website nach dem Deploy auf den zentralen Kreditkartenseiten kurz visuell prüfen.
+
+## Linktypen sauber trennen
+
+- `official_url` verweist immer auf die öffentliche Produkt- oder Anbieterseite.
+- `referral_terms_url` verweist auf die öffentliche Erklärung des Anbieters zur Freundschaftswerbung.
+- `request_path` führt zur internen, einmaligen Link-Anfrage. Dort wird kein Kartenantrag ausgelöst.
+- `offer_type: referral` bedeutet, dass der genannte Punktebonus aus einem aktuell geprüften Empfehlungsweg stammt. Entscheidend bleiben die Bedingungen im tatsächlich geöffneten Link.
+- Persönliche Referral- oder Affiliate-Tracking-URLs gehören nicht in `_data/offers.yml`. Sie werden erst nach konkreter Anfrage versendet beziehungsweise bei einem späteren öffentlichen Affiliate-Einsatz ausdrücklich als vergütet gekennzeichnet.
+
+Für Miles & More werden keine kommerziellen Freundschaftswerbungslinks vermittelt. Die Website verlinkt dort ausschließlich auf öffentliche Anbieterangebote und Bedingungen.
 
 ## Technische Einbindung
 

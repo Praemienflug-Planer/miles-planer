@@ -97,10 +97,9 @@ function buildAffiliateBox() {
       <h4>Fragen zu Karten und Sammelstrategie?</h4>
       <p>
         <strong>Hinweis:</strong> Ich nutze selbst verschiedene Karten- und Punkteprogramme.
-        Wenn du Fragen zu einer konkreten Karte oder einer möglichen Freundschaftswerbung hast,
-        kannst du mich über das
-        <a href="/miles-planer/kontakt.html">Kontaktformular</a>
-        kontaktieren. Ich gebe keine Finanzberatung und empfehle nur Produkte,
+        Wenn ein Kartenbaustein zu deinem Ergebnis passt, kannst du über die
+        <a href="/kreditkarten-link/?karte=amex-flexibel&amp;quelle=rechner-basis">kurze Link-Anfrage</a>
+        einen aktuell geprüften Angebotsweg erhalten. Ich gebe keine Finanzberatung und empfehle nur Produkte,
         die ich selbst sinnvoll einordnen kann.
       </p>
     </div>

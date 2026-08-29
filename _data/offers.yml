@@ -1,16 +1,22 @@
-last_checked: "2026-08-24"
-last_checked_display: "24.08.2026"
+last_checked: "2026-08-29"
+last_checked_display: "29.08.2026"
 
 amex:
-  last_checked: "2026-08-24"
-  last_checked_display: "24.08.2026"
+  last_checked: "2026-08-29"
+  last_checked_display: "29.08.2026"
+  referral_terms_url: "https://www.americanexpress.com/de-de/amexcited/benefits/amex-freunde-werben"
   platinum:
     product: "American Express Platinum"
     bonus_value: 85000
     bonus_display: "85.000 MR"
+    bonus_qualifier: "bis zu"
+    minimum_spend_display: "10.000 € Kartenumsatz in 6 Monaten"
+    public_offer_display: "bis zu 340 € Startguthaben"
     fee_monthly_eur: 60
     fee_monthly_display: "60 €"
     offer_type: "referral"
+    official_url: "https://www.americanexpress.com/de-de/kreditkarte/platinum-card/"
+    request_path: "/kreditkarten-link/?karte=amex-platinum"
     status: "current"
   rose_gold:
     product: "American Express Rose Gold"
@@ -24,17 +30,27 @@ amex:
     product: "American Express Gold"
     bonus_value: 50000
     bonus_display: "50.000 MR"
+    bonus_qualifier: "bis zu"
+    minimum_spend_display: "5.000 € Kartenumsatz in 6 Monaten"
+    public_offer_display: "bis zu 200 € Startguthaben"
     fee_monthly_eur: 20
     fee_monthly_display: "20 €"
     offer_type: "referral"
+    official_url: "https://www.americanexpress.com/de-de/kreditkarte/goldcard/"
+    request_path: "/kreditkarten-link/?karte=amex-gold"
     status: "current"
   green:
     product: "American Express Green"
     bonus_value: 10000
     bonus_display: "10.000 MR"
+    bonus_qualifier: ""
+    minimum_spend_display: "Bedingungen im geöffneten Link prüfen"
+    public_offer_display: "40 € Startguthaben bei 2.000 € Umsatz in 6 Monaten"
     fee_monthly_eur: 5
     fee_monthly_display: "5 €"
     offer_type: "referral"
+    official_url: "https://www.americanexpress.com/de-de/kreditkarte/american-express-card/"
+    request_path: "/kreditkarten-link/?karte=amex-green"
     status: "current"
   payback:
     product: "PAYBACK American Express"
@@ -42,9 +58,13 @@ amex:
     bonus_number_display: "4.000"
     bonus_display: "4.000 PAYBACK Punkte"
     bonus_short_display: "4.000 °P"
+    minimum_spend_display: "Bedingungen im geöffneten Link prüfen"
+    public_offer_display: "bis zu 3.000 Extra°Punkte"
     annual_fee_eur: 0
     annual_fee_display: "0 €"
     offer_type: "referral"
+    official_url: "https://www.payback.de/info/american-express"
+    request_path: "/kreditkarten-link/?karte=payback-amex"
     status: "current"
 
 miles_and_more_credit_card:

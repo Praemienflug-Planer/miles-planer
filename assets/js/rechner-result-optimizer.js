@@ -12,9 +12,9 @@
         <p class="eyebrow">Punkte schneller aufbauen</p>
         <h3>Kreditkarten, PAYBACK und Sammelstrategie</h3>
         <p>Wenn dein Ergebnis zeigt, dass noch Punkte fehlen, können passende Sammelwege helfen – zum Beispiel PAYBACK, Miles & More oder flexible Punkteprogramme wie Amex Membership Rewards.</p>
-        <p>Ob sich eine Kreditkarte für dich lohnt, hängt von deinem Ziel, deinem Ausgabeverhalten und deiner Zahlungsdisziplin ab. Bei Interesse kann ich dir einen passenden Empfehlungslink gerne über das <a href="/kontakt.html">Kontaktformular</a> zur Verfügung stellen.</p>
+        <p>Ob sich eine Kreditkarte für dich lohnt, hängt von deinem Ziel, deinem Ausgabeverhalten und deiner Zahlungsdisziplin ab. Wenn ein Kartenbaustein zu deinem Ergebnis passt, kannst du einen aktuell geprüften Link gezielt anfragen.</p>
         <p class="affiliate-disclosure">Wenn du über einen solchen Link bestellst, kann ich davon profitieren. Für dich entstehen dadurch keine zusätzlichen Kosten.</p>
-        <div class="result-action-buttons"><a class="btn btn-primary" href="/kontakt.html">Empfehlungslink anfragen</a><a class="btn btn-secondary" href="/meilen-sammeln/">Sammelwege ansehen</a></div>
+        <div class="result-action-buttons"><a class="btn btn-primary" href="/kreditkarten-link/?karte=amex-flexibel&quelle=rechner-ergebnis">Passenden Kartenlink anfragen</a><a class="btn btn-secondary" href="/meilen-sammeln/">Sammelwege ansehen</a></div>
       </div>
     `;
   }

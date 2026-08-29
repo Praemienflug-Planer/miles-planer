@@ -240,7 +240,7 @@
     const block = document.createElement('div');
     block.className = 'payback-amex-promo';
     block.dataset.officialPaybackCard = 'true';
-    block.innerHTML = `<div class="payback-amex-promo-media"><img src="${officialCardImages.payback}" alt="PAYBACK American Express Karte" loading="lazy"></div><p><strong>Aktuell über meinen Empfehlungslink:</strong> 4.000 PAYBACK Punkte für den Geworbenen (Stand 24.08.2026).</p><ul><li>PAYBACK Punkte verfallen durch aktive PAYBACK Amex nicht mehr.</li><li>Guter Basisbaustein, wenn du auf PAYBACK → Miles & More sammelst.</li><li>Die Karte sammelt PAYBACK Punkte, nicht Membership Rewards.</li></ul><a class="btn btn-primary" href="${BASE}/kontakt.html" data-event="payback_amex_contact_inline">PAYBACK-Amex-Link anfragen</a>`;
+    block.innerHTML = `<div class="payback-amex-promo-media"><img src="${officialCardImages.payback}" alt="PAYBACK American Express Karte" loading="lazy"></div><p><strong>Aktuell über meinen Empfehlungslink:</strong> 4.000 PAYBACK Punkte für den Geworbenen (Stand 29.08.2026).</p><ul><li>PAYBACK Punkte verfallen durch aktive PAYBACK Amex nicht mehr.</li><li>Guter Basisbaustein, wenn du auf PAYBACK → Miles & More sammelst.</li><li>Die Karte sammelt PAYBACK Punkte, nicht Membership Rewards.</li></ul><a class="btn btn-primary" href="${BASE}/kreditkarten-link/?karte=payback-amex&quelle=payback-inline" data-event="card_offer_click">4.000-Punkte-Link erhalten</a>`;
     const headline = target.querySelector('h2, h3');
     if (headline) headline.insertAdjacentElement('afterend', block);
     else target.prepend(block);

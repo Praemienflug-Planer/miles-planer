@@ -1,0 +1,98 @@
+---
+layout: page
+title: "Kreditkarten-Empfehlungslink anfragen | Prämienflug-Planer"
+description: "Passenden Amex- oder PAYBACK-Kreditkartenlink per E-Mail anfragen. Karte vorauswählen, Konditionen prüfen und ohne automatischen Antrag entscheiden."
+canonical: "https://praemienflug-planer.de/kreditkarten-link/"
+extra_js:
+  - "/assets/js/referral-request.js?v=20260829-1"
+---
+<section class="hero hero-small hero-contact">
+  <div class="container hero-grid contact-hero-grid">
+    <div>
+      <p class="eyebrow">Einmalige Link-Anfrage</p>
+      <h1>Den passenden Kreditkartenlink per E-Mail erhalten</h1>
+      <p class="hero-text">Wähle die Karte aus und hinterlasse deine E-Mail-Adresse. Ich sende dir den aktuell geprüften Link oder – falls ein anderes öffentliches Angebot besser ist – einen entsprechenden Hinweis.</p>
+      <div class="hero-mini-proof" aria-label="Ablauf"><span>Kein Nutzerkonto</span><span>Keine Newsletter-Anmeldung</span><span>Kein automatischer Kartenantrag</span></div>
+    </div>
+    <div class="hero-card">
+      <h2>Bevor du entscheidest</h2>
+      <ul>
+        <li>Bonus und Mindestumsatz im geöffneten Link prüfen</li>
+        <li>Gebühr gegen dauerhaft genutzte Vorteile rechnen</li>
+        <li>Abrechnung immer vollständig bezahlen</li>
+        <li>keine Ausgaben nur für Punkte erzeugen</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-layout referral-layout">
+    <div class="contact-card">
+      <p class="eyebrow">In unter einer Minute</p>
+      <h2>Link anfragen</h2>
+      <p id="referralSelectionSummary" class="contact-intro">Die gewünschte Karte ist bereits vorausgewählt, wenn du von einem Angebot kommst.</p>
+      <form id="referralLinkForm" action="https://formspree.io/f/xaqpjkgd" method="POST" class="contact-form referral-form">
+        <label for="referralCard">Welche Karte interessiert dich?</label>
+        <select id="referralCard" name="wunsch" required>
+          <option value="payback-amex">PAYBACK Amex – {{ site.data.offers.amex.payback.bonus_display }}</option>
+          <option value="amex-flexibel">Amex Membership Rewards – passende Karte einordnen</option>
+          <option value="amex-green">Amex Green – {{ site.data.offers.amex.green.bonus_display }}</option>
+          <option value="amex-gold">Amex Gold – {{ site.data.offers.amex.gold.bonus_qualifier }} {{ site.data.offers.amex.gold.bonus_display }}</option>
+          <option value="amex-platinum">Amex Platinum – {{ site.data.offers.amex.platinum.bonus_qualifier }} {{ site.data.offers.amex.platinum.bonus_display }}</option>
+          <option value="eurowings">Eurowings Kreditkarte – offizielles Angebot einordnen</option>
+          <option value="miles-and-more">Miles &amp; More Kreditkarte – offizielles Angebot einordnen</option>
+        </select>
+
+        <label for="referralEmail">E-Mail-Adresse</label>
+        <input id="referralEmail" name="email" type="email" placeholder="deine@email.de" autocomplete="email" required />
+
+        <label for="referralName">Name <span class="optional-label">optional</span></label>
+        <input id="referralName" name="name" type="text" placeholder="Wie darf ich dich ansprechen?" autocomplete="name" />
+
+        <label for="referralMessage">Kurze Frage <span class="optional-label">optional</span></label>
+        <textarea id="referralMessage" name="nachricht" rows="4" placeholder="Zum Beispiel: Ich schwanke zwischen Green und Gold."></textarea>
+
+        <label class="form-check" for="referralConfirm">
+          <input id="referralConfirm" name="hinweis_bestaetigt" type="checkbox" value="ja" required />
+          <span>Ich habe verstanden, dass erst der Anbieter den Kartenantrag prüft und die Bedingungen im geöffneten Link maßgeblich sind.</span>
+        </label>
+
+        <div class="hp-field" aria-hidden="true"><label for="referralWebsite">Bitte leer lassen</label><input id="referralWebsite" type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
+        <input id="referralSource" type="hidden" name="quelle" value="direkt" />
+        <input id="referralSubject" type="hidden" name="_subject" value="Kreditkarten-Link-Anfrage" />
+        <input type="hidden" name="_language" value="de" />
+        <button id="referralSubmit" type="submit" class="btn btn-primary">Ausgewählten Link anfragen</button>
+        <p class="form-note">Deine Angaben werden ausschließlich zur Beantwortung dieser Anfrage verarbeitet. Details findest du im <a href="/datenschutz.html#kreditkarten-link-anfrage">Datenschutz</a>.</p>
+        <div id="referralFormStatus" class="form-status" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <aside class="contact-side">
+      <div class="contact-info-card">
+        <p class="eyebrow">So geht es weiter</p>
+        <h3>Keine Blackbox</h3>
+        <ol class="referral-steps">
+          <li>Du wählst Karte und E-Mail-Adresse.</li>
+          <li>Ich prüfe den aktuellen Link und seine sichtbaren Konditionen.</li>
+          <li>Du erhältst den Link per E-Mail und entscheidest selbst.</li>
+          <li>Ein Antrag findet ausschließlich beim Kartenanbieter statt.</li>
+        </ol>
+      </div>
+      <div class="contact-info-card">
+        <p class="eyebrow">Transparenz</p>
+        <h3>Wie ich profitieren kann</h3>
+        <p>Bei einem Empfehlungslink kann ich eine Prämie erhalten, wenn du den Link nutzt und der Antrag angenommen wird. Für dich entstehen dadurch keine zusätzlichen Kosten.</p>
+        <p>Bei Miles &amp; More verweise ich ausschließlich auf öffentliche Anbieterangebote; eine kommerzielle Freundschaftswerbung biete ich dafür nicht an.</p>
+        <p><a href="/transparenz.html">Alle Transparenzhinweise lesen</a></p>
+      </div>
+      <div class="contact-info-card">
+        <p class="eyebrow">Noch unsicher?</p>
+        <h3>Erst vergleichen</h3>
+        <div class="sidebar-links"><a href="/rechner/">Meilenbedarf berechnen</a><a href="/meilen-sammeln/amex-kreditkarten/">Amex Karten vergleichen</a><a href="/amex-oder-payback/">Amex oder PAYBACK?</a></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="section legal-note-section"><div class="container legal-note"><strong>Keine Finanzberatung:</strong> Die Inhalte und die Link-Zusendung sind allgemeine Informationen, keine individuelle Finanzberatung. Kreditkarten sind nur sinnvoll, wenn du die Abrechnung vollständig und pünktlich bezahlst.</div></section>

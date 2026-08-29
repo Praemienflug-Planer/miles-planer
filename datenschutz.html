@@ -15,7 +15,7 @@ canonical: https://praemienflug-planer.de/datenschutz.html
 <section class="section">
   <div class="container legal-page">
     <article class="article-card seo-card">
-      <p><strong>Stand:</strong> 09.06.2026</p>
+      <p><strong>Stand:</strong> 29.08.2026</p>
 
       <h2>1. Allgemeine Hinweise</h2>
       <p>Der Schutz deiner persönlichen Daten ist mir wichtig. Diese Datenschutzerklärung informiert darüber, welche Daten auf dieser Website verarbeitet werden.</p>
@@ -47,8 +47,10 @@ canonical: https://praemienflug-planer.de/datenschutz.html
       <p>Für einzelne Berechnungen kann eine Google-Sheets- beziehungsweise Google-Apps-Script-Infrastruktur genutzt werden. Dabei werden die eingegebenen Rechnerdaten technisch verarbeitet, um das Ergebnis zu erzeugen.</p>
       <p>Die Eingaben sollten nur grobe Planungswerte enthalten, zum Beispiel Meilenbestand, Zielregion, Reisezeit und Sammelrate.</p>
 
-      <h2>7. Google Analytics 4 / Google Tag</h2>
-      <p>Auf dieser Website wird Google Analytics 4 über den Google Tag eingesetzt. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics hilft mir zu verstehen, welche Seiten genutzt werden, wie Besucher mit dem Rechner interagieren und ob Anfragen über das Rechner-Formular entstehen.</p>
+      <h2 id="google-analytics">7. Google Analytics 4 nur nach Einwilligung</h2>
+      <p>Google Analytics 4 wird auf dieser Website ausschließlich geladen, wenn du im Datenschutz-Dialog ausdrücklich „Statistik erlauben“ auswählst. Vor dieser Auswahl beziehungsweise bei „Nur notwendige“ wird das Google-Analytics-Skript nicht geladen. Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
+      <p>Die Auswahl wird im lokalen Speicher deines Browsers unter dem Schlüssel <code>pfp_analytics_consent</code> gespeichert, damit die Website nicht bei jedem Seitenaufruf erneut fragt. Diese Einstellung ist technisch notwendig, um deine Entscheidung umzusetzen.</p>
+      <p>Nach deiner Einwilligung hilft Google Analytics mir zu verstehen, welche Seiten genutzt werden, wie Besucher mit dem Rechner interagieren und ob Anfragen über die Formulare entstehen.</p>
       <p>Erfasst werden insbesondere Seitenaufrufe und technische Ereignisse wie:</p>
       <ul>
         <li><code>page_view</code> – Seitenaufruf</li>
@@ -57,12 +59,17 @@ canonical: https://praemienflug-planer.de/datenschutz.html
         <li><code>calculator_result_view</code> – ein Rechner-Ergebnis wurde angezeigt</li>
         <li><code>form_start</code> – ein Formular wurde begonnen</li>
         <li><code>lead_request_submit</code> – eine Anfrage über das Rechner-Formular wurde abgeschickt</li>
+        <li><code>card_offer_view</code> – ein Kartenangebot wurde sichtbar</li>
+        <li><code>card_offer_click</code> – ein Kartenangebot oder eine Link-Anfrage wurde geöffnet</li>
+        <li><code>referral_link_request</code> – das Formular für eine Link-Anfrage wurde abgeschickt</li>
+        <li><code>referral_link_success</code> – die Link-Anfrage wurde technisch erfolgreich zugestellt</li>
+        <li><code>outbound_provider_click</code> – ein externer Anbieterlink wurde geöffnet</li>
         <li><code>cta_click</code> – ein Link oder Call-to-Action wurde angeklickt</li>
       </ul>
       <p>Die an Google Analytics gesendeten Ereignisse enthalten keine Namen, keine E-Mail-Adressen und keine Nachrichtentexte. Auch die im Rechner-Formular eingegebenen personenbezogenen Kontaktdaten werden nicht als Ereignisparameter an Google Analytics übermittelt.</p>
       <p>Google Analytics kann technische Informationen verarbeiten, zum Beispiel Geräte- und Browserinformationen, ungefähre Standortinformationen, Seiten-URL, Referrer, Nutzungszeitpunkt und Interaktionsdaten. Google kann diese Daten auch auf Servern außerhalb der Europäischen Union verarbeiten. Für eine mögliche Übermittlung in die USA gelten die von Google bereitgestellten Datenschutz- und Übermittlungsmechanismen.</p>
-      <p>Die Nutzung erfolgt zur Reichweitenmessung, zur Verbesserung der Website und zur Auswertung, ob der Rechner und die Anfragefunktionen funktionieren. Die Speicherdauer und Detailtiefe der Daten richten sich nach den Einstellungen in Google Analytics.</p>
-      <p>Du kannst die Erfassung durch Google Analytics unter anderem verhindern, indem du in deinem Browser das Speichern von Cookies einschränkst, Tracking blockierst oder geeignete Browser-Erweiterungen nutzt. Weitere Informationen stellt Google in den Datenschutzinformationen zu Google Analytics bereit.</p>
+      <p>Rechtsgrundlage ist deine Einwilligung. Die Speicherdauer und Detailtiefe der Daten richten sich nach den Einstellungen in Google Analytics.</p>
+      <p>Du kannst deine Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Öffne dafür im Footer „Datenschutz-Einstellungen“ und wähle „Nur notwendige“. Dabei versucht die Website auch vorhandene Google-Analytics-Cookies dieser Domain zu entfernen. Alternativ kannst du Cookies und Website-Daten in deinem Browser löschen.</p>
 
       <h2>8. Rechner-Anfrageformular und Formspree</h2>
       <p>Nach der Nutzung des Rechners kannst du eine Anfrage stellen, zum Beispiel für eine passende Einordnung, einen Sammelplan, eine Roadmap oder einen Karten-/Referral-Hinweis. Dabei werden die von dir eingegebenen Daten verarbeitet.</p>
@@ -80,19 +87,23 @@ canonical: https://praemienflug-planer.de/datenschutz.html
       <p>Wenn du das allgemeine Kontaktformular nutzt, werden die von dir eingegebenen Daten verarbeitet, um deine Anfrage beantworten zu können. Dazu gehören insbesondere Name, E-Mail-Adresse, Betreff und Nachricht.</p>
       <p>Auch das Kontaktformular kann über Formspree verarbeitet werden. Die eingegebenen Daten werden dabei an Formspree übermittelt, damit die Nachricht zugestellt werden kann.</p>
 
-      <h2>10. Affiliate-Links und Empfehlungen</h2>
-      <p>Derzeit werden keine öffentlichen Kreditkarten-Freundschaftswerbungslinks direkt auf der Website eingebunden. Falls künftig Partnerlinks oder Affiliate-Links genutzt werden, werden diese transparent gekennzeichnet.</p>
-      <p>Wenn du über das Rechner-Formular eine passende Einordnung oder einen Link anfragst, kann ich dir per E-Mail eine individuelle Rückmeldung senden. Ein Kartenabschluss erfolgt nicht automatisch über das Formular.</p>
+      <h2 id="kreditkarten-link-anfrage">10. Kreditkarten-Link-Anfrage</h2>
+      <p>Über die Seite „Kreditkartenlink anfragen“ kannst du einmalig einen aktuell geprüften Empfehlungslink oder eine Einordnung zu einem öffentlichen Anbieterangebot anfordern. Verarbeitet werden die ausgewählte Karte, deine E-Mail-Adresse, optional dein Name und eine optionale Nachricht sowie die technische Herkunft der Anfrage innerhalb dieser Website.</p>
+      <p>Die Übermittlung erfolgt über Formspree. Die Angaben werden ausschließlich dazu verwendet, die konkrete Anfrage zu beantworten. Eine Newsletter-Anmeldung, ein Nutzerkonto oder ein automatischer Kreditkartenantrag entstehen dadurch nicht. Der eigentliche Antrag findet ausschließlich auf der Website des Kartenanbieters statt.</p>
 
-      <h2>11. Keine Heatmaps, keine Session-Recordings, kein Meta Pixel</h2>
+      <h2>11. Affiliate-Links und Empfehlungen</h2>
+      <p>Öffentliche Anbieterlinks werden als solche bezeichnet. Persönliche Kreditkarten-Freundschaftswerbungslinks werden nicht öffentlich in die Website eingebettet, sondern nur auf konkrete Anfrage per E-Mail versendet. Partner- oder Affiliate-Links werden transparent gekennzeichnet, sobald sie eingesetzt werden.</p>
+      <p>Wenn du einen Empfehlungs- oder Partnerlink nutzt und ein Antrag angenommen wird, kann ich eine Prämie oder Provision erhalten. Für dich entstehen dadurch keine zusätzlichen Kosten. Ein Kartenabschluss erfolgt nie automatisch über ein Formular dieser Website.</p>
+
+      <h2>12. Keine Heatmaps, keine Session-Recordings, kein Meta Pixel</h2>
       <p>Es werden keine Heatmaps, keine Session-Recordings und kein Meta Pixel eingesetzt. Es werden außerdem keine Nutzerkonten, keine Mitgliederbereiche und keine individuellen Bewegungsprofile durch mich erstellt.</p>
 
-      <h2>12. Deine Rechte</h2>
+      <h2>13. Deine Rechte</h2>
       <p>Du hast nach Maßgabe der gesetzlichen Vorschriften das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie auf Widerspruch gegen die Verarbeitung deiner personenbezogenen Daten.</p>
       <p>Wenn die Verarbeitung auf berechtigten Interessen beruht, kannst du der Verarbeitung aus Gründen, die sich aus deiner besonderen Situation ergeben, widersprechen.</p>
       <p>Wenn du mir eine Anfrage über das Formular sendest und später möchtest, dass deine Anfrage gelöscht wird, kannst du dich per E-Mail an mich wenden.</p>
 
-      <h2>13. Änderungen</h2>
+      <h2>14. Änderungen</h2>
       <p>Diese Datenschutzerklärung kann angepasst werden, wenn sich technische oder rechtliche Anforderungen ändern oder weitere Dienste eingebunden werden.</p>
 
       <div class="hero-actions" style="margin-top: 28px;">
