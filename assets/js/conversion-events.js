@@ -43,6 +43,7 @@
 
   const seen = new Set();
   let analyticsSessionInitialized = false;
+  let offerObserver = null;
 
   function analyticsAllowed() {
     return window.pfpAnalyticsConsent === 'granted';
@@ -203,28 +204,42 @@
 
   function watchOfferViews() {
     const offers = document.querySelectorAll('[data-card-offer]');
-    if (!offers.length || !('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver((entries) => {
+    if (!offers.length || !('IntersectionObserver' in window) || offerObserver) return;
+    offerObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting || entry.intersectionRatio < 0.45) return;
         const offer = entry.target;
         const offerName = offer.getAttribute('data-card-offer') || 'unknown';
         const key = `card_offer_view:${offerName}:${window.location.pathname}`;
-        if (!seen.has(key)) {
-          seen.add(key);
-          sendEvent('card_offer_view', { card_offer: offerName });
+        if (seen.has(key)) {
+          offerObserver.unobserve(offer);
+          return;
         }
-        observer.unobserve(offer);
+        if (!analyticsAllowed()) return;
+        sendEvent('card_offer_view', { card_offer: offerName });
+        seen.add(key);
+        offerObserver.unobserve(offer);
       });
     }, { threshold: [0.45] });
-    offers.forEach((offer) => observer.observe(offer));
+    offers.forEach((offer) => offerObserver.observe(offer));
+  }
+
+  function refreshOfferViews() {
+    if (!offerObserver || !analyticsAllowed()) return;
+    document.querySelectorAll('[data-card-offer]').forEach((offer) => {
+      const offerName = offer.getAttribute('data-card-offer') || 'unknown';
+      const key = `card_offer_view:${offerName}:${window.location.pathname}`;
+      if (seen.has(key)) return;
+      offerObserver.unobserve(offer);
+      offerObserver.observe(offer);
+    });
   }
 
   function initializeAnalyticsSession() {
     if (analyticsSessionInitialized || !analyticsAllowed()) return;
     analyticsSessionInitialized = true;
     sendEvent('page_view', { referrer: getSafeReferrer() });
-    sendEvent('tracking_ready', { tracking_version: '20260829-consent-1' });
+    sendEvent('tracking_ready', { tracking_version: '20260829-consent-2' });
     if (window.location.pathname.includes('/rechner/')) {
       sendEvent('calculator_start', { trigger: 'calculator_page_loaded' });
     }
@@ -237,7 +252,10 @@
   }
 
   window.addEventListener('pfp:analytics-consent', (event) => {
-    if (event.detail?.choice === 'granted') initializeAnalyticsSession();
+    if (event.detail?.choice === 'granted') {
+      initializeAnalyticsSession();
+      refreshOfferViews();
+    }
   });
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
