@@ -673,6 +673,20 @@ async function berechneMilesPlaner() {
           </ul>
         </div>
 
+        ${payload.programm === "Miles & More" && extractNumber(data.fehlend) > 0 ? `
+          <div class="result-section">
+            <p class="eyebrow">Miles-&-More-Sammellücke</p>
+            <h3>Dir fehlen noch ${escapeHtml(data.fehlend || "—")} Meilen</h3>
+            <p>Prüfe zuerst deinen übertragbaren PAYBACK-Bestand. Wenn danach nur eine überschaubare Lücke bleibt und der Prämienflug verfügbar ist, kannst du sie gegebenenfalls über Bundle&amp;Go schließen.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="/meilen-sammeln/payback-punkte-miles-and-more/">PAYBACK übertragen</a>
+              <a class="btn btn-secondary" href="/meilen-sammeln/miles-and-more-kreditkarte/">Kreditkarte prüfen</a>
+              <a class="btn btn-secondary" href="https://storefront.points.com/miles-and-more/sso/mv-delegate/buy" target="_blank" rel="noopener noreferrer">Meilen zukaufen</a>
+            </div>
+            <p class="value-note"><strong>Wichtig:</strong> Erst Verfügbarkeit prüfen und den Paketpreis zusammen mit den Award-Zuzahlungen gegen den regulären Flugpreis rechnen. Der Meilenkauf ist die letzte Option, nicht der Standard-Sammelweg.</p>
+          </div>
+        ` : ""}
+
         ${buildAffiliateBox()}
       </div>
     `;
