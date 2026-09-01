@@ -101,6 +101,11 @@ miles_and_more_credit_card:
     offer_display: "500 Meilen + 40 Points"
     valid_until: "2026-12-31"
     valid_until_display: "31.12.2026"
+    promo_display: "12 Monate ohne Kartenpreis"
+    promo_savings_eur: 66
+    promo_savings_display: "66 €"
+    promo_note: "separater Aktionsweg; nicht mit anderen Werbeaktionen kombinierbar"
+    promo_status: "current"
     status: "current"
   myflex:
     product: "Miles & More MyFlex Credit Card"
