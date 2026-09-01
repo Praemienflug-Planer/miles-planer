@@ -99,7 +99,8 @@ miles_and_more_credit_card:
     welcome_points: 40
     welcome_points_display: "40 Points"
     welcome_offer_display: "500 Meilen + 40 Points"
-    offer_display: "12 Monate ohne Kartenpreis + 500 Meilen + 40 Points"
+    offer_display: "500 Meilen + 40 Points"
+    combined_offer_display: "12 Monate ohne Kartenpreis + 500 Meilen + 40 Points"
     valid_until: "2026-12-31"
     valid_until_display: "31.12.2026"
     promo_display: "12 Monate ohne Kartenpreis"
