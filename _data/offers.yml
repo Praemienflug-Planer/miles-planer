@@ -2,8 +2,8 @@ last_checked: "2026-09-01"
 last_checked_display: "01.09.2026"
 
 amex:
-  last_checked: "2026-08-29"
-  last_checked_display: "29.08.2026"
+  last_checked: "2026-09-01"
+  last_checked_display: "01.09.2026"
   referral_terms_url: "https://www.americanexpress.com/de-de/amexcited/benefits/amex-freunde-werben"
   platinum:
     product: "American Express Platinum"
@@ -19,12 +19,16 @@ amex:
     request_path: "/kreditkarten-link/?karte=amex-platinum"
     status: "current"
   rose_gold:
-    product: "American Express Rose Gold"
-    bonus_value: 55000
-    bonus_display: "55.000 MR"
+    product: "American Express Gold Card Rosé"
+    bonus_value: 50000
+    bonus_display: "50.000 MR"
+    bonus_qualifier: "bis zu"
+    minimum_spend_display: "5.000 € Kartenumsatz in 6 Monaten"
+    public_offer_display: "bis zu 200 € Startguthaben"
     fee_monthly_eur: 20
     fee_monthly_display: "20 €"
-    offer_type: "referral"
+    offer_type: "campaign"
+    official_url: "https://www.americanexpress.com/de-de/kreditkarte/gold-rose/"
     status: "current"
   gold:
     product: "American Express Gold"
@@ -51,6 +55,19 @@ amex:
     offer_type: "referral"
     official_url: "https://www.americanexpress.com/de-de/kreditkarte/american-express-card/"
     request_path: "/kreditkarten-link/?karte=amex-green"
+    status: "current"
+  blue:
+    product: "American Express Blue Card"
+    public_offer_display: "25 € Startguthaben"
+    minimum_spend_display: "1.200 € Kartenumsatz in 6 Monaten"
+    annual_fee_eur: 0
+    annual_fee_display: "0 €"
+    mr_optional_annual_fee_eur: 30
+    mr_optional_annual_fee_display: "30 € / Jahr"
+    mr_signup_bonus: 5000
+    mr_signup_bonus_display: "5.000 MR"
+    offer_type: "public"
+    official_url: "https://www.americanexpress.com/de-de/kreditkarte/blue-card/"
     status: "current"
   payback:
     product: "PAYBACK American Express"
