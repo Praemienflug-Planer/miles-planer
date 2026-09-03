@@ -1,11 +1,27 @@
 (() => {
+  const DEAL_TIME_ZONE = 'Europe/Berlin';
+
+  function getIsoDateInTimeZone(date, timeZone) {
+    const parts = {};
+
+    new Intl.DateTimeFormat('de-DE', {
+      timeZone,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).formatToParts(date).forEach(({ type, value }) => {
+      if (type !== 'literal') parts[type] = value;
+    });
+
+    return `${parts.year}-${parts.month}-${parts.day}`;
+  }
+
   function initDealStatus() {
     const cards = Array.from(document.querySelectorAll('[data-deal-card]'));
     const activeCount = document.querySelector('[data-active-deal-count]');
     if (!cards.length) return;
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const todayInGermany = getIsoDateInTimeZone(new Date(), DEAL_TIME_ZONE);
     let activeDeals = 0;
 
     cards.forEach((card) => {
@@ -15,8 +31,7 @@
       const cta = card.querySelector('[data-deal-cta]');
       if (!expires || !status) return;
 
-      const expiryDate = new Date(`${expires}T23:59:59`);
-      const expired = today.getTime() > expiryDate.getTime();
+      const expired = todayInGermany > expires;
 
       if (!expired) {
         activeDeals += 1;
