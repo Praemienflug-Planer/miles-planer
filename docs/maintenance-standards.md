@@ -32,6 +32,7 @@ Header und Hauptnavigation werden zentral über `_includes/header.html` gepflegt
 Aktuelle Top-Level-Navigation:
 
 - Rechner
+- Angebote
 - Meilen sammeln
 - Familien
 - Reiseziele

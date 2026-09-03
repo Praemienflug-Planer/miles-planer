@@ -1,6 +1,6 @@
 # Aktuelle Bonus- und Angebotsdaten
 
-Die Datei `_data/offers.yml` ist die zentrale Quelle für volatile Kreditkarten- und Bonusdaten der Website.
+Die Datei `_data/offers.yml` ist die zentrale Quelle für volatile Kreditkarten- und Bonusdaten der Website. Zeitlich begrenzte redaktionelle Deals der Seite `/angebote/` werden getrennt in `_data/deals.yml` gepflegt.
 
 ## Was dort gepflegt wird
 
@@ -21,6 +21,17 @@ Aktuell enthält die Datei unter anderem:
 3. Das `last_checked` und `last_checked_display` der betroffenen Produktfamilie aktualisieren. Die globalen Felder oben in der Datei dienen nur als Gesamt-Datenstand.
 4. Prüfen, ob sich außer Zahlen auch Bedingungen oder redaktionelle Einordnungen geändert haben. Solche Textänderungen gehören weiterhin in die jeweilige Inhaltsseite.
 5. Website nach dem Deploy auf den zentralen Kreditkartenseiten kurz visuell prüfen.
+
+## Aktuelle Angebotsseite
+
+Jeder Eintrag in `_data/deals.yml` enthält Frist, Bild, Eckdaten, Bedingungen, Einordnung sowie den offiziellen Anbieterlink. Die Seite `/angebote/` rendert daraus automatisch die Angebotskarten.
+
+- Neue Screenshots erhalten sprechende Dateinamen unter `/images/` und dürfen keine persönlichen Daten zeigen.
+- `last_checked` und `last_checked_display` werden bei jeder redaktionellen Prüfung aktualisiert.
+- Das Enddatum wird als ISO-Datum in `expires` und zusätzlich lesbar in `expires_display` gepflegt.
+- `/assets/js/deals-status.js` graut abgelaufene Karten automatisch aus, ersetzt den Status durch „Abgelaufen am …“ und deaktiviert den Anbieterbutton.
+- Abgelaufene Angebote bleiben bewusst als sichtbares Archiv erhalten. Sie werden nur entfernt, wenn sie inhaltlich oder rechtlich keinen dokumentarischen Wert mehr haben.
+- Persönliche Referral- oder Affiliate-Links werden nicht ungekennzeichnet als Angebotslink hinterlegt.
 
 ## Linktypen sauber trennen
 
