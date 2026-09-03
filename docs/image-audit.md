@@ -71,6 +71,16 @@ Aktiv genutzt auf Ziel- und Ratgeberseiten:
 
 Bewertung: behalten. Diese Screenshots visualisieren Award-Verfügbarkeit, Beispielpreise und Zuzahlungen.
 
+### Aktuelle Angebotsseite
+
+Aktiv genutzt auf `/angebote/`:
+
+- `/images/angebot-avis-1000-meilen-2026.png`
+- `/images/angebot-auto-motor-sport-14000-payback-2026.png`
+- `/images/angebot-booking-com-4-meilen-september-2026.png`
+
+Bewertung: behalten. Die Screenshots dokumentieren die konkrete Aktion und werden beim automatischen Wechsel in den abgelaufenen Status als sichtbares Angebotsarchiv weiterverwendet.
+
 ### OG-Bilder
 Mehrere Seiten referenzieren aktuell:
 

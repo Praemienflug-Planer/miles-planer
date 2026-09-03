@@ -1,0 +1,102 @@
+---
+layout: page
+title: "Aktuelle Meilen-Angebote & Aktionen | Prämienflug-Planer"
+description: "Aktuelle und geprüfte Angebote für Miles & More Meilen, PAYBACK Punkte, Kreditkarten, Hotels und Abos – mit Frist, Bedingungen, Screenshot und ehrlicher Einordnung."
+canonical: "https://praemienflug-planer.de/angebote/"
+og_type: website
+og_title: "Aktuelle Meilen-Angebote & Aktionen"
+og_description: "Zeitlich begrenzte Meilen- und Punkteaktionen mit Screenshot, Frist, Bedingungen und ehrlicher Einordnung."
+og_image: "/images/angebot-avis-1000-meilen-2026.png"
+extra_css:
+  - "/assets/css/deals.css?v=20260903-1"
+extra_js:
+  - "/assets/js/deals-status.js?v=20260903-1"
+schema_json: |
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Aktuelle Meilen-Angebote & Aktionen",
+    "url": "https://praemienflug-planer.de/angebote/",
+    "description": "Geprüfte Angebote zum Sammeln von Miles & More Meilen und PAYBACK Punkten.",
+    "inLanguage": "de-DE"
+  }
+---
+<section class="offers-hero">
+  <div class="container offers-hero-inner">
+    <p class="eyebrow">Geprüfte Meilen-Deals</p>
+    <h1>Aktuelle Meilen-Angebote</h1>
+    <p class="offers-intro">Hier findest du ausgewählte Aktionen, mit denen sich ein Meilen- oder Punktekonto sinnvoll auffüllen lässt. Kurz eingeordnet, mit Original-Screenshot und den entscheidenden Bedingungen.</p>
+    <div class="offers-meta" aria-label="Aktualität der Angebote">
+      <span><strong data-active-deal-count>{{ site.data.deals.deals | size }}</strong> aktuell aktive Angebote</span>
+      <span>Zuletzt geprüft: <time datetime="{{ site.data.deals.last_checked }}">{{ site.data.deals.last_checked_display }}</time></span>
+      <span>Abgelaufene Angebote bleiben als Archiv sichtbar</span>
+    </div>
+  </div>
+</section>
+
+<section class="section offers-section" aria-labelledby="offers-current-heading">
+  <div class="container">
+    <div class="section-head offers-section-head">
+      <p class="eyebrow">Aktuell geprüft</p>
+      <h2 id="offers-current-heading">Diese Aktionen sind gerade interessant</h2>
+    </div>
+
+    <div class="deal-grid">
+      {% for deal in site.data.deals.deals %}
+      <article class="deal-card" id="{{ deal.id }}" data-deal-card data-expires="{{ deal.expires }}" data-expires-display="{{ deal.expires_display }}">
+        <figure class="deal-visual">
+          <a href="{{ deal.image }}" target="_blank" rel="noopener noreferrer" aria-label="Screenshot größer öffnen: {{ deal.title | escape }}">
+            <img src="{{ deal.image }}" alt="{{ deal.image_alt | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+          </a>
+          <figcaption>{{ deal.image_caption | escape }}</figcaption>
+        </figure>
+
+        <div class="deal-content">
+          <div class="deal-topline">
+            <span class="deal-category">{{ deal.category | escape }}</span>
+            <span class="deal-status" data-deal-status><span class="deal-status-dot" aria-hidden="true"></span>Aktiv bis {{ deal.expires_display }}</span>
+          </div>
+
+          <h2>{{ deal.title | escape }}</h2>
+          <p class="deal-summary">{{ deal.summary | escape }}</p>
+
+          <dl class="deal-facts">
+            {% for fact in deal.facts %}
+            <div><dt>{{ fact.label | escape }}</dt><dd>{{ fact.value | escape }}</dd></div>
+            {% endfor %}
+          </dl>
+
+          <div class="deal-verdict"><strong>Meine Einordnung:</strong> {{ deal.verdict | escape }}</div>
+
+          <details class="deal-details">
+            <summary>Bedingungen und wichtige Hinweise</summary>
+            <ul>
+              {% for condition in deal.conditions %}<li>{{ condition | escape }}</li>{% endfor %}
+            </ul>
+          </details>
+
+          <div class="deal-actions">
+            <a class="btn btn-primary" href="{{ deal.offer_url }}" target="_blank" rel="noopener noreferrer" data-deal-cta data-event="deal_offer_click" data-deal="{{ deal.id }}">{{ deal.cta | escape }}</a>
+            <a class="text-link" href="{{ deal.internal_url }}">{{ deal.internal_label | escape }}</a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section alt offers-archive" aria-labelledby="offers-archive-heading">
+  <div class="container offers-archive-inner">
+    <div>
+      <p class="eyebrow">Transparentes Archiv</p>
+      <h2 id="offers-archive-heading">Abgelaufen heißt nicht gelöscht</h2>
+      <p>Nach dem Enddatum wird eine Angebotskarte automatisch ausgegraut und mit „Abgelaufen am …“ gekennzeichnet. So bleibt nachvollziehbar, wann eine Aktion existiert hat und dass diese Übersicht regelmäßig gepflegt wird.</p>
+    </div>
+    <a class="btn btn-secondary" href="/transparenz.html">So arbeitet der Prämienflug-Planer</a>
+  </div>
+</section>
+
+<section class="section legal-note-section">
+  <div class="container legal-note"><strong>Hinweis:</strong> Angebote und Teilnahmebedingungen können sich kurzfristig ändern. Maßgeblich sind immer die Bedingungen auf der verlinkten Anbieterseite beziehungsweise im persönlichen PAYBACK Konto. Links sind derzeit nicht vergütet; sollte sich das ändern, wird dies direkt am Angebot gekennzeichnet.</div>
+</section>
