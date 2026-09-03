@@ -6,6 +6,7 @@
   const turbo = root.querySelector('#fix-amex-turbo');
   const revolutPlan = root.querySelector('#fix-revolut-plan');
   const paybackMonth = root.querySelector('#fix-payback-month');
+  const paybackBonusYear = root.querySelector('#fix-payback-bonus-year');
 
   const outputs = {
     totalMonth: root.querySelector('#fix-total-month'),
@@ -141,6 +142,7 @@
     const turboOn = Boolean(turbo?.checked);
     const plan = plans[revolutPlan?.value] || plans.standard;
     const paybackPerMonth = number(paybackMonth?.value);
+    const paybackBonusPerYear = number(paybackBonusYear?.value);
 
     let totalMonth = 0;
     let amexMonth = 0;
@@ -193,7 +195,7 @@
     const mmYear = mmDirectYear + mmMoneySendYear;
 
     const revYear = (revEligibleCardMonth / plan.divisor) * 12;
-    const paybackYear = paybackPerMonth * 12;
+    const paybackYear = (paybackPerMonth * 12) + paybackBonusPerYear;
     const mmWithPayback = mmYear + paybackYear;
     const feesYear = (plan.monthlyFee * 12) + (turboOn ? 15 : 0);
 
@@ -243,9 +245,13 @@
       messages.push(`Für Revolut ${plan.label} berücksichtigt der Rechner ${euro(plan.monthlyFee * 12, 2)} Jahreskosten. Das bedeutet nicht automatisch, dass sich das Abo allein wegen der zusätzlichen RevPoints lohnt.`);
     }
 
+    if (paybackBonusPerYear > 0) {
+      messages.push(`${fmt(paybackBonusPerYear)} PAYBACK Punkte aus Einmal- oder Aktionsboni werden genau einmal im Jahreswert berücksichtigt.`);
+    }
+
     messages.push('Der Rechner ist eine regelbasierte Zahlungsweg-Planung, kein Euro-Wert-Optimizer: Membership Rewards, Miles-&-More-Meilen und RevPoints werden nicht künstlich zu einer gemeinsamen Währung verrechnet.');
     messages.push('Die ausgewiesenen Zusatzkosten enthalten nur Rewards Turbo und das gewählte Revolut-Abo. Kartenpreise einer Amex oder Miles-&-More-Kreditkarte sind nicht enthalten.');
-    messages.push('PAYBACK bleibt ein separater Punktetopf und wird hier nur optional mit dem regulären 1:1-Transfer zu Miles & More in das M&M-Potenzial eingerechnet.');
+    messages.push('PAYBACK bleibt ein separater Punktetopf und wird hier nur optional mit dem regulären 1:1-Transfer zu Miles & More in das M&M-Potenzial eingerechnet. Monatliche Punkte werden mit zwölf multipliziert; Einmalboni nicht.');
 
     if (outputs.note) outputs.note.textContent = messages.join(' ');
   }
