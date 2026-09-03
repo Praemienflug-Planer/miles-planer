@@ -55,8 +55,10 @@
 .visual-card-media img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.22s ease; }
 .visual-card-media-contain img { box-sizing: border-box; padding: 16px; object-fit: contain; }
 .visual-card:hover .visual-card-media img, .visual-card:focus-within .visual-card-media img { transform: scale(1.025); }
-.visual-card-archive { border-color: rgba(251, 191, 36, 0.28); }
-.visual-card-archive .visual-card-media img { filter: grayscale(1); opacity: 0.68; }
+.visual-card-archive, .visual-card.is-expired { border-color: rgba(251, 191, 36, 0.28); }
+.visual-card-archive .visual-card-media img, .visual-card.is-expired .visual-card-media img { filter: grayscale(1); opacity: 0.68; }
+.visual-card.is-expired:hover, .visual-card.is-expired:focus-within { transform: none; border-color: rgba(251, 191, 36, 0.28); box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24); }
+.visual-card.is-expired [data-deal-status] { color: #fbbf24 !important; }
 .visual-card-body { display: flex; flex: 1; flex-direction: column; padding: 20px; }
 .visual-card-body h3 { margin: 2px 0 10px; }
 .visual-card-body p { margin: 0 0 16px; color: var(--muted); }
