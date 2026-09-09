@@ -1,6 +1,6 @@
 window.MILES_PLANNER_PROGRAMS = {
-  dataStand: "26.08.2026",
-  source: "Programm- und Transferregeln für den Prämienflug-Rechner. Verifiziert am 26.08.2026 anhand offizieller Angaben von PAYBACK, American Express, Flying Blue und Miles & More.",
+  dataStand: "09.09.2026",
+  source: "Programm- und Transferregeln für den Prämienflug-Rechner. Flying-Blue-Prämientarife zuletzt am 09.09.2026 anhand offizieller Flying-Blue-Angaben geprüft; übrige Transferregeln zuletzt am 26.08.2026 geprüft.",
   programs: {
     "Miles & More": {
       punktelabel: "Miles & More Meilen",
@@ -33,7 +33,7 @@ window.MILES_PLANNER_PROGRAMS = {
       transferMinimum: 625,
       transferDuration: "bis zu 1 Werktag",
       transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 },
-      hinweis: "Flying Blue ist dynamisch bepreist. Rechnerwerte sind Planungswerte, keine Live-Awardpreise."
+      hinweis: "Flying Blue ist dynamisch bepreist. Seit 08.09.2026 gibt es Reward Tickets in Light, Standard und Flex. Der günstigste angezeigte Meilenpreis kann zum Light-Tarif gehören und enthält weniger Leistungen als Standard/Flex; je nach Reiseklasse können insbesondere Gepäck, Loungezugang sowie Umbuchungs-/Erstattungsregeln abweichen. Rechnerwerte sind Planungswerte, keine Live-Awardpreise. Vor dem Punktetransfer immer den konkreten Tarif und dessen Leistungen prüfen."
     },
     "KrisFlyer": {
       punktelabel: "KrisFlyer Meilen",
