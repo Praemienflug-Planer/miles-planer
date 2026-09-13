@@ -1,0 +1,70 @@
+---
+layout: page
+title: "Familien-Prämienflug planen | Sofortcheck & drei Szenarien"
+description: "Prüfe live für 2–8 Personen, wie viele Meilen du brauchst, wie groß die Lücke ist und was dein Prämienflug gegenüber einem Cashflug wert ist."
+canonical: "https://praemienflug-planer.de/familien-rechner/"
+og_title: "Familien-Prämienflug mit Meilen planen | Prämienflug-Planer"
+og_image: "/assets/og/og-home.jpg"
+extra_css:
+  - "/assets/css/family-planner.css?v=20260913-1"
+extra_js:
+  - "/assets/data/rechner-award-rates.js?v=20260510-2"
+  - "/assets/data/rechner-award-calibration-mm-20260826.js?v=20260826-mm-calibration-1"
+  - "/assets/data/rechner-programs.js?v=20260909-flying-blue"
+  - "/assets/js/family-planner-engine.js?v=20260913-1"
+  - "/assets/js/family-planner-app.js?v=20260913-1"
+schema_json: |
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Familien-Prämienflug-Rechner","url":"https://praemienflug-planer.de/familien-rechner/","applicationCategory":"TravelApplication","operatingSystem":"Web","inLanguage":"de-DE"}
+---
+<div class="family-planner" id="start">
+
+    <section class="hero-section" id="planen" aria-labelledby="hero-title">
+      <div class="shell hero-top">
+        <div><p class="eyebrow">FÜR FAMILIEN, DIE MIT MEILEN REISEN WOLLEN</p><h1 id="hero-title">Eine Reise. Vier Sitzplätze.<br><em>Ein klarer Plan.</em></h1><p class="hero-copy">Ich rechne lieber für die ganze Familie als mit einem verlockenden Einzelpreis. Wähle deine Reise und sieh sofort, wie viele Punkte du brauchst, wann du sie erreichen könntest und ob sich die Einlösung gegenüber einem Cashflug lohnt.</p></div>
+        <div class="hero-aside"><span class="small-rule"></span><strong>Dein Realitätscheck</strong><p>Hin- und Rückflug · 2–8 Reisende<br>Planungswerte statt Buchungsversprechen</p><a href="#ratgeber">So ordne ich das Ergebnis ein <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="shell mobile-status"><div><small>LIVE-ÜBERBLICK</small><strong id="mobileStatusText">Ergebnis wird berechnet</strong></div><a href="#ergebnis">Ergebnis ansehen ↓</a></div>
+      <div class="shell calculator" aria-label="Interaktiver Familienrechner">
+        <div class="input-panel">
+          <div class="panel-heading"><div><span class="panel-kicker">01 / DEINE REISE</span><h2>Was habt ihr vor?</h2></div><span class="live-dot"><i></i> Sofortberechnung</span></div>
+          <form id="plannerForm" novalidate>
+            <div class="field-grid two">
+              <label>Reiseziel<select id="destination" name="destination"><option value="Thailand">Thailand</option><option value="Japan">Japan</option><option value="Malediven">Malediven</option><option value="Südafrika">Südafrika</option><option value="USA East">USA Ostküste</option><option value="USA West">USA Westküste</option><option value="Dubai">Dubai</option></select></label>
+              <label>Reiseklasse<select id="cabin" name="cabin"><option value="Premium Economy">Premium Economy</option><option value="Business">Business Class</option></select></label>
+            </div>
+            <div class="field-grid thirds">
+              <label>Erwachsene<input id="adults" type="number" inputmode="numeric" min="1" max="8" step="1" value="2"></label>
+              <label>Kinder 2–11 Jahre<input id="children" type="number" inputmode="numeric" min="0" max="7" step="1" value="2"></label>
+              <label>Reisezeit<select id="season"><option value="Ferien">Ferien</option><option value="Hauptreisezeit">Hauptreisezeit</option><option value="Nebensaison">Nebensaison</option></select></label>
+            </div>
+            <div class="field-grid two">
+              <label>Reisemonat<input id="travelMonth" type="month" min="2026-09" value="2028-07"></label>
+              <label>Meilenprogramm<select id="program"><option>Miles &amp; More</option><option>Avios</option><option>Flying Blue</option><option>KrisFlyer</option></select></label>
+            </div>
+            <div class="subhead"><span class="panel-kicker">02 / DEINE PUNKTE</span><h2>Was ist schon da?</h2><p id="transferHint">PAYBACK Punkte → Miles &amp; More Meilen · 1:1</p></div>
+            <div class="field-grid two">
+              <label><span id="nativeLabel">Miles &amp; More Meilen heute</span><input id="nativePoints" type="number" inputmode="numeric" min="0" step="1" value="20000"><small>Schon im ausgewählten Meilenprogramm</small></label>
+              <label><span id="sourceLabel">PAYBACK Punkte übertragbar</span><input id="sourcePoints" type="number" inputmode="numeric" min="0" step="1" value="40000"><small>Zusätzlich zum Bestand im Programm</small></label>
+              <label><span id="monthlyLabel">PAYBACK Punkte pro Monat</span><input id="monthlyPoints" type="number" inputmode="numeric" min="0" step="1" value="5000"><small>Planbare neue Punkte, nicht Meilen</small></label>
+              <label>Angenommener Transferbonus<input id="bonus" type="number" inputmode="numeric" min="0" max="100" step="1" value="0"><small>In %, nur auf übertragbare Punkte; 0 = keiner</small></label>
+            </div>
+            <div class="subhead"><span class="panel-kicker">03 / VERGLEICH MIT CASH</span><h2>Was kostet der Flug?</h2><p>Trage den tatsächlich gefundenen Preis je Person ein. Die Vorschlagswerte stammen aus der Planungsmatrix.</p></div>
+            <div class="field-grid two">
+              <label>Cashflug je Person <span class="unit">€</span><input id="cashPp" type="number" inputmode="decimal" min="0" step="1"><small id="cashHint">Vorschlagswert, jederzeit änderbar</small></label>
+              <label>Award-Zuzahlung je Person <span class="unit">€</span><input id="taxesPp" type="number" inputmode="decimal" min="0" step="1"><small id="taxesHint">Steuern und Zuschläge als Planungswert</small></label>
+            </div>
+            <p id="inputError" class="input-error" role="alert" hidden></p>
+          </form>
+        </div>
+        <div class="result-panel" id="ergebnis" aria-live="polite" aria-atomic="false">
+          <div class="result-heading"><div><span class="panel-kicker">DEIN FAMILIENÜBERBLICK</span><h2 id="resultTitle">Thailand für vier</h2><p id="resultSubtitle">Premium Economy · Juli 2028 · Ferien</p></div><span class="plane-mark" aria-hidden="true">↗</span></div>
+          <div id="resultContent"></div>
+        </div>
+      </div>
+      <div class="shell under-calculator"><span>✳ Keine Anmeldung erforderlich</span><span>✳ Transferbonus ist eine Annahme, keine aktive Aktion</span><span>✳ Vor dem Transfer Plätze und Gebühren prüfen</span><a href="/rechner/">Zum bisherigen Schritt-für-Schritt-Rechner</a></div>
+    </section>
+
+    <section class="info-section" id="transfer" aria-labelledby="transfer-title"><div class="shell"><div class="section-intro"><p class="eyebrow">PROGRAMME & TRANSFER</p><h2 id="transfer-title">Welcher Punkteweg passt zu deinem Ziel?</h2><p>Die Quelle zählt: 40.000 Membership Rewards sind je nach Partner nicht 40.000 Meilen. Im Rechner zeige ich Programm-Meilen und flexible Punkte deshalb getrennt.</p></div><div class="program-grid" id="programCards"></div><p class="source-note">Transferregeln laut <a href="https://www.americanexpress.com/de-de/rewards/membership-rewards/travel/airlines">American Express Transferpartnern</a> (eingesehen am 13.09.2026) und den <a href="/meilen-sammeln/payback-transferbonus/">PAYBACK-Transferdaten</a> (Stand 27.08.2026). Werte im Rechner sind Planungswerte; Übertragungen können Mindestmengen und Schrittgrößen haben.</p></div></section>
+
+    <section class="guide-section" id="ratgeber" aria-labelledby="guide-title"><div class="shell"><div class="section-intro"><p class="eyebrow">MEINE RATGEBER</p><h2 id="guide-title">So wird aus der Zahl eine Entscheidung.</h2><p>Ich nutze die Ampel als Vorbereitung für die Suche. Die eigentliche Entscheidung fällt erst mit freien Plätzen, echten Zuzahlungen und einem vergleichbaren Cashpreis.</p></div><div class="guide-grid"><article class="guide-card"><span>01 / FAMILIENPLANUNG</span><h3>Vier Prämienplätze finden</h3><p>Ich suche zuerst nach genügend Sitzen für alle. Eine günstige Einlösung für nur eine Person hilft einer Familie wenig. Flexible Tage und Abflughäfen erhöhen die Chancen.</p><a href="/vier-praemienflug-plaetze-finden/">Zum ausführlichen Ratgeber <span aria-hidden="true">↗</span></a></article><article class="guide-card"><span>02 / PUNKTESTRATEGIE</span><h3>Transfer erst nach der Suche</h3><p>Ich lasse flexible Punkte möglichst lange beim Ausgangsprogramm. Ein angenommener Bonus bringt mir nichts, wenn zum passenden Zeitpunkt keine buchbaren Plätze frei sind.</p><a href="/meilen-sammeln/payback-transferbonus/">Transferbonus verstehen <span aria-hidden="true">↗</span></a></article><article class="guide-card"><span>03 / PREISVERGLEICH</span><h3>Dealwert richtig lesen</h3><p>Ich ziehe die Award-Zuzahlung vom vergleichbaren Cashpreis ab und teile den Rest durch alle eingesetzten Meilen. Ein hoher Centwert ersetzt keine passende Flugzeit oder faire Bedingungen.</p><a href="/praemienflug-steuern-gebuehren/">Zuzahlungen einordnen <span aria-hidden="true">↗</span></a></article></div><div class="guide-foot"><p>Mehr Hintergrund in der gewohnten Ich-Perspektive: <a href="/praemienfluege-familie/">Prämienflüge mit Familie</a> · <a href="/business-class-mit-kindern/">Business Class mit Kindern</a></p><p>Die ausführlichen Ratgeber findest du hier auf der Website.</p></div></div></section>
+</div>
