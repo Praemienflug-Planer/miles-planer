@@ -197,8 +197,15 @@ revolut:
   ultra_revpoints_rate_display: "1 RevPoint je 1 €"
 
 payback:
-  last_checked: "2026-08-26"
-  last_checked_display: "26.08.2026"
+  last_checked: "2026-09-11"
+  last_checked_display: "11.09.2026"
+  wunschgutschein_coupon_multiplier: 10
+  wunschgutschein_coupon_valid_until: "2026-09-13"
+  wunschgutschein_coupon_valid_until_display: "13.09.2026"
+  wunschgutschein_coupon_minimum_redeem_points: 200
+  wunschgutschein_coupon_minimum_redeem_display: "200 PAYBACK-Punkte"
+  wunschgutschein_coupon_scope_display: "eine Wunschgutschein-Bestellung"
+  wunschgutschein_coupon_status: "dated_offer"
   point_value_cent: 1
   point_value_display: "1 PAYBACK Punkt = 1 Cent"
   usual_base_rate_display: "häufig 1 Punkt je 2 € Umsatz beim Partner"
