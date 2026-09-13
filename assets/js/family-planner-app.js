@@ -98,15 +98,16 @@
   }
   function init() {
     const today = new Date();
+    const suggestedPriceFields = new Set(['destination', 'cabin', 'season', 'program']);
     $('travelMonth').min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}`;
     if ($('travelMonth').value < $('travelMonth').min) $('travelMonth').value = `${today.getFullYear()+2}-07`;
     applyLinkPrefill();
     $('cashPp').addEventListener('input', () => { state.cashEdited = true; render(); });
     $('taxesPp').addEventListener('input', () => { state.taxesEdited = true; render(); });
-    $('plannerForm').addEventListener('input', e => { if (e.target.id !== 'cashPp' && e.target.id !== 'taxesPp') render(); });
-    $('plannerForm').addEventListener('change', e => { if (['destination','cabin','season'].includes(e.target.id)) setSuggestedPrice(); render(); });
+    $('plannerForm').addEventListener('input', e => { if (e.target.id !== 'cashPp' && e.target.id !== 'taxesPp' && !suggestedPriceFields.has(e.target.id)) render(); });
+    $('plannerForm').addEventListener('change', e => { if (suggestedPriceFields.has(e.target.id)) setSuggestedPrice(); render(); });
     $('plannerForm').addEventListener('submit', e => e.preventDefault());
-    $('programCards').addEventListener('click', e => { const button = e.target.closest('[data-program]'); if (!button) return; $('program').value = button.dataset.program; render(); $('planen').scrollIntoView({ behavior: 'smooth' }); $('program').focus({ preventScroll:true }); });
+    $('programCards').addEventListener('click', e => { const button = e.target.closest('[data-program]'); if (!button) return; $('program').value = button.dataset.program; setSuggestedPrice(); render(); $('planen').scrollIntoView({ behavior: 'smooth' }); $('program').focus({ preventScroll:true }); });
     setSuggestedPrice(); render();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
