@@ -36,6 +36,36 @@
     return `<article class="program-card${$('program').value === name ? ' active' : ''}"><span class="program-kicker">${source.toUpperCase()} → ${name.toUpperCase()}</span><h3>${name}</h3><div class="program-ratio">${ratios[name]}</div><p>Ab ${fmt(({'Miles & More':200, Avios:1000,'Flying Blue':625,KrisFlyer:1500})[name])} ${source} Punkten · Transfer ${durations[name]}</p><button type="button" data-program="${name}" aria-label="${name} im Rechner auswählen">Im Rechner vergleichen ↗</button></article>`;
   }
   function renderProgramCards() { $('programCards').innerHTML = ['Miles & More','Avios','Flying Blue','KrisFlyer'].map(programCard).join(''); }
+  function applyLinkPrefill() {
+    const params = new URLSearchParams(window.location.search);
+    const normalized = value => String(value || '').trim().toLowerCase();
+    const aliases = {
+      ziel: { thailand:'Thailand', 'usa-east':'USA East', 'usa east':'USA East', newyork:'USA East', 'new-york':'USA East' },
+      klasse: { business:'Business', 'business class':'Business', 'premium-economy':'Premium Economy', 'premium economy':'Premium Economy', premium:'Premium Economy' },
+      programm: { 'miles-and-more':'Miles & More', 'miles & more':'Miles & More', 'flying-blue':'Flying Blue', 'flying blue':'Flying Blue', avios:'Avios', krisflyer:'KrisFlyer' },
+      reisezeit: { ferien:'Ferien', hauptreisezeit:'Hauptreisezeit', nebensaion:'Nebensaison', nebensaison:'Nebensaison' }
+    };
+    const applied = [];
+    for (const [key, id] of [['ziel','destination'],['klasse','cabin'],['programm','program'],['reisezeit','season']]) {
+      const raw = params.get(key);
+      if (!raw) continue;
+      const wanted = aliases[key][normalized(raw)] || raw;
+      const element = $(id);
+      const option = [...element.options].find(item => normalized(item.value) === normalized(wanted));
+      if (option) { element.value = option.value; applied.push(option.textContent); }
+    }
+    for (const [key, id, min, max, label] of [['erwachsene','adults',1,8,'Erwachsene'],['kinder','children',0,7,'Kinder']]) {
+      const raw = params.get(key);
+      if (!raw || !/^\d+$/.test(raw)) continue;
+      const number = Number(raw);
+      if (number >= min && number <= max) { $(id).value = String(number); applied.push(`${number} ${label}`); }
+    }
+    if (applied.length) {
+      const hint = $('contextHint');
+      hint.textContent = `Aus dem Ratgeber übernommen: ${applied.join(' · ')}. Du kannst alle Werte ändern.`;
+      hint.hidden = false;
+    }
+  }
   function render() {
     const rate = rateFor(), input = readInput();
     const source = sourceNames[input.program], ratio = ratios[input.program];
@@ -70,6 +100,7 @@
     const today = new Date();
     $('travelMonth').min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}`;
     if ($('travelMonth').value < $('travelMonth').min) $('travelMonth').value = `${today.getFullYear()+2}-07`;
+    applyLinkPrefill();
     $('cashPp').addEventListener('input', () => { state.cashEdited = true; render(); });
     $('taxesPp').addEventListener('input', () => { state.taxesEdited = true; render(); });
     $('plannerForm').addEventListener('input', e => { if (e.target.id !== 'cashPp' && e.target.id !== 'taxesPp') render(); });

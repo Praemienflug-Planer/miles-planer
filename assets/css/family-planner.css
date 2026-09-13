@@ -16,3 +16,6 @@
 @media(max-width:590px){.family-planner .hero-top{border-radius:12px;padding-top:30px;padding-bottom:30px}.family-planner .hero-top h1{font-size:clamp(32px,9vw,39px)}.family-planner .hero-top .hero-copy{font-size:15px}.family-planner .result-panel,.family-planner .input-panel{padding:22px 18px}}
 
 .family-planner .chart-note{font-size:12px;line-height:1.55;color:#cde1e2;margin:6px 0 14px}
+
+.family-planner .context-hint{font-size:13px;line-height:1.5;background:#edf7f2;color:#125447;border:1px solid #c3e4d7;border-radius:9px;padding:11px 13px;margin-bottom:18px}
+.family-planner .context-hint[hidden]{display:none}
