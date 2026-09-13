@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Amex Punkte Rechner: Membership Rewards in Meilen umrechnen"
-description: "Amex Punkte Rechner: Membership Rewards in Avios, Flying Blue, KrisFlyer, Qatar, PAYBACK und weitere Partner umrechnen – mit aktuellen Transferverhältnissen."
+title: "Amex Punkte in Meilen umrechnen: Rechner 2026"
+description: "Amex Punkte kostenlos in Avios, Flying Blue, KrisFlyer oder PAYBACK umrechnen. Rechner mit aktuellen Transferverhältnissen und 100.000-Punkte-Beispiel."
 canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
 ---
 <style>
@@ -11,15 +11,15 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
 <section class="hero hero-small hero-amex">
   <div class="container hero-grid seo-hero-grid">
     <div>
-      <p class="eyebrow">Membership Rewards Rechner · Stand 27.08.2026</p>
-      <h1>Amex Punkte Rechner: Membership Rewards in Meilen umrechnen</h1>
-      <p class="hero-text">Mit dem Rechner lassen sich American Express Membership Rewards direkt in Avios, Flying Blue Meilen, KrisFlyer Meilen, Qatar Avios, PAYBACK Punkte und weitere Transferpartner umrechnen.</p>
-      <p class="hero-text">Die Umrechnung zeigt, wie viele Punkte oder Meilen aus dem vorhandenen MR-Bestand entstehen. Erst wenn die gewünschte Prämienflug-Verfügbarkeit feststeht, sollte der tatsächliche Transfer erfolgen.</p>
-      <div class="hero-actions"><a class="btn btn-primary" href="#mr-rechner">Amex Punkte berechnen</a><a class="btn btn-secondary" href="#transfer">Transferverhältnisse ansehen</a></div>
+      <p class="eyebrow">Amex Punkte Rechner · Stand 27.08.2026</p>
+      <h1>Amex Punkte in Meilen umrechnen: kostenloser Rechner</h1>
+      <p class="hero-text">Gib deinen Punktestand ein und sieh sofort, wie viele Avios, Flying Blue Meilen, KrisFlyer Meilen, Qatar Avios oder PAYBACK Punkte daraus werden.</p>
+      <p class="hero-text">Der Rechner ist kostenlos und benötigt keine Anmeldung. Die aktuellen Transferverhältnisse sowie Beispiele für 50.000, 100.000, 200.000 und 300.000 Membership Rewards helfen beim direkten Vergleich.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#mr-rechner">Punkte jetzt umrechnen</a><a class="btn btn-secondary" href="#transfer">Transferverhältnisse ansehen</a></div>
       <div class="trust-note">Transferverhältnisse geprüft am 27.08.2026. Vor einer Übertragung die aktuelle Rate und mögliche Mindestmengen direkt im American-Express-Konto kontrollieren.</div>
     </div>
     <div class="hero-card">
-      <h2>100.000 MR ergeben aktuell</h2>
+      <h2>100.000 Amex Punkte ergeben aktuell</h2>
       <ul>
         <li><strong>80.000</strong> Avios / Flying Blue / SAS bei 5:4</li>
         <li><strong>66.667</strong> Qatar Avios / KrisFlyer / Cathay / Delta bei 3:2</li>
@@ -35,10 +35,10 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
     <article class="seo-content">
       <div class="article-card seo-card" id="mr-rechner">
         <p class="eyebrow">Rechner</p>
-        <h2>Wie viele Meilen sind meine Amex Punkte wert?</h2>
-        <p>Membership-Rewards-Punkte eingeben, Transferpartner auswählen und die aktuelle Umrechnung sofort berechnen.</p>
+        <h2>Amex Punkte kostenlos in Meilen umrechnen</h2>
+        <p>Membership-Rewards-Punkte eingeben, Transferpartner auswählen und sofort sehen, wie viele Punkte oder Meilen ankommen.</p>
         <div class="form-grid two-col">
-          <div class="field-group"><label for="mrPoints">Membership Rewards Punkte</label><input id="mrPoints" type="number" min="1" step="1" inputmode="numeric" placeholder="z. B. 100000"></div>
+          <div class="field-group"><label for="mrPoints">Amex Membership Rewards Punkte</label><input id="mrPoints" type="number" min="1" step="1" inputmode="numeric" placeholder="z. B. 100000"></div>
           <div class="field-group"><label for="mrPartner">Partnerprogramm</label><select id="mrPartner"><option value="">Bitte Partner wählen</option></select></div>
         </div>
         <div class="mr-preset-row" aria-label="Beispielwerte">
@@ -47,7 +47,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
           <button class="mr-preset" type="button" data-mr-preset="200000">200.000 MR</button>
           <button class="mr-preset" type="button" data-mr-preset="300000">300.000 MR</button>
         </div>
-        <div class="tool-actions"><button class="btn btn-primary" type="button" id="mrCalcButton">Berechnen</button><button class="btn btn-secondary" type="button" id="mrResetButton">Zurücksetzen</button></div>
+        <div class="tool-actions"><button class="btn btn-primary" type="button" id="mrCalcButton">Jetzt umrechnen</button><button class="btn btn-secondary" type="button" id="mrResetButton">Zurücksetzen</button></div>
         <div id="mrError" class="form-status error" aria-live="polite" hidden></div>
         <div id="mrResult" class="decision-card decision-card-good" hidden>
           <div class="decision-badge" id="mrBadge"></div>
@@ -131,7 +131,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
     error.hidden=true;
     const p=partners()[Number(idx)],out=n*p.factor;
     document.getElementById('mrBadge').textContent=p.name;
-    document.getElementById('mrTitle').textContent=`${fmt(n)} MR → ${fmt(out)} ${p.unit}`;
+    document.getElementById('mrTitle').textContent=`${fmt(n)} Amex Punkte → ${fmt(out)} ${p.unit}`;
     document.getElementById('mrText').textContent='Vor dem Transfer Verfügbarkeit, benötigte Menge, mögliche Mindesttransfers sowie Steuern und Gebühren prüfen.';
     document.getElementById('mrUnits').textContent=`${fmt(out)} ${p.unit}`;
     document.getElementById('mrRatio').textContent=p.ratio;
