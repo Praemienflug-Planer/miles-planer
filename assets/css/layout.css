@@ -19,9 +19,9 @@
   white-space: nowrap;
 }
 .brand:hover { color: var(--text); }
-.site-header .brand { font-size: 21px; font-weight: 400; letter-spacing: -.045em; }
+.site-header .brand { font-size: 25px; font-weight: 400; letter-spacing: -.045em; }
 .site-header .brand-name { display: flex; flex-direction: column; line-height: 1.02; }
-.site-header .brand-name-accent { color: #e8b596; font-size: 20px; font-style: italic; letter-spacing: -.035em; }
+.site-header .brand-name-accent { color: #e8b596; font-size: 23px; font-style: italic; letter-spacing: -.035em; }
 .main-nav, .main-nav ul { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 0; padding: 0; list-style: none; min-width: 0; }
 .nav-item { position: relative; }
 .has-dropdown { padding-bottom: 14px; margin-bottom: -14px; }
@@ -181,8 +181,8 @@ img, iframe, video {
   .nav, .cta-box { align-items: flex-start; flex-direction: column; }
   .nav { gap: 14px; min-height: auto; padding-top: 14px; padding-bottom: 14px; }
   .brand { width: 100%; font-size: clamp(15px, 4.3vw, 18px); padding-right: 56px; gap: 9px; }
-  .site-header .brand { font-size: 19px; }
-  .site-header .brand-name-accent { font-size: 18px; }
+  .site-header .brand { font-size: 21px; }
+  .site-header .brand-name-accent { font-size: 19px; }
   .nav-toggle {
     position: absolute;
     right: 20px;
