@@ -18,7 +18,7 @@ body:has(.home-redesign) .nav-link { color: #203439; }
 body:has(.home-redesign) .brand:hover,
 body:has(.home-redesign) .main-nav a:hover,
 body:has(.home-redesign) .nav-link:hover { color: #a1462b; }
-body:has(.home-redesign) .brand-logo { border-radius: 3px; box-shadow: none; }
+body:has(.home-redesign) .brand-logo { border-radius: 0; box-shadow: none; }
 body:has(.home-redesign) .nav-dropdown { background: #fbfaf6; border-color: #c9ccc5; box-shadow: 0 15px 28px rgba(20, 35, 38, .13); }
 body:has(.home-redesign) .nav-dropdown a:hover { background: #eee9de; }
 body:has(.home-redesign) .nav-group-title { color: #a1462b; }
