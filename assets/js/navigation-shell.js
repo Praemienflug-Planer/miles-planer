@@ -171,7 +171,8 @@
     header.innerHTML = `
       <div class="container nav">
         <a class="brand" href="${BASE}/" aria-label="Startseite Prämienflug-Planer">
-          <span class="brand-name"><span>Prämienflug</span><span class="brand-name-accent">Planer.</span></span>
+          <img class="brand-logo" src="${BASE}/assets/brand/praemienflug-planer-logo.svg?v=20260915-original-brand-1" alt="" aria-hidden="true" width="40" height="40" loading="eager" decoding="async">
+          <span class="brand-name">Prämienflug-Planer</span>
         </a>
         <button class="nav-toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="site-navigation"><span></span><span></span><span></span></button>
         <nav id="site-navigation" class="main-nav" aria-label="Hauptnavigation">${renderMainNav()}</nav>
