@@ -1,7 +1,7 @@
 /* Central stylesheet hub.
    Keep this file small. Add page-specific rules to the modules below. */
 @import url('/assets/css/base.css?v=20260617-system-font');
-@import url('/assets/css/layout.css?v=20260914-wordmark-3');
+@import url('/assets/css/layout.css?v=20260915-original-brand-1');
 @import url('/assets/css/nav-active-plane.css?v=20260826-plane-top');
 @import url('/assets/css/articles.css?v=20260903-visual-hubs-3');
 @import url('/assets/css/tools.css?v=20260617-system-font');
