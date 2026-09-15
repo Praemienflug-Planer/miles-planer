@@ -1,30 +1,30 @@
-/* A quiet editorial surface for the homepage. Header, footer and other pages stay on the site system. */
+/* A dark editorial surface for the homepage. Header, footer and other pages stay on the site system. */
 .home-redesign {
-  --home-paper: #f2f0e8;
-  --home-white: #fbfaf6;
-  --home-ink: #203439;
-  --home-muted: #536164;
-  --home-line: #c9ccc5;
-  --home-accent: #a1462b;
+  --home-paper: #101b25;
+  --home-white: #172630;
+  --home-ink: #f3f0e8;
+  --home-muted: #b7c3c4;
+  --home-line: #42545b;
+  --home-accent: #e9ae86;
   color: var(--home-ink);
   background: var(--home-paper);
   line-height: 1.55;
 }
 /* Keep the familiar navigation and its behavior, but let it belong to the new masthead. */
-body:has(.home-redesign) .site-header { background: rgba(242, 240, 232, .97); border-bottom-color: #c9ccc5; box-shadow: none; }
+body:has(.home-redesign) .site-header { background: rgba(13, 25, 34, .97); border-bottom-color: #42545b; box-shadow: none; }
 body:has(.home-redesign) .brand,
 body:has(.home-redesign) .main-nav a,
-body:has(.home-redesign) .nav-link { color: #203439; }
+body:has(.home-redesign) .nav-link { color: #f3f0e8; }
 body:has(.home-redesign) .brand:hover,
 body:has(.home-redesign) .main-nav a:hover,
-body:has(.home-redesign) .nav-link:hover { color: #a1462b; }
-body:has(.home-redesign) .site-header .brand-name-accent { color: #a1462b; }
-body:has(.home-redesign) .nav-dropdown { background: #fbfaf6; border-color: #c9ccc5; box-shadow: 0 15px 28px rgba(20, 35, 38, .13); }
-body:has(.home-redesign) .nav-dropdown a:hover { background: #eee9de; }
-body:has(.home-redesign) .nav-group-title { color: #a1462b; }
+body:has(.home-redesign) .nav-link:hover { color: #e9ae86; }
+body:has(.home-redesign) .site-header .brand-name-accent { color: #e9ae86; }
+body:has(.home-redesign) .nav-dropdown { background: #172630; border-color: #42545b; box-shadow: 0 15px 28px rgba(0, 0, 0, .3); }
+body:has(.home-redesign) .nav-dropdown a:hover { background: #253b45; }
+body:has(.home-redesign) .nav-group-title { color: #e9ae86; }
 body:has(.home-redesign) .main-nav a:focus-visible,
 body:has(.home-redesign) .nav-toggle:focus-visible,
-body:has(.home-redesign) .submenu-toggle:focus-visible { outline: 3px solid #a1462b; outline-offset: 3px; }
+body:has(.home-redesign) .submenu-toggle:focus-visible { outline: 3px solid #e9ae86; outline-offset: 3px; }
 .home-redesign .container { max-width: 1200px; padding-inline: 30px; }
 .home-redesign h1,
 .home-redesign h2,
@@ -45,7 +45,7 @@ body:has(.home-redesign) .submenu-toggle:focus-visible { outline: 3px solid #a14
   letter-spacing: .15em;
   text-transform: uppercase;
 }
-.home-index span { padding-inline: 8px; color: #9a9d95; }
+.home-index span { padding-inline: 8px; color: #8ea3a8; }
 .home-text-link {
   display: inline-flex;
   align-items: center;
@@ -71,7 +71,7 @@ body:has(.home-redesign) .submenu-toggle:focus-visible { outline: 3px solid #a14
   line-height: 1.25;
   transition: background .18s ease;
 }
-.home-button:hover { background: var(--home-accent); color: #fff !important; }
+.home-button:hover { background: var(--home-accent); color: #132530 !important; }
 .home-button span { font-size: 22px; font-weight: 400; line-height: 1; }
 
 .home-hero { padding: 0 0 32px; background: var(--home-paper); }
@@ -118,8 +118,9 @@ body:has(.home-redesign) .submenu-toggle:focus-visible { outline: 3px solid #a14
   flex-direction: column;
   justify-content: space-between;
   padding: clamp(26px, 3.2vw, 39px);
-  background: #20383d;
+  background: #274049;
   color: #f8f5eb;
+  border: 1px solid #52696c;
   position: relative;
   overflow: hidden;
 }
@@ -196,7 +197,8 @@ body:has(.home-redesign) .submenu-toggle:focus-visible { outline: 3px solid #a14
   box-shadow: none;
   transform: none;
 }
-.home-redesign .card-offer-actions .btn:hover { background: var(--home-accent); color: #fff; transform: none; }
+.home-redesign .card-offer-actions .btn:hover { background: var(--home-accent); color: #132530; transform: none; }
+.home-redesign .card-offer-actions .text-link:hover { color: var(--home-accent); }
 .home-redesign .card-offer-actions .text-link { align-self: flex-start; min-height: 40px; display: inline-flex; align-items: center; margin: 0; color: var(--home-ink); font-size: 13px; font-weight: 650; text-align: left; }
 .home-redesign .card-offer-disclosure { margin: 25px 0 0; padding: 14px 0 0; border: 0; border-top: 1px solid var(--home-line); border-radius: 0; background: transparent; color: var(--home-muted); font-size: 13px; }
 .home-redesign .card-offer-disclosure strong { color: var(--home-ink); }
@@ -204,7 +206,7 @@ body:has(.home-redesign) .submenu-toggle:focus-visible { outline: 3px solid #a14
 .home-method { padding: clamp(68px, 8vw, 112px) 0; background: var(--home-paper); }
 .home-method-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
 .home-method-item { min-width: 0; border-top: 1px solid var(--home-ink); padding-top: 17px; }
-.home-method-image { display: block; width: 100%; aspect-ratio: 1.55; padding: 12px; background: #fff; border: 1px solid var(--home-line); overflow: hidden; }
+.home-method-image { display: block; width: 100%; aspect-ratio: 1.55; padding: 12px; background: #253640; border: 1px solid var(--home-line); overflow: hidden; }
 .home-method-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .home-method-body { padding-top: 22px; }
 .home-method-number { color: var(--home-accent); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
@@ -236,15 +238,15 @@ body:has(.home-redesign) .submenu-toggle:focus-visible { outline: 3px solid #a14
 .home-link-list > a > span:last-child { justify-self: end; font-size: 25px; }
 .home-link-list > a:hover strong { color: var(--home-accent); }
 
-.home-final { padding: clamp(68px, 8vw, 105px) 0; background: #9f482e; color: #fffaf1; }
+.home-final { padding: clamp(68px, 8vw, 105px) 0; background: #623c32; color: #f3f0e8; }
 .home-final-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 60px; align-items: end; }
-.home-final .home-index { color: #f6d9be; }
+.home-final .home-index { color: #e9ae86; }
 .home-final h2 { margin: 0 0 20px; font-size: clamp(3rem, 5.7vw, 5.8rem); line-height: .98; }
-.home-final h2 em { color: #f7ddc4; }
-.home-final p:not(.home-index) { max-width: 640px; margin: 0; color: #fff3e8; font-size: 17px; line-height: 1.65; }
-.home-final .home-button { min-width: 250px; background: #20383d; }
-.home-final .home-button:hover { background: #f5efe4; color: #20383d !important; }
-.home-disclaimer { padding: 22px 0 28px; background: #e6e6df; color: #465254; font-size: 13px; line-height: 1.65; }
+.home-final h2 em { color: #e9ae86; }
+.home-final p:not(.home-index) { max-width: 640px; margin: 0; color: #e8d8ce; font-size: 17px; line-height: 1.65; }
+.home-final .home-button { min-width: 250px; background: #e9ae86; color: #132530; }
+.home-final .home-button:hover { background: #f3f0e8; color: #132530 !important; }
+.home-disclaimer { padding: 22px 0 28px; background: #13232b; color: #aabdc0; font-size: 13px; line-height: 1.65; }
 .home-disclaimer strong { color: var(--home-ink); }
 body:has(.home-redesign) .site-footer { margin-top: 0; }
 
@@ -258,9 +260,9 @@ body:has(.home-redesign) .site-footer { margin-top: 0; }
 @media (max-width: 900px) {
   body:has(.home-redesign) .nav-toggle,
   body:has(.home-redesign) .submenu-toggle,
-  body:has(.home-redesign) .main-nav > .nav-item > .nav-link { background: #fbfaf6; border-color: #c9ccc5; }
-  body:has(.home-redesign) .nav-toggle span { background: #203439; }
-  body:has(.home-redesign) .submenu-toggle { color: #203439; }
+  body:has(.home-redesign) .main-nav > .nav-item > .nav-link { background: #172630; border-color: #42545b; }
+  body:has(.home-redesign) .nav-toggle span { background: #f3f0e8; }
+  body:has(.home-redesign) .submenu-toggle { color: #f3f0e8; }
   body:has(.home-redesign) .nav-dropdown { box-shadow: none; }
 }
 @media (max-width: 760px) {
