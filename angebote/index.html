@@ -25,10 +25,10 @@ schema_json: |
   <div class="container offers-hero-inner">
     <p class="eyebrow">Geprüfte Meilen-Deals</p>
     <h1>Aktuelle Meilen-Angebote</h1>
-    <p class="offers-intro">Hier findest du ausgewählte Aktionen, mit denen sich ein Meilen- oder Punktekonto sinnvoll auffüllen lässt. Kurz eingeordnet, mit Original-Screenshot und den entscheidenden Bedingungen.</p>
+    <p class="offers-intro">Hier findest du ausgewählte Aktionen, mit denen sich ein Meilen- oder Punktekonto sinnvoll auffüllen lässt. Kurz eingeordnet, mit Frist, den entscheidenden Bedingungen und – sofern vorhanden – Original-Screenshot.</p>
     <div class="offers-meta" aria-label="Aktualität der Angebote">
       <span><strong data-active-deal-count>{{ site.data.deals.deals | size }}</strong> aktuell aktive Angebote</span>
-      <span>Zuletzt geprüft: <time datetime="{{ site.data.deals.last_checked }}">{{ site.data.deals.last_checked_display }}</time></span>
+      <span>Zuletzt aktualisiert: <time datetime="{{ site.data.deals.last_updated | default: site.data.deals.last_checked }}">{{ site.data.deals.last_updated_display | default: site.data.deals.last_checked_display }}</time></span>
       <span>Abgelaufene Angebote bleiben als Archiv sichtbar</span>
     </div>
   </div>
@@ -44,12 +44,14 @@ schema_json: |
     <div class="deal-grid">
       {% for deal in site.data.deals.deals %}
       <article class="deal-card" id="{{ deal.id }}" data-deal-card data-expires="{{ deal.expires }}" data-expires-display="{{ deal.expires_display }}">
+        {% if deal.image %}
         <figure class="deal-visual">
           <a href="{{ deal.image }}" target="_blank" rel="noopener noreferrer" aria-label="Screenshot größer öffnen: {{ deal.title | escape }}">
             <img src="{{ deal.image }}" alt="{{ deal.image_alt | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
           </a>
           <figcaption>{{ deal.image_caption | escape }}</figcaption>
         </figure>
+        {% endif %}
 
         <div class="deal-content">
           <div class="deal-topline">
