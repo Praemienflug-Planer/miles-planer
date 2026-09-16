@@ -49,6 +49,21 @@
       }
     });
 
+    document.querySelectorAll('[data-deal-comparison]').forEach((comparison) => {
+      const expires = comparison.dataset.comparisonExpires;
+      if (!expires || todayInGermany <= expires) return;
+
+      const heading = comparison.querySelector('[data-comparison-heading]');
+      const text = comparison.querySelector('[data-comparison-text]');
+      const link = comparison.querySelector('[data-comparison-link]');
+      if (heading && comparison.dataset.expiredHeading) heading.textContent = comparison.dataset.expiredHeading;
+      if (text && comparison.dataset.expiredText) text.textContent = comparison.dataset.expiredText;
+      if (link && comparison.dataset.expiredUrl && comparison.dataset.expiredLabel) {
+        link.setAttribute('href', comparison.dataset.expiredUrl);
+        link.textContent = comparison.dataset.expiredLabel;
+      }
+    });
+
     if (activeCount) activeCount.textContent = String(activeDeals);
   }
 

@@ -10,7 +10,7 @@ og_image: "/images/angebot-avis-1000-meilen-2026.png"
 extra_css:
   - "/assets/css/deals.css?v=20260916-coupon-set-1"
 extra_js:
-  - "/assets/js/deals-status.js?v=20260903-2"
+  - "/assets/js/deals-status.js?v=20260916-coupon-fixes-1"
 schema_json: |
   {
     "@context": "https://schema.org",
@@ -42,12 +42,14 @@ schema_json: |
     </div>
 
     <div class="deal-grid">
+      {% assign deal_image_rendered = false %}
       {% for deal in site.data.deals.deals %}
       <article class="deal-card{% if deal.variants %} deal-card-set{% endif %}" id="{{ deal.id }}" data-deal-card data-expires="{{ deal.expires }}" data-expires-display="{{ deal.expires_display }}">
         {% if deal.image %}
         <figure class="deal-visual">
           <a href="{{ deal.image }}" target="_blank" rel="noopener noreferrer" aria-label="Screenshot größer öffnen: {{ deal.title | escape }}">
-            <img src="{{ deal.image }}" alt="{{ deal.image_alt | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+            <img src="{{ deal.image }}" alt="{{ deal.image_alt | escape }}" loading="{% if deal_image_rendered %}lazy{% else %}eager{% endif %}" decoding="async">
+            {% assign deal_image_rendered = true %}
           </a>
           <figcaption>{{ deal.image_caption | escape }}</figcaption>
         </figure>
@@ -68,7 +70,8 @@ schema_json: |
             <section class="deal-set-option" aria-labelledby="{{ deal.id }}-{{ variant.id }}">
               <figure class="deal-visual">
                 <a href="{{ variant.image }}" target="_blank" rel="noopener noreferrer" aria-label="Original-Coupon größer öffnen: {{ variant.title | escape }}">
-                  <img src="{{ variant.image }}" alt="{{ variant.image_alt | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
+                  <img src="{{ variant.image }}" alt="{{ variant.image_alt | escape }}" loading="{% if deal_image_rendered %}lazy{% else %}eager{% endif %}" decoding="async">
+                  {% assign deal_image_rendered = true %}
                 </a>
                 <figcaption>Original-Coupon · {{ variant.title | escape }} · bis {{ deal.expires_display }}</figcaption>
               </figure>
@@ -95,7 +98,7 @@ schema_json: |
           <div class="deal-verdict"><strong>Meine Einordnung:</strong> {{ deal.verdict | escape }}</div>
 
           {% if deal.comparison_text %}
-          <p class="deal-compare"><strong>10-fach oder 12-fach?</strong> {{ deal.comparison_text | escape }} <a href="{{ deal.comparison_url }}">{{ deal.comparison_label | escape }}</a></p>
+          <p class="deal-compare" data-deal-comparison data-comparison-expires="{{ deal.comparison_expires | escape }}" data-expired-text="{{ deal.comparison_expired_text | escape }}" data-expired-heading="{{ deal.comparison_expired_heading | escape }}" data-expired-url="{{ deal.comparison_expired_url | escape }}" data-expired-label="{{ deal.comparison_expired_label | escape }}"><strong data-comparison-heading>10-fach oder 12-fach?</strong> <span data-comparison-text>{{ deal.comparison_text | escape }}</span> <a data-comparison-link href="{{ deal.comparison_url }}">{{ deal.comparison_label | escape }}</a></p>
           {% endif %}
 
           <details class="deal-details">
