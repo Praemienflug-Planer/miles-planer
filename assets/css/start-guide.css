@@ -1,4 +1,6 @@
 /* Scoped beginner journey. Native links, details and checkboxes work without JavaScript. */
+/* clip avoids the unintended body scroll container caused by overflow-x: hidden. */
+html:has(.start-guide), body:has(.start-guide) { overflow-x: clip; }
 .start-guide { font-size: 17px; }
 .start-guide :is(section[id], div[id], details[id]) { scroll-margin-top: 155px; }
 .guide-intro { padding-bottom: 64px; }
