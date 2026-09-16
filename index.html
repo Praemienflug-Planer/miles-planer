@@ -10,7 +10,7 @@ twitter_title: "Familien-Prämienflüge realistisch planen"
 twitter_description: "Prüfe kostenlos, ob deine Meilen für eine Familienreise realistisch reichen."
 og_image: "/assets/og/og-home.jpg"
 extra_css:
-  - "/assets/css/home.css?v=20260915-dark-editorial-1"
+  - "/assets/css/home.css?v=20260916-guided-start-1"
 schema_json: |
   {"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://praemienflug-planer.de/#website","url":"https://praemienflug-planer.de/","name":"Prämienflug-Planer","inLanguage":"de-DE"},{"@type":"Organization","@id":"https://praemienflug-planer.de/#organization","name":"Prämienflug-Planer","url":"https://praemienflug-planer.de/"},{"@type":"SoftwareApplication","name":"Prämienflug-Planer","url":"https://praemienflug-planer.de/","applicationCategory":"TravelApplication","operatingSystem":"Web","inLanguage":"de-DE"}]}
 ---
@@ -24,7 +24,7 @@ schema_json: |
           <h1 id="home-title">Vier Plätze.<br><em>Ein Plan.</em></h1>
           <p class="home-hero-question">Reichen deine Meilen wirklich für die Familienreise?</p>
           <p class="home-hero-copy">Ein einzelner Prämienflug klingt schnell machbar. Mit vier Personen, Schulferien und Zuzahlungen sieht die Rechnung anders aus. Ich helfe dir, erst den Bedarf für alle zu prüfen und dann gezielt zu sammeln.</p>
-          <div class="home-hero-actions"><a class="home-button" href="/rechner/" data-event="start_calculator">Familienreise berechnen <span aria-hidden="true">↗</span></a><a class="home-text-link" href="/ueber-das-projekt/">Warum ich diesen Rechner gebaut habe <span aria-hidden="true">↗</span></a></div>
+          <div class="home-hero-actions"><a class="home-button" href="/rechner/" data-event="start_calculator">Familienreise berechnen <span aria-hidden="true">↗</span></a><a class="home-text-link" href="/meilen-sammeln/anfaenger/">Neu hier? So funktioniert’s <span aria-hidden="true">↗</span></a></div>
         </div>
         <aside class="home-fieldnote" aria-label="Meine Herangehensweise">
           <div class="home-fieldnote-top"><span>Aus meiner Planung</span><span>Notiz 01 / 03</span></div>
@@ -36,9 +36,22 @@ schema_json: |
     </div>
   </section>
 
+  <section class="home-start" id="dein-einstieg" aria-labelledby="home-start-title">
+    <div class="container">
+      <header class="home-section-head"><div><p class="home-index">02 <span aria-hidden="true">—</span> Dein Einstieg</p><h2 id="home-start-title">Dein Weg zum<br><em>ersten Prämienflug.</em></h2></div><p>Wenn du neu im Thema bist, führe ich dich von den Grundlagen bis zur Buchung. Du brauchst dafür weder zehn Programme noch sofort eine Kreditkarte.</p></header>
+      <nav class="home-start-path" aria-label="Dein Weg zum ersten Prämienflug">
+        <a href="/meilen-sammeln/anfaenger/#verstehen"><span>01</span><strong>Verstehen</strong><small>Welche Punkte sind was – und was bringen sie?</small><span aria-hidden="true">↗</span></a>
+        <a href="/meilen-sammeln/anfaenger/#planen"><span>02</span><strong>Reise planen</strong><small>Bedarf und Cashkosten für alle Personen prüfen.</small><span aria-hidden="true">↗</span></a>
+        <a href="/meilen-sammeln/anfaenger/#sammeln"><span>03</span><strong>Gezielt sammeln</strong><small>Normale Ausgaben nutzen, statt Punkte zu jagen.</small><span aria-hidden="true">↗</span></a>
+        <a href="/meilen-sammeln/anfaenger/#buchen"><span>04</span><strong>Suchen &amp; buchen</strong><small>Plätze bestätigen, vergleichen, erst dann transferieren.</small><span aria-hidden="true">↗</span></a>
+      </nav>
+      <p class="home-start-more"><a class="home-text-link" href="/meilen-sammeln/anfaenger/">Deinen passenden Einstieg wählen <span aria-hidden="true">↗</span></a></p>
+    </div>
+  </section>
+
   <section class="home-news" id="aktuelle-daten-aktionen" aria-labelledby="home-news-title">
     <div class="container">
-      <header class="home-section-head home-news-head"><div><p class="home-index">02 <span aria-hidden="true">—</span> Aktueller Stand</p><h2 id="home-news-title">Was sich gerade lohnt<br><em>zu prüfen.</em></h2></div><p>Zeitlich begrenzte Boni ändern sich schnell. Ich trenne deshalb Aktionen von regulären Umrechnungskursen.<span class="home-dateline">Datenstand PAYBACK {{ site.data.offers.payback_transfer.last_checked_display }} · M&amp;M {{ site.data.offers.miles_and_more_credit_card.last_checked_display }}</span></p></header>
+      <header class="home-section-head home-news-head"><div><p class="home-index">03 <span aria-hidden="true">—</span> Aktueller Stand</p><h2 id="home-news-title">Was sich gerade lohnt<br><em>zu prüfen.</em></h2></div><p>Zeitlich begrenzte Boni ändern sich schnell. Ich trenne deshalb Aktionen von regulären Umrechnungskursen.<span class="home-dateline">Datenstand PAYBACK {{ site.data.offers.payback_transfer.last_checked_display }} · M&amp;M {{ site.data.offers.miles_and_more_credit_card.last_checked_display }}</span></p></header>
       <div class="home-news-list">
         <article class="home-news-row"><div class="home-news-meta"><span>01 / Karten</span><span>Ab 13. Oktober 2026</span></div><div class="home-news-content"><h3>PAYBACK American Express PLUS</h3><p>Aus PAYBACK MAX wird PAYBACK American Express PLUS. Für 35 € im Jahr bleibt die erhöhte Sammelrate von 2 Punkten je 3 € Umsatz bis 20.000 € Jahresumsatz erhalten. Dazu kommen monatliche Extra-Punkte, Coupons und Gutscheine. Ich habe nachgerechnet, wann sich PLUS gegenüber der normalen PAYBACK Amex und der privaten Miles-&amp;-More-Kreditkarte lohnt.</p></div><a class="home-row-link" href="/meilen-sammeln/payback-amex-plus/">PAYBACK Amex PLUS ansehen <span aria-hidden="true">↗</span></a></article>
         <article class="home-news-row"><div class="home-news-meta"><span>02 / Transfer</span><span>PAYBACK → Miles &amp; More</span></div><div class="home-news-content"><h3>Regulär {{ site.data.offers.payback_transfer.ratio_display }} ab {{ site.data.offers.payback_transfer.minimum_points }} Punkten</h3><p>Der letzte Bonus lag bei {{ site.data.offers.payback_transfer.last_bonus_percent }} % im {{ site.data.offers.payback_transfer.last_bonus_period_display }} und ist beendet. Aktueller Stand: {{ site.data.offers.payback_transfer.current_bonus_display }}. Regulär kannst du ab {{ site.data.offers.payback_transfer.minimum_points }} PAYBACK Punkten im Verhältnis {{ site.data.offers.payback_transfer.ratio_display }} zu Miles &amp; More übertragen.</p></div><a class="home-row-link" href="/meilen-sammeln/payback-transferbonus/">Transferstrategie ansehen <span aria-hidden="true">↗</span></a></article>
@@ -51,7 +64,7 @@ schema_json: |
 
   <section class="home-method" id="so-funktioniert-es" aria-labelledby="home-method-title">
     <div class="container">
-      <header class="home-section-head"><div><p class="home-index">03 <span aria-hidden="true">—</span> Mein Vorgehen</p><h2 id="home-method-title">Erst die Reise.<br><em>Dann die Punkte.</em></h2></div><p>Die Beispiele stammen aus echten Suchen. Sie zeigen, welche Fragen ich kläre, bevor ich Punkte übertrage oder eine Karte beantrage.</p></header>
+      <header class="home-section-head"><div><p class="home-index">04 <span aria-hidden="true">—</span> Mein Vorgehen</p><h2 id="home-method-title">Erst die Reise.<br><em>Dann die Punkte.</em></h2></div><p>Die Beispiele stammen aus echten Suchen. Sie zeigen, welche Fragen ich kläre, bevor ich Punkte übertrage oder eine Karte beantrage.</p></header>
       <div class="home-method-grid">
         <article class="home-method-item"><a class="home-method-image" href="/images/thailand_award_bc_dus_bkk_2027.png" aria-label="Prämienflugsuche Düsseldorf nach Bangkok in voller Größe ansehen"><img src="/images/thailand_award_bc_dus_bkk_2027.png" alt="Miles-and-More-Prämienflugsuche Düsseldorf Bangkok" loading="lazy"></a><div class="home-method-body"><span class="home-method-number">01 / Verfügbarkeit</span><h3>Gibt es genügend Plätze?</h3><p>Ein Preis in der Suche hilft wenig, wenn du vier Sitze auf demselben Flug brauchst.</p><a class="home-text-link" href="/vier-praemienflug-plaetze-finden/">Mehrere Award-Plätze finden <span aria-hidden="true">↗</span></a></div></article>
         <article class="home-method-item"><a class="home-method-image" href="/images/new-york-ba-avios-4-personen.png" aria-label="British-Airways-Prämienflugbeispiel in voller Größe ansehen"><img src="/images/new-york-ba-avios-4-personen.png" alt="British-Airways-Prämienflugbeispiel nach New York" loading="lazy"></a><div class="home-method-body"><span class="home-method-number">02 / Familienpreis</span><h3>Was kostet die ganze Reise?</h3><p>Ich rechne Meilen und Zuzahlungen für alle zusammen und vergleiche mit dem Cashpreis.</p><a class="home-text-link" href="/meilen-new-york/">Cash- und Awardpreise vergleichen <span aria-hidden="true">↗</span></a></div></article>
