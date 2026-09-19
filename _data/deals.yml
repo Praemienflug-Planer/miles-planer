@@ -2,6 +2,7 @@ last_checked: "2026-09-03"
 last_checked_display: "03.09.2026"
 last_updated: "2026-09-19"
 last_updated_display: "19.09.2026"
+active_count_fallback: 5
 
 deals:
   - id: "wunschgutschein-themen-12fach-september-2026"
@@ -97,6 +98,38 @@ deals:
       - "Amazon ist ein Vorteil gegenüber den drei 12-fach-Themen-Gutscheinen. Laut Wunschgutschein sind nur Gutscheine mit Amazon-Logo auf der Partnerkarte sicher für Amazon einlösbar; den konkreten Gutschein vor dem Kauf prüfen."
     internal_url: "/meilen-sammeln/wunschgutschein/#coupon"
     internal_label: "Meine Wunschgutschein-Strategie lesen"
+
+  - id: "wunschgutschein-10fach-20260918"
+    archived: true
+    category: "PAYBACK & Gutscheine · Archiv"
+    title: "10-fach PAYBACK Punkte auf Wunschgutschein (bis 18.09.)"
+    summary: "Dieser frühere 10-fach-eCoupon galt bis 18.09.2026. Er bleibt mit Original-Screenshot und Bedingungen dokumentiert, damit frühere Aktionen nachvollziehbar sind. Für einen neuen Kauf gilt dieser Coupon nicht mehr."
+    image: "/images/angebot-wunschgutschein-10fach-202609.jpg"
+    image_alt: "Archivierter PAYBACK eCoupon: 10-fach Punkte auf Wunschgutschein, gültig bis 18.09.2026"
+    image_caption: "Original-Coupon im Archiv · gültig bis 18.09.2026"
+    expires: "2026-09-18"
+    expires_display: "18.09.2026"
+    offer_url: "https://www.payback.de/shop/wunschgutschein?gbon=true"
+    cta: "Angebot abgelaufen"
+    facts:
+      - label: "Coupon"
+        value: "10-fach °P"
+      - label: "Bei 500 €"
+        value: "2.500 °P"
+      - label: "Bestellgrenze"
+        value: "500 €"
+    verdict: "Für mich war der normale Wunschgutschein gegenüber den Themen-Gutscheinen wegen der größeren Partnerauswahl interessant, insbesondere für Amazon bei geeigneter Amazon-Kennzeichnung. Dieser Coupon ist inzwischen abgelaufen."
+    conditions:
+      - "Der archivierte eCoupon war bis 18.09.2026 gültig und ist nicht mehr aktivierbar."
+      - "Der 10-fach-eCoupon musste vor dem Kauf aktiviert und der Einkauf über die PAYBACK-Partnerseite gestartet werden."
+      - "Die Basisrate betrug 1 PAYBACK Punkt je 2 €. 10-fach bedeutete insgesamt 5 Punkte je Euro, nicht 10 zusätzliche Punkte je Euro."
+      - "Nur haushaltsübliche Mengen bis maximal 500 € Bestellwert wurden bepunktet. Bestellungen über 500 € waren ausgeschlossen."
+      - "Stornierungen, Retouren, Versandkosten, Themen- und Einzelmarkengutscheine sowie Kombinationen mit anderen Rabatt- oder Zugabeaktionen waren von der Bepunktung ausgeschlossen."
+      - "Laut PAYBACK konnten maximal 5 Gutscheine pro Tag bei Wunschgutschein eingelöst werden. Das war eine Einlösegrenze, keine Kaufempfehlung."
+      - "Die Punkte erschienen zunächst gesperrt und wurden laut damaliger Partneraktion nach ca. 42 Tagen freigegeben, sofern keine Rückabwicklung erfolgte."
+      - "Amazon war nur bei entsprechend gekennzeichneten normalen Wunschgutscheinen ein möglicher Einlösepartner."
+    internal_url: "/meilen-sammeln/wunschgutschein/#coupon"
+    internal_label: "Aktuelle Wunschgutschein-Strategie lesen"
 
   - id: "avis-1000-meilen"
     category: "Kostenlose Meilen"

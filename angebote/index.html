@@ -27,7 +27,7 @@ schema_json: |
     <h1>Aktuelle Meilen-Angebote</h1>
     <p class="offers-intro">Hier findest du ausgewählte Aktionen, mit denen sich ein Meilen- oder Punktekonto sinnvoll auffüllen lässt. Kurz eingeordnet, mit Frist, den entscheidenden Bedingungen und – sofern vorhanden – Original-Screenshot.</p>
     <div class="offers-meta" aria-label="Aktualität der Angebote">
-      <span><strong data-active-deal-count>{{ site.data.deals.deals | size }}</strong> aktuell aktive Angebote</span>
+      <span><strong data-active-deal-count>{{ site.data.deals.active_count_fallback }}</strong> aktuell aktive Angebote</span>
       <span>Zuletzt aktualisiert: <time datetime="{{ site.data.deals.last_updated | default: site.data.deals.last_checked }}">{{ site.data.deals.last_updated_display | default: site.data.deals.last_checked_display }}</time></span>
       <span>Abgelaufene Angebote bleiben als Archiv sichtbar</span>
     </div>
@@ -44,7 +44,7 @@ schema_json: |
     <div class="deal-grid">
       {% assign deal_image_rendered = false %}
       {% for deal in site.data.deals.deals %}
-      <article class="deal-card{% if deal.variants %} deal-card-set{% endif %}" id="{{ deal.id }}" data-deal-card data-expires="{{ deal.expires }}" data-expires-display="{{ deal.expires_display }}">
+      <article class="deal-card{% if deal.variants %} deal-card-set{% endif %}{% if deal.archived %} is-expired{% endif %}" id="{{ deal.id }}" data-deal-card data-expires="{{ deal.expires }}" data-expires-display="{{ deal.expires_display }}">
         {% if deal.image %}
         <figure class="deal-visual">
           <a href="{{ deal.image }}" target="_blank" rel="noopener noreferrer" aria-label="Screenshot größer öffnen: {{ deal.title | escape }}">
@@ -58,7 +58,7 @@ schema_json: |
         <div class="deal-content">
           <div class="deal-topline">
             <span class="deal-category">{{ deal.category | escape }}</span>
-            <span class="deal-status" data-deal-status><span class="deal-status-dot" aria-hidden="true"></span>Aktiv bis {{ deal.expires_display }}</span>
+            <span class="deal-status" data-deal-status><span class="deal-status-dot" aria-hidden="true"></span>{% if deal.archived %}Abgelaufen am{% else %}Aktiv bis{% endif %} {{ deal.expires_display }}</span>
           </div>
 
           <h2>{{ deal.title | escape }}</h2>
@@ -112,7 +112,11 @@ schema_json: |
           </details>
 
           <div class="deal-actions">
+            {% if deal.archived %}
+            <span class="btn btn-primary" aria-disabled="true" data-deal-cta>Angebot abgelaufen</span>
+            {% else %}
             <a class="btn btn-primary" href="{{ deal.offer_url }}" target="_blank" rel="noopener noreferrer" data-deal-cta data-event="deal_offer_click" data-deal="{{ deal.id }}">{{ deal.cta | escape }}</a>
+            {% endif %}
             <a class="text-link" href="{{ deal.internal_url }}">{{ deal.internal_label | escape }}</a>
           </div>
         </div>
