@@ -49,6 +49,13 @@
       }
     });
 
+    const grid = cards[0].parentElement;
+    if (grid) {
+      const current = cards.filter((card) => !card.classList.contains('is-expired'));
+      const archive = cards.filter((card) => card.classList.contains('is-expired'));
+      grid.append(...current, ...archive);
+    }
+
     document.querySelectorAll('[data-deal-comparison]').forEach((comparison) => {
       const expires = comparison.dataset.comparisonExpires;
       if (!expires || todayInGermany <= expires) return;
