@@ -49,10 +49,11 @@
       }
     });
 
-    const grid = cards[0].parentElement;
+    const grid = document.querySelector('.deal-grid');
     if (grid) {
-      const current = cards.filter((card) => !card.classList.contains('is-expired'));
-      const archive = cards.filter((card) => card.classList.contains('is-expired'));
+      const offers = Array.from(grid.querySelectorAll(':scope > [data-deal-card]'));
+      const current = offers.filter((card) => !card.classList.contains('is-expired'));
+      const archive = offers.filter((card) => card.classList.contains('is-expired'));
       grid.append(...current, ...archive);
     }
 
