@@ -1,10 +1,40 @@
 last_checked: "2026-09-03"
 last_checked_display: "03.09.2026"
-last_updated: "2026-09-21"
-last_updated_display: "21.09.2026"
-active_count_fallback: 5
+last_updated: "2026-09-28"
+last_updated_display: "28.09.2026"
+active_count_fallback: 3
 
 deals:
+  - id: "wunschgutschein-praemienshop-10fach-september-2026"
+    category: "PAYBACK Prämienshop · Gutscheine"
+    title: "10-fach Extra-Punkte auf Wunschgutschein im Prämienshop"
+    summary: "Mit aktiviertem Coupon gibt es bis 30.09.2026 im PAYBACK Prämienshop 500 Extra-Punkte beim 100-€-Wunschgutschein. Mindestens 200 vorhandene Punkte einsetzen und den Rest in Euro bezahlen. Einmal pro Kundenkonto nutzbar."
+    image: "/images/angebot-wunschgutschein-praemienshop-10fach-20260930.png"
+    image_alt: "PAYBACK Original-Coupon: 10-fach Punkte auf Wunschgutschein im Prämienshop bis 30.09.2026"
+    image_caption: "Original-Coupon · 10-fach im PAYBACK Prämienshop · gültig bis 30.09.2026"
+    terms_image: "/images/angebot-wunschgutschein-praemienshop-10fach-bedingungen-20260930.png"
+    expires: "2026-09-30"
+    expires_display: "30.09.2026"
+    offer_url: "https://www.payback.de/praemien/praemienaktionen/gutscheindeal"
+    cta: "Wunschgutschein im Prämienshop prüfen"
+    facts:
+      - label: "100-€-Gutschein"
+        value: "500 Extra-°P"
+      - label: "Punkte einsetzen"
+        value: "mind. 200 °P"
+      - label: "Gültig bis"
+        value: "30.09.2026, 23:59 Uhr"
+    verdict: "Ich nutze die Aktion für ohnehin geplante Einkäufe. Beim 100-€-Gutschein setze ich nur 200 vorhandene Punkte im Wert von 2 € ein und zahle die übrigen 98 € in Euro. Dafür nennt der Coupon 500 Extra-Punkte. Im Bestellprozess würde ich die voreingestellte Punkteeinlösung kontrollieren und auf 200 Punkte reduzieren."
+    conditions:
+      - "Coupon vor dem Kauf aktivieren und bis 30.09.2026, 23:59 Uhr im PAYBACK Prämienshop bestellen. Einmal pro Kundenkonto; keine nachträgliche Einlösung. Nur solange der Vorrat reicht."
+      - "Pro Bestellung mindestens 200 PAYBACK Punkte einlösen. Die Höhe ist frei wählbar; der Restbetrag kann in Euro bezahlt werden. Für möglichst wenig Punkteeinsatz die voreingestellte Einlösung auf 200 Punkte reduzieren."
+      - "Extra-Punkte laut Coupon: 25 °P bei 5 €, 75 °P bei 15 €, 125 °P bei 25 €, 250 °P bei 50 € und 500 °P bei 100 € Gutscheinwert."
+      - "Gutschrift laut Coupon ca. zwei Wochen nach Aktionsende. Die Punkte bleiben laut Bedingungen ca. 35 Tage nach der Bestellung gesperrt und werden danach automatisch freigegeben. Bei Widerruf innerhalb der Sperrfrist werden sie storniert."
+      - "Nicht mit anderen Aktionen oder Rabattcodes kombinierbar. Die Gutschrift gilt ausschließlich für eine Gutscheinbestellung im PAYBACK Prämienshop. Die 500-€-Grenze und Bedingungen der regulären Wunschgutschein-Partneraktion gelten hier nicht automatisch."
+      - "Vor dem Kauf den gewünschten Einlösepartner prüfen. Der abgebildete Wunschgutschein trägt unter anderem das Amazon-Logo."
+    internal_url: "/meilen-sammeln/wunschgutschein/#coupon"
+    internal_label: "Meine Hinweise zur Wunschgutschein-Aktion lesen"
+
   - id: "wunschgutschein-praemienshop-8fach-september-2026"
     category: "PAYBACK Prämienshop · Gutscheine"
     title: "8-fach Extra-Punkte auf Wunschgutschein im Prämienshop"
