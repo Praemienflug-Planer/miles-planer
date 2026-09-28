@@ -71,11 +71,16 @@ amex:
     status: "current"
   payback:
     product: "PAYBACK American Express"
+    last_checked: "2026-09-28"
+    last_checked_display: "28.09.2026"
+    valid_until: "2026-11-15"
+    valid_until_display: "15.11.2026 laut Empfehlungsseite; Coupon nennt 25.10.2026"
+    referral_bonus: 3000
     bonus_value: 4000
     bonus_number_display: "4.000"
-    bonus_display: "4.000 PAYBACK Punkte"
-    bonus_short_display: "4.000 °P"
-    minimum_spend_display: "Bedingungen im geöffneten Link prüfen"
+    bonus_display: "bis zu 4.000 PAYBACK Punkte"
+    bonus_short_display: "bis zu 4.000 °P"
+    minimum_spend_display: "2.000 Punkte mit der ersten Zahlung + 2.000 Punkte ab 500 € Kartenumsatz innerhalb der ersten 2 Monate"
     public_offer_display: "bis zu 3.000 Extra°Punkte"
     annual_fee_eur: 0
     annual_fee_display: "0 €"

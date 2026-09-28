@@ -111,6 +111,10 @@ schema_json: |
             {% endif %}
           </details>
 
+          {% if deal.screenshots %}
+          <details class="deal-details"><summary>Alle Original-Screenshots und Fristen</summary><ul>{% for screenshot in deal.screenshots %}<li><a class="text-link" href="{{ screenshot.url }}" target="_blank" rel="noopener noreferrer">{{ screenshot.label | escape }}</a></li>{% endfor %}</ul></details>
+          {% endif %}
+
           <div class="deal-actions">
             {% if deal.archived %}
             <span class="btn btn-primary" aria-disabled="true" data-deal-cta>Angebot abgelaufen</span>
@@ -138,5 +142,5 @@ schema_json: |
 </section>
 
 <section class="section legal-note-section">
-  <div class="container legal-note"><strong>Hinweis:</strong> Angebote und Teilnahmebedingungen können sich kurzfristig ändern. Maßgeblich sind immer die Bedingungen auf der verlinkten Anbieterseite beziehungsweise im persönlichen PAYBACK Konto. Links sind derzeit nicht vergütet; sollte sich das ändern, wird dies direkt am Angebot gekennzeichnet.</div>
+  <div class="container legal-note"><strong>Hinweis:</strong> Angebote und Teilnahmebedingungen können sich kurzfristig ändern. Maßgeblich sind immer die Bedingungen auf der verlinkten Anbieterseite beziehungsweise im persönlichen PAYBACK Konto. Bei Empfehlungslinks kann ich eine Prämie erhalten; dies kennzeichne ich direkt am jeweiligen Angebot.</div>
 </section>

@@ -2,9 +2,45 @@ last_checked: "2026-09-03"
 last_checked_display: "03.09.2026"
 last_updated: "2026-09-28"
 last_updated_display: "28.09.2026"
-active_count_fallback: 3
+active_count_fallback: 4
 
 deals:
+  - id: payback-amex-herbst-2026
+    category: PAYBACK Amex · Freundschaftswerbung
+    title: 'PAYBACK Amex: bis zu 4.000 Punkte für Neukunden'
+    summary: Über eine Empfehlung gibt es 2.000 Extra-Punkte mit der ersten Zahlung und weitere 2.000 Extra-Punkte ab 500 € Kartenumsatz innerhalb der ersten 2 Monate. Der Werber erhält separat 3.000 Punkte. Die Empfehlungsseite nennt den 15.11.2026 als Aktionsende; der PAYBACK-Coupon nennt abweichend den 25.10.2026.
+    image: /images/payback-amex-herbst-2026-banner.png
+    image_alt: 'PAYBACK American Express Herbstaktion: 3.000 Punkte für Werber und bis zu 4.000 Punkte für geworbene Freunde'
+    image_caption: Original-Aktionsbanner · bereitgestellt am 28.09.2026
+    terms_image: /images/payback-amex-herbst-2026-neukunden.png
+    expires: '2026-11-15'
+    expires_display: 15.11.2026 laut Empfehlungsseite*
+    offer_url: /kreditkarten-link/?karte=payback-amex&quelle=angebote
+    cta: Empfehlungslink anfragen
+    facts:
+    - label: Für Neukunden
+      value: bis zu 4.000 °P
+    - label: Für Werber
+      value: 3.000 °P separat
+    - label: Für vollen Bonus
+      value: 500 € Umsatz in 2 Monaten
+    verdict: Für mich ist die Aktion interessant, wenn die Karte ohnehin zu den normalen Ausgaben passt. Die 4.000 Punkte für Neukunden bestehen aus zwei Teilen. Die 3.000 Werberpunkte gehen an die empfehlende Person und werden nicht zum eigenen Willkommensbonus addiert.
+    conditions:
+    - 2.000 Extra-Punkte mit der ersten Zahlung; weitere 2.000 Extra-Punkte ab 500 € Kartenumsatz innerhalb der ersten 2 Monate laut Empfehlungsseite.
+    - Der Werber erhält 3.000 Punkte je erfolgreich geworbenem Freund, der eine PAYBACK American Express Karte beantragt.
+    - 'Abweichende Fristen: Der PAYBACK-Coupon nennt 25.10.2026, die Empfehlungsseite für Werber und Neukunden 15.11.2026. Ob unterschiedliche Aktionswege gemeint sind, geht aus den Screenshots nicht hervor. Vor dem Antrag die im persönlichen Empfehlungslink angezeigte Frist und vollständigen Bedingungen prüfen.'
+    - Weitere Voraussetzungen zur Bonusberechtigung und Kartengenehmigung sind in den Screenshots nicht vollständig enthalten. Maßgeblich sind die Bedingungen im Antragsprozess.
+    - 'Transparenz: Wenn du über meinen Empfehlungslink erfolgreich eine Karte beantragst, kann ich 3.000 PAYBACK Punkte erhalten.'
+    internal_url: /meilen-sammeln/payback/
+    internal_label: Meine Einordnung zur PAYBACK Amex
+    screenshots:
+    - url: /images/payback-amex-herbst-2026-coupon.png
+      label: 'PAYBACK-Coupon: gültig bis 25.10.2026'
+    - url: /images/payback-amex-herbst-2026-werber.png
+      label: 'Werber: 3.000 Punkte, Aktion bis 15.11.2026'
+    - url: /images/payback-amex-herbst-2026-neukunden.png
+      label: 'Neukunden: Bonusbedingungen, Aktion bis 15.11.2026'
+
   - id: "wunschgutschein-praemienshop-10fach-september-2026"
     category: "PAYBACK Prämienshop · Gutscheine"
     title: "10-fach Extra-Punkte auf Wunschgutschein im Prämienshop"
