@@ -1,7 +1,7 @@
 ---
 layout: page
-title: "Amex Punkte Rechner: Membership Rewards in Meilen umrechnen"
-description: "Amex Punkte Rechner: Membership Rewards in Avios, Flying Blue, KrisFlyer, Qatar, PAYBACK und weitere Partner umrechnen – mit aktuellen Transferverhältnissen."
+title: "Amex Punkte in Meilen umrechnen: Rechner & Transferquoten"
+description: "Berechne, wie viele Avios, Flying Blue oder Miles-&-More-Meilen über PAYBACK deine Amex Punkte ergeben. Mit Transferquoten und allen direkten Partnern."
 canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
 ---
 <style>
@@ -12,7 +12,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
   <div class="container hero-grid seo-hero-grid">
     <div>
       <p class="eyebrow">Membership Rewards Rechner · Stand 27.08.2026</p>
-      <h1>Amex Punkte Rechner: Membership Rewards in Meilen umrechnen</h1>
+      <h1>Amex Punkte in Meilen umrechnen</h1>
       <p class="hero-text">Mit dem Rechner lassen sich American Express Membership Rewards direkt in Avios, Flying Blue Meilen, KrisFlyer Meilen, Qatar Avios, PAYBACK Punkte und weitere Transferpartner umrechnen.</p>
       <p class="hero-text">Die Umrechnung zeigt, wie viele Punkte oder Meilen aus dem vorhandenen MR-Bestand entstehen. Erst wenn die gewünschte Prämienflug-Verfügbarkeit feststeht, sollte der tatsächliche Transfer erfolgen.</p>
       <div class="hero-actions"><a class="btn btn-primary" href="#mr-rechner">Amex Punkte berechnen</a><a class="btn btn-secondary" href="#transfer">Transferverhältnisse ansehen</a></div>
@@ -35,7 +35,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
     <article class="seo-content">
       <div class="article-card seo-card" id="mr-rechner">
         <p class="eyebrow">Rechner</p>
-        <h2>Wie viele Meilen sind meine Amex Punkte wert?</h2>
+        <h2>Wie viele Meilen bekomme ich für meine Amex Punkte?</h2>
         <p>Membership-Rewards-Punkte eingeben, Transferpartner auswählen und die aktuelle Umrechnung sofort berechnen.</p>
         <div class="form-grid two-col">
           <div class="field-group"><label for="mrPoints">Membership Rewards Punkte</label><input id="mrPoints" type="number" min="1" step="1" inputmode="numeric" placeholder="z. B. 100000"></div>
@@ -124,15 +124,29 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
   const groups={};
   partners().forEach((p,i)=>{(groups[p.group]??=[]).push({p,i});});
   Object.entries(groups).forEach(([g,items])=>{const og=document.createElement('optgroup');og.label=g;items.forEach(({p,i})=>{const o=document.createElement('option');o.value=i;o.textContent=p.name;og.appendChild(o);});select.appendChild(og);});
+  const indirectGroup=document.createElement('optgroup');
+  indirectGroup.label='Indirekter Transfer';
+  const milesAndMoreOption=document.createElement('option');
+  milesAndMoreOption.value='miles-and-more-via-payback';
+  milesAndMoreOption.textContent='Miles & More über PAYBACK (indirekt)';
+  indirectGroup.appendChild(milesAndMoreOption);
+  select.appendChild(indirectGroup);
   document.getElementById('partnerTables').innerHTML=Object.entries(groups).map(([g,items])=>`<h3>${g}</h3><div class="seo-table-wrap"><table class="seo-table"><thead><tr><th>Partner</th><th>Verhältnis</th><th>100.000 MR ergeben</th></tr></thead><tbody>${items.map(({p})=>`<tr><td>${p.name}</td><td>${p.ratio}</td><td>${fmt(100000*p.factor)} ${p.unit}</td></tr>`).join('')}</tbody></table></div>`).join('');
   function calc(){
     const n=Number(points.value),idx=select.value;
     if(!Number.isFinite(n)||n<=0||idx===''){error.textContent='Bitte eine gültige Punktzahl und einen Transferpartner wählen.';error.hidden=false;result.hidden=true;return;}
     error.hidden=true;
-    const p=partners()[Number(idx)],out=n*p.factor;
+    const indirect=idx==='miles-and-more-via-payback';
+    const p=indirect
+      ? {name:'Miles & More über PAYBACK (indirekt)',unit:'Miles-&-More-Meilen',ratio:'3 : 1 über PAYBACK',factor:1/3}
+      : partners()[Number(idx)];
+    if(!p){error.textContent='Bitte einen gültigen Transferpartner wählen.';error.hidden=false;result.hidden=true;return;}
+    const out=n*p.factor;
     document.getElementById('mrBadge').textContent=p.name;
     document.getElementById('mrTitle').textContent=`${fmt(n)} MR → ${fmt(out)} ${p.unit}`;
-    document.getElementById('mrText').textContent='Vor dem Transfer Verfügbarkeit, benötigte Menge, mögliche Mindesttransfers sowie Steuern und Gebühren prüfen.';
+    document.getElementById('mrText').textContent=indirect
+      ? 'Rechenweg: Membership Rewards → PAYBACK (3:1) → Miles & More (regulär 1:1). Kein direkter Amex-Transfer. Verfügbarkeit und Transferbedingungen vorab prüfen.'
+      : 'Vor dem Transfer Verfügbarkeit, benötigte Menge, mögliche Mindesttransfers sowie Steuern und Gebühren prüfen.';
     document.getElementById('mrUnits').textContent=`${fmt(out)} ${p.unit}`;
     document.getElementById('mrRatio').textContent=p.ratio;
     result.hidden=false;
