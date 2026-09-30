@@ -1,10 +1,42 @@
 last_checked: "2026-09-03"
 last_checked_display: "03.09.2026"
-last_updated: "2026-09-28"
-last_updated_display: "28.09.2026"
+last_updated: "2026-09-30"
+last_updated_display: "30.09.2026"
 active_count_fallback: 4
 
 deals:
+  - id: miles-more-my-activity-challenge-2026
+    category: Miles & More · persönliche App-Aktion
+    title: 'My Activity Challenge: persönliches Angebot in der App prüfen'
+    summary: 'Ab 1. Oktober: Meine persönliche Challenge bietet bis zu 5.000 zusätzliche Prämienmeilen. Teilnahme, Sammelziele und Bonus können bei dir abweichen. Prüfe die Miles & More App und aktiviere dein Angebot vor dem Sammeln.'
+    image: /images/my-activity-challenge-2026.png
+    image_alt: 'Mein persönliches Beispiel: 14.160, 17.240 und 20.940 gesammelte Meilen mit insgesamt bis zu 5.000 Bonusmeilen'
+    image_caption: 'Mein persönliches Angebot · Screenshot vom 30.09.2026 · keine allgemein gültigen Sammelziele'
+    starts: '2026-10-01'
+    starts_display: '01.10.2026'
+    expires: '2026-12-31'
+    expires_display: '31.12.2026 (mein Angebot; eigene App prüfen)'
+    offer_url: https://www.miles-and-more.com/
+    cta: Miles & More öffnen – Challenge in der App prüfen
+    facts:
+      - label: Mein Ziel Stufe 1
+        value: '14.160 Meilen → +1.110 Bonus'
+      - label: Mein Ziel Stufe 2
+        value: '17.240 Meilen → +1.890 weitere'
+      - label: Mein Ziel Stufe 3
+        value: '20.940 Meilen → +2.000 weitere'
+    verdict: 'Ich nehme den Bonus gerne mit, wenn ich die Ziele mit ohnehin geplanten Ausgaben erreiche. In meinem Beispiel ergeben 20.940 anrechenbare Meilen insgesamt 5.000 Bonusmeilen – rund 24 % zusätzlich. Die Ziele sind kumulativ und werden nicht addiert. Nur für die Challenge würde ich keine unnötigen Käufe oder Abos abschließen.'
+    conditions:
+      - 'Personalisiertes Angebot: Nur teilnahmeberechtigte Mitglieder sehen die Challenge in ihrer Miles & More App. Meine Ziele und Boni sind ein Beispiel, keine Zusage für andere Konten.'
+      - 'Kostenlose Aktivierung in der App erforderlich. Laut Bedingungen beginnt der persönliche Aktionszeitraum mit erfolgreicher Aktivierung; eine nachträgliche Aktivierung ist ausgeschlossen.'
+      - 'Mein Screenshot zeigt den Start am 01.10.2026 um 02:00 CEST und als Ende den 01.01.2027 um 00:59 CEST. Wegen der auffälligen Sommerzeitangabe zum Jahreswechsel plane ich vorsorglich mit dem 31.12.2026. Maßgeblich ist die Frist in der eigenen App.'
+      - 'Nur Transaktionen bei teilnehmenden Partnern im Aktionszeitraum zählen. Auch die Meilengutschrift muss innerhalb dieses Zeitraums erfolgen; verspätete oder nachträglich erfasste Gutschriften werden nicht berücksichtigt.'
+      - 'Gutschriften über nur eine Meile pro Transaktion werden nicht gewertet. Für korrektes Tracking laut Bedingungen zuvor in App und auf miles-and-more.com im eigenen Konto anmelden.'
+      - 'Bonusstaffel meines Angebots: ab insgesamt 14.160 Meilen 1.110 Bonusmeilen; ab 17.240 insgesamt 3.000 Bonusmeilen; ab 20.940 insgesamt 5.000 Bonusmeilen.'
+      - 'Die Aktion ist nicht übertragbar und laut Teilnahmebedingungen nicht mit weiteren Miles & More Angeboten kombinierbar. PAYBACK-Transfers und Kreditkartenmeilen werden in den vorliegenden Bedingungen nicht einzeln bestätigt; ich verspreche dafür keine Anrechnung.'
+    internal_url: /meilen-sammeln/miles-and-more/
+    internal_label: Meine Miles-&-More-Sammelwege
+
   - id: payback-amex-herbst-2026
     category: PAYBACK Amex · Freundschaftswerbung
     title: 'PAYBACK Amex: bis zu 4.000 Punkte für Neukunden'

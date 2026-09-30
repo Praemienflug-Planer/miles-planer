@@ -10,7 +10,7 @@ og_image: "/images/angebot-avis-1000-meilen-2026.png"
 extra_css:
   - "/assets/css/deals.css?v=20260916-coupon-set-1"
 extra_js:
-  - "/assets/js/deals-status.js?v=20260921-scope-fix-1"
+  - "/assets/js/deals-status.js?v=20260930-challenge"
 schema_json: |
   {
     "@context": "https://schema.org",
@@ -44,7 +44,7 @@ schema_json: |
     <div class="deal-grid">
       {% assign deal_image_rendered = false %}
       {% for deal in site.data.deals.deals %}
-      <article class="deal-card{% if deal.variants %} deal-card-set{% endif %}{% if deal.archived %} is-expired{% endif %}" id="{{ deal.id }}" data-deal-card data-expires="{{ deal.expires }}" data-expires-display="{{ deal.expires_display }}">
+      <article class="deal-card{% if deal.variants %} deal-card-set{% endif %}{% if deal.archived %} is-expired{% endif %}" id="{{ deal.id }}" data-deal-card data-starts="{{ deal.starts }}" data-starts-display="{{ deal.starts_display }}" data-expires="{{ deal.expires }}" data-expires-display="{{ deal.expires_display }}">
         {% if deal.image %}
         <figure class="deal-visual">
           <a href="{{ deal.image }}" target="_blank" rel="noopener noreferrer" aria-label="Screenshot größer öffnen: {{ deal.title | escape }}">
@@ -58,7 +58,7 @@ schema_json: |
         <div class="deal-content">
           <div class="deal-topline">
             <span class="deal-category">{{ deal.category | escape }}</span>
-            <span class="deal-status" data-deal-status><span class="deal-status-dot" aria-hidden="true"></span>{% if deal.archived %}Abgelaufen am{% else %}Aktiv bis{% endif %} {{ deal.expires_display }}</span>
+            <span class="deal-status" data-deal-status><span class="deal-status-dot" aria-hidden="true"></span>{% if deal.archived %}Abgelaufen am {{ deal.expires_display }}{% elsif deal.starts %}Ab {{ deal.starts_display }} · bis {{ deal.expires_display }}{% else %}Aktiv bis {{ deal.expires_display }}{% endif %}</span>
           </div>
 
           <h2>{{ deal.title | escape }}</h2>
@@ -142,5 +142,5 @@ schema_json: |
 </section>
 
 <section class="section legal-note-section">
-  <div class="container legal-note"><strong>Hinweis:</strong> Angebote und Teilnahmebedingungen können sich kurzfristig ändern. Maßgeblich sind immer die Bedingungen auf der verlinkten Anbieterseite beziehungsweise im persönlichen PAYBACK Konto. Bei Empfehlungslinks kann ich eine Prämie erhalten; dies kennzeichne ich direkt am jeweiligen Angebot.</div>
+  <div class="container legal-note"><strong>Hinweis:</strong> Angebote und Teilnahmebedingungen können sich kurzfristig ändern. Maßgeblich sind immer die Bedingungen auf der verlinkten Anbieterseite beziehungsweise im persönlichen PAYBACK Konto beziehungsweise in der Miles & More App. Bei Empfehlungslinks kann ich eine Prämie erhalten; dies kennzeichne ich direkt am jeweiligen Angebot.</div>
 </section>

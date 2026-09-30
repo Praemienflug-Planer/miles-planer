@@ -33,7 +33,13 @@
 
       const expired = todayInGermany > expires;
 
+      if (!expired && card.dataset.starts && todayInGermany < card.dataset.starts) {
+        status.lastChild.textContent = `Startet am ${card.dataset.startsDisplay}`;
+        return;
+      }
+
       if (!expired) {
+        if (card.dataset.starts) status.lastChild.textContent = `Aktiv bis ${expiresDisplay}`;
         activeDeals += 1;
         return;
       }
