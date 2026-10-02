@@ -1,10 +1,28 @@
 last_checked: "2026-09-03"
 last_checked_display: "03.09.2026"
-last_updated: "2026-09-30"
-last_updated_display: "30.09.2026"
+last_updated: "2026-10-02"
+last_updated_display: "02.10.2026"
 active_count_fallback: 4
 
 deals:
+  - id: "amazon-challenge-oktober-2026"
+    category: "Miles & More · Amazon App-Challenge"
+    title: "Amazon-Challenge: bis zu 5.000 Extrameilen"
+    summary: "Passend zu den Prime Days: Challenge in der Miles & More App aktivieren und berechtigte Einkäufe über Miles & More starten. Mehrere Einkäufe werden summiert. Bei 100 € gibt es insgesamt 500, bei 1.000 € insgesamt 5.000 Extrameilen zusätzlich zu den regulären Meilen."
+    image: "/images/amazon-challenge-202610-1.png"
+    image_alt: "Amazon.de Challenge mit fünf Einkaufszielen von 10 bis 1.000 Euro und insgesamt bis zu 5.000 Extrameilen"
+    image_caption: "Mein App-Angebot und Original-Bedingungen · 02.10.2026"
+    expires: "2026-10-12"
+    expires_display: "12.10.2026 vorsorglich; App-Frist beachten"
+    offer_url: "https://www.miles-and-more.com/amazon"
+    cta: "Amazon über Miles & More öffnen"
+    facts: [{"label":"Ab 10 / 50 / 75 €","value":"100 / 200 / 300 Extrameilen gesamt"},{"label":"Ab 100 €","value":"500 Extrameilen gesamt"},{"label":"Ab 1.000 €","value":"5.000 Extrameilen gesamt"}]
+    verdict: "Ich nehme die Extrameilen für ohnehin geplante Amazon-Einkäufe mit. Schon 100 € anrechenbarer Gesamtumsatz bringen 500 Extrameilen. Zwischen 100 € und 1.000 € gibt es keine weitere Bonusstufe – nur für den großen Bonus würde ich keine zusätzlichen Käufe tätigen."
+    conditions: ["Nur für teilnahmeberechtigte Mitglieder, denen die Challenge in der Miles & More App angezeigt wird; Wohnsitz in Deutschland, Österreich, Liechtenstein, Luxemburg oder der Schweiz. Kostenlos in der App aktivieren, bevor du einkaufst. Der persönliche Aktionszeitraum beginnt mit der Aktivierung; keine nachträgliche Aktivierung.","Fristangaben sind nicht einheitlich: Mein App-Screenshot zeigt 13.10.2026, 01:59 CEST; die allgemeinen Bedingungen nennen 23:59 MEZ am angegebenen Enddatum. Ich plane vorsorglich mit Einkäufen bis 12.10.2026. Maßgeblich ist die Frist des eigenen Angebots.","Alle korrekt erfassten, anrechenbaren Einkäufe im persönlichen Aktionszeitraum werden summiert. Stufen: 10 € → +100; 50 € → +100; 75 € → +100; 100 € → +200; 1.000 € → +4.500 Meilen. Insgesamt maximal 5.000 Extrameilen. Beispiel: 3 × 35 € ergeben 105 € und insgesamt 500 Extrameilen.","Vor JEDEM Einkauf über miles-and-more.com/amazon mit der eigenen Servicekartennummer zu Amazon wechseln. Warenkorb vorher leeren, Adblocker und VPN/Firmennetzwerk ausschalten, Cookies akzeptieren und Bestellung unmittelbar in derselben Sitzung abschließen, ohne andere Tabs zu öffnen. Direkte Bestellungen und Bestellungen über die Amazon-App oder Amazon Business sind ausgeschlossen. Amazon-Konto und Servicekarte müssen derselben Person gehören.","Nur für meilenberechtigte Einkäufe: Die Bedingungen nennen mindestens 3 Meilen je Euro in den ausgewiesenen Angebotskategorien sowie für berechtigte Amazon-Geräte und Zubehör. Zusätzlich beschreiben sie eine Monatsregel für mehr als 500 € Gesamtumsatz mit 2 Meilen je Euro auch außerhalb der beworbenen Kategorien. Diese Regel ist keine pauschale Zusage von 3 Meilen je Euro für jedes Produkt; aktuelle Kategorien und Konditionen auf der Partnerseite prüfen.","Ausgeschlossen sind unter anderem Amazon- und Geschenkgutscheine, Wert-/Prepaidkarten und Guthaben, Bücher, E-Books und preisgebundene Produkte, apothekenpflichtige Medikamente, Spar-Abos, Vorbestellungen, Stornos, Retouren und Versandkosten.","Die Challenge-Meilen kommen zusätzlich zu regulären Meilen. Laut Bedingungen ist die Challenge nicht mit weiteren Miles & More Angeboten kombinierbar; eine Kombination mit der My Activity Challenge oder anderen Sonderboni ist hier nicht zugesagt.","Die Bedingungen nennen für Challenge-Boni etwa eine Woche nach Challenge-Ende, für reguläre Amazon-Meilen etwa sieben Wochen nach Monatsende. Zugleich müssen die betreffenden Transaktionen korrekt erfasst und meilenberechtigt sein. Nicht innerhalb von 21 Tagen nach Challenge-Ende automatisch erfasste Transaktionen werden laut Bedingungen nicht nachträglich berücksichtigt. Wegen der unterschiedlichen Fristen ist eine Gutschrift nach genau einer Woche nicht garantiert."]
+    internal_url: "/meilen-sammeln/miles-and-more/"
+    internal_label: "Meine Miles-&-More-Sammelwege"
+    screenshots: [{"url":"/images/amazon-challenge-202610-1.png","label":"Challenge-Übersicht und Bonusstufen"},{"url":"/images/amazon-challenge-202610-2.png","label":"Original-Bedingungen · Screenshot 2"},{"url":"/images/amazon-challenge-202610-3.png","label":"Original-Bedingungen · Screenshot 3"},{"url":"/images/amazon-challenge-202610-4.png","label":"Original-Bedingungen · Screenshot 4"},{"url":"/images/amazon-challenge-202610-5.png","label":"Original-Bedingungen · Screenshot 5"},{"url":"/images/amazon-challenge-202610-6.png","label":"Original-Bedingungen · Screenshot 6"},{"url":"/images/amazon-challenge-202610-7.png","label":"Original-Bedingungen · Screenshot 7"},{"url":"/images/amazon-challenge-202610-8.png","label":"Original-Bedingungen · Screenshot 8"},{"url":"/images/amazon-challenge-202610-9.png","label":"Original-Bedingungen · Screenshot 9"},{"url":"/images/amazon-challenge-202610-10.png","label":"Original-Bedingungen · Screenshot 10"}]
+
   - id: miles-more-my-activity-challenge-2026
     category: Miles & More · persönliche App-Aktion
     title: 'My Activity Challenge: persönliches Angebot in der App prüfen'
