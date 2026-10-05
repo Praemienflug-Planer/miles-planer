@@ -1,10 +1,30 @@
 last_checked: "2026-09-03"
 last_checked_display: "03.09.2026"
-last_updated: "2026-10-02"
-last_updated_display: "02.10.2026"
+last_updated: "2026-10-05"
+last_updated_display: "05.10.2026"
 active_count_fallback: 4
 
 deals:
+  - id: "amazon-payback-prime-days-oktober-2026"
+    category: "PAYBACK · Amazon Prime Deal Days"
+    title: "Amazon: 8-fach PAYBACK Punkte am 6. und 7. Oktober"
+    summary: "Mit aktiviertem eCoupon gibt es am 06. und 07.10.2026 insgesamt 8-fach PAYBACK Punkte auf berechtigte Amazon-Einkäufe. Bei 1 Basispunkt je 2 € entspricht das rechnerisch 4 Punkten je Euro: 400 Punkte bei 100 € Einkaufswert. Allgemeine Ausschlüsse und Rundungen beachten."
+    image: "/images/amazon-payback-8fach-202610.png"
+    image_alt: "PAYBACK Amazon Coupon: 8-fach Punkte zu den Prime Deal Days am 6. und 7. Oktober 2026"
+    image_caption: "Original-Coupon · bereitgestellt am 05.10.2026"
+    terms_image: "/images/amazon-payback-8fach-202610-bedingungen.png"
+    starts: "2026-10-06"
+    starts_display: "06.10.2026"
+    expires: "2026-10-07"
+    expires_display: "07.10.2026"
+    offer_url: "https://www.payback.de/shop/amazon"
+    cta: "PAYBACK öffnen und Coupon prüfen"
+    facts: [{"label":"Sammelrate","value":"8-fach = rechnerisch 4 °P/€"},{"label":"Bei 100 €","value":"400 °P insgesamt"},{"label":"Aktionszeitraum","value":"06.–07.10.2026"}]
+    verdict: "Ich nutze den Coupon für ohnehin geplante Einkäufe und vergleiche vorher mit der M&M-Challenge. Bei 100 € bringt diese 800 Meilen, sofern die Artikel dort 3 reguläre Meilen je Euro erhalten und alle Challenge-Voraussetzungen erfüllt sind. Nach der 100-€-Stufe können weitere, getrennte Einkäufe über PAYBACK sinnvoll sein, wenn ich die 1.000-€-Challenge-Stufe nicht erreiche. Ein möglicher späterer Transferbonus ist hier nicht eingerechnet."
+    conditions: ["eCoupon vor dem Einkauf in der PAYBACK App oder auf PAYBACK.de/ecoupons aktivieren. Gültig ausschließlich am 06. und 07.10.2026; am 05.10. zeigt der bereitgestellte Coupon noch „In Kürze“. Verfügbarkeit im eigenen Konto prüfen.","Amazon-Warenkorb leeren, bevor der Einkauf über die PAYBACK App oder PAYBACK.de gestartet wird. Anschließend zu Amazon wechseln und den Einkauf abschließen. Für das Tracking Cookies akzeptieren.","8-fach bezeichnet die Gesamtpunkte inklusive Basispunkten, nicht 8 zusätzliche Punkte pro Euro. Bei 1 Basispunkt je volle 2 € ergeben sich rechnerisch 4 Punkte je Euro; Rundungen können die tatsächliche Ausbeute beeinflussen.","Der Coupon selbst nennt keine zusätzliche Kategorienbeschränkung oder Punkteobergrenze. Es gelten die Ausschlüsse und Bedingungen der verlinkten PAYBACK-Amazon-Partnerseite. Ausgeschlossene Produkte erhalten auch keine Extra-Punkte.","Die Extra-Punkte werden separat von den Basispunkten etwa eine Woche nach Aktionsende zunächst gesperrt gutgeschrieben. Freigabe laut Coupon nach Ablauf der Rückgabefrist.","Für dieselbe Bestellung keine doppelte Prämie über PAYBACK und das Miles-&-More-Shoppingportal einplanen. Ein Vergleich oder eine Aufteilung bezieht sich auf getrennte Einkäufe mit dem jeweiligen Einstiegslink."]
+    internal_url: "/angebote/#amazon-challenge-oktober-2026"
+    internal_label: "Mit der M&M Amazon-Challenge vergleichen"
+
   - id: "amazon-challenge-oktober-2026"
     category: "Miles & More · Amazon App-Challenge"
     title: "Amazon-Challenge: bis zu 5.000 Extrameilen"
