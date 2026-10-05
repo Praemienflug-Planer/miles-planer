@@ -44,7 +44,9 @@
 {% capture rev_ultra_plan %}<div class="rev-plan"><strong>Ultra</strong><small>{{ site.data.offers.revolut.ultra_fee_monthly_display }}/Monat</small><div class="rate">1 / {{ site.data.offers.revolut.ultra_revpoints_divisor_eur }} €</div></div>{% endcapture %}
 {% capture rev_calc_root %}<div class="rev-calculator" data-rev-calculator data-mm-earn-divisor="{{ site.data.offers.miles_and_more_credit_card.common.earn_divisor_eur }}" data-mm-cap="{{ site.data.offers.miles_and_more_credit_card.common.moneysend_cap_miles }}" data-standard-divisor="{{ site.data.offers.revolut.standard_revpoints_divisor_eur }}" data-standard-fee="{{ site.data.offers.revolut.standard_fee_monthly_eur }}" data-plus-divisor="{{ site.data.offers.revolut.plus_revpoints_divisor_eur }}" data-plus-fee="{{ site.data.offers.revolut.plus_fee_monthly_eur }}" data-premium-divisor="{{ site.data.offers.revolut.premium_revpoints_divisor_eur }}" data-premium-fee="{{ site.data.offers.revolut.premium_fee_monthly_eur }}" data-metal-divisor="{{ site.data.offers.revolut.metal_revpoints_divisor_eur }}" data-metal-fee="{{ site.data.offers.revolut.metal_fee_monthly_eur }}" data-ultra-divisor="{{ site.data.offers.revolut.ultra_revpoints_divisor_eur }}" data-ultra-fee="{{ site.data.offers.revolut.ultra_fee_monthly_eur }}">{% endcapture %}
 
-{% comment %}PAYBACK Amex referral bonus is repeated across several pages.{% endcomment %}
+{% comment %}Normalize legacy qualifiers before replacing the whole bonus, so data-driven offers do not gain a second 'bis zu'.{% endcomment %}
+{% assign rendered = rendered | replace: 'bis zu 4.000 PAYBACK Punkte', '4.000 PAYBACK Punkte' %}
+{% assign rendered = rendered | replace: 'bis zu 4.000 °P', '4.000 °P' %}
 {% assign rendered = rendered | replace: '4.000 PAYBACK Punkte', site.data.offers.amex.payback.bonus_display %}
 {% assign rendered = rendered | replace: '4.000 °P', site.data.offers.amex.payback.bonus_short_display %}
 {% assign rendered = rendered | replace: 'mit 4.000 Punkten anfragen', payback_points_button %}
