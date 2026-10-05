@@ -3,8 +3,10 @@ layout: page
 title: "Kreditkarten-Empfehlungslink anfragen | Prämienflug-Planer"
 description: "Passenden Amex- oder PAYBACK-Kreditkartenlink per E-Mail anfragen. Karte vorauswählen, Konditionen prüfen und ohne automatischen Antrag entscheiden."
 canonical: "https://praemienflug-planer.de/kreditkarten-link/"
+extra_css:
+  - "/assets/css/referral-request.css?v=20261005-1"
 extra_js:
-  - "/assets/js/referral-request.js?v=20260829-1"
+  - "/assets/js/referral-request.js?v=20261005-1"
 ---
 <section class="hero hero-small hero-contact">
   <div class="container hero-grid contact-hero-grid">
@@ -43,15 +45,18 @@ extra_js:
           <option value="eurowings">Eurowings Kreditkarte – offizielles Angebot einordnen</option>
           <option value="miles-and-more">Miles &amp; More Kreditkarte – offizielles Angebot einordnen</option>
         </select>
+        {% include referral-offer-summary.html %}
 
         <label for="referralEmail">E-Mail-Adresse</label>
         <input id="referralEmail" name="email" type="email" placeholder="deine@email.de" autocomplete="email" required />
 
+        <details class="referral-optional"><summary>Name oder Frage ergänzen (optional)</summary>
         <label for="referralName">Name <span class="optional-label">optional</span></label>
         <input id="referralName" name="name" type="text" placeholder="Wie darf ich dich ansprechen?" autocomplete="name" />
 
         <label for="referralMessage">Kurze Frage <span class="optional-label">optional</span></label>
-        <textarea id="referralMessage" name="nachricht" rows="4" placeholder="Zum Beispiel: Ich schwanke zwischen Green und Gold."></textarea>
+        <textarea id="referralMessage" name="nachricht" rows="3" placeholder="Zum Beispiel: Ich schwanke zwischen Green und Gold."></textarea>
+        </details>
 
         <label class="form-check" for="referralConfirm">
           <input id="referralConfirm" name="hinweis_bestaetigt" type="checkbox" value="ja" required />
@@ -62,9 +67,9 @@ extra_js:
         <input id="referralSource" type="hidden" name="quelle" value="direkt" />
         <input id="referralSubject" type="hidden" name="_subject" value="Kreditkarten-Link-Anfrage" />
         <input type="hidden" name="_language" value="de" />
-        <button id="referralSubmit" type="submit" class="btn btn-primary">Ausgewählten Link anfragen</button>
+        <button id="referralSubmit" type="submit" class="btn btn-primary">Link per E-Mail anfragen</button>
         <p class="form-note">Deine Angaben werden ausschließlich zur Beantwortung dieser Anfrage verarbeitet. Details findest du im <a href="/datenschutz.html#kreditkarten-link-anfrage">Datenschutz</a>.</p>
-        <div id="referralFormStatus" class="form-status" aria-live="polite"></div>
+        <div id="referralFormStatus" class="form-status" role="status" aria-live="polite" tabindex="-1"></div>
       </form>
     </div>
 

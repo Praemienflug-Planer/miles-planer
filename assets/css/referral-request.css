@@ -1,0 +1,13 @@
+.referral-offer-summary[hidden], .referral-offer-summary [hidden] { display: none; }
+.referral-offer-summary { margin: 18px 0 22px; padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: rgba(96,165,250,.06); }
+.referral-offer-summary h3 { margin: 0 0 12px; font-size: 20px; }
+.referral-offer-summary dl { margin: 0; }
+.referral-offer-summary dt { margin-top: 10px; color: var(--muted); font-size: 14px; }
+.referral-offer-summary dd { margin: 2px 0 0; font-weight: 650; }
+.referral-offer-summary p { margin-top: 12px; }
+.referral-offer-summary a { text-decoration: underline; }
+.referral-optional { margin-top: 18px; }
+.referral-optional summary { cursor: pointer; padding: 8px 0; font-weight: 600; }
+.referral-optional[open] summary { margin-bottom: 12px; }
+.referral-form button:disabled { opacity: .7; cursor: wait; }
+.referral-form .form-status:focus { outline: 2px solid var(--primary); outline-offset: 4px; }

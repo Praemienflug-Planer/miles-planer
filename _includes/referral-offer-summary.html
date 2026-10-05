@@ -1,0 +1,32 @@
+<div class="referral-offer-summary" aria-label="Konditionen zur Auswahl" hidden id="referralOfferSummary">
+{% assign pb = site.data.offers.amex.payback %}
+<section data-referral-card="payback-amex" data-card-offer="payback-amex" hidden>
+  <h3>PAYBACK Amex auf einen Blick</h3>
+  <dl><dt>Hinterlegter Bonus</dt><dd>{{ pb.bonus_display }}</dd><dt>Voraussetzung</dt><dd>{{ pb.minimum_spend_display }}</dd><dt>Jahresgebühr</dt><dd>{{ pb.annual_fee_display }}</dd></dl>
+  <p>Für dich interessant, wenn du PAYBACK Punkte mit ohnehin geplanten Ausgaben sammeln möchtest. Prüfe Akzeptanz, ausgeschlossene Umsätze und weitere Gebühren.</p>
+  <p class="form-note">Angebotsstand: {{ pb.last_checked_display }}. Abweichende Aktionsfristen sind hinterlegt: {{ pb.valid_until_display }}. Ich prüfe die gültigen Bedingungen vor der Zusendung.</p>
+</section>
+{% assign amex_cards = "green,gold,platinum" | split: "," %}
+{% for key in amex_cards %}
+{% assign offer = site.data.offers.amex[key] %}
+<section data-referral-card="amex-{{ key }}" data-card-offer="amex-{{ key }}" hidden>
+  <h3>Amex {{ key | capitalize }} auf einen Blick</h3>
+  <dl><dt>Hinterlegter Bonus</dt><dd>{{ offer.bonus_qualifier }} {{ offer.bonus_display }}</dd><dt>Voraussetzung</dt><dd>{{ offer.minimum_spend_display }}</dd><dt>Kartengebühr</dt><dd>{{ offer.fee_monthly_display }} pro Monat</dd></dl>
+  <p>{% if key == "green" %}Zum Einstieg in Membership Rewards. Prüfe, ob dir die flexiblen Punkte die laufende Gebühr wert sind.{% elsif key == "gold" %}Für regelmäßiges Sammeln mit Membership Rewards. Der Mindestumsatz sollte durch deine geplanten Ausgaben erreichbar sein.{% else %}Vor allem dann prüfen, wenn du die enthaltenen Reisevorteile tatsächlich nutzt und damit die laufende Gebühr rechtfertigen kannst.{% endif %}</p>
+  <p class="form-note">Angebotsstand: {{ site.data.offers.amex.last_checked_display }}. Das Angebot kann sich geändert haben; vor der Zusendung prüfe ich Bonus und Bedingungen.</p>
+</section>
+{% endfor %}
+<section data-referral-card="amex-flexibel" data-card-offer="amex-flexibel" hidden>
+  <h3>Noch keine Amex ausgewählt?</h3>
+  <p>Bonus, Gebühr und Mindestumsatz hängen von der Karte ab. <a href="/meilen-sammeln/amex-kreditkarten/">Vergleiche zuerst die Amex Karten</a> oder ergänze unten eine kurze Frage zu deinen geplanten Ausgaben und genutzten Vorteilen.</p>
+</section>
+<section data-referral-card="eurowings" data-card-offer="eurowings" hidden>
+  <h3>Eurowings: öffentliches Angebot prüfen</h3>
+  <p>Ich sende dir eine Einordnung zum öffentlichen Anbieterangebot. Bonus, Gebühren und Umsatzbedingungen richten sich nach der gewählten Variante und dem dann gültigen Angebot.</p>
+</section>
+<section data-referral-card="miles-and-more" data-card-offer="miles-and-more" hidden>
+  <h3>Miles &amp; More: öffentliches Angebot prüfen</h3>
+  <p>Hier erhältst du ausschließlich einen Hinweis auf öffentliche Anbieterangebote, keinen Freundschaftswerbelink. Bonus, Gebühren und Umsatzbedingungen prüfe ich vor der Zusendung.</p>
+</section>
+<p class="form-note">Maßgeblich sind die Bedingungen im Anbieterlink. Bei Empfehlungsangeboten kann ich eine Prämie erhalten. Ein Kartenantrag erfolgt erst beim Anbieter.</p>
+</div>
