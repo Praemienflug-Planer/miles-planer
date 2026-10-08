@@ -22,7 +22,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
       <h2>100.000 MR ergeben aktuell</h2>
       <ul>
         <li><strong>80.000</strong> Avios / Flying Blue / SAS bei 5:4</li>
-        <li><strong>66.667</strong> Qatar Avios / KrisFlyer / Cathay / Delta bei 3:2</li>
+        <li><strong>66.666</strong> Qatar Avios / KrisFlyer / Cathay / Delta bei 3:2</li>
         <li><strong>50.000</strong> Emirates Skywards Meilen bei 2:1</li>
         <li><strong>33.333</strong> PAYBACK Punkte bei 3:1</li>
       </ul>
@@ -42,6 +42,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
           <div class="field-group"><label for="mrPartner">Partnerprogramm</label><select id="mrPartner"><option value="">Bitte Partner wählen</option></select></div>
         </div>
         <div class="mr-preset-row" aria-label="Beispielwerte">
+          <button class="mr-preset" type="button" data-mr-preset="10000">10.000 MR</button>
           <button class="mr-preset" type="button" data-mr-preset="50000">50.000 MR</button>
           <button class="mr-preset" type="button" data-mr-preset="100000">100.000 MR</button>
           <button class="mr-preset" type="button" data-mr-preset="200000">200.000 MR</button>
@@ -61,6 +62,46 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
         <div class="warning-box"><strong>Transfer-Regel:</strong><br><br>Membership Rewards nicht vorsorglich übertragen. Zuerst Award-Verfügbarkeit, benötigte Punktezahl, Steuern und Gebühren sowie die aktuelle Transferrate prüfen. Ein Transfer lässt sich in der Regel nicht einfach rückgängig machen.</div>
       </div>
 
+
+      <div class="article-card seo-card" id="punktewert">
+        <p class="eyebrow">Punktewert</p>
+        <h2>Wie viel sind Amex Punkte in Euro wert?</h2>
+        <p><strong>Membership Rewards haben keinen einheitlichen Euro-Wert.</strong> Beim Bezahlen mit Punkten gilt die für die jeweilige Einlösung angezeigte Rate im Amex-Konto. Bei einem Prämienflug hängt der Gegenwert vom vergleichbaren Ticketpreis, den Zuzahlungen und der benötigten Punktzahl ab.</p>
+        <p>100.000 Amex Punkte sind deshalb nicht automatisch einen bestimmten Geldbetrag wert. Vergleiche einen Flug, den du tatsächlich buchen würdest, mit derselben Strecke, Reiseklasse und möglichst ähnlichen Gepäck- und Tarifbedingungen.</p>
+        <h3>Gegenwert einer Flugeinlösung berechnen</h3>
+        <p>Trage die gesamten Werte für dieselbe Reise und dieselbe Personenzahl ein. Benötigt werden die dafür eingesetzten <strong>Membership-Rewards-Punkte vor dem Transfer</strong>, nicht die Meilen im Zielprogramm.</p>
+        <div class="form-grid two-col">
+          <div class="field-group"><label for="mrCashPrice">Vergleichbarer Ticketpreis in Euro</label><input id="mrCashPrice" type="number" min="0" step="0.01" inputmode="decimal" placeholder="z. B. 1200"></div>
+          <div class="field-group"><label for="mrAwardFees">Zuzahlungen und zusätzliche Kosten in Euro</label><input id="mrAwardFees" type="number" min="0" step="0.01" inputmode="decimal" placeholder="z. B. 300"></div>
+          <div class="field-group"><label for="mrValuePoints">Eingesetzte Membership-Rewards-Punkte</label><input id="mrValuePoints" type="number" min="1" step="1" inputmode="numeric" placeholder="z. B. 100000"></div>
+        </div>
+        <div class="tool-actions"><button class="btn btn-primary" type="button" id="mrValueButton">Gegenwert berechnen</button></div>
+        <p id="mrValueResult" aria-live="polite" hidden></p>
+        <p class="mr-source">Rechnung: (Ticketpreis − Zuzahlungen und zusätzliche Kosten) ÷ eingesetzte MR × 100 = Cent je MR. Das Ergebnis ist ein Vergleichswert für diese Reise, kein auszahlbarer Geldbetrag. Kosten für den Erwerb der Punkte sind nicht enthalten.</p>
+        <p><strong>Rechenbeispiel:</strong> 1.200 € Ticketpreis minus 300 € Zuzahlung ergeben bei 100.000 MR einen Gegenwert von 900 € beziehungsweise 0,9 Cent pro Punkt. Dies ist ein frei gewähltes Beispiel und kein buchbares Flugangebot.</p>
+        <p class="mr-source">Zur Einlösung für Kartenumsätze: <a href="https://www.americanexpress.com/de-de/amexcited/benefits/mit-punkten-bezahlen-12474">American Express: Mit Punkten bezahlen</a>. Die konkrete Einlöserate vor der Bestätigung im Konto prüfen.</p>
+      </div>
+
+      <div class="article-card seo-card" id="punktebeispiele">
+        <p class="eyebrow">Punktebeispiele</p>
+        <h2>10.000, 50.000 oder 100.000 Amex Punkte umrechnen</h2>
+        <p>Die folgenden Werte zeigen die rechnerische Umrechnung nach den auf dieser Seite hinterlegten Verhältnissen. Transfermindestmengen und vorgegebene Schritte können die tatsächlich übertragbare Menge begrenzen. Bruchteile werden hier abgerundet.</p>
+        <div class="seo-table-wrap"><table class="seo-table">
+          <thead><tr><th>MR-Punkte</th><th>Bei 5:4</th><th>Bei 3:2</th><th>Bei 3:1 über PAYBACK</th></tr></thead>
+          <tbody>
+            <tr><td>10.000</td><td>8.000</td><td>6.666</td><td>3.333</td></tr>
+            <tr><td>50.000</td><td>40.000</td><td>33.333</td><td>16.666</td></tr>
+            <tr><td>100.000</td><td>80.000</td><td>66.666</td><td>33.333</td></tr>
+          </tbody>
+        </table></div>
+        <p>Welche Rate für dein gewünschtes Programm hinterlegt ist, zeigt die <a href="#transfer">Transferpartner-Tabelle</a>. Die letzte Spalte entspricht rechnerisch auch Miles-&amp;-More-Meilen nach einem anschließenden regulären PAYBACK-Transfer ohne Bonus.</p>
+        <div class="mr-preset-row">
+          <button class="mr-preset" type="button" data-mr-example="10000">10.000 Punkte im Rechner</button>
+          <button class="mr-preset" type="button" data-mr-example="50000">50.000 Punkte im Rechner</button>
+          <button class="mr-preset" type="button" data-mr-example="100000">100.000 Punkte im Rechner</button>
+        </div>
+      </div>
+
       <div class="article-card seo-card" id="transfer">
         <p class="eyebrow">Transferpartner</p>
         <h2>Amex Membership Rewards: aktuelle Transferverhältnisse</h2>
@@ -74,7 +115,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
         <h2>Was werden aus 100.000 Membership Rewards?</h2>
         <div class="mr-example-grid">
           <div class="mr-example"><strong>80.000</strong><span>Avios bei British Airways oder Iberia sowie Flying Blue Meilen bzw. SAS EuroBonus Punkte bei 5:4.</span></div>
-          <div class="mr-example"><strong>66.667</strong><span>Qatar Avios, KrisFlyer Meilen, Cathay Miles oder Delta SkyMiles bei 3:2.</span></div>
+          <div class="mr-example"><strong>66.666</strong><span>Qatar Avios, KrisFlyer Meilen, Cathay Miles oder Delta SkyMiles bei 3:2.</span></div>
           <div class="mr-example"><strong>33.333</strong><span>PAYBACK Punkte bei 3:1 – und damit regulär ebenfalls 33.333 Miles-&amp;-More-Meilen nach anschließendem PAYBACK-Transfer.</span></div>
         </div>
       </div>
@@ -83,7 +124,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
         <p class="eyebrow">Miles &amp; More</p>
         <h2>Kann man Amex Punkte direkt zu Miles &amp; More übertragen?</h2>
         <p><strong>Nein, Miles &amp; More ist in Deutschland kein direkter Membership-Rewards-Transferpartner.</strong> Der übliche Weg führt über PAYBACK: 3 Membership Rewards ergeben 1 PAYBACK Punkt; PAYBACK kann regulär im Verhältnis 1:1 zu Miles &amp; More übertragen werden.</p>
-        <p>Dadurch werden aus 100.000 Membership Rewards rechnerisch rund 33.333 Miles-&amp;-More-Meilen. Im Vergleich dazu entstehen bei mehreren direkten Airlinepartnern 66.667 oder 80.000 Einheiten. Der PAYBACK-Weg ist deshalb vor allem dann sinnvoll, wenn Miles &amp; More für die konkrete Einlösung gezielt benötigt wird.</p>
+        <p>Dadurch werden aus 100.000 Membership Rewards rechnerisch rund 33.333 Miles-&amp;-More-Meilen. Im Vergleich dazu entstehen bei mehreren direkten Airlinepartnern 66.666 oder 80.000 Einheiten. Der PAYBACK-Weg ist deshalb vor allem dann sinnvoll, wenn Miles &amp; More für die konkrete Einlösung gezielt benötigt wird.</p>
         <div class="hero-actions"><a class="btn btn-secondary" href="/meilen-sammeln/payback-punkte-miles-and-more/">PAYBACK → Miles &amp; More</a><a class="btn btn-secondary" href="/meilen-sammeln/payback-transferbonus/">Transferbonus prüfen</a></div>
       </div>
 
@@ -95,16 +136,29 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
         <div class="hero-actions"><a class="btn btn-primary" href="/rechner/">Prämienflug-Bedarf berechnen</a><a class="btn btn-secondary" href="/vier-praemienflug-plaetze-finden/">4 Award-Plätze finden</a></div>
       </div>
 
+
+      <div class="article-card seo-card" id="weitere-punkte">
+        <p class="eyebrow">Weitere Punkte sammeln</p>
+        <h2>Welche Amex-Karte passt zu deinem Sammelziel?</h2>
+        <p>Wenn dir für eine geplante Reise noch Punkte fehlen, vergleiche Kartenkosten, reguläre Sammelrate und die Bedingungen eines möglichen Willkommensbonus. Ein Bonus lohnt sich nur, wenn du den erforderlichen Umsatz mit ohnehin geplanten Ausgaben erreichst.</p>
+        <p>Prüfe auch, welche Punkte die Karte sammelt: Membership Rewards und PAYBACK Punkte sind unterschiedliche Programme.</p>
+        <a class="btn btn-secondary" href="/meilen-sammeln/amex-kreditkarten/">Amex-Karten und Bedingungen vergleichen</a>
+      </div>
+
       <div class="article-card seo-card faq-block" id="faq">
         <p class="eyebrow">FAQ</p>
         <h2>Häufige Fragen zum Amex Punkte Rechner</h2>
-        <details open><summary>Wie viele Meilen sind 100.000 Amex Punkte?</summary><p>Das hängt vom Transferpartner ab. Bei einem Verhältnis von 5:4 werden aus 100.000 Membership Rewards 80.000 Punkte oder Meilen, bei 3:2 rund 66.667 und bei 2:1 50.000.</p></details>
+        <details><summary>Wie viel sind 1.000 Amex Punkte wert?</summary><p>Es gibt keinen festen Euro-Wert für alle Einlösungen. Bei einer Flugeinlösung zählt der vergleichbare Ticketpreis abzüglich der Zuzahlungen, geteilt durch die eingesetzten Membership-Rewards-Punkte. Die Rate für das Bezahlen mit Punkten wird im Amex-Konto angezeigt.</p></details>
+        <details><summary>Wie viel sind 100.000 Amex Punkte in Euro wert?</summary><p>Der Wert hängt von der Einlösung ab. Ein frei gewähltes Beispiel: Bei 1.200 Euro Ticketpreis und 300 Euro Zuzahlungen ergeben 100.000 MR einen Gegenwert von 900 Euro. Das ist kein garantierter Wert und kein buchbares Angebot.</p></details>
+        <details><summary>Wie rechne ich Amex Punkte in Avios um?</summary><p>Wähle im Rechner das gewünschte Avios-Programm aus. Die hinterlegten Transferverhältnisse können sich je nach Programm unterscheiden. Prüfe vor dem tatsächlichen Transfer die aktuelle Rate, Mindestmenge und Transferschritte direkt bei American Express.</p></details>
+        <details><summary>Warum sind mehr Meilen nicht automatisch mehr wert?</summary><p>Jedes Programm hat eigene Prämienpreise, Verfügbarkeiten und Zuzahlungen. Vergleiche deshalb die Gesamtkosten derselben Reise und die dafür benötigten Membership-Rewards-Punkte.</p></details>
+        <details open><summary>Wie viele Meilen sind 100.000 Amex Punkte?</summary><p>Das hängt vom Transferpartner ab. Bei einem Verhältnis von 5:4 werden aus 100.000 Membership Rewards 80.000 Punkte oder Meilen, bei 3:2 rund 66.666 und bei 2:1 50.000.</p></details>
         <details><summary>Kann ich Amex Membership Rewards zu Miles &amp; More übertragen?</summary><p>Nicht direkt. In Deutschland führt der übliche Weg über PAYBACK: 3 MR ergeben 1 PAYBACK Punkt, der anschließend regulär 1:1 zu Miles &amp; More übertragen werden kann.</p></details>
         <details><summary>Welche Amex Transferpartner haben aktuell 5:4?</summary><p>British Airways, Iberia, Air France/KLM Flying Blue und SAS EuroBonus werden aktuell mit 5:4 geführt.</p></details>
         <details><summary>Sollte ich Membership Rewards vor einer Flugbuchung übertragen?</summary><p>In der Regel erst, wenn die gewünschte Verfügbarkeit geprüft ist. Nach dem Transfer sind die Punkte an das jeweilige Programm gebunden und ein Rücktransfer ist üblicherweise nicht vorgesehen.</p></details>
       </div>
       <script type="application/ld+json">
-      {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Wie viele Meilen sind 100.000 Amex Punkte?","acceptedAnswer":{"@type":"Answer","text":"Das hängt vom Transferpartner ab. Bei 5:4 werden aus 100.000 Membership Rewards 80.000 Punkte oder Meilen, bei 3:2 rund 66.667 und bei 2:1 50.000."}},{"@type":"Question","name":"Kann ich Amex Membership Rewards zu Miles & More übertragen?","acceptedAnswer":{"@type":"Answer","text":"Nicht direkt. In Deutschland führt der übliche Weg über PAYBACK: 3 Membership Rewards ergeben 1 PAYBACK Punkt, der anschließend regulär 1:1 zu Miles & More übertragen werden kann."}},{"@type":"Question","name":"Welche Amex Transferpartner haben aktuell 5:4?","acceptedAnswer":{"@type":"Answer","text":"British Airways, Iberia, Air France/KLM Flying Blue und SAS EuroBonus werden aktuell mit 5:4 geführt."}},{"@type":"Question","name":"Sollte ich Membership Rewards vor einer Flugbuchung übertragen?","acceptedAnswer":{"@type":"Answer","text":"In der Regel erst nach Prüfung der gewünschten Prämienflug-Verfügbarkeit. Nach dem Transfer sind die Punkte an das jeweilige Programm gebunden."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Wie viele Meilen sind 100.000 Amex Punkte?","acceptedAnswer":{"@type":"Answer","text":"Das hängt vom Transferpartner ab. Bei 5:4 werden aus 100.000 Membership Rewards 80.000 Punkte oder Meilen, bei 3:2 rund 66.666 und bei 2:1 50.000."}},{"@type":"Question","name":"Kann ich Amex Membership Rewards zu Miles & More übertragen?","acceptedAnswer":{"@type":"Answer","text":"Nicht direkt. In Deutschland führt der übliche Weg über PAYBACK: 3 Membership Rewards ergeben 1 PAYBACK Punkt, der anschließend regulär 1:1 zu Miles & More übertragen werden kann."}},{"@type":"Question","name":"Welche Amex Transferpartner haben aktuell 5:4?","acceptedAnswer":{"@type":"Answer","text":"British Airways, Iberia, Air France/KLM Flying Blue und SAS EuroBonus werden aktuell mit 5:4 geführt."}},{"@type":"Question","name":"Sollte ich Membership Rewards vor einer Flugbuchung übertragen?","acceptedAnswer":{"@type":"Answer","text":"In der Regel erst nach Prüfung der gewünschten Prämienflug-Verfügbarkeit. Nach dem Transfer sind die Punkte an das jeweilige Programm gebunden."}},{"@type":"Question","name":"Wie viel sind 1.000 Amex Punkte wert?","acceptedAnswer":{"@type":"Answer","text":"Es gibt keinen festen Euro-Wert für alle Einlösungen. Bei einer Flugeinlösung zählt der vergleichbare Ticketpreis abzüglich der Zuzahlungen, geteilt durch die eingesetzten Membership-Rewards-Punkte. Die Rate für das Bezahlen mit Punkten wird im Amex-Konto angezeigt."}},{"@type":"Question","name":"Wie viel sind 100.000 Amex Punkte in Euro wert?","acceptedAnswer":{"@type":"Answer","text":"Der Wert hängt von der Einlösung ab. Ein frei gewähltes Beispiel: Bei 1.200 Euro Ticketpreis und 300 Euro Zuzahlungen ergeben 100.000 MR einen Gegenwert von 900 Euro. Das ist kein garantierter Wert und kein buchbares Angebot."}},{"@type":"Question","name":"Wie rechne ich Amex Punkte in Avios um?","acceptedAnswer":{"@type":"Answer","text":"Wähle im Rechner das gewünschte Avios-Programm aus. Die hinterlegten Transferverhältnisse können sich je nach Programm unterscheiden. Prüfe vor dem tatsächlichen Transfer die aktuelle Rate, Mindestmenge und Transferschritte direkt bei American Express."}},{"@type":"Question","name":"Warum sind mehr Meilen nicht automatisch mehr wert?","acceptedAnswer":{"@type":"Answer","text":"Jedes Programm hat eigene Prämienpreise, Verfügbarkeiten und Zuzahlungen. Vergleiche deshalb die Gesamtkosten derselben Reise und die dafür benötigten Membership-Rewards-Punkte."}}]}
       </script>
     </article>
 
@@ -119,7 +173,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
 <script>
 (function(){
   const partners=()=>window.AMEX_TRANSFER_PARTNERS||[];
-  const fmt=n=>Math.round(n).toLocaleString('de-DE');
+  const fmt=n=>Math.floor(n).toLocaleString('de-DE');
   const select=document.getElementById('mrPartner'),points=document.getElementById('mrPoints'),error=document.getElementById('mrError'),result=document.getElementById('mrResult');
   const groups={};
   partners().forEach((p,i)=>{(groups[p.group]??=[]).push({p,i});});
@@ -154,6 +208,26 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
   document.getElementById('mrCalcButton').addEventListener('click',calc);
   document.getElementById('mrResetButton').addEventListener('click',()=>{points.value='';select.value='';error.hidden=true;result.hidden=true;});
   document.querySelectorAll('[data-mr-preset]').forEach(button=>button.addEventListener('click',()=>{points.value=button.dataset.mrPreset;points.focus();if(select.value!=='')calc();}));
+  document.querySelectorAll('[data-mr-example]').forEach(button=>button.addEventListener('click',()=>{
+    points.value=button.dataset.mrExample;
+    document.getElementById('mr-rechner').scrollIntoView({behavior:'smooth',block:'start'});
+    points.focus({preventScroll:true});
+    if(select.value!=='')calc();
+  }));
+  document.getElementById('mrValueButton').addEventListener('click',()=>{
+    const inputs=['mrCashPrice','mrAwardFees','mrValuePoints'].map(id=>document.getElementById(id));
+    const [cash,fees,mr]=inputs.map(el=>Number(el.value));
+    const output=document.getElementById('mrValueResult');
+    output.hidden=false;
+    if(inputs.some(el=>el.value.trim()==='')||![cash,fees,mr].every(Number.isFinite)||cash<0||fees<0||mr<=0||!Number.isInteger(mr)){
+      output.textContent='Bitte Ticketpreis, Zuzahlungen und eine positive ganze MR-Punktzahl eingeben.';
+      return;
+    }
+    const net=cash-fees;
+    output.textContent=net<=0
+      ? 'Die Zuzahlungen erreichen oder übersteigen den Ticketpreis. Diese Einlösung bietet nach den eingegebenen Kosten keinen positiven Gegenwert für deine Punkte.'
+      : 'Gegenwert dieser Reise: '+net.toLocaleString('de-DE',{style:'currency',currency:'EUR'})+' beziehungsweise '+(net/mr*100).toLocaleString('de-DE',{maximumFractionDigits:2})+' Cent je Membership-Rewards-Punkt.';
+  });
   [points,select].forEach(el=>el.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();calc();}}));
 })();
 </script>
