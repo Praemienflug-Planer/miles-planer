@@ -31,6 +31,7 @@
   };
 
   const ROUTE_EVENTS = [
+    { test: (href) => href.includes('/meilen-sammeln/amex-kreditkarten/'), event: 'card_info_click' },
     { test: (href) => href.includes('/rechner/'), event: 'calculator_start' },
     { test: (href) => href.includes('/kreditkarten-link/'), event: 'card_offer_click' },
     { test: (href) => href.includes('kontakt.html'), event: 'contact_click' },
@@ -157,7 +158,8 @@
     sendEvent(eventName, {
       link_text: target.textContent.trim().replace(/\s+/g, ' ').slice(0, 80),
       link_target: target.getAttribute('href') || '',
-      card_offer: target.getAttribute('data-card') || ''
+      card_offer: target.getAttribute('data-card') || '',
+      placement: target.getAttribute('data-placement') || ''
     });
   });
 
@@ -182,7 +184,7 @@
     }
 
     if (form.id === 'referralLinkForm') {
-      sendEvent('referral_link_request', getLeadMeta(form));
+      // The form handler tracks accepted attempts after its validation/sending guard.
       return;
     }
 
@@ -239,7 +241,10 @@
     if (analyticsSessionInitialized || !analyticsAllowed()) return;
     analyticsSessionInitialized = true;
     sendEvent('page_view', { referrer: getSafeReferrer() });
-    sendEvent('tracking_ready', { tracking_version: '20260829-consent-2' });
+    sendEvent('tracking_ready', { tracking_version: '20261012-referral-funnel-1' });
+    if (window.location.pathname.replace(/\/$/, '') === '/meilen-sammeln/amex-kreditkarten') {
+      sendEvent('card_info_view', { card_offer: 'amex' });
+    }
     if (window.location.pathname.includes('/rechner/')) {
       sendEvent('calculator_start', { trigger: 'calculator_page_loaded' });
     }

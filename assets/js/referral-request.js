@@ -11,6 +11,7 @@
   const offerSummary = document.getElementById('referralOfferSummary');
   const offerPanels = Array.from(document.querySelectorAll('[data-referral-card]'));
   let sending = false;
+  let pageViewTracked = false;
   const params = new URLSearchParams(window.location.search);
   const validCards = new Set(Array.from(cardSelect.options).map((option) => option.value));
 
@@ -35,6 +36,27 @@
   cardSelect.addEventListener('change', syncSelection);
   syncSelection();
 
+  function trackReferral(eventName, card = cardSelect.value, source = sourceInput.value) {
+    try {
+      if (typeof window.pfpTrackConversion === 'function') {
+        window.pfpTrackConversion(eventName, {
+          form_name: 'referral_link_request',
+          card_offer: card,
+          request_source: source
+        });
+      }
+    } catch (trackingError) { /* Tracking must never interrupt a request. */ }
+  }
+
+  function trackPageView() {
+    if (pageViewTracked || window.pfpAnalyticsConsent !== 'granted' || typeof window.pfpTrackConversion !== 'function') return;
+    pageViewTracked = true;
+    trackReferral('referral_page_view');
+  }
+  window.addEventListener('pfp:analytics-consent', trackPageView);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', trackPageView);
+  else trackPageView();
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (sending) return;
@@ -44,6 +66,7 @@
     const submittedSource = sourceInput.value;
     const submittedData = new FormData(form);
     sending = true;
+    trackReferral('referral_link_request', submittedCard, submittedSource);
     submitButton.disabled = true;
     cardSelect.disabled = true;
     submitButton.textContent = 'Wird gesendet …';
@@ -58,14 +81,7 @@
         headers: { Accept: 'application/json' }
       });
       if (!response.ok) throw new Error('Formspree request failed');
-      try {
-      if (typeof window.pfpTrackConversion === 'function') {
-        window.pfpTrackConversion('referral_link_success', {
-          card_offer: submittedCard,
-          request_source: submittedSource
-        });
-      }
-      } catch (trackingError) { /* Tracking must never change a successful submission. */ }
+      trackReferral('referral_link_success', submittedCard, submittedSource);
       form.reset();
       cardSelect.value = submittedCard;
       sourceInput.value = safeSource(params.get('quelle'));
@@ -74,6 +90,7 @@
       statusBox.style.display = '';
       statusBox.textContent = 'Danke! Deine Anfrage wurde erfolgreich übermittelt. Ich prüfe das Angebot und antworte dir per E-Mail. Schau auch in deinen Spam-Ordner. Ein Kartenantrag wurde damit noch nicht gestellt.';
     } catch (error) {
+      trackReferral('referral_link_error', submittedCard, submittedSource);
       statusBox.className = 'form-status error';
       statusBox.style.display = '';
       statusBox.textContent = 'Die Anfrage konnte gerade nicht gesendet werden. Bitte versuche es später noch einmal.';
