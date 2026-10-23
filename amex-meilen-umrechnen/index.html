@@ -59,6 +59,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
             <div class="result-item"><div class="label">Transferverhältnis</div><div class="value" id="mrRatio">—</div></div>
           </div>
           <p class="mr-source">Rechnerischer Wert, auf ganze Einheiten abgerundet. Mindestmengen und Transferschritte können die tatsächlich übertragbare Menge begrenzen.</p>
+          <div id="mrAviosHint" class="warning-box" hidden><strong>Qatar-Avios: den Weg über British Airways prüfen</strong><p id="mrAviosComparison"></p><p>Ich würde bei diesen regulären Kursen zuerst zu British Airways übertragen und die Avios anschließend kostenlos 1:1 zum eigenen verknüpften Qatar-Konto verschieben. <a href="#avios-transferweg">Voraussetzungen und Rechenbeispiel</a></p></div>
           <h3>Was möchtest du als Nächstes prüfen?</h3>
           <div class="mr-example-grid">
             <div class="mr-example"><h4>Eine Reise planen</h4><p>Ich zeige dir an Reisebeispielen, wie ich Meilenbedarf, Zuzahlungen und Plätze für die Familie vergleiche.</p><a href="#reisebeispiele" data-event="amex_journey_click" data-placement="amex-rechner-ergebnis">Reisebeispiele ansehen</a></div>
@@ -69,6 +70,17 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
         <div class="warning-box"><strong>Transfer-Regel:</strong><br><br>Membership Rewards nicht vorsorglich übertragen. Zuerst Award-Verfügbarkeit, benötigte Punktezahl, Steuern und Gebühren sowie die aktuelle Transferrate prüfen. Ein Transfer lässt sich in der Regel nicht einfach rückgängig machen.</div>
       </div>
 
+
+      <div class="article-card seo-card" id="avios-transferweg">
+        <p class="eyebrow">Mein Avios-Tipp · geprüft am 23.10.2026</p>
+        <h2>Amex Punkte für Qatar: über British Airways mehr Avios erhalten</h2>
+        <p><strong>Ich würde MR bei den regulären Kursen über British Airways statt direkt zu Qatar übertragen.</strong> Amex Deutschland rechnet bei British Airways 5 MR in 4 Avios um, bei Qatar direkt nur 3 MR in 2 Avios. Anschließend lassen sich die Avios zwischen deinen verknüpften BA- und Qatar-Konten kostenlos im Verhältnis 1:1 verschieben.</p>
+        <div class="seo-table-wrap"><table class="seo-table"><thead><tr><th>Weg für 90.000 MR</th><th>Avios für Qatar</th></tr></thead><tbody><tr><td>Amex → Qatar direkt (3:2)</td><td>60.000 Avios</td></tr><tr><td>Amex → British Airways (5:4) → Qatar (1:1)</td><td><strong>72.000 Avios</strong></td></tr></tbody></table></div>
+        <p>Das sind <strong>12.000 Avios beziehungsweise 20 % mehr</strong> bei gleichem MR-Einsatz, ohne Transferbonus. Auch Iberia hat bei Amex einen 5:4-Kurs; hier zeige ich den Weg über BA mit direkter Qatar-Verknüpfung.</p>
+        <p><strong>Vorher Konten verknüpfen:</strong> Beide Konten müssen dir gehören. Vorname, Nachname, Geburtsdatum und E-Mail-Adresse müssen übereinstimmen. Prüfe die Verknüpfung und die aktuellen Transferbedingungen, bevor du MR überträgst.</p>
+        <p>Avios sind dieselbe Punktewährung, aber Prämienpreise, Zuzahlungen und Verfügbarkeiten unterscheiden sich je nach Programm. Für eine Buchung bei Qatar gelten dessen Bedingungen. Ein BA-Haushaltskonto lässt dich nur deinen persönlichen Avios-Anteil verschieben. Bei Sonderboni rechne ich beide Wege erneut durch.</p>
+        <p class="mr-source">Quellen: <a href="https://www.americanexpress.com/de-de/rewards/membership-rewards/travel/all">Amex Deutschland: Transferkurse</a> und <a href="https://www.qatarairways.com/en/Privilege-Club/terms-and-conditions/avios.html">Qatar: Kontoverknüpfung und Avios-Transfer</a>.</p>
+      </div>
 
       <div class="article-card seo-card" id="punktewert">
         <p class="eyebrow">Punktewert</p>
@@ -220,6 +232,13 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
       : partners()[Number(idx)];
     if(!p){error.textContent='Bitte einen gültigen Transferpartner wählen.';error.hidden=false;result.hidden=true;return;}
     const out=units(n,p);
+    const ba=partners().find(partner=>partner.name.includes('British Airways'));
+    const qatar=p.name.includes('Qatar');
+    document.getElementById('mrAviosHint').hidden=!qatar||!ba;
+    if(qatar&&ba){
+      const viaBA=units(n,ba);
+      document.getElementById('mrAviosComparison').textContent=`Für ${fmt(n)} MR: direkt ${fmt(out)} Avios; über British Airways rechnerisch ${fmt(viaBA)} Avios – ${fmt(viaBA-out)} Avios mehr. Mindestmengen und Transferschritte beachten.`;
+    }
     document.getElementById('mrBadge').textContent=p.name;
     document.getElementById('mrTitle').textContent=`${fmt(n)} MR → ${fmt(out)} ${p.unit}`;
     document.getElementById('mrText').textContent=indirect
