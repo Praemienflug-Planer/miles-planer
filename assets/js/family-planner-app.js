@@ -1,7 +1,7 @@
 (() => {
   const $ = id => document.getElementById(id);
   const fmt = n => Number(n).toLocaleString('de-DE', { maximumFractionDigits: 0 });
-  const euro = n => `${fmt(n)} €`;
+  const euro = n => `${Number(n).toLocaleString('de-DE', { minimumFractionDigits: Number(n) % 1 ? 2 : 0, maximumFractionDigits: 2 })} €`;
   const decimal = n => Number(n).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const months = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
   const sourceNames = { 'Miles & More':'PAYBACK', Avios:'Membership Rewards', 'Flying Blue':'Membership Rewards', KrisFlyer:'Membership Rewards' };
