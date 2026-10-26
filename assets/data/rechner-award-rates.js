@@ -1,5 +1,12 @@
 (() => {
   const dataStand = "10.05.2026";
+  const gebuehrenPruefung = "26.10.2026";
+  // Für M&M-Lufthansa-Group nur konkrete, recherchierte Roundtrip-Beispiele.
+  // Keine Livepreise, keine universellen Routentarife und keine Partnerairline-Gebühren.
+  const gebuehrenReferenzen = {
+    "USA East|Business": { betrag: 1696.39, strecke: "Berlin–New York", kabine: "Business", datum: "05.10.2026", quelle: "https://reisetopia.de/news/lufthansa-group-zuschlaege-praemienfluege/" },
+    "Japan|Business": { betrag: 799.13, strecke: "Frankfurt–Tokio", kabine: "Business", datum: "05.10.2026", quelle: "https://reisetopia.de/news/lufthansa-group-zuschlaege-praemienfluege/" }
+  };
 
   const factors = {
     "Dubai": [1.00, 1.05, 1.12],
@@ -45,7 +52,7 @@
       },
       "Japan": {
         "Premium Economy": [90000, 110000, 130000, 450, 600, 800, 1700],
-        "Business": [170000, 200000, 240000, 750, 950, 1250, 3800]
+        "Business": [170000, 200000, 240000, 750, 799.13, 1250, 3800]
       },
       "Malediven": {
         "Premium Economy": [90000, 110000, 130000, 500, 650, 850, 1700],
@@ -61,7 +68,7 @@
       },
       "USA East": {
         "Premium Economy": [70000, 90000, 110000, 380, 500, 650, 1300],
-        "Business": [112000, 150000, 180000, 600, 780, 1000, 2800]
+        "Business": [112000, 150000, 180000, 600, 1696.39, 1950, 2800]
       },
       "USA West": {
         "Premium Economy": [80000, 100000, 120000, 420, 550, 750, 1500],
@@ -172,6 +179,7 @@
           const [bestMiles, realMiles, consMiles, bestTaxes, realTaxes, consTaxes, cashPp] = values;
           const [faktorNebensaison, faktorHauptsaison, faktorFerien] = factors[ziel] || [1, 1.08, 1.18];
           const meta = programMeta[programm];
+          const gebuehrenReferenz = programm === "Miles & More" ? gebuehrenReferenzen[`${ziel}|${klasse}`] || null : null;
 
           rates.push({
             ziel,
@@ -188,6 +196,8 @@
             faktorHauptsaison,
             faktorFerien,
             cashPp,
+            gebuehrenReferenz,
+            gebuehrenDatenstand: gebuehrenReferenz ? gebuehrenReferenz.datum : dataStand,
             quelle: meta.quelle,
             hinweis: meta.hinweis
           });
@@ -200,7 +210,8 @@
 
   window.MILES_PLANNER_AWARD_RATES = {
     dataStand,
-    source: "GitHub Planungswerte für Phase 3. Werte sind konservative Szenario-Spannen und keine Live-Verfügbarkeiten.",
+    gebuehrenPruefung,
+    source: "Grundmatrix: Planungswerte vom 10.05.2026. M&M-Gebührenreferenzen Berlin–New York und Frankfurt–Tokio vom 05.10.2026; am 26.10.2026 geprüft. Für die neue Travel-Dealz-Meldung vom 26.10. liegen noch keine verifizierten Einzelbeträge vor. Alle anderen Gebühren bleiben ältere Schätzwerte, keine Live-Verfügbarkeiten.",
     currency: "EUR",
     rates: buildRates()
   };
