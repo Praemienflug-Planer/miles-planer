@@ -1,6 +1,6 @@
 window.MILES_PLANNER_PROGRAMS = {
-  dataStand: "09.09.2026",
-  source: "Programm- und Transferregeln für den Prämienflug-Rechner. Flying-Blue-Prämientarife zuletzt am 09.09.2026 anhand offizieller Flying-Blue-Angaben geprüft; übrige Transferregeln zuletzt am 26.08.2026 geprüft.",
+  dataStand: "26.10.2026",
+  source: "Programm- und Transferregeln für den Prämienflug-Rechner. Amex-Transferkurse, Mindestmengen und Transferschritte am 26.10.2026 anhand offizieller Amex-Angaben geprüft; Flying-Blue-Prämientarife zuletzt am 09.09.2026 geprüft.",
   programs: {
     "Miles & More": {
       punktelabel: "Miles & More Meilen",
@@ -22,7 +22,7 @@ window.MILES_PLANNER_PROGRAMS = {
       transferMinimum: 1000,
       transferDuration: "bis zu 1 Werktag",
       transferBonusPct: { konservativ: 0, realistisch: 0, best: 0 },
-      hinweis: "Der Rechner nutzt für den generischen Avios-Eintrag den 5:4-Transferweg über British Airways oder Iberia. Ein direkter Transfer zu Qatar Privilege Club ist bei deutscher Amex mit 3:2 schwächer und dauert laut Amex ca. 7 Werktage."
+      hinweis: "Der Rechner nutzt für Avios den 5:4-Transferweg über British Airways (Mindesttransfer 1.000 MR, Schritte zu je 5 MR). Iberia nutzt ebenfalls 5:4, aber 500er Schritte. Ein direkter Transfer zu Qatar Privilege Club ist bei deutscher Amex mit 3:2 schwächer und dauert laut Amex ca. 7 Werktage."
     },
     "Flying Blue": {
       punktelabel: "Flying Blue Meilen",
