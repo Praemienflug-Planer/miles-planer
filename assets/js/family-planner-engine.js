@@ -3,7 +3,7 @@
   if (typeof module === 'object' && module.exports) module.exports = api;
   root.FamilyPlanner = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
-  const STEPS = { 'Miles & More': 1, Avios: 500, 'Flying Blue': 5, KrisFlyer: 3 };
+  const STEPS = { 'Miles & More': 1, Avios: 5, 'Flying Blue': 5, KrisFlyer: 3 };
   const MINIMUMS = { 'Miles & More': 200, Avios: 1000, 'Flying Blue': 625, KrisFlyer: 1500 };
   const RATIOS = { 'Miles & More': [1, 1], Avios: [4, 5], 'Flying Blue': [4, 5], KrisFlyer: [2, 3] };
   const SCENARIOS = [
@@ -54,8 +54,8 @@
     const rows = SCENARIOS.map(s => {
       const milesFactor = rate.seasonFactorMode === 'miles-only' || rate.seasonFactorMode === 'included' ? 1 : factor;
       const needed = Math.ceil(Number(rate[s.key + 'MilesRtPp']) * milesFactor * childShare);
-      const taxes = Math.round(taxesPp * persons);
-      const cash = Math.round(cashPp * persons);
+      const taxes = Math.round(taxesPp * persons * 100) / 100;
+      const cash = Math.round(cashPp * persons * 100) / 100;
       const net = cash - taxes;
       const months = monthReached(input, needed, now);
       const gap = Math.max(0, needed - available);
