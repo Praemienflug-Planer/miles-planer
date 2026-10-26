@@ -19,3 +19,8 @@
 
 .family-planner .context-hint{font-size:13px;line-height:1.5;background:#edf7f2;color:#125447;border:1px solid #c3e4d7;border-radius:9px;padding:11px 13px;margin-bottom:18px}
 .family-planner .context-hint[hidden]{display:none}
+
+/* Gebührenprüfung Oktober 2026: Hinweise und Partnerauswahl */
+.family-planner #mmAirlineGroup[hidden]{display:none}
+.family-planner .fee-context{font-size:12px;line-height:1.6;color:#405d64;background:#edf4f1;border-left:3px solid #168074;border-radius:6px;padding:10px 12px;margin:6px 0 15px}
+.family-planner .fee-alert{color:#fce6bb;font-weight:650;border-left:3px solid #d6b575;padding:9px 0 9px 12px;margin-top:15px!important}
