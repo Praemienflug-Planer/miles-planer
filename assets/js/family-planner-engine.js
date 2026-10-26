@@ -40,6 +40,7 @@
   }
   function calculate(input, rate, now = new Date()) {
     const adults = whole(input.adults), children = whole(input.children), native = whole(input.nativePoints), source = whole(input.sourcePoints), monthly = whole(input.monthlyPoints);
+    if (String(input.cashPp).trim() === '' || String(input.taxesPp).trim() === '') return { error: 'Bitte Cashpreis und die gesamte Award-Zuzahlung aus der Buchung eintragen. Ohne Zuzahlung ist kein seriöser Preisvergleich möglich.' };
     const cashPp = Number(input.cashPp), taxesPp = Number(input.taxesPp), bonus = Number(input.bonus);
     if (!rate || !RATIOS[input.program]) return { error: 'Bitte Ziel, Reiseklasse und Programm wählen.' };
     if (![adults, children, native, source, monthly, cashPp, taxesPp, bonus].every(Number.isFinite) || adults < 1 || adults + children < 2 || adults + children > 8 || cashPp < 0 || taxesPp < 0 || bonus < 0 || bonus > 100) return { error: 'Bitte gültige Werte eintragen: 2–8 Personen, mindestens ein Erwachsener und keine negativen Beträge.' };
@@ -60,12 +61,13 @@
       const gap = Math.max(0, needed - available);
       const projectedGap = Math.max(0, needed - projected);
       const valueCt = cashPp > 0 ? net / needed * 100 : null;
+      const feeSharePct = cash > 0 ? taxes / cash * 100 : null;
       let light = 'red', status = 'Punkte reichen bis zur Reise voraussichtlich nicht';
       if (projectedGap === 0 && months <= lead) {
         light = lead - months >= 3 ? 'green' : 'amber';
         status = light === 'green' ? 'Punkte rechnerisch mit Zeitpuffer erreichbar' : 'Punkte rechnerisch erst knapp vor der Reise erreichbar';
       }
-      return { ...s, needed, gap, projectedGap, months, taxes, cash, net, valueCt, light, status, pp: Math.ceil(needed / childShare) };
+      return { ...s, needed, gap, projectedGap, months, taxes, cash, net, valueCt, feeSharePct, light, status, pp: Math.ceil(needed / childShare) };
     });
     return { persons, childDiscount: input.program === 'Flying Blue' && children > 0, available, projected, lead, factor, rows, ratio: RATIOS[input.program], min: MINIMUMS[input.program], step: STEPS[input.program] };
   }
