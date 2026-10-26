@@ -5,7 +5,7 @@
   const decimal = n => Number(n).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const months = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
   const sourceNames = { 'Miles & More':'PAYBACK', Avios:'Membership Rewards', 'Flying Blue':'Membership Rewards', KrisFlyer:'Membership Rewards' };
-  const ratios = { 'Miles & More':'1:1', Avios:'5:4 über Iberia', 'Flying Blue':'5:4', KrisFlyer:'3:2' };
+  const ratios = { 'Miles & More':'1:1', Avios:'5:4 über British Airways', 'Flying Blue':'5:4', KrisFlyer:'3:2' };
   const durations = { 'Miles & More':'bis zu 5 Werktage', Avios:'bis zu 1 Werktag', 'Flying Blue':'bis zu 1 Werktag', KrisFlyer:'bis zu 15 Werktage' };
   const rows = () => window.MILES_PLANNER_AWARD_RATES?.rates || [];
   const state = { cashEdited:false, taxesEdited:false };
@@ -15,10 +15,23 @@
   function setSuggestedPrice() {
     const rate = rateFor(); if (!rate) return;
     const factor = seasonFactor(rate);
+    const isMM = $('program').value === 'Miles & More';
+    const partner = isMM && $('mmAirline').value === 'partner';
+    $('mmAirlineGroup').hidden = !isMM;
     if (!state.cashEdited) $('cashPp').value = Math.round(rate.cashPp * factor);
-    if (!state.taxesEdited) $('taxesPp').value = Math.round(rate.realTaxesRtPp * factor);
-    $('cashHint').textContent = state.cashEdited ? 'Dein eingetragener Vergleichspreis' : 'Vorschlagswert aus der Planungsmatrix';
-    $('taxesHint').textContent = state.taxesEdited ? 'Deine eingetragene Zuzahlung' : 'Vorschlagswert für alle drei Szenarien';
+    // Zuschläge sind nicht automatisch saisonabhängig. Keine Multiplikation mit Ferien-Faktor.
+    if (!state.taxesEdited) $('taxesPp').value = partner ? '' : String(rate.realTaxesRtPp);
+    $('cashHint').textContent = state.cashEdited ? 'Dein manuell eingetragener Vergleichspreis' : 'Saisonabhängiger Planungswert, kein Livepreis';
+    const ref = !partner && isMM ? rate.gebuehrenReferenz : null;
+    $('taxesHint').textContent = state.taxesEdited ? 'Deine manuell eingetragene Gesamtzuzahlung je Person (Roundtrip)'
+      : partner ? 'Bitte die Zuzahlung aus der Partner-Awardbuchung eintragen'
+      : ref ? `Referenz ${ref.strecke} (${ref.datum}), inklusive Steuern/Gebühren – kein allgemeiner Tarif`
+      : 'Älterer Planungswert, nicht live geprüft; bitte überschreiben';
+    $('feesContext').textContent = partner
+      ? 'Miles & More mit Partnerairline: Es gibt keinen einheitlichen Zuschlag. Trage Steuern, Flughafen- und Airline-Gebühren aus dem konkreten Angebot ein.'
+      : ref ? `Lufthansa-Referenz ${ref.strecke} Business, Hin und zurück: ${euro(ref.betrag)} je Person (Stichprobe ${ref.datum}). Die weitere Meldung vom 26.10.2026 ist noch nicht betragsmäßig verifiziert. Der tatsächliche Buchungspreis geht immer vor.`
+      : isMM ? 'Lufthansa-Group-Zuschläge können je nach Strecke und Kabine deutlich höher ausfallen als ältere Schätzwerte. Bitte den konkreten Gesamtbetrag einschließlich YQ/YR, Steuern und Gebühren eingeben.'
+      : 'Bei anderen Programmen sind die vorgegebenen Gebühren lediglich ältere Orientierungswerte; je Airline und Strecke können sie erheblich abweichen.';
   }
   function readInput() {
     const [year, month] = $('travelMonth').value.split('-').map(Number);
@@ -89,11 +102,12 @@
       : `<div class="scenario-heading"><h3>Drei Wege im Vergleich</h3><small>alle Werte für die Familie</small></div>${result.rows.map(card).join('')}`;
     const childNote = result.childDiscount ? '<p>Flying Blue: Für Kinder von 2–11 Jahren sind hier 25 % weniger Meilen als Planungsannahme berücksichtigt. Prüfe die Bedingungen für den konkreten Reward-Tarif. Zuzahlungen bleiben für jede Person voll angesetzt.</p>' : Number(input.children) ? '<p>Kinder von 2–11 Jahren werden hier vorsichtig mit vollem Meilenpreis gerechnet. Ein möglicher Child’s-Award-Rabatt hängt vom konkreten Programm und der Airline ab.</p>' : '';
     const transferNote = Number(input.bonus) > 0 ? `Der eingegebene Bonus von ${fmt(input.bonus)} % ist nur eine Annahme, keine bestätigte Aktion. ` : '';
+    const feeWarning = realistic.net <= 0 ? 'Warnsignal: Allein die Award-Zuzahlungen liegen mindestens auf dem Cashpreis – die Meilen hätten hier keinen positiven Gegenwert.' : realistic.feeSharePct >= 50 ? `Hoher Geldanteil: Die Zuzahlungen machen rund ${fmt(realistic.feeSharePct)} % des vergleichbaren Cashpreises aus. Prüfe dringend einen bezahlten Flug oder andere Programme/Airlines.` : 'Der Preisvorteil vor Bewertung deiner Meilen ist positiv; prüfe trotzdem Routing, Gepäck, Tarif und Verfügbarkeit.';
     $('resultContent').innerHTML = `<div class="focus-result"><span class="overline">${fixedChart ? 'CHART-ANKER FÜR DIE FAMILIE' : 'REALISTISCHER FAMILIENBEDARF'}</span><strong>${fmt(realistic.needed)} ${input.program === 'Miles & More' ? 'Meilen' : input.program === 'Avios' ? 'Avios' : 'Meilen'}</strong><p>${fmt(result.persons)} Personen · Hin- und Rückflug · ${leadText}</p></div>
       <div class="metric-line"><div class="metric"><span>Heute verfügbar*</span><strong>${fmt(result.available)}</strong></div><div class="metric"><span>Bis zur Reise*</span><strong>${fmt(result.projected)}</strong></div><div class="metric"><span>Realistische Lücke</span><strong>${fmt(realistic.gap)}</strong></div></div>
       ${scenarios}
-      <div class="deal-box"><h3>Der Cashvergleich</h3><div class="deal-grid"><div><span>Cashpreis gesamt</span><strong>${euro(realistic.cash)}</strong></div><div><span>Award-Zuzahlung gesamt</span><strong>${euro(realistic.taxes)}</strong></div><div><span>Preisunterschied</span><strong>${euro(realistic.net)}</strong></div><div><span>Rechnerisch pro Meile</span><strong>${realistic.valueCt === null ? '—' : `${decimal(realistic.valueCt)} ct`}</strong></div></div><p>Dealwert = (Cashpreis − Award-Zuzahlungen) ÷ eingesetzte Meilen × 100. ${realistic.net < 0 ? 'Hier ist der Award schon vor Bewertung der Meilen teurer als der Cashflug.' : 'Vergleiche dieselbe Strecke, Klasse, Gepäck und Tarifbedingungen.'}</p></div>
-      <div class="result-foot"><strong>Meine Einordnung:</strong> ${transferNote}${source} → ${input.program}: ${ratio}, Mindesttransfer ${fmt(result.min)} Punkte. ${childNote}<p>* Bereits vorhandene ${input.program} Meilen plus nur transferierbare ${source} Punkte; monatliche Punkte werden bis zum Reisemonat hochgerechnet. Die Ampel bewertet rechnerische Punkte und Zeitpuffer, nicht Verfügbarkeit. Bei Flying Blue können Light, Standard und Flex verschiedene Leistungen enthalten. Datenbasis für Awardpreise: Planungsmatrix 10.05.2026; teils separat kalibriert 26.08.2026. Preise und Gebühren sind keine Liveangebote.</p></div>`;
+      <div class="deal-box"><h3>Der Cashvergleich</h3><div class="deal-grid"><div><span>Cashpreis gesamt</span><strong>${euro(realistic.cash)}</strong></div><div><span>Award-Zuzahlung gesamt</span><strong>${euro(realistic.taxes)}</strong></div><div><span>Geldersparnis vor Meileneinsatz</span><strong>${euro(realistic.net)}</strong></div><div><span>Rechnerisch pro Meile</span><strong>${realistic.valueCt === null ? '—' : `${decimal(realistic.valueCt)} ct`}</strong></div></div><p class="fee-alert">${feeWarning}</p><p>Dealwert = (Cashpreis − gesamte Award-Zuzahlungen) ÷ eingesetzte Meilen × 100. Diese Differenz ist keine Nettoersparnis gegenüber einem Nullwert für Meilen: Die eingesetzten Meilen haben selbst einen Wert. Vergleiche dieselbe Strecke, Klasse, Gepäck und Tarifbedingungen.</p></div>
+      <div class="result-foot"><strong>Meine Einordnung:</strong> ${transferNote}${source} → ${input.program}: ${ratio}, Mindesttransfer ${fmt(result.min)} Punkte. ${childNote}<p>* Bereits vorhandene ${input.program} Meilen plus nur transferierbare ${source} Punkte; monatliche Punkte werden bis zum Reisemonat hochgerechnet. Die Ampel bewertet rechnerische Punkte und Zeitpuffer, nicht Verfügbarkeit. Bei Flying Blue können Light, Standard und Flex verschiedene Leistungen enthalten. Datenbasis für Award-Meilen: Planungsmatrix 10.05.2026, teils kalibriert 26.08.2026. Gebührenbasis: ältere Planungswerte, zwei Lufthansa-Referenzen vom 05.10.2026 (Prüfung 26.10.2026). Weitere Erhöhungen können noch nicht enthalten sein. Kein Liveangebot. Die automatische Gebührenvorgabe ist in allen drei Szenarien gleich; du kannst sie manuell überschreiben.</p></div>`;
     renderProgramCards();
   }
   function init() {
@@ -107,6 +121,7 @@
     $('plannerForm').addEventListener('input', e => { if (e.target.id !== 'cashPp' && e.target.id !== 'taxesPp' && !suggestedPriceFields.has(e.target.id)) render(); });
     $('plannerForm').addEventListener('change', e => { if (suggestedPriceFields.has(e.target.id)) setSuggestedPrice(); render(); });
     $('plannerForm').addEventListener('submit', e => e.preventDefault());
+    $('mmAirline').addEventListener('change', () => { setSuggestedPrice(); render(); });
     $('programCards').addEventListener('click', e => { const button = e.target.closest('[data-program]'); if (!button) return; $('program').value = button.dataset.program; setSuggestedPrice(); render(); $('planen').scrollIntoView({ behavior: 'smooth' }); $('program').focus({ preventScroll:true }); });
     setSuggestedPrice(); render();
   }
