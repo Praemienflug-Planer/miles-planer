@@ -44,6 +44,11 @@
     const cashPp = Number(input.cashPp), taxesPp = Number(input.taxesPp), bonus = Number(input.bonus);
     if (!rate || !RATIOS[input.program]) return { error: 'Bitte Ziel, Reiseklasse und Programm wählen.' };
     if (![adults, children, native, source, monthly, cashPp, taxesPp, bonus].every(Number.isFinite) || adults < 1 || adults + children < 2 || adults + children > 8 || cashPp < 0 || taxesPp < 0 || bonus < 0 || bonus > 100) return { error: 'Bitte gültige Werte eintragen: 2–8 Personen, mindestens ein Erwachsener und keine negativen Beträge.' };
+    // Bei einem vom Nutzer gefundenen Angebot gibt der Wert die Meilen pro Person für den Roundtrip an.
+    // Für diesen Modus niemals pauschale Programm-Kinderrabatte oder Saisonfaktoren anwenden.
+    const manualMilesRaw = String(input.actualMilesPp ?? '').trim();
+    const actualMilesPp = manualMilesRaw === '' ? null : Number(manualMilesRaw);
+    if (actualMilesPp !== null && (!Number.isSafeInteger(actualMilesPp) || actualMilesPp < 1)) return { error: 'Bitte für ein konkretes Award-Angebot eine positive ganze Meilenzahl je Person für Hin und Rück eintragen.' };
     const lead = monthsBetween(now, input.year, input.month);
     if (!Number.isFinite(lead) || lead < 0) return { error: 'Bitte einen Reisemonat ab dem aktuellen Monat wählen.' };
     const persons = adults + children;
@@ -53,7 +58,7 @@
     const projected = native + converted(source + monthly * lead, input.program, bonus);
     const rows = SCENARIOS.map(s => {
       const milesFactor = rate.seasonFactorMode === 'miles-only' || rate.seasonFactorMode === 'included' ? 1 : factor;
-      const needed = Math.ceil(Number(rate[s.key + 'MilesRtPp']) * milesFactor * childShare);
+      const needed = actualMilesPp !== null ? actualMilesPp * persons : Math.ceil(Number(rate[s.key + 'MilesRtPp']) * milesFactor * childShare);
       const taxes = Math.round(taxesPp * persons * 100) / 100;
       const cash = Math.round(cashPp * persons * 100) / 100;
       const net = cash - taxes;
@@ -67,9 +72,9 @@
         light = lead - months >= 3 ? 'green' : 'amber';
         status = light === 'green' ? 'Punkte rechnerisch mit Zeitpuffer erreichbar' : 'Punkte rechnerisch erst knapp vor der Reise erreichbar';
       }
-      return { ...s, needed, gap, projectedGap, months, taxes, cash, net, valueCt, feeSharePct, light, status, pp: Math.ceil(needed / childShare) };
+      return { ...s, needed, gap, projectedGap, months, taxes, cash, net, valueCt, feeSharePct, light, status, pp: actualMilesPp ?? Math.ceil(needed / childShare) };
     });
-    return { persons, childDiscount: input.program === 'Flying Blue' && children > 0, available, projected, lead, factor, rows, ratio: RATIOS[input.program], min: MINIMUMS[input.program], step: STEPS[input.program] };
+    return { persons, actualQuote: actualMilesPp !== null, childDiscount: actualMilesPp === null && input.program === 'Flying Blue' && children > 0, available, projected, lead, factor, rows, ratio: RATIOS[input.program], min: MINIMUMS[input.program], step: STEPS[input.program] };
   }
   return { calculate, converted, monthsBetween, monthReached, SCENARIOS };
 });
