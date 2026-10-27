@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Familien-Prämienflug planen | Sofortcheck & drei Szenarien"
-description: "Prüfe für 2–8 Personen Meilenbedarf, Award-Zuzahlungen inklusive Airline-Zuschlägen, Cashpreis und echten Preisvorteil. Mit Oktober-2026-Gebührenbeispielen."
+description: "Prüfe für 2–8 Personen Meilenbedarf, Award-Zuzahlungen inklusive Airline-Zuschlägen, Cashpreis und echten Preisvorteil. Mit echten Award-Meilen als optionalem Eingabewert und Oktober-2026-Gebührenbeispielen."
 canonical: "https://praemienflug-planer.de/rechner/"
 og_title: "Familien-Prämienflug mit Meilen planen | Prämienflug-Planer"
 og_image: "/assets/og/og-home.jpg"
@@ -11,8 +11,8 @@ extra_js:
   - "/assets/data/rechner-award-rates.js?v=20261026-fees"
   - "/assets/data/rechner-award-calibration-mm-20260826.js?v=20260826-mm-calibration-1"
   - "/assets/data/rechner-programs.js?v=20261026-transfer"
-  - "/assets/js/family-planner-engine.js?v=20261026-fees"
-  - "/assets/js/family-planner-app.js?v=20261026-fees"
+  - "/assets/js/family-planner-engine.js?v=20261027-quote"
+  - "/assets/js/family-planner-app.js?v=20261027-quote"
 schema_json: |
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Familien-Prämienflug-Rechner","url":"https://praemienflug-planer.de/rechner/","applicationCategory":"TravelApplication","operatingSystem":"Web","inLanguage":"de-DE"}
 ---
@@ -54,7 +54,9 @@ schema_json: |
               <label>Award-Zuzahlung je Person <span class="unit">€</span><input id="taxesPp" type="number" inputmode="decimal" min="0" step="0.01"><small id="taxesHint">Steuern, Gebühren und Airline-Zuschläge · Roundtrip</small></label>
             </div>
             <div class="field-grid two" id="mmAirlineGroup"><label>Airline bei Miles &amp; More<select id="mmAirline"><option value="lh">Lufthansa Group – Planungsbeispiel</option><option value="partner">Partnerairline – eigene Zuzahlung</option></select><small>Die Gebühren der Lufthansa Group gelten nicht pauschal für Partnerairlines.</small></label></div>
+            <div class="field-grid two"><label>Meilen je Person für Hin- und Rückflug (optional)<input id="actualMilesPp" type="number" inputmode="numeric" min="1" step="1" placeholder="z. B. 128161"><small>Reale Award-Suche? Beide Richtungen addieren. Leer lassen für Planungsszenarien. Kinderrabatte werden bei diesem Eingabewert nicht angenommen.</small></label></div>
             <p id="feesContext" class="fee-context" aria-live="polite"></p>
+            <p class="fee-context">Bei Rückflügen mit USD-Zuzahlung: erst in EUR umrechnen und die gesamte Zuzahlung für Hin- und Rückflug in Euro eintragen. <a href="/praemienflug-steuern-gebuehren/#new-york-buchungsbeispiel-oktober-2026">Echtes New-York-Suchbeispiel vom 27.10.2026 ansehen</a>.</p>
             <p id="inputError" class="input-error" role="alert" hidden></p>
           </form>
         </div>
