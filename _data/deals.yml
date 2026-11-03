@@ -1,10 +1,12 @@
 last_checked: "2026-09-03"
 last_checked_display: "03.09.2026"
-last_updated: "2026-10-05"
-last_updated_display: "05.10.2026"
+last_updated: "2026-11-03"
+last_updated_display: "03.11.2026"
 active_count_fallback: 4
 
 deals:
+  - {"id": "wunschgutschein-10fach-november-2026", "category": "PAYBACK · Gutscheinshop", "title": "Wunschgutschein: 10-fach PAYBACK Punkte bis 4. November", "summary": "10-fach Punkte mit aktiviertem eCoupon: bis 04.11.2026, 23:59 Uhr über die PAYBACK App oder PAYBACK.de im Gutscheinshop einkaufen. Coupon-Verfügbarkeit im eigenen Konto prüfen. Bestellungen über 500 € sind von der Bepunktung ausgeschlossen.", "image": "/images/wunschgutschein-10fach-20261104.png", "image_alt": "Original-Coupon: 10-fach PAYBACK Punkte auf Wunschgutschein bis 04.11.2026", "image_caption": "Original-Coupon · bereitgestellt am 03.11.2026", "expires": "2026-11-04", "expires_display": "04.11.2026, 23:59 Uhr", "offer_url": "https://www.payback.de/coupons", "cta": "Coupon prüfen und aktivieren", "facts": [{"label": "Coupon", "value": "10-fach Punkte"}, {"label": "Bestellgrenze", "value": "Über 500 € ausgeschlossen"}, {"label": "Frist", "value": "04.11.2026, 23:59 Uhr"}], "verdict": "Ich nutze den Coupon nur für ohnehin geplante Einkäufe und prüfe vorher den gewünschten Einlösepartner. Bei einer Basisrate von 1 Punkt je 2 € wären es insgesamt 500 Punkte bei 100 € bzw. 2.500 Punkte bei 500 €. Die Basisrate steht nicht im Screenshot und muss im Gutscheinshop geprüft werden.", "conditions": ["eCoupon vor dem Kauf in der PAYBACK App oder auf PAYBACK.de/coupons aktivieren. Verfügbarkeit im eigenen Konto prüfen.", "Anschließend direkt über die PAYBACK App oder PAYBACK.de zum Gutscheinshop gutscheine.PAYBACK.de wechseln und im Aktionszeitraum bis 04.11.2026, 23:59 Uhr einkaufen.", "Ausgeschlossen sind stornierte Bestellungen, Retouren, Versandkosten und Bestellungen über 500 €. Nicht nur der darüberliegende Betrag ist ausgeschlossen.", "Der Screenshot nennt keinen erforderlichen Einsatz vorhandener Punkte. Die Bedingungen der früheren Prämienshop-Aktion mit mindestens 200 Punkten werden nicht auf diesen Coupon übertragen.", "Nutzungshäufigkeit und Gutschriftfrist sind im vorliegenden Screenshot nicht angegeben. Vollständige Bedingungen im eigenen Konto prüfen. Ein späterer Miles-&-More-Transferbonus ist nicht Bestandteil dieses Coupons."], "internal_url": "/meilen-sammeln/wunschgutschein/#aktionen", "internal_label": "Wunschgutschein: Anleitung und Punktebeispiele"}
+
   - id: "amazon-payback-prime-days-oktober-2026"
     category: "PAYBACK · Amazon Prime Deal Days"
     title: "Amazon: 8-fach PAYBACK Punkte am 6. und 7. Oktober"
