@@ -88,7 +88,11 @@
       syncSelection();
       statusBox.className = 'form-status success';
       statusBox.style.display = '';
-      statusBox.textContent = 'Danke! Deine Anfrage wurde erfolgreich übermittelt. Ich prüfe das Angebot und antworte dir per E-Mail. Schau auch in deinen Spam-Ordner. Ein Kartenantrag wurde damit noch nicht gestellt.';
+      statusBox.textContent = 'Danke! Deine Anfrage wurde erfolgreich übermittelt. Ich prüfe das Angebot und antworte dir per E-Mail. Schau auch in deinen Spam-Ordner. Ein Kartenantrag wurde damit noch nicht gestellt. ';
+      const helpLink = document.createElement('a');
+      helpLink.href = '/kontakt.html?thema=mindestumsatz&quelle=nach-linkanfrage#contactForm';
+      helpLink.textContent = 'Du hast Fragen zum Mindestumsatz? Hier findest du meine kostenlose Meilen-Starthilfe.';
+      statusBox.appendChild(helpLink);
     } catch (error) {
       trackReferral('referral_link_error', submittedCard, submittedSource);
       statusBox.className = 'form-status error';
