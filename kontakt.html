@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Kontakt | Prämienflug-Planer
-description: Kontakt zum Prämienflug-Planer. Fragen, Hinweise oder Feedback einfach über das Kontaktformular senden.
+title: Kontakt & kostenlose Meilen-Starthilfe | Prämienflug-Planer
+description: Kostenlose Meilen-Starthilfe zu Amex-Mindestumsatz, Prämienflugsuche und Punkte-Transfer. Fragen unabhängig von Kreditkartenempfehlungen stellen.
 canonical: https://praemienflug-planer.de/kontakt.html
 ---
 <section class="hero hero-small hero-contact">
@@ -11,7 +11,7 @@ canonical: https://praemienflug-planer.de/kontakt.html
       <h1>Fragen, Hinweise oder Feedback?</h1>
       <p class="hero-text">
         Wenn dir ein Fehler im Rechner auffällt, du eine Idee für eine Verbesserung hast,
-        eine allgemeine Frage hast oder mit mir Kontakt aufnehmen möchtest,
+        eine Frage zum Mindestumsatz, zum Meilentransfer oder zur Prämienflugsuche hast,
         kannst du mir hier direkt schreiben.
       </p>
       <div class="trust-note">
@@ -26,6 +26,8 @@ canonical: https://praemienflug-planer.de/kontakt.html
         <li>Fehler oder Unstimmigkeiten im Rechner melden</li>
         <li>Ideen für neue Programme oder Ziele schicken</li>
         <li>Fragen zur Nutzung des Tools stellen</li>
+        <li>Fragen zu Mindestumsatz und Bonusbedingungen stellen</li>
+        <li>Hinweise zur Prämienflugsuche oder zum Punktetransfer erhalten</li>
         <li>allgemeine Fragen zu Karten- und Punkteprogrammen stellen</li>
         <li>allgemeines Feedback zur Website geben</li>
       </ul>
@@ -36,21 +38,24 @@ canonical: https://praemienflug-planer.de/kontakt.html
 <section class="section">
   <div class="container contact-layout">
     <div class="contact-card">
-      <h2>Nachricht senden</h2>
-      <p class="contact-intro">Ich antworte so schnell wie möglich.</p>
+      <h2 id="contactFormTitle">Nachricht senden</h2>
+      <p id="contactIntro" class="contact-intro">Ich beantworte konkrete Fragen nach Möglichkeit per E-Mail.</p>
       <form id="contactForm" action="https://formspree.io/f/xaqpjkgd" method="POST" class="contact-form">
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" placeholder="Dein Name" required />
+        <label for="name">Name (optional)</label>
+        <input id="name" name="name" type="text" placeholder="Dein Name" />
         <label for="email">E-Mail</label>
         <input id="email" name="email" type="email" placeholder="deine@email.de" required />
         <label for="subject">Betreff</label>
         <input id="subject" name="subject" type="text" placeholder="Worum geht es?" required />
         <label for="message">Nachricht</label>
         <textarea id="message" name="message" rows="7" placeholder="Deine Nachricht..." required></textarea>
+        <p class="form-note" id="contactHelpNote" hidden>Bitte keine Kreditkartennummern, Zugangsdaten, Buchungscodes oder andere sensiblen Daten mitteilen. Die kostenlose Hilfe ist nicht an die Nutzung eines Empfehlungslinks gebunden.</p>
         <div class="hp-field" aria-hidden="true">
           <label for="website">Bitte dieses Feld leer lassen</label>
           <input id="website" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
         </div>
+        <input id="contactTopic" type="hidden" name="anfrage_thema" value="allgemein" />
+        <input id="contactSource" type="hidden" name="quelle" value="direkt" />
         <input type="hidden" name="_subject" value="Neue Nachricht über kontakt.html" />
         <input type="hidden" name="_language" value="de" />
         <button type="submit" class="btn btn-primary">Nachricht senden</button>
@@ -86,6 +91,36 @@ canonical: https://praemienflug-planer.de/kontakt.html
 <script>
   const form = document.getElementById("contactForm");
   const statusBox = document.getElementById("formStatus");
+  const topics = {
+    mindestumsatz: {
+      subject: "Meilen-Starthilfe: Mindestumsatz und Willkommensbonus",
+      intro: "Nenne mir die Karte, den vorgesehenen Mindestumsatz und die Frist. Ich helfe dir, die Bedingungen und ohnehin geplante Ausgaben sinnvoll einzuordnen.",
+      placeholder: "Welche Karte und welcher Mindestumsatz? Bis wann muss er erreicht sein? Welche normalen Ausgaben planst du ohnehin?"
+    },
+    praemienflug: {
+      subject: "Meilen-Starthilfe: Prämienflug suchen",
+      intro: "Schreibe mir Reiseziel, ungefähren Zeitraum, Anzahl der Reisenden und verfügbaren Punktebestand. Ich gebe dir nach Möglichkeit Hinweise zur Suche und zur Einschätzung der Angebote.",
+      placeholder: "Reiseziel, Reisezeitraum, Abflughafen, Anzahl Erwachsene/Kinder, Punkte/Meilen und gewünschte Reiseklasse ..."
+    },
+    transfer: {
+      subject: "Meilen-Starthilfe: Punkte richtig übertragen",
+      intro: "Welche Punkte hast du, welches Reiseziel oder Programm kommt infrage? Ich helfe dir, die möglichen Transferwege und ihre Bedingungen zu vergleichen.",
+      placeholder: "Welches Punkteprogramm und wie viele Punkte? Wohin möchtest du übertragen und wofür willst du sie einsetzen?"
+    }
+  };
+  const query = new URLSearchParams(window.location.search);
+  const selectedTopic = query.get("thema");
+  if (Object.prototype.hasOwnProperty.call(topics, selectedTopic)) {
+    const help = topics[selectedTopic];
+    document.getElementById("contactFormTitle").textContent = "Frage zur Meilen-Starthilfe senden";
+    document.getElementById("contactIntro").textContent = help.intro;
+    document.getElementById("subject").value = help.subject;
+    document.getElementById("message").placeholder = help.placeholder;
+    document.getElementById("contactTopic").value = selectedTopic;
+    document.getElementById("contactHelpNote").hidden = false;
+  }
+  const rawSource = query.get("quelle") || "direkt";
+  document.getElementById("contactSource").value = rawSource.toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 80) || "direkt";
 
   if (form && statusBox) {
     form.addEventListener("submit", async function (event) {
@@ -98,7 +133,18 @@ canonical: https://praemienflug-planer.de/kontakt.html
         if (response.ok) {
           form.reset();
           statusBox.className = "form-status success";
-          statusBox.textContent = "Danke! Deine Nachricht wurde erfolgreich gesendet.";
+          statusBox.textContent = Object.prototype.hasOwnProperty.call(topics, selectedTopic)
+            ? "Danke! Deine Frage zur kostenlosen Meilen-Starthilfe wurde erfolgreich gesendet. Ich melde mich nach Möglichkeit per E-Mail."
+            : "Danke! Deine Nachricht wurde erfolgreich gesendet.";
+          if (Object.prototype.hasOwnProperty.call(topics, selectedTopic)) {
+            try {
+              window.pfpTrackConversion?.("support_request_success", {
+                form_name: "meilen_starthilfe",
+                help_topic: selectedTopic,
+                request_source: document.getElementById("contactSource").value
+              });
+            } catch (trackingError) { /* Tracking darf die Anfrage nie beeinflussen. */ }
+          }
         } else {
           const data = await response.json().catch(() => null);
           statusBox.className = "form-status error";
