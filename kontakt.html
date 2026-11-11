@@ -49,7 +49,7 @@ canonical: https://praemienflug-planer.de/kontakt.html
         <input id="subject" name="subject" type="text" placeholder="Worum geht es?" required />
         <label for="message">Nachricht</label>
         <textarea id="message" name="message" rows="7" placeholder="Deine Nachricht..." required></textarea>
-        <p class="form-note" id="contactHelpNote" hidden>Bitte keine Kreditkartennummern, Zugangsdaten, Buchungscodes oder andere sensiblen Daten mitteilen. Die kostenlose Hilfe ist nicht an die Nutzung eines Empfehlungslinks gebunden.</p>
+        <p class="form-note" id="contactHelpNote" hidden>Bitte keine Kreditkartennummern, Zugangsdaten, Buchungscodes oder andere sensible Daten mitteilen. Die kostenlose Hilfe ist nicht an die Nutzung eines Empfehlungslinks gebunden.</p>
         <div class="hp-field" aria-hidden="true">
           <label for="website">Bitte dieses Feld leer lassen</label>
           <input id="website" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
@@ -131,7 +131,6 @@ canonical: https://praemienflug-planer.de/kontakt.html
       try {
         const response = await fetch(form.action, { method: form.method, body: formData, headers: { Accept: "application/json" } });
         if (response.ok) {
-          form.reset();
           statusBox.className = "form-status success";
           statusBox.textContent = Object.prototype.hasOwnProperty.call(topics, selectedTopic)
             ? "Danke! Deine Frage zur kostenlosen Meilen-Starthilfe wurde erfolgreich gesendet. Ich melde mich nach Möglichkeit per E-Mail."
@@ -144,6 +143,12 @@ canonical: https://praemienflug-planer.de/kontakt.html
                 request_source: document.getElementById("contactSource").value
               });
             } catch (trackingError) { /* Tracking darf die Anfrage nie beeinflussen. */ }
+          }
+          form.reset();
+          if (Object.prototype.hasOwnProperty.call(topics, selectedTopic)) {
+            document.getElementById("subject").value = topics[selectedTopic].subject;
+            document.getElementById("contactTopic").value = selectedTopic;
+            document.getElementById("contactSource").value = rawSource.toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 80) || "direkt";
           }
         } else {
           const data = await response.json().catch(() => null);
