@@ -28,7 +28,7 @@
 {% capture amex_green_bonus_card %}<div class="amex-bonus"><span>{{ amex_green_bonus_number }}</span> MR-Punkte als möglicher Startbonus</div>{% endcapture %}
 {% capture amex_gold_rose_bonus_card %}<div class="amex-bonus"><span>{{ amex_gold_bonus_number }}–{{ amex_rose_bonus_number }}</span> MR-Punkte als möglicher Bonus</div>{% endcapture %}
 {% capture amex_platinum_bonus_card %}<div class="amex-bonus">bis zu <span>{{ amex_platinum_bonus_number }}</span> MR-Punkte als möglicher Bonus</div>{% endcapture %}
-{% capture amex_payback_bonus_card %}<div class="amex-bonus"><span>{{ site.data.offers.amex.payback.bonus_number_display }}</span> PAYBACK Punkte über Empfehlungslink</div>{% endcapture %}
+{% capture amex_payback_bonus_card %}<div class="amex-bonus">bis zu <span>{{ site.data.offers.amex.payback.bonus_number_display }}</span> PAYBACK Punkte über Empfehlungslink</div>{% endcapture %}
 {% capture amex_green_fee_list %}<li>{{ site.data.offers.amex.green.fee_monthly_display }} monatlich</li>{% endcapture %}
 {% capture amex_gold_fee_list %}<li>{{ site.data.offers.amex.gold.fee_monthly_display }} monatlich</li>{% endcapture %}
 {% capture amex_platinum_fee_list %}<li>{{ site.data.offers.amex.platinum.fee_monthly_display }} monatlich</li>{% endcapture %}
@@ -45,11 +45,13 @@
 {% capture rev_calc_root %}<div class="rev-calculator" data-rev-calculator data-mm-earn-divisor="{{ site.data.offers.miles_and_more_credit_card.common.earn_divisor_eur }}" data-mm-cap="{{ site.data.offers.miles_and_more_credit_card.common.moneysend_cap_miles }}" data-standard-divisor="{{ site.data.offers.revolut.standard_revpoints_divisor_eur }}" data-standard-fee="{{ site.data.offers.revolut.standard_fee_monthly_eur }}" data-plus-divisor="{{ site.data.offers.revolut.plus_revpoints_divisor_eur }}" data-plus-fee="{{ site.data.offers.revolut.plus_fee_monthly_eur }}" data-premium-divisor="{{ site.data.offers.revolut.premium_revpoints_divisor_eur }}" data-premium-fee="{{ site.data.offers.revolut.premium_fee_monthly_eur }}" data-metal-divisor="{{ site.data.offers.revolut.metal_revpoints_divisor_eur }}" data-metal-fee="{{ site.data.offers.revolut.metal_fee_monthly_eur }}" data-ultra-divisor="{{ site.data.offers.revolut.ultra_revpoints_divisor_eur }}" data-ultra-fee="{{ site.data.offers.revolut.ultra_fee_monthly_eur }}">{% endcapture %}
 
 {% comment %}Normalize legacy qualifiers before replacing the whole bonus, so data-driven offers do not gain a second 'bis zu'.{% endcomment %}
+{% unless page.url == '/angebote/' or page.url == '/meilen-sammeln/payback-transferbonus-juli-2026/' %}
 {% assign rendered = rendered | replace: 'bis zu 4.000 PAYBACK Punkte', '4.000 PAYBACK Punkte' %}
 {% assign rendered = rendered | replace: 'bis zu 4.000 °P', '4.000 °P' %}
 {% assign rendered = rendered | replace: '4.000 PAYBACK Punkte', site.data.offers.amex.payback.bonus_display %}
 {% assign rendered = rendered | replace: '4.000 °P', site.data.offers.amex.payback.bonus_short_display %}
 {% assign rendered = rendered | replace: 'mit 4.000 Punkten anfragen', payback_points_button %}
+{% endunless %}
 {% assign rendered = rendered | replace: 'Für die private Miles & More Gold Credit Card läuft aktuell ein erhöhtes Willkommenspaket. Die Aktion ist an Bedingungen geknüpft; vor dem Antrag deshalb die offiziellen Teilnahmebedingungen prüfen.', 'Für die private Miles & More Gold Credit Card gilt aktuell der oben genannte Willkommensbonus. Die Aktion ist an Bedingungen geknüpft; vor dem Antrag deshalb die offiziellen Teilnahmebedingungen prüfen.' %}
 {% if has_payback_amex_offer %}
   {% assign rendered = rendered | replace: 'Stand 24.08.2026', amex_checked %}

@@ -77,7 +77,7 @@
         ['Ziel neu berechnen', `${BASE}/rechner/`],
         ['Kartenbaustein einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]
       ] : [
-        ['4.000-Punkte-Link für PAYBACK Amex', `${BASE}/kreditkarten-link/?karte=payback-amex&quelle=rechner-mm-luecke`],
+        ['Aktuellen PAYBACK-Amex-Bonus prüfen', `${BASE}/kreditkarten-link/?karte=payback-amex&quelle=rechner-mm-luecke`],
         ['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`],
         ['Kartenbaustein einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]
       ];
@@ -113,7 +113,7 @@
     const normalized = String(programm || '').toLowerCase();
 
     if (normalized.includes('miles') || normalized.includes('more')) {
-      return { title: 'Dein Ergebnis passt zu Miles & More: Sammelweg gezielt verbessern', text: 'Wenn dein Plan auf Miles & More basiert, sind meistens drei Bausteine relevant: PAYBACK im Alltag, Transferbonus-Aktionen und ein passender Kartenbaustein. Prüfe diese Reihenfolge, bevor du Punkte überträgst.', links: [['4.000-Punkte-Link für PAYBACK Amex', `${BASE}/kreditkarten-link/?karte=payback-amex&quelle=rechner-miles-and-more`], ['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`], ['Miles-&-More-Karte offiziell einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]], note: 'Zusätzliche Produkte nur nutzen, wenn sie zu deinem Alltag passen. Meilen sind kein Grund für unnötige Ausgaben. Für Miles & More werden keine kommerziellen Freundschaftswerbungslinks vermittelt.' };
+      return { title: 'Dein Ergebnis passt zu Miles & More: Sammelweg gezielt verbessern', text: 'Wenn dein Plan auf Miles & More basiert, sind meistens drei Bausteine relevant: PAYBACK im Alltag, Transferbonus-Aktionen und ein passender Kartenbaustein. Prüfe diese Reihenfolge, bevor du Punkte überträgst.', links: [['Aktuellen PAYBACK-Amex-Bonus prüfen', `${BASE}/kreditkarten-link/?karte=payback-amex&quelle=rechner-miles-and-more`], ['PAYBACK Strategie ansehen', `${BASE}/meilen-sammeln/payback/`], ['Miles-&-More-Karte offiziell einordnen', `${BASE}/meilen-sammeln/miles-and-more-kreditkarte/`]], note: 'Zusätzliche Produkte nur nutzen, wenn sie zu deinem Alltag passen. Meilen sind kein Grund für unnötige Ausgaben. Für Miles & More werden keine kommerziellen Freundschaftswerbungslinks vermittelt.' };
     }
 
     if (normalized.includes('flying')) {
