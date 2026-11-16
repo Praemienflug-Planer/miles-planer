@@ -143,6 +143,13 @@ canonical: https://praemienflug-planer.de/kontakt.html
                 request_source: document.getElementById("contactSource").value
               });
             } catch (trackingError) { /* Tracking darf die Anfrage nie beeinflussen. */ }
+          } else {
+            try {
+              window.pfpTrackConversion?.("contact_form_success", {
+                form_name: "contact",
+                request_source: document.getElementById("contactSource").value
+              });
+            } catch (trackingError) { /* Tracking darf die Anfrage nie beeinflussen. */ }
           }
           form.reset();
           if (Object.prototype.hasOwnProperty.call(topics, selectedTopic)) {
