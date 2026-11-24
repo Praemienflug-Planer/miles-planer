@@ -29,7 +29,12 @@
       const expiresDisplay = card.dataset.expiresDisplay;
       const status = card.querySelector('[data-deal-status]');
       const cta = card.querySelector('[data-deal-cta]');
-      if (!expires || !status) return;
+      if (!status) return;
+      if (!expires) {
+        status.lastChild.textContent = 'Aktuell geprüft · kein festes Enddatum';
+        activeDeals += 1;
+        return;
+      }
 
       const expired = todayInGermany > expires;
 
