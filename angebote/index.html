@@ -58,7 +58,7 @@ schema_json: |
         <div class="deal-content">
           <div class="deal-topline">
             <span class="deal-category">{{ deal.category | escape }}</span>
-            <span class="deal-status" data-deal-status><span class="deal-status-dot" aria-hidden="true"></span>{% if deal.archived %}Abgelaufen am {{ deal.expires_display }}{% elsif deal.starts %}Ab {{ deal.starts_display }} · bis {{ deal.expires_display }}{% else %}Aktiv bis {{ deal.expires_display }}{% endif %}</span>
+            <span class="deal-status" data-deal-status><span class="deal-status-dot" aria-hidden="true"></span>{% if deal.archived %}Abgelaufen am {{ deal.expires_display }}{% elsif deal.starts and deal.expires %}Ab {{ deal.starts_display }} · bis {{ deal.expires_display }}{% elsif deal.expires %}Aktiv bis {{ deal.expires_display }}{% else %}Aktuell geprüft · kein festes Enddatum{% endif %}</span>
           </div>
 
           <h2>{{ deal.title | escape }}</h2>
