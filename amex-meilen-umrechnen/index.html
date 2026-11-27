@@ -6,6 +6,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
 ---
 <style>
 .mr-preset-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}.mr-preset{appearance:none;border:1px solid rgba(148,163,184,.3);background:rgba(255,255,255,.05);color:inherit;border-radius:999px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}.mr-preset:hover,.mr-preset:focus-visible{border-color:rgba(96,165,250,.7);background:rgba(59,130,246,.12)}.mr-example-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0}.mr-example{border:1px solid rgba(148,163,184,.24);border-radius:16px;padding:16px;background:rgba(255,255,255,.04)}.mr-example strong{display:block;font-size:1.25rem;margin-bottom:5px}.mr-example span{color:var(--muted);line-height:1.55}.mr-source{font-size:.92rem;color:var(--muted);line-height:1.6}@media(max-width:800px){.mr-example-grid{grid-template-columns:1fr}}
+.mr-referral{margin-top:18px;padding:18px;border:1px solid rgba(148,163,184,.32);border-radius:16px;background:rgba(59,130,246,.07)}.mr-referral h3{margin:0 0 8px}.mr-referral p{margin:0 0 12px}.mr-referral .hero-actions{margin:12px 0}.mr-referral .mr-source{margin:0}.mr-next-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.mr-referral .btn,.mr-next-actions .btn{white-space:normal;text-align:center;min-height:44px}@media(max-width:600px){.mr-referral .hero-actions,.mr-next-actions{display:grid;grid-template-columns:minmax(0,1fr)}.mr-referral .btn,.mr-next-actions .btn{width:100%;box-sizing:border-box}.mr-referral{padding:14px}}
 </style>
 
 <section class="hero hero-small hero-amex">
@@ -42,6 +43,7 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
           <div class="field-group"><label for="mrPartner">Partnerprogramm</label><select id="mrPartner"><option value="">Bitte Partner wählen</option></select></div>
         </div>
         <div class="mr-preset-row" aria-label="Beispielwerte">
+          <button class="mr-preset" type="button" data-mr-preset="1000">1.000 MR</button>
           <button class="mr-preset" type="button" data-mr-preset="10000">10.000 MR</button>
           <button class="mr-preset" type="button" data-mr-preset="50000">50.000 MR</button>
           <button class="mr-preset" type="button" data-mr-preset="100000">100.000 MR</button>
@@ -61,13 +63,21 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
           <p class="mr-source">Rechnerischer Wert, auf ganze Einheiten abgerundet. Mindestmengen und Transferschritte können die tatsächlich übertragbare Menge begrenzen.</p>
           <div id="mrAviosHint" class="warning-box" hidden><strong>Qatar-Avios: den Weg über British Airways prüfen</strong><p id="mrAviosComparison"></p><p>Ich würde bei diesen regulären Kursen zuerst zu British Airways übertragen und die Avios anschließend kostenlos 1:1 zum eigenen verknüpften Qatar-Konto verschieben. <a href="#avios-transferweg">Voraussetzungen und Rechenbeispiel</a></p></div>
           <h3>Was möchtest du als Nächstes prüfen?</h3>
-          <div class="mr-example-grid">
-            <div class="mr-example"><h4>Eine Reise planen</h4><p>Ich zeige dir an Reisebeispielen, wie ich Meilenbedarf, Zuzahlungen und Plätze für die Familie vergleiche.</p><a href="#reisebeispiele" data-event="amex_journey_click" data-placement="amex-rechner-ergebnis">Reisebeispiele ansehen</a></div>
-            <div class="mr-example"><h4>Den Gegenwert prüfen</h4><p>Du hast ein konkretes Flugangebot? Vergleiche den Ticketpreis mit Punkten und Zuzahlung.</p><button class="mr-preset" type="button" id="mrUseForValue" data-event="amex_value_start" data-placement="amex-rechner-ergebnis">MR in Wertrechner übernehmen</button></div>
-            <div class="mr-example"><h4>Weitere MR sammeln</h4><p>Wenn dir noch Punkte fehlen, prüfe ich Kartenkosten, einen möglichen Willkommensbonus und den nötigen Umsatz für ohnehin geplante Ausgaben.</p><p><a href="/meilen-sammeln/amex-kreditkarten/" data-event="card_info_click" data-placement="amex-rechner-ergebnis">Amex-Karten und Boni vergleichen</a></p><p><a href="/kreditkarten-link/?karte=amex-flexibel&amp;quelle=amex-rechner-ergebnis" data-event="card_offer_click" data-card="amex-flexibel" data-placement="amex-rechner-ergebnis">Passenden Link unverbindlich anfragen</a></p><p class="mr-source">Kein automatischer Kartenantrag. Wenn du meinen Empfehlungslink nutzt, kann ich eine Prämie erhalten; dir entstehen dadurch keine zusätzlichen Kosten.</p></div>
+          <div class="mr-next-actions">
+            <a class="btn btn-secondary" href="#reisebeispiele" data-event="amex_journey_click" data-placement="amex-rechner-ergebnis">Reisebeispiele ansehen</a>
+            <button class="btn btn-secondary" type="button" id="mrUseForValue" data-event="amex_value_start" data-placement="amex-rechner-ergebnis">MR in Wertrechner übernehmen</button>
           </div>
         </div>
         <div class="warning-box"><strong>Transfer-Regel:</strong><br><br>Membership Rewards nicht vorsorglich übertragen. Zuerst Award-Verfügbarkeit, benötigte Punktezahl, Steuern und Gebühren sowie die aktuelle Transferrate prüfen. Ein Transfer lässt sich in der Regel nicht einfach rückgängig machen.</div>
+        <div class="mr-referral" id="amex-kartenempfehlung" data-card-offer="amex-flexibel">
+          <h3>Noch nicht genug Amex Punkte für deine Reise?</h3>
+          <p>Mit einer passenden Membership-Rewards-Karte und einem möglichen Willkommensbonus kannst du deinen Punktestand aufbauen. Ich vergleiche für dich das aktuell sichtbare Angebot, die Kartenkosten und den nötigen Umsatz. Auch wenn du bereits eine Amex hast: Prüfe vorab, ob du überhaupt bonusberechtigt bist.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/kreditkarten-link/?karte=amex-flexibel&amp;quelle=amex-rechner-empfehlung" data-event="card_offer_click" data-card="amex-flexibel" data-placement="amex-rechner-empfehlung">Amex-Angebot per E-Mail anfragen</a>
+            <a class="btn btn-secondary" href="/meilen-sammeln/amex-kreditkarten/#aktuelle-angebote" data-event="card_info_click" data-placement="amex-rechner-empfehlung">Erst Karten und Boni vergleichen</a>
+          </div>
+          <p class="mr-source">Unverbindlich: kein Kartenantrag, kein Newsletter. Wenn du meinen Empfehlungslink nutzt und der Antrag angenommen wird, kann ich eine Prämie erhalten. Dir entstehen durch den Link keine zusätzlichen Kosten. Kartenentgelt und Angebotsbedingungen gelten unabhängig davon.</p>
+        </div>
       </div>
 
 
@@ -88,9 +98,9 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
         <p><strong>Wichtig nach den Lufthansa-Zuschlagserhöhungen im Oktober 2026:</strong> Ein hoher Meilenwert allein ist kein guter Deal. Vergleiche immer die gesamte Zuzahlung für alle Reisenden einschließlich Airline-Zuschlägen mit einem wirklich vergleichbaren Kaufticket. <a href="/rechner/">Zum Familien-Cashvergleich</a> · <a href="/praemienflug-steuern-gebuehren/#lufthansa-oktober-2026">Lufthansa-Gebührenbeispiele</a>.</p>
         <p><strong>Membership Rewards haben keinen einheitlichen Euro-Wert.</strong> Beim Bezahlen mit Punkten gilt die für die jeweilige Einlösung angezeigte Rate im Amex-Konto. Bei einem Prämienflug hängt der Gegenwert vom vergleichbaren Ticketpreis, den Zuzahlungen und der benötigten Punktzahl ab.</p>
         <p>100.000 Amex Punkte sind deshalb nicht automatisch einen bestimmten Geldbetrag wert. Vergleiche einen Flug, den du tatsächlich buchen würdest, mit derselben Strecke, Reiseklasse und möglichst ähnlichen Gepäck- und Tarifbedingungen.</p>
-        <h3>1.000, 10.000 und 100.000 Amex Punkte in Euro: Rechenbeispiele</h3>
+        <h3>1.000, 10.000, 50.000 und 100.000 Amex Punkte in Euro: Rechenbeispiele</h3>
         <p><strong>Das sind frei gewählte Annahmen, keine garantierten oder typischen Punktwerte.</strong> Mit dem Rechner darunter ermittelst du deinen tatsächlichen Vergleichswert aus Ticketpreis, Zuzahlungen und eingesetzten MR.</p>
-        <div class="seo-table-wrap"><table class="seo-table"><thead><tr><th>Angenommener Wert je MR</th><th>1.000 MR</th><th>10.000 MR</th><th>100.000 MR</th></tr></thead><tbody><tr><td>0,5 Cent</td><td>5 €</td><td>50 €</td><td>500 €</td></tr><tr><td>1 Cent</td><td>10 €</td><td>100 €</td><td>1.000 €</td></tr><tr><td>1,5 Cent</td><td>15 €</td><td>150 €</td><td>1.500 €</td></tr></tbody></table></div>
+        <div class="seo-table-wrap"><table class="seo-table"><thead><tr><th>Angenommener Wert je MR</th><th>1.000 MR</th><th>10.000 MR</th><th>50.000 MR</th><th>100.000 MR</th></tr></thead><tbody><tr><td>0,5 Cent</td><td>5 €</td><td>50 €</td><td>250 €</td><td>500 €</td></tr><tr><td>1 Cent</td><td>10 €</td><td>100 €</td><td>500 €</td><td>1.000 €</td></tr><tr><td>1,5 Cent</td><td>15 €</td><td>150 €</td><td>750 €</td><td>1.500 €</td></tr></tbody></table></div>
         <h3>Gegenwert einer Flugeinlösung berechnen</h3>
         <p>Trage die gesamten Werte für dieselbe Reise und dieselbe Personenzahl ein. Benötigt werden die dafür eingesetzten <strong>Membership-Rewards-Punkte vor dem Transfer</strong>, nicht die Meilen im Zielprogramm.</p>
         <div class="form-grid two-col">
@@ -169,7 +179,8 @@ canonical: "https://praemienflug-planer.de/amex-meilen-umrechnen/"
         <h3>1. Willkommensboni der Amex-Karten vergleichen</h3>
         <p>Prüfe die Angebote etwa für Gold und Platinum: Entscheidend sind nicht nur die Bonuspunkte, sondern auch Kartenentgelt, erforderlicher Umsatz, Umsatzfrist und deine Bonusberechtigung. Höhe und Bedingungen können je nach Aktion und Antragsweg unterschiedlich sein. Maßgeblich ist das Angebot auf der konkreten Antragsseite.</p>
         <p><strong>Der Bonus steht nicht sofort nach dem Antrag zur Verfügung.</strong> Die Voraussetzungen müssen erfüllt sein; Zeitpunkt der Gutschrift und mögliche Rückforderungen bei Kündigung oder Kartenwechsel stehen in den Angebotsbedingungen.</p>
-        <div class="hero-actions"><a class="btn btn-secondary" href="/meilen-sammeln/amex-kreditkarten/" data-event="card_info_click" data-placement="amex-weitere-punkte">Amex-Karten und Willkommensboni vergleichen</a></div>
+        <div class="hero-actions"><a class="btn btn-primary" href="/kreditkarten-link/?karte=amex-flexibel&amp;quelle=amex-weitere-punkte" data-event="card_offer_click" data-card="amex-flexibel" data-placement="amex-weitere-punkte">Aktuelles Amex-Angebot per E-Mail anfragen</a><a class="btn btn-secondary" href="/meilen-sammeln/amex-kreditkarten/" data-event="card_info_click" data-placement="amex-weitere-punkte">Amex-Karten und Willkommensboni vergleichen</a></div>
+        <p class="mr-source">Unverbindliche Anfrage, kein automatischer Kartenantrag. Bei erfolgreicher Empfehlung kann ich eine Prämie erhalten; dir entstehen durch den Link keine zusätzlichen Kosten.</p>
         <h3>2. Geplante Ausgaben bündeln</h3>
         <p>Nutze die Karte für ohnehin geplante Einkäufe und Buchungen, sofern Amex akzeptiert wird. So können reguläre Sammelpunkte und ein qualifizierender Mindestumsatz zusammenkommen. Prüfe, welche Umsätze für das konkrete Angebot zählen. Zusätzliche Ausgaben nur für den Bonus schmälern seinen Nutzen.</p>
         <h3>3. Extra-Punkte-Angebote prüfen</h3>
